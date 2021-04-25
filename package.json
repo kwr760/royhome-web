@@ -6,11 +6,11 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/kwr760/royhome-net.git"
+    "url": "git+ssh://git@github.com/kwr760/royhome-web.git"
   },
-  "homepage": "https://github.com/kwr760/royhome-net#readme",
+  "homepage": "https://github.com/kwr760/royhome-web#readme",
   "bugs": {
-    "url": "https://github.com/kwr760/royhome-net/issues"
+    "url": "https://github.com/kwr760/royhome-web/issues"
   },
   "scripts": {
     "debug:dev:web": "NODE_ENV=development ts-node src/web/server/index.ts",

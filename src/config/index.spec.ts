@@ -28,7 +28,7 @@ describe('config/index', () => {
           },
           host: 'https://royk.us',
           mode: 'production',
-          root: expect.stringContaining('/royhome-net'),
+          root: expect.stringContaining('/royhome-web'),
           port: {
             api: 5000,
             web: 3000,
@@ -39,7 +39,7 @@ describe('config/index', () => {
             key: '/var/cert/royk.us/privkey.pem',
           },
           log: {
-            dir: '/var/log/royhome-net',
+            dir: '/var/log/royhome-web',
             level: LOG_LEVELS.WARN,
             stdout: false,
             includePidFilename: true,
@@ -81,7 +81,7 @@ describe('config/index', () => {
           },
           host: 'https://royk.us',
           mode: 'development',
-          root: expect.stringContaining('/royhome-net'),
+          root: expect.stringContaining('/royhome-web'),
           port: {
             api: 5000,
             web: 3000,
@@ -134,7 +134,7 @@ describe('config/index', () => {
           },
           host: 'https://royk.us',
           mode: 'production',
-          root: expect.stringContaining('/royhome-net'),
+          root: expect.stringContaining('/royhome-web'),
           port: {
             api: 5000,
             web: 3000,
@@ -145,7 +145,7 @@ describe('config/index', () => {
             key: '/var/cert/royk.us/privkey.pem',
           },
           log: {
-            dir: '/var/log/royhome-net',
+            dir: '/var/log/royhome-web',
             level: LOG_LEVELS.WARN,
             stdout: false,
             includePidFilename: true,

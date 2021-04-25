@@ -9,9 +9,9 @@ services:
         RELEASE: ${RELEASE}
     volumes:
       - /var/cert/royhome.net:/var/cert/royk.us
-      - .:/var/app/royhome-net
-      - /var/app/royhome-net/node_modules
-      - /var/log/royhome-net
+      - .:/var/app/royhome-web
+      - /var/app/royhome-web/node_modules
+      - /var/log/royhome-web
     ports:
       - "3000:3000"
       - "9229:9229"
@@ -30,9 +30,9 @@ services:
         RELEASE: ${RELEASE}
     volumes:
       - /var/cert/royhome.net:/var/cert/royk.us
-      - .:/var/app/royhome-net
-      - /var/app/royhome-net/node_modules
-      - /var/log/royhome-net
+      - .:/var/app/royhome-web
+      - /var/app/royhome-web/node_modules
+      - /var/log/royhome-web
     ports:
       - "5000:5000"
       - "9230:9229"

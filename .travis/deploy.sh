@@ -14,13 +14,13 @@ echo -e "\nTravis:  openssl rm"
 rm private-key
 
 echo -e "\nRemote:  clean docker"
-ssh $RELEASE_HOST 'cd /var/app/royhome-net ; docker container prune -f'
-ssh $RELEASE_HOST 'cd /var/app/royhome-net ; docker image prune -f'
-ssh $RELEASE_HOST 'cd /var/app/royhome-net ; docker volume prune -f'
+ssh $RELEASE_HOST 'cd /var/app/royhome-web ; docker container prune -f'
+ssh $RELEASE_HOST 'cd /var/app/royhome-web ; docker image prune -f'
+ssh $RELEASE_HOST 'cd /var/app/royhome-web ; docker volume prune -f'
 echo -e "\nRemote:  copy new code to stage"
-ssh $RELEASE_HOST 'git clone https://github.com/kwr760/royhome-net.git /var/app/royhome-net.stage'
+ssh $RELEASE_HOST 'git clone https://github.com/kwr760/royhome-web.git /var/app/royhome-web.stage'
 echo -e "\nRemote:  scp env"
-scp .env $RELEASE_HOST:/var/app/royhome-net.stage
+scp .env $RELEASE_HOST:/var/app/royhome-web.stage
 echo -e "\nRemote:  cp letsencrypt"
 ssh $RELEASE_HOST 'sudo -H cp /var/cert/royk.us/cert.pem /var/cert/royhome.net'
 ssh $RELEASE_HOST 'sudo -H cp /var/cert/royk.us/chain.pem /var/cert/royhome.net'
@@ -28,17 +28,17 @@ ssh $RELEASE_HOST 'sudo -H cp /var/cert/royk.us/chain.pem /var/cert/royhome.net'
 ssh $RELEASE_HOST 'sudo -H cp /var/cert/royk.us/privkey.pem /var/cert/royhome.net'
 ssh $RELEASE_HOST 'sudo -H chmod 644 /var/cert/royhome.net/*'
 echo -e "\nRemote:  docker-compose build"
-ssh $RELEASE_HOST 'cd /var/app/royhome-net.stage ; RELEASE=prod docker-compose build'
+ssh $RELEASE_HOST 'cd /var/app/royhome-web.stage ; RELEASE=prod docker-compose build'
 echo -e "\nRemote:  stop existing server"
-ssh $RELEASE_HOST 'cd /var/app/royhome-net ; RELEASE=prod docker-compose down'
+ssh $RELEASE_HOST 'cd /var/app/royhome-web ; RELEASE=prod docker-compose down'
 echo -e "\nRemote:  remove old release"
-ssh $RELEASE_HOST 'sudo -H rm -rf /var/app/royhome-net.rollback'
+ssh $RELEASE_HOST 'sudo -H rm -rf /var/app/royhome-web.rollback'
 echo -e "\nRemote:  backup existing server"
-ssh $RELEASE_HOST 'mv /var/app/royhome-net /var/app/royhome-net.rollback'
+ssh $RELEASE_HOST 'mv /var/app/royhome-web /var/app/royhome-web.rollback'
 echo -e "\nRemote:  promote staging"
-ssh $RELEASE_HOST 'mv /var/app/royhome-net.stage /var/app/royhome-net'
+ssh $RELEASE_HOST 'mv /var/app/royhome-web.stage /var/app/royhome-web'
 echo -e "\nRemote:  start new server"
-ssh $RELEASE_HOST 'cd /var/app/royhome-net ; RELEASE=prod docker-compose up -d'
+ssh $RELEASE_HOST 'cd /var/app/royhome-web ; RELEASE=prod docker-compose up -d'
 
 echo -e "\nRemote:  certbot renew"
 ssh $RELEASE_HOST 'sudo systemctl stop nginx'

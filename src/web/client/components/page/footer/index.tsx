@@ -36,7 +36,7 @@ const BottomBar: FunctionComponent = () => {
     <Container className={classes.container}>
       <footer className={classes.banner}>
         <Link
-          href="https://github.com/kwr760/royhome-net"
+          href="https://github.com/kwr760/royhome-web"
           target="_target"
         >
           <VscGithub className={`${classes.icon} fa-2x`} />

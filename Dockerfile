@@ -1,12 +1,12 @@
 FROM node:12.18.4-alpine
 
-WORKDIR /var/app/royhome-net
+WORKDIR /var/app/royhome-web
 COPY ["package.json", "yarn.lock", "./"]
 RUN yarn install
 COPY . .
 
-RUN mkdir -p /var/log/royhome-net
-RUN chmod 777 /var/log/royhome-net
+RUN mkdir -p /var/log/royhome-web
+RUN chmod 777 /var/log/royhome-web
 
 ARG APP
 ENV APP $APP
