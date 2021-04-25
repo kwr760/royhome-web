@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "module": "commonjs",
+    "target": "ES2019",
+    "outDir": "build",
+    "sourceMap": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "lib": ["es6", "dom"],
+    "typeRoots" : [
+      "node_modules/@types",
+      "src/types"
+    ],
+    "removeComments": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true,
+    "alwaysStrict": true,
+    "noUnusedParameters": true,
+    "strict": true
+  },
+  "include": [
+    "src/types",
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/**/__mocks__/**"
+  ]
+}
+
