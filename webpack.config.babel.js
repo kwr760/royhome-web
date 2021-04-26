@@ -111,6 +111,12 @@ const getConfig = (target) => {
         },
       ],
     },
+    externals: target === 'node' ? [
+      '@loadable/component',
+      nodeExternals({
+        allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i],
+      }),
+    ] : undefined,
     output: {
       path: path.resolve(__dirname, 'dist', target),
       filename: isDevel ? '[name].js' : '[name].[chunkhash:8].js',
@@ -155,7 +161,15 @@ const getConfig = (target) => {
             name(module) {
               const splitMap = [
                 { name: 'core-js', packages: ['core-js'] },
-                { name: 'react', packages: ['react', 'react-router', 'react-router-dom', 'react-redux', 'redux', 'react-dom', 'react-transition-group'] },
+                { name: 'react', packages: [
+                  'react',
+                  'react-router',
+                  'react-router-dom',
+                  'react-redux',
+                  'redux',
+                  'react-dom',
+                  'react-transition-group',
+                ]},
                 { name: 'axios', packages: ['axios'] },
                 { name: 'lodash', packages: ['lodash'] },
                 { name: 'auth0-spa', packages: ['auth0'] },
