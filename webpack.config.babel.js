@@ -48,7 +48,7 @@ const getConfig = (target) => {
     mode: isDevel ? 'development' : 'production',
     target,
     devtool: 'source-map',
-    entry: `./src/web/client/index-${target}.tsx`,
+    entry: `./src/client/index-${target}.tsx`,
     module: {
       rules: [
         {
@@ -114,7 +114,7 @@ const getConfig = (target) => {
     output: {
       path: path.resolve(__dirname, 'dist', target),
       filename: isDevel ? '[name].js' : '[name].[chunkhash:8].js',
-      publicPath: `/dist/web/`,
+      publicPath: '/dist/web/',
     },
     plugins: [
       new CleanWebpackPlugin(),
@@ -131,8 +131,8 @@ const getConfig = (target) => {
       // }),
       new CopyPlugin({
         patterns: [
-          { from: 'src/web/client/assets/favicon.ico', to: './favicon.ico' },
-          { from: 'src/web/client/assets/images/gold-on-blue.png', to: './favicon.png' },
+          { from: 'src/client/assets/favicon.ico', to: './favicon.ico' },
+          { from: 'src/client/assets/images/gold-on-blue.png', to: './favicon.png' },
         ],
       }),
       new LodashModuleReplacementPlugin(),

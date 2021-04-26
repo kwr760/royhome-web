@@ -15,12 +15,10 @@ describe('server/middleware/start-https', () => {
     const port = 3000;
     (fs.readFileSync as jest.Mock)
       .mockReturnValueOnce('key')
-      .mockReturnValueOnce('cert')
-      .mockReturnValueOnce('ca');
+      .mockReturnValueOnce('cert');
     const expectedCred = {
       key: 'key',
       cert: 'cert',
-      ca: 'ca',
     };
     const mockServer = { listen: (_: unknown, cb: () => unknown) => { cb(); } };
     (spdy.createServer as jest.Mock).mockImplementation(() => mockServer);

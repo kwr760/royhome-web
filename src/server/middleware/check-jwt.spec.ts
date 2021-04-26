@@ -10,7 +10,7 @@ describe('server/middleware/check-jwt', () => {
     // Arrange
     // const expected = {
     //   algorithms: ['RS256'],
-    //   audience: 'http://royk.us',
+    //   audience: 'https://royk.us',
     //   issuer: 'https://royk.auth0.com/',
     //   secret: expect.any(Function),
     // };

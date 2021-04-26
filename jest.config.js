@@ -14,7 +14,7 @@ module.exports = {
       testEnvironment: 'jsdom',
       verbose: true,
       testMatch: [
-        '**/src/web/**/?(*.)spec.ts?(x)',
+        '**/src/**/?(*.)spec.ts?(x)',
       ],
       transform: {
         '^.+\\.tsx?$': 'ts-jest',

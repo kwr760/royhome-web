@@ -9,7 +9,7 @@ import hasNeededRole from '../../../../util/auth0/has-needed-role';
 import PrivateRoute from './index';
 import createStore from '../../../store/create-store';
 
-jest.mock('../../../../../common/util/auth0/has-needed-role');
+jest.mock('../../../../util/auth0/has-needed-role');
 
 describe('client/components/page/private-route', () => {
   const userRole = 'admin';

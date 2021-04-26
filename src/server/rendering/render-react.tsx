@@ -45,7 +45,7 @@ const renderReact = async (req: Request, res: Response): Promise<void> => {
   const css = sheets.toString();
 
   // Extract the creation of the html to a separate file
-  const indexFile = path.resolve('./src/web/client/assets/index.html');
+  const indexFile = path.resolve('./src/client/assets/index.html');
   const contents = fs.readFileSync(indexFile, 'utf8');
   const preloadedState = JSON.stringify(store.getState()).replace(/</g, '\\u003c');
   const responseHtml = contents

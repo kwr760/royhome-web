@@ -6,6 +6,7 @@ import compression from 'compression';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import httpContext from 'express-http-context';
+import dotenv from 'dotenv';
 
 import env from '../config';
 
@@ -38,6 +39,8 @@ app.get('/*', renderReact);
 app.use(handleError);
 app.use(notFound);
 
-startHttpsServer(app, env.port.web);
+dotenv.config();
+const port = parseInt(process.env.SERVER_PORT || '3000');
+startHttpsServer(app, port);
 
 export default app;

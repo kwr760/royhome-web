@@ -5,13 +5,9 @@ const rootPath = path.normalize(`${__dirname}/../../..`);
 const currentHost = global.origin || 'https://royk.us';
 
 const env = (host: string) => ({
-  appName: 'roy-home',
+  appName: 'royhome',
   host,
   root: rootPath,
-  port: {
-    web: 3000,
-    api: 5000,
-  },
   api: {
     url: 'https://api.royk.us',
   },
@@ -22,7 +18,7 @@ const env = (host: string) => ({
   auth0: {
     domain: 'royk.auth0.com',
     clientId: 'J5Mu7fSFraTWgQBz1WJgikpnuRnKRkaL',
-    audience: 'http://royk.us',
+    audience: 'https://royk.us',
     callbackUrl: `${host}`,
   },
 });

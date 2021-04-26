@@ -23,7 +23,7 @@ jest.mock('body-parser', () => ({
 }));
 jest.mock('cookie-parser');
 jest.mock('express-http-context');
-jest.mock('../../common/server/middleware/start-https');
+jest.mock('./middleware/start-https');
 
 describe('server/index', () => {
   const mockExpress = {
@@ -110,6 +110,7 @@ describe('server/index', () => {
       const { default: prod } = require('../config/env/prod');
       env.mode = prod.mode;
       env.server = prod.server;
+      process.env.SERVER_PORT = '';
 
       // Act
       const { default: app } = require('./index');

@@ -19,27 +19,22 @@ describe('config/index', () => {
       // Arrange
       const expected = {
         default: {
-          appName: 'roy-home',
+          appName: 'royhome',
           auth0: {
-            audience: 'http://royk.us',
-            callbackUrl: 'https://royk.us',
+            audience: 'https://royk.us',
+            callbackUrl: 'http://localhost',
             clientId: 'J5Mu7fSFraTWgQBz1WJgikpnuRnKRkaL',
             domain: 'royk.auth0.com',
           },
-          host: 'https://royk.us',
+          host: 'http://localhost',
           mode: 'production',
-          root: expect.stringContaining('/royhome-web'),
-          port: {
-            api: 5000,
-            web: 3000,
-          },
+          root: expect.stringContaining('/royhome'),
           cert: {
-            ca: '/var/cert/royk.us/chain.pem',
-            cert: '/var/cert/royk.us/cert.pem',
-            key: '/var/cert/royk.us/privkey.pem',
+            cert: '/var/cert/royhome/fullchain.pem',
+            key: '/var/cert/royhome/privkey.pem',
           },
           log: {
-            dir: '/var/log/royhome-web',
+            dir: '/var/log/royhome',
             level: LOG_LEVELS.WARN,
             stdout: false,
             includePidFilename: true,
@@ -72,24 +67,19 @@ describe('config/index', () => {
       // Arrange
       const expected = {
         default: {
-          appName: 'roy-home',
+          appName: 'royhome',
           auth0: {
-            audience: 'http://royk.us',
-            callbackUrl: 'https://royk.us',
+            audience: 'https://royk.us',
+            callbackUrl: 'http://localhost',
             clientId: 'J5Mu7fSFraTWgQBz1WJgikpnuRnKRkaL',
             domain: 'royk.auth0.com',
           },
-          host: 'https://royk.us',
+          host: 'http://localhost',
           mode: 'development',
           root: expect.stringContaining('/royhome-web'),
-          port: {
-            api: 5000,
-            web: 3000,
-          },
           cert: {
-            ca: '/var/cert/royk.us/chain.pem',
-            cert: '/var/cert/royk.us/cert.pem',
-            key: '/var/cert/royk.us/privkey.pem',
+            cert: '/var/cert/royhome/fullchain.pem',
+            key: '/var/cert/royhome/privkey.pem',
           },
           log: {
             dir: './log',
@@ -125,9 +115,9 @@ describe('config/index', () => {
       // Arrange
       const expected = {
         default: {
-          appName: 'roy-home',
+          appName: 'royhome',
           auth0: {
-            audience: 'http://royk.us',
+            audience: 'https://royk.us',
             callbackUrl: 'https://royk.us',
             clientId: 'J5Mu7fSFraTWgQBz1WJgikpnuRnKRkaL',
             domain: 'royk.auth0.com',
@@ -135,17 +125,12 @@ describe('config/index', () => {
           host: 'https://royk.us',
           mode: 'production',
           root: expect.stringContaining('/royhome-web'),
-          port: {
-            api: 5000,
-            web: 3000,
-          },
           cert: {
-            ca: '/var/cert/royk.us/chain.pem',
-            cert: '/var/cert/royk.us/cert.pem',
-            key: '/var/cert/royk.us/privkey.pem',
+            cert: '/var/cert/royhome/fullchain.pem',
+            key: '/var/cert/royhome/privkey.pem',
           },
           log: {
-            dir: '/var/log/royhome-web',
+            dir: '/var/log/royhome',
             level: LOG_LEVELS.WARN,
             stdout: false,
             includePidFilename: true,
@@ -155,6 +140,7 @@ describe('config/index', () => {
           },
         },
       };
+      global.origin = '';
 
       // Act
       const prod = require('./index');

@@ -9,10 +9,10 @@ describe('server/logger/get-filename', () => {
       .mockImplementationOnce(() => new Date('2000-01-01T21:01:01.000').valueOf());
 
     // Act
-    const result = getLogFilename('/var/log/roy-home.net');
+    const result = getLogFilename('/var/log/royhome');
 
     // Assert
-    expect(result).toMatch(/^\/var\/log\/roy-home.net\/server-20000101/);
+    expect(result).toMatch(/^\/var\/log\/royhome\/server-20000101/);
     expect(result).toMatch(/.log$/);
   });
   it('should return filename with date and pid', () => {
@@ -24,10 +24,10 @@ describe('server/logger/get-filename', () => {
     env.log.includePidFilename = false;
 
     // Act
-    const result = getLogFilename('/var/log/roy-home.net');
+    const result = getLogFilename('/var/log/royhome');
 
     // Assert
-    expect(result).toMatch(/^\/var\/log\/roy-home.net\/server/);
+    expect(result).toMatch(/^\/var\/log\/royhome\/server/);
     expect(result).toMatch(/.log$/);
   });
 });

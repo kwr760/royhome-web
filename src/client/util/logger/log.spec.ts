@@ -7,9 +7,9 @@ import formatMessage from '../../../util/logger/format-message';
 import log from './log';
 import writeToServer from './write-to-server';
 
-jest.mock('../../../../common/util/logger/format-message');
+jest.mock('../../../util/logger/format-message');
 jest.mock('./write-to-server');
-jest.mock('../../../../common/util/logger/get-console');
+jest.mock('../../../util/logger/get-console');
 
 describe('server/logger/log', () => {
   beforeEach(() => {
