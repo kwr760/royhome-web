@@ -1,4 +1,4 @@
-import LOG_LEVELS from '../../common/util/logger/logger-levels';
+import LOG_LEVELS from '../../util/logger/logger-levels';
 
 const env = {
   mode: 'production',

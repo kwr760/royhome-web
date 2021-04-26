@@ -27,26 +27,6 @@ module.exports = {
       testPathIgnorePatterns: commonIgnoreDirs,
       coveragePathIgnorePatterns: commonIgnoreDirs,
     },
-    {
-      name: 'server',
-      displayName: 'server',
-      testEnvironment: 'node',
-      verbose: true,
-      testMatch: [
-        '**/src/api/**/?(*.)spec.ts',
-        '**/src/config/**/?(*.)spec.ts',
-        '**/src/common/**/?(*.)spec.ts',
-      ],
-      transform: {
-        '^.+\\.ts$': 'ts-jest',
-      },
-      moduleNameMapper: {
-        '\\.(svg|md)$': '<rootDir>/src/mocks/file.ts',
-      },
-      modulePathIgnorePatterns: commonIgnoreDirs,
-      testPathIgnorePatterns: commonIgnoreDirs,
-      coveragePathIgnorePatterns: commonIgnoreDirs,
-    },
   ],
   collectCoverage: true,
   coverageDirectory: './reports/coverage',

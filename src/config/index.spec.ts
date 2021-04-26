@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 /* eslint-disable @typescript-eslint/no-var-requires */
-import LOG_LEVELS from '../common/util/logger/logger-levels';
+import LOG_LEVELS from '../util/logger/logger-levels';
 
 describe('config/index', () => {
   const { NODE_ENV } = process.env;

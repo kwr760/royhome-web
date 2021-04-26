@@ -16,9 +16,8 @@ const env = (host: string) => ({
     url: 'https://api.royk.us',
   },
   cert: {
-    key: '/var/cert/royk.us/privkey.pem',
-    cert: '/var/cert/royk.us/cert.pem',
-    ca: '/var/cert/royk.us/chain.pem',
+    key: '/var/cert/royhome/privkey.pem',
+    cert: '/var/cert/royhome/fullchain.pem',
   },
   auth0: {
     domain: 'royk.auth0.com',

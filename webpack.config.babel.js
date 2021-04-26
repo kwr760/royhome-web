@@ -1,5 +1,4 @@
 import path from 'path';
-import nodeExternals from 'webpack-node-externals';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import LoadablePlugin from '@loadable/webpack-plugin';
@@ -112,17 +111,10 @@ const getConfig = (target) => {
         },
       ],
     },
-    externals: target === 'node' ? [
-      '@loadable/component',
-      nodeExternals({
-        allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i],
-      }),
-    ] : undefined,
     output: {
       path: path.resolve(__dirname, 'dist', target),
       filename: isDevel ? '[name].js' : '[name].[chunkhash:8].js',
       publicPath: `/dist/web/`,
-      libraryTarget: target === 'node' ? 'commonjs2' : undefined,
     },
     plugins: [
       new CleanWebpackPlugin(),
@@ -184,4 +176,4 @@ const getConfig = (target) => {
   };
 };
 
-export default [getConfig('web'), getConfig('node')];
+export default [getConfig('web')];

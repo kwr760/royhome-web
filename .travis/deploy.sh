@@ -1,4 +1,4 @@
-echo -e "\nDeploy the latest code"
+echo -e "\nDeploy API to Production"
 
 eval "$(ssh-agent -s)"
 
@@ -11,41 +11,10 @@ chmod 600 private-key
 echo -e "\nTravis:  openssl ssh-add"
 ssh-add private-key
 echo -e "\nTravis:  openssl rm"
-rm private-key
+rm private-key .travis/secrets.tar
 
-echo -e "\nRemote:  clean docker"
-ssh $RELEASE_HOST 'cd /var/app/royhome-web ; docker container prune -f'
-ssh $RELEASE_HOST 'cd /var/app/royhome-web ; docker image prune -f'
-ssh $RELEASE_HOST 'cd /var/app/royhome-web ; docker volume prune -f'
 echo -e "\nRemote:  copy new code to stage"
-ssh $RELEASE_HOST 'git clone https://github.com/kwr760/royhome-web.git /var/app/royhome-web.stage'
-echo -e "\nRemote:  scp env"
-scp .env $RELEASE_HOST:/var/app/royhome-web.stage
-echo -e "\nRemote:  cp letsencrypt"
-ssh $RELEASE_HOST 'sudo -H cp /var/cert/royk.us/cert.pem /var/cert/royhome.net'
-ssh $RELEASE_HOST 'sudo -H cp /var/cert/royk.us/chain.pem /var/cert/royhome.net'
-# ssh $RELEASE_HOST 'sudo -H cp /var/cert/royk.us/fullchain.pem /var/cert/royhome.net'
-ssh $RELEASE_HOST 'sudo -H cp /var/cert/royk.us/privkey.pem /var/cert/royhome.net'
-ssh $RELEASE_HOST 'sudo -H chmod 644 /var/cert/royhome.net/*'
-echo -e "\nRemote:  docker-compose build"
-ssh $RELEASE_HOST 'cd /var/app/royhome-web.stage ; RELEASE=prod docker-compose build'
-echo -e "\nRemote:  stop existing server"
-ssh $RELEASE_HOST 'cd /var/app/royhome-web ; RELEASE=prod docker-compose down'
-echo -e "\nRemote:  remove old release"
-ssh $RELEASE_HOST 'sudo -H rm -rf /var/app/royhome-web.rollback'
-echo -e "\nRemote:  backup existing server"
-ssh $RELEASE_HOST 'mv /var/app/royhome-web /var/app/royhome-web.rollback'
-echo -e "\nRemote:  promote staging"
-ssh $RELEASE_HOST 'mv /var/app/royhome-web.stage /var/app/royhome-web'
-echo -e "\nRemote:  start new server"
-ssh $RELEASE_HOST 'cd /var/app/royhome-web ; RELEASE=prod docker-compose up -d'
+ssh $RELEASE_HOST 'sudo /var/scripts/install-repo.sh royhome-web prod'
 
-echo -e "\nRemote:  certbot renew"
-ssh $RELEASE_HOST 'sudo systemctl stop nginx'
-ssh $RELEASE_HOST 'sudo -H certbot renew --standalone'
-ssh $RELEASE_HOST 'sudo systemctl start nginx'
-
-# Don't forget to cleanup your agent after you're done using it if you're not on an ephemeral build server.
+echo -e "\nDone.\n"
 ssh-agent -k
-
-
