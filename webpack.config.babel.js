@@ -7,6 +7,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
+import nodeExternals from 'webpack-node-externals';
 
 const isDevel = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
@@ -121,6 +122,7 @@ const getConfig = (target) => {
       path: path.resolve(__dirname, 'dist', target),
       filename: isDevel ? '[name].js' : '[name].[chunkhash:8].js',
       publicPath: '/dist/web/',
+      libraryTarget: target === 'node' ? 'commonjs2' : undefined,
     },
     plugins: [
       new CleanWebpackPlugin(),
@@ -190,4 +192,4 @@ const getConfig = (target) => {
   };
 };
 
-export default [getConfig('web')];
+export default [getConfig('web'), getConfig('node')];
