@@ -2,12 +2,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import React, { FunctionComponent } from 'react';
 import { Container, createStyles, Theme } from '@material-ui/core';
 import {
-  AddressType,
-  ContactType, EducationType, ExperienceType,
-  OwnerType,
+  EducationType,
+  ExperienceType,
   ResumeType,
-  SkillsType,
-  SummaryType,
+  SkillGroupType,
 } from '../../../../types/resume.types';
 
 import ResumeHeader from '../header';
@@ -31,20 +29,22 @@ const ResumePage: FunctionComponent<Props> = ({ resume = {} as ResumeType}) => {
   const classes = useStyles();
 
   const {
-    owner = {} as OwnerType,
-    contact = {} as ContactType,
-    address = {} as AddressType,
-    summary = {} as SummaryType,
-    skills = [] as SkillsType[],
+    name = '',
+    address = '',
+    summary = '',
+    email = '',
+    phone = '',
+    displayPhone = false,
+    skillGroups = [] as SkillGroupType[],
     experience = [] as ExperienceType[],
     education = [] as EducationType[],
   } = resume;
 
   return (
     <Container className={classes.container}>
-      <ResumeHeader owner={owner} contact={contact} address={address} />
+      <ResumeHeader name={name} address={address} email={email} phone={phone} displayPhone={displayPhone} />
       <ResumeSummary summary={summary} />
-      <ResumeSkills skills={skills} />
+      <ResumeSkills skillGroups={skillGroups} />
       <ResumeExperience experience={experience} />
       <ResumeEducation education={education} />
     </Container>

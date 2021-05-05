@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React, { FunctionComponent } from 'react';
 import { createStyles, Grid, Theme } from '@material-ui/core';
 
-import { SkillsType } from '../../../../types/resume.types';
+import { SkillGroupType } from '../../../../types/resume.types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,9 +26,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-  skills: SkillsType[];
+  skillGroups: SkillGroupType[];
 }
-const ResumeSkills: FunctionComponent<Props> = ({ skills }) => {
+const ResumeSkills: FunctionComponent<Props> = ({ skillGroups }) => {
   const classes = useStyles();
   return (
     <Grid container>
@@ -36,15 +36,15 @@ const ResumeSkills: FunctionComponent<Props> = ({ skills }) => {
         <div className={classes.title}>Skills</div>
       </Grid>
       {
-        skills.map((item) => {
-          const { name, items } = item;
+        skillGroups.map((skillGroup) => {
+          const { name, skills } = skillGroup;
           return (
             <Grid container key={name}>
               <Grid item className={classes.header} sm={3}>
                 {name}
               </Grid>
               <Grid item className={classes.list} sm={9}>
-                {items.map((e) => e.name).join(', ')}
+                {skills.map((e) => e.name).join(', ')}
               </Grid>
             </Grid>
           );

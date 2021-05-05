@@ -20,11 +20,10 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-  summary: SummaryType;
+  summary: string;
 }
 const ResumeSummary: FunctionComponent<Props> = ({ summary }) => {
   const classes = useStyles();
-  const { summary: summaryText = '' } = summary;
   return (
     <Grid container>
       <Grid item sm={12}>
@@ -32,7 +31,7 @@ const ResumeSummary: FunctionComponent<Props> = ({ summary }) => {
       </Grid>
       <Grid item>
         <div className={classes.content}>
-          { summaryText }
+          { summary }
         </div>
       </Grid>
     </Grid>

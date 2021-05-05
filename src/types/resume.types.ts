@@ -1,65 +1,41 @@
-export interface OwnerType {
+export interface SkillType {
   name: string;
 }
 
-export interface ContactType {
-  phone: string;
-  email: string;
-  displayPhone: boolean;
-}
-
-export interface AddressType {
-  address: string;
-}
-
-export interface SummaryType {
-  summary: string;
-}
-
-export interface SkillItemType {
-  id: number;
-  position: number;
+export interface SkillGroupType {
   name: string;
-}
-
-export interface SkillsType {
-  id: number;
-  position: number;
-  name: string;
-  items: SkillItemType[];
+  skills: SkillType[];
 }
 
 export interface ExperienceItemType {
-  id: number;
-  position: number;
-  type: string;
-  item: string;
+  id: string;
+  name: string;
 }
 
 export interface ExperienceType {
-  id: number;
-  position: number;
   title: string;
   company: string;
   startDate: string;
   endDate: string;
   description: ExperienceItemType[];
   bullets: ExperienceItemType[];
-  techs: ExperienceItemType[];
+  tech: SkillGroupType;
 }
 
 export interface EducationType {
   degree: string;
   school: string;
-  graduationDate: string;
+  graduation: string;
 }
 
 export interface ResumeType {
-  owner: OwnerType;
-  contact: ContactType;
-  address: AddressType;
-  summary: SummaryType;
-  skills: SkillsType[];
+  name: string;
+  address: string;
+  email: string;
+  phone: string;
+  displayPhone: boolean;
+  summary: string;
+  skillGroups: SkillGroupType[];
   experience: ExperienceType[];
   education: EducationType[];
 }

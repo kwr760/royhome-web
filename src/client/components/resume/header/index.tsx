@@ -2,8 +2,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import React, { FunctionComponent } from 'react';
 import { createStyles, Grid, Theme } from '@material-ui/core';
 
-import { AddressType, ContactType, OwnerType } from '../../../../types/resume.types';
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
@@ -48,15 +46,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-  owner: OwnerType;
-  address: AddressType;
-  contact: ContactType;
+  name: string;
+  address: string;
+  email: string;
+  phone: string;
+  displayPhone: boolean;
 }
-const ResumeHeader: FunctionComponent<Props> = ({ owner, address, contact }) => {
+const ResumeHeader: FunctionComponent<Props> = ({ name, address, email, phone, displayPhone }) => {
   const classes = useStyles();
-  const { name = '' } = owner;
-  const { email = '', phone = '', displayPhone = false } = contact;
-  const { address: location = '' } = address;
   return (
     <Grid container>
       <Grid item xs={12} sm={4} className={classes.name}>
@@ -71,7 +68,7 @@ const ResumeHeader: FunctionComponent<Props> = ({ owner, address, contact }) => 
         <div className={classes.phone}>{ displayPhone ? phone : 'Cell upon request' }</div>
       </Grid>
       <Grid item xs={12} sm={4} className={classes.address}>
-        { location }
+        { address }
       </Grid>
     </Grid>
   );

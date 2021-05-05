@@ -54,7 +54,7 @@ const ResumeExperience: FunctionComponent<Props> = ({ experience }) => {
       {
         experience.map((item) => {
           const {
-            title, company, startDate, endDate = 'current', description, bullets, techs,
+            title, company, startDate, endDate = 'current', description, bullets, tech,
           } = item;
           return (
             <Grid container key={company}>
@@ -69,19 +69,19 @@ const ResumeExperience: FunctionComponent<Props> = ({ experience }) => {
                 </Grid>
                 <Grid container className={classes.justify}>
                   <Grid item>
-                    {description.map((e) => (<p key={e.id}>{e.item}</p>))}
+                    {description.map((e) => (<p key={e.id}>{e.name}</p>))}
                     { isEmpty(bullets) ? ''
                       : (
                         <ul>
-                          {bullets.map((e) => (<li key={e.id}>{ e.item }</li>))}
+                          {bullets.map((e) => (<li key={e.id}>{ e.name }</li>))}
                         </ul>
                       )}
-                    { isEmpty(techs) ? ''
+                    { isEmpty(tech.skills) ? ''
                       : (
                         <Grid container className={classes.list}>
                           <Grid item className={classes.header} sm={3}>Technology</Grid>
                           <Grid item sm={9}>
-                            {techs.map((e) => e.item).join(', ')}
+                            {tech.skills.map((e) => e.name).join(', ')}
                           </Grid>
                         </Grid>
                       )}

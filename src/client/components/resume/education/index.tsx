@@ -32,7 +32,7 @@ const ResumeEducation: FunctionComponent<Props> = ({ education }) => {
       </Grid>
       {
         education.map((item) => {
-          const { degree, school, graduationDate } = item;
+          const { degree, school, graduation } = item;
           return (
             <Grid container key={school}>
               <Grid item sm={9}>
@@ -41,7 +41,7 @@ const ResumeEducation: FunctionComponent<Props> = ({ education }) => {
                 <i>{school}</i>
               </Grid>
               <Grid item sm={3} className={classes.date}>
-                {graduationDate}
+                {graduation}
               </Grid>
             </Grid>
           );
