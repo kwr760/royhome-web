@@ -1,27 +1,20 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { AddressType, ContactType, OwnerType } from '../../../../types/resume.types';
 
 import ResumeHeader from './index';
 
 describe('client/components/resume/header', () => {
   it('should render with phone', () => {
     // Arrange
-    const owner = {
-      name: 'name',
-    };
-    const contact = {
-      phone: 'phone',
-      email: 'email',
-      displayPhone: true,
-    };
-    const address = {
-      address: 'address',
-    };
+    const name = 'name';
+    const phone = 'phone';
+    const email = 'email';
+    const displayPhone = true;
+    const address = 'address';
 
     // Act
     const { getByText } = render(
-      <ResumeHeader owner={owner} contact={contact} address={address} />,
+      <ResumeHeader name={name} address={address} phone={phone} email={email} displayPhone={displayPhone}/>,
     );
 
     // Assert
@@ -32,13 +25,10 @@ describe('client/components/resume/header', () => {
   });
   it('should render without props', () => {
     // Arrange
-    const owner = {} as OwnerType;
-    const contact = {} as ContactType;
-    const address = {} as AddressType;
 
     // Act
     const { getByText } = render(
-      <ResumeHeader owner={owner} contact={contact} address={address} />,
+      <ResumeHeader name={''} address={''} phone={''} email={''} displayPhone={false}/>,
     );
 
     // Assert

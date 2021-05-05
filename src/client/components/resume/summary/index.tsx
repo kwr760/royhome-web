@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import React, { FunctionComponent } from 'react';
 import { createStyles, Grid, Theme } from '@material-ui/core';
-import { SummaryType } from '../../../../types/resume.types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

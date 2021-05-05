@@ -9,13 +9,17 @@ describe('web/server/proxy/resume.proxy', () => {
     // Arrange
     const email = 'kroy760@gmail.com';
     const expected = { resume: 'resume' };
-    (axios.get as jest.Mock).mockResolvedValue({ data: { resume: expected } });
+    (axios.get as jest.Mock).mockResolvedValue({
+      data: {
+        output: expected,
+      },
+    });
 
     // Act
     const resume = await getResumeProxy(email);
 
     // Assert
-    expect(axios.get).toBeCalledWith('https://api.royk.us/resume/kroy760%40gmail.com');
+    expect(axios.get).toBeCalledWith('https://api.royk.us/resume/kroy760@gmail.com');
     expect(resume).toEqual(expected);
   });
 });

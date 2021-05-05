@@ -8,17 +8,11 @@ describe('client/components/resume/resume', () => {
   it('should render', () => {
     // Arrange
     const resume = {
-      contact: {
-        phone: 'phone',
-        email: 'email',
-        displayPhone: false,
-      },
-      address: {
-        address: 'address',
-      },
-      owner: {
-        name: 'name',
-      },
+      phone: 'phone',
+      email: 'email',
+      displayPhone: false,
+      address: 'address',
+      name: 'name',
     } as ResumeType;
 
     // Act

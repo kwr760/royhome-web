@@ -10,7 +10,7 @@ describe('client/components/resume/education', () => {
     const education = [{
       degree: 'degree',
       school: 'school',
-      graduationDate: 'Month Year',
+      graduation: 'Month Year',
     }];
 
     // Act

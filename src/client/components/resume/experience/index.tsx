@@ -76,7 +76,7 @@ const ResumeExperience: FunctionComponent<Props> = ({ experience }) => {
                           {bullets.map((e) => (<li key={e.id}>{ e.name }</li>))}
                         </ul>
                       )}
-                    { isEmpty(tech.skills) ? ''
+                    { (isEmpty(tech) || isEmpty(tech.skills)) ? ''
                       : (
                         <Grid container className={classes.list}>
                           <Grid item className={classes.header} sm={3}>Technology</Grid>
