@@ -5,11 +5,11 @@ node_js:
 - '12'
 jobs:
   include:
-  - stage: Test PR
+  - stage: Test Pull Request
     script:
     - npm test
     if: type = pull_request
-  - stage: Deploy latest code
+  - stage: Deploy to Production
     script:
     - "./.travis/deploy.sh"
     if: type = push AND branch = main
