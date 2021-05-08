@@ -18,9 +18,10 @@
     "test": "yarn test:lint && yarn test:only",
     "test:lint": "eslint src && tsc",
     "test:only": "jest --colors",
-    "clean": "rimraf dist build log/*.log reports",
+    "clean": "rimraf started dist build log/*.log reports",
     "docker:dev": "yarn build:dev & nodemon --config nodemon.web.json",
     "docker:prod": "yarn build:prod && NODE_ENV=production ts-node src/server/index.ts",
+    "debug:prod": "NODE_ENV=production node dist/node/main.js",
     "build:prod": "yarn clean && NODE_ENV=production webpack"
   },
   "dependencies": {

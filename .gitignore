@@ -16,6 +16,7 @@ node_modules/
 /build/*
 /reports/*
 /dist/*
+started
 
 # config
 .env

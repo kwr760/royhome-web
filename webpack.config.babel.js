@@ -45,7 +45,7 @@ const getConfig = (target) => {
   }
 
   return {
-    name: target,
+    name: target == 'web' ? 'browser' : 'ssr',
     mode: isDevel ? 'development' : 'production',
     target,
     devtool: 'source-map',
@@ -119,9 +119,9 @@ const getConfig = (target) => {
       }),
     ] : undefined,
     output: {
-      path: path.resolve(__dirname, 'dist', target),
+      path: path.resolve(__dirname, 'dist', target == 'web' ? 'browser' : 'ssr'),
       filename: isDevel ? '[name].js' : '[name].[chunkhash:8].js',
-      publicPath: '/dist/web/',
+      publicPath: '/dist/browser/',
       libraryTarget: target === 'node' ? 'commonjs2' : undefined,
     },
     plugins: [
@@ -132,11 +132,6 @@ const getConfig = (target) => {
         chunkFilename: isDevel ? '[id].css' : '[id].[chunkhash:8].css',
       }),
       new WebpackMd5Hash(),
-      // new StylelintPlugin({
-      //   configFile: './stylelint.config.js',
-      //   files: './src/**/*.scss',
-      //   syntax: 'scss',
-      // }),
       new CopyPlugin({
         patterns: [
           { from: 'src/client/assets/favicon.ico', to: './favicon.ico' },

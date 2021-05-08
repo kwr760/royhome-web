@@ -15,7 +15,13 @@ const startHttpsServer = (app: Application, port: number): void => {
 
   spdy.createServer(credentials, app).listen(
     port,
-    () => displayMessage('Secure server is running'),
+    () => {
+      displayMessage('Secure server is running');
+      const dateTime = new Date(Date.now());
+      fs.writeFile('started', dateTime.toISOString(), (err) => {
+        if (err) throw err;
+      });
+    },
   );
 };
 
