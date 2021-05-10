@@ -43,7 +43,7 @@ module.exports = {
     'comma-dangle': ['error', 'always-multiline'],
     'import/no-dynamic-require': 0,
     'import/prefer-default-export': 'off',
-    indent: ['error', 2],
+    indent: ['error', 2, { 'SwitchCase': 1 }],
     'linebreak-style': ['error', 'unix'],
     quotes: ['warn', 'single'],
     'no-unused-vars': [

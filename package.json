@@ -13,16 +13,16 @@
     "url": "https://github.com/kwr760/royhome-web/issues"
   },
   "scripts": {
-    "debug:dev": "NODE_ENV=development ts-node src/server/index.ts",
-    "build:dev": "yarn clean & NODE_ENV=development webpack --watch",
+    "run:dev": "NODE_ENV=development ts-node src/server/index.ts",
+    "webpack:dev": "yarn clean & NODE_ENV=development webpack --watch",
     "test": "yarn test:lint && yarn test:only",
     "test:lint": "eslint src && tsc",
     "test:only": "jest --colors",
     "clean": "rimraf started dist build log/*.log reports",
     "docker:dev": "yarn build:dev & nodemon --config nodemon.web.json",
     "docker:prod": "yarn build:prod && NODE_ENV=production ts-node src/server/index.ts",
-    "debug:prod": "NODE_ENV=production node dist/node/main.js",
-    "build:prod": "yarn clean && NODE_ENV=production webpack"
+    "run:prod": "NODE_ENV=production node dist/server/start.js",
+    "webpack:prod": "yarn clean && NODE_ENV=production webpack"
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.11.0",
