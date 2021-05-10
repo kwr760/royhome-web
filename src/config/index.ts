@@ -8,12 +8,12 @@ let mergedConfig;
 
 const release = process.env['NODE_ENV'] || 'production';
 switch (release) {
-case 'development':
-  mergedConfig = merge({}, base, dev);
-  break;
-default:
-  mergedConfig = merge({}, base, prod);
-  break;
+  case 'development':
+    mergedConfig = merge({}, base, dev);
+    break;
+  default:
+    mergedConfig = merge({}, base, prod);
+    break;
 }
 
 const env = mergedConfig;

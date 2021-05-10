@@ -4,6 +4,9 @@ import fs from 'fs';
 
 import env from '../../config';
 import displayMessage from './display-message';
+import ErrnoException = NodeJS.ErrnoException;
+
+const throwError = (err: ErrnoException | null) => { if (err) throw err; };
 
 const startHttpsServer = (app: Application, port: number): void => {
   const privateKey = fs.readFileSync(env.cert.key, 'utf8');
@@ -18,9 +21,7 @@ const startHttpsServer = (app: Application, port: number): void => {
     () => {
       displayMessage('Secure server is running');
       const dateTime = new Date(Date.now());
-      fs.writeFile('started', dateTime.toISOString(), (err) => {
-        if (err) throw err;
-      });
+      fs.writeFile('started', dateTime.toISOString(), throwError);
     },
   );
 };
