@@ -16,7 +16,7 @@ const resumeSlice = createSlice({
   initialState,
   reducers: {
     getResumeSuccess: (state: ResumeStateType, action: PayloadAction<ResumeActionType>) => {
-      const { resume } = action.payload;
+      const { output: resume } = action.payload;
       const { email = 'unknown'} = resume;
       state.email = email;
       state.resumes = {

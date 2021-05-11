@@ -16,7 +16,7 @@ describe('client/store/resume/resume.slice', () => {
     // Arrange
     const email = 'kroy760@gmail.com';
     const expectedResume = {
-      resume: {},
+      output: {},
     };
     const expectedState = {
       email: 'unknown',

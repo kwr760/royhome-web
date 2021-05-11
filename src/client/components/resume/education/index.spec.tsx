@@ -10,7 +10,7 @@ describe('client/components/resume/education', () => {
     const education = [{
       degree: 'degree',
       school: 'school',
-      graduation: 'Month Year',
+      graduation: '2020-01-01',
     }];
 
     // Act
@@ -21,15 +21,12 @@ describe('client/components/resume/education', () => {
     // Assert
     getByText('degree,');
     getByText('school');
-    getByText('Month Year');
+    getByText('January 2020');
   });
   it('should render without props', () => {
-    // Arrange
-    const education: EducationType[] = [];
-
-    // Act
+    // Arrange / Act
     const { getByText } = render(
-      <ResumeEducation education={education}/>,
+      <ResumeEducation education={[] as EducationType[]}/>,
     );
 
     // Assert

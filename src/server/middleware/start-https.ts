@@ -4,9 +4,8 @@ import fs from 'fs';
 
 import env from '../../config';
 import displayMessage from './display-message';
-import ErrnoException = NodeJS.ErrnoException;
 
-const throwError = (err: ErrnoException | null) => { if (err) throw err; };
+const throwError = (err: NodeJS.ErrnoException | null) => { if (err) throw err; };
 
 const startHttpsServer = (app: Application, port: number): void => {
   const privateKey = fs.readFileSync(env.cert.key, 'utf8');
