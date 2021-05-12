@@ -21,7 +21,6 @@ describe('config/index', () => {
         default: {
           appName: 'royhome',
           auth0: {
-            audience: 'https://royk.us',
             callbackUrl: 'http://localhost',
             clientId: 'J5Mu7fSFraTWgQBz1WJgikpnuRnKRkaL',
             domain: 'royk.auth0.com',
@@ -69,7 +68,6 @@ describe('config/index', () => {
         default: {
           appName: 'royhome',
           auth0: {
-            audience: 'https://royk.us',
             callbackUrl: 'http://localhost',
             clientId: 'J5Mu7fSFraTWgQBz1WJgikpnuRnKRkaL',
             domain: 'royk.auth0.com',
@@ -117,7 +115,6 @@ describe('config/index', () => {
         default: {
           appName: 'royhome',
           auth0: {
-            audience: 'https://royk.us',
             callbackUrl: 'https://royk.us',
             clientId: 'J5Mu7fSFraTWgQBz1WJgikpnuRnKRkaL',
             domain: 'royk.auth0.com',

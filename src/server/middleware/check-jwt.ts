@@ -13,7 +13,6 @@ const checkJwt = jwt({
     }/.well-known/jwks.json`,
   }),
 
-  audience: env.auth0.audience,
   issuer: `https://${env.auth0.domain}/`,
   algorithms: ['RS256'],
 });

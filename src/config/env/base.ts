@@ -18,7 +18,6 @@ const env = (host: string) => ({
   auth0: {
     domain: 'royk.auth0.com',
     clientId: 'J5Mu7fSFraTWgQBz1WJgikpnuRnKRkaL',
-    audience: 'https://royk.us',
     callbackUrl: `${host}`,
   },
 });
