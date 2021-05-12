@@ -22,7 +22,9 @@
     "docker:dev": "yarn build:dev & nodemon --config nodemon.web.json",
     "docker:prod": "yarn build:prod && NODE_ENV=production ts-node src/server/index.ts",
     "run:prod": "NODE_ENV=production node dist/server/start.js",
-    "webpack:prod": "yarn clean && NODE_ENV=production webpack"
+    "webpack:prod": "yarn clean && NODE_ENV=production webpack",
+    "service:dev": "yarn webpack:dev && yarn run:dev",
+    "service:prod": "yarn webpack:prod && yarn run:prod"
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.11.0",
