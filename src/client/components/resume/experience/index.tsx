@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import dateFormat from 'dateformat';
 import React, { FunctionComponent } from 'react';
 import { createStyles, Grid, Theme } from '@material-ui/core';
 import { isEmpty } from 'lodash';
@@ -37,6 +38,9 @@ const useStyles = makeStyles((theme: Theme) =>
     justify: {
       textAlign: 'justify',
     },
+    fullWidth: {
+      width: '100%',
+    },
   }),
 );
 
@@ -54,17 +58,18 @@ const ResumeExperience: FunctionComponent<Props> = ({ experience }) => {
       {
         experience.map((item) => {
           const {
-            title, company, startDate, endDate = 'current', description, bullets, tech,
+            title, company, startDate, endDate = null, description, bullets, tech,
           } = item;
           return (
             <Grid container key={company}>
-              <Grid item>
+              <Grid item className={classes.fullWidth}>
                 <Grid container className={classes.position}>
                   <Grid item sm={8} className={classes.role}>
                     {`${title} at ${company}`}
                   </Grid>
                   <Grid item sm={4} className={classes.right}>
-                    {`${startDate} - ${endDate}`}
+                    {`${dateFormat(startDate, 'mmmm yyyy', true)} -
+                    ${endDate ? dateFormat(endDate, 'mmmm yyyy', true) : 'current'}`}
                   </Grid>
                 </Grid>
                 <Grid container className={classes.justify}>

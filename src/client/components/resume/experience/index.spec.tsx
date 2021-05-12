@@ -10,7 +10,7 @@ describe('client/components/resume/experience', () => {
     const experiences = [{
       title: 'title 1',
       company: 'company 1',
-      startDate: 'startDate 1',
+      startDate: '2020-02-01',
       description: [{
         id: '1',
         name: 'description 1',
@@ -20,8 +20,8 @@ describe('client/components/resume/experience', () => {
     }, {
       title: 'title 2',
       company: 'company 2',
-      startDate: 'startDate 2',
-      endDate: 'endDate 2',
+      startDate: '2010-01-01',
+      endDate: '2020-01-01',
       description: [{
         id: '1',
         name: 'description 2',
@@ -50,22 +50,19 @@ describe('client/components/resume/experience', () => {
     // Assert
     getByText('Professional Experience');
     getByText('title 1 at company 1');
-    getByText('startDate 1 - current');
+    getByText('February 2020 - current');
     getByText('description 1');
     getByText('title 2 at company 2');
-    getByText('startDate 2 - endDate 2');
+    getByText('January 2010 - January 2020');
     getByText('description 2');
     getByText('bullet #1');
     getByText('bullet #2');
     getByText('tech #1, tech #2');
   });
   it('should render without props', () => {
-    // Arrange
-    const experiences: ExperienceType[] = [];
-
-    // Act
+    // Arrange / Act
     const { getByText } = render(
-      <ResumeExperience experience={experiences}/>,
+      <ResumeExperience experience={[] as ExperienceType[]}/>,
     );
 
     // Assert

@@ -2,7 +2,7 @@ import { ResumeType } from './resume.types';
 import { UserStateType } from './state.types';
 
 export interface ResumeActionType {
-  resume: ResumeType;
+  output: ResumeType;
   error?: string;
 }
 

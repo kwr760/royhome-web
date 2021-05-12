@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React, { FunctionComponent } from 'react';
 import { createStyles, Grid, Theme } from '@material-ui/core';
 import { EducationType } from '../../../../types/resume.types';
+import dateFormat from 'dateformat';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,7 +42,7 @@ const ResumeEducation: FunctionComponent<Props> = ({ education }) => {
                 <i>{school}</i>
               </Grid>
               <Grid item sm={3} className={classes.date}>
-                {graduation}
+                {dateFormat(graduation, 'mmmm yyyy', true)}
               </Grid>
             </Grid>
           );

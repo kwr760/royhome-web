@@ -24,10 +24,10 @@ const renderReact = async (req: Request, res: Response): Promise<void> => {
   displayMessage(`Server render:  ${req.url}`);
 
   // Extract the creation of the markup to a separate file
-  const nodeStats = path.resolve(env.root, './dist/node/loadable-stats.json');
+  const nodeStats = path.resolve(env.root, './dist/ssr/loadable-stats.json');
   const nodeExtractor = new ChunkExtractor({ statsFile: nodeStats });
   const { default: Main } = nodeExtractor.requireEntrypoint() as unknown as MainType;
-  const webStats = path.resolve(env.root, './dist/web/loadable-stats.json');
+  const webStats = path.resolve(env.root, './dist/browser/loadable-stats.json');
   const webExtractor = new ChunkExtractor({ statsFile: webStats });
   const url = parseUrl(req) || { pathname: ''};
   const pathname = url.pathname || '';
