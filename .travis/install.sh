@@ -8,13 +8,10 @@ type=${3}
 source ${scripts}/${repo}/env/${type}
 
 echo "installing ${repo} as ${deployment}"
-echo cd ${LOCATION}/${deployment}
 cd ${LOCATION}/${deployment}
-pwd
 
 echo "yarn install"
 yarn install
-pwd
 echo "copy .env"
 cp ${scripts}/${repo}/dotenv/${type}/${deployment} .env
 
