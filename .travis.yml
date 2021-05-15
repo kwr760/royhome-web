@@ -7,10 +7,11 @@ jobs:
   include:
   - stage: Test Pull Request
     script:
-    - npm test
+    - yarn test
     if: type = pull_request
   - stage: Deploy to Production
     script:
+    - yarn webpack:prod
     - "./.travis/deploy.sh"
     if: type = push AND branch = main
 addons:
