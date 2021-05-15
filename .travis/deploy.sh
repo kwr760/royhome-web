@@ -15,8 +15,11 @@ echo -e "\nTravis:  openssl rm"
 rm private-key .travis/secrets.tar
 
 pwd
-ssh $RELEASE_HOST 'sudo rm -rf /var/app/royhome-web/deploy'
+echo scp -r /home/travis/build/kwr760/royhome-web $RELEASE_HOST:/var/app/royhome-web/deploy
 scp -r /home/travis/build/kwr760/royhome-web $RELEASE_HOST:/var/app/royhome-web/deploy
+echo ssh $RELEASE_HOST 'sudo rm -rf /var/app/royhome-web/deploy'
+ssh $RELEASE_HOST 'sudo rm -rf /var/app/royhome-web/deploy'
+echo ssh $RELEASE_HOST 'sudo ls -l /var/app/royhome-web/deploy'
 ssh $RELEASE_HOST 'sudo ls -l /var/app/royhome-web/deploy'
 
 echo -e "\nRemote:  copy new code to stage"
