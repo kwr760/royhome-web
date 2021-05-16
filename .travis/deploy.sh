@@ -17,8 +17,10 @@ rm private-key .travis/secrets.tar
 pwd
 echo ssh $RELEASE_HOST 'sudo rm -rf /var/app/royhome-web/deploy'
 ssh $RELEASE_HOST 'sudo rm -rf /var/app/royhome-web/deploy'
-echo rsync -avP rsync -avP /home/travis/build/kwr760/royhome-web $RELEASE_HOST:/var/app/royhome-web/deploy
-rsync -avP rsync -avP /home/travis/build/kwr760/royhome-web $RELEASE_HOST:/var/app/royhome-web/deploy
+# echo rsync -avP rsync -aP /home/travis/build/kwr760/royhome-web $RELEASE_HOST:/var/app/royhome-web
+# rsync -avP rsync -aP /home/travis/build/kwr760/royhome-web $RELEASE_HOST:/var/app/royhome-web
+echo tar cf - /home/travis/build/kwr760/royhome-web | gzip | ssh $RELEASE_HOST 'cd /var/apps/royhome-web && gzip -d | tar xvf deploy'
+tar cf - /home/travis/build/kwr760/royhome-web | gzip | ssh $RELEASE_HOST 'cd /var/apps/royhome-web && gzip -d | tar xvf deploy'
 # scp -r /home/travis/build/kwr760/royhome-web $RELEASE_HOST:/var/app/royhome-web/deploy
 echo ssh $RELEASE_HOST 'sudo ls -l /var/app/royhome-web/deploy'
 ssh $RELEASE_HOST 'sudo ls -l /var/app/royhome-web/deploy'
