@@ -30,8 +30,8 @@ echo scp deploy.tar $RELEASE_HOST:/var/app/royhome-web
 scp deploy.tar $RELEASE_HOST:/var/app/royhome-web
 echo ssh $RELEASE_HOST 'sudo mkdir /var/app/royhome-web/deploy'
 ssh $RELEASE_HOST 'sudo mkdir /var/app/royhome-web/deploy'
-echo ssh $RELEASE_HOST 'sudo tar -xvf /var/app/royhome-web/deploy.tar -C /var/app/royhome-web/deploy'
-ssh $RELEASE_HOST 'sudo tar -xvf /var/app/royhome-web/deploy.tar -C /var/app/royhome-web/deploy'
+echo ssh $RELEASE_HOST 'sudo tar -xf /var/app/royhome-web/deploy.tar -C /var/app/royhome-web/deploy'
+ssh $RELEASE_HOST 'sudo tar -xf /var/app/royhome-web/deploy.tar -C /var/app/royhome-web/deploy'
 
 echo ssh $RELEASE_HOST 'sudo ls -l /var/app/royhome-web/deploy'
 ssh $RELEASE_HOST 'sudo ls -l /var/app/royhome-web/deploy'
