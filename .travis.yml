@@ -11,7 +11,6 @@ jobs:
     if: type = pull_request
   - stage: Deploy to Production
     script:
-    - yarn webpack:prod
     - "./.travis/deploy.sh"
     if: type = push AND branch = main
 addons:

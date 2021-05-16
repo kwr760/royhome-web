@@ -15,5 +15,7 @@ echo "yarn install"
 yarn install
 echo "copy .env"
 cp ${scripts}/${repo}/dotenv/${type}/${deployment} .env
+echo "yarn webpack:prod"
+yarn webpack:prod
 
 echo "completed"
