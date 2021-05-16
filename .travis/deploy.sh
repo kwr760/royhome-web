@@ -16,7 +16,7 @@ rm private-key .travis/secrets.tar
 
 pwd
 echo -e "push code to server"
-ssh $RELEASE_HOST 'sudo rm -rf /var/app/royhome-web/deploy'
+ssh $RELEASE_HOST 'sudo rm -rf /var/app/royhome-web/deploy /var/app/royhome-web/deploy.tar '
 tar -cjf ../deploy.tar -C /home/travis/build/kwr760/royhome-web .
 scp ../deploy.tar $RELEASE_HOST:/var/app/royhome-web
 ssh $RELEASE_HOST 'sudo mkdir /var/app/royhome-web/deploy'
