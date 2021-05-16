@@ -17,11 +17,22 @@ rm private-key .travis/secrets.tar
 pwd
 echo ssh $RELEASE_HOST 'sudo rm -rf /var/app/royhome-web/deploy'
 ssh $RELEASE_HOST 'sudo rm -rf /var/app/royhome-web/deploy'
-# echo rsync -avP rsync -aP /home/travis/build/kwr760/royhome-web $RELEASE_HOST:/var/app/royhome-web
-# rsync -avP rsync -aP /home/travis/build/kwr760/royhome-web $RELEASE_HOST:/var/app/royhome-web
-echo tar cf - /home/travis/build/kwr760/royhome-web | gzip | ssh $RELEASE_HOST 'cd /var/app/royhome-web && gzip -d | tar xvf deploy'
-tar cf - /home/travis/build/kwr760/royhome-web | gzip | ssh $RELEASE_HOST 'cd /var/app/royhome-web && gzip -d | tar xvf deploy'
+# echo rsync -aP /home/travis/build/kwr760/royhome-web $RELEASE_HOST:/var/app/royhome-web
+# rsync -aP /home/travis/build/kwr760/royhome-web $RELEASE_HOST:/var/app/royhome-web
+# ssh $RELEASE_HOST 'sudo mv /var/app/royhome-web/royhome-web /var/app/royhome-web/deploy'
+# echo tar cf - /home/travis/build/kwr760/royhome-web | gzip | ssh $RELEASE_HOST 'cd /var/app/royhome-web && gzip -d | tar xvf deploy'
+# tar cf - /home/travis/build/kwr760/royhome-web | gzip | ssh $RELEASE_HOST 'cd /var/app/royhome-web && gzip -d | tar xvf deploy'
 # scp -r /home/travis/build/kwr760/royhome-web $RELEASE_HOST:/var/app/royhome-web/deploy
+
+echo tar -cjf deploy.tar -C /home/travis/build/kwr760/royhome-web .
+tar -cjf deploy.tar -C /home/travis/build/kwr760/royhome-web .
+echo scp deploy.tar $RELEASE_HOST:/var/app/royhome-web
+scp deploy.tar $RELEASE_HOST:/var/app/royhome-web
+echo ssh $RELEASE_HOST 'sudo mkdir /var/app/royhome-web/deploy'
+ssh $RELEASE_HOST 'sudo mkdir /var/app/royhome-web/deploy'
+echo ssh $RELEASE_HOST 'sudo tar -xvf /var/app/royhome-web/deploy.tar -C /var/app/royhome-web/deploy'
+ssh $RELEASE_HOST 'sudo tar -xvf /var/app/royhome-web/deploy.tar -C /var/app/royhome-web/deploy'
+
 echo ssh $RELEASE_HOST 'sudo ls -l /var/app/royhome-web/deploy'
 ssh $RELEASE_HOST 'sudo ls -l /var/app/royhome-web/deploy'
 
