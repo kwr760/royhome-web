@@ -1,6 +1,7 @@
 /* eslint-disable global-require */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import LOG_LEVELS from '../util/logger/logger-levels';
+import { DEVELOPMENT, DOCKER, PRODUCTION } from './release-environments';
 
 describe('config/index', () => {
   const { NODE_ENV } = process.env;
@@ -8,7 +9,7 @@ describe('config/index', () => {
   describe('production', () => {
     beforeEach(() => {
       jest.resetModules();
-      process.env.NODE_ENV = 'production';
+      process.env.NODE_ENV = PRODUCTION;
     });
 
     afterEach(() => {
@@ -26,20 +27,21 @@ describe('config/index', () => {
             domain: 'royk.auth0.com',
           },
           host: 'http://localhost',
-          mode: 'production',
+          release: PRODUCTION,
           root: expect.stringContaining('/royhome'),
-          cert: {
-            cert: '/var/cert/royhome/fullchain.pem',
-            key: '/var/cert/royhome/privkey.pem',
-          },
           log: {
             dir: '/var/log/royhome',
             level: LOG_LEVELS.WARN,
             stdout: false,
             includePidFilename: true,
           },
-          api: {
-            url: 'https://api.royk.us',
+          server: {
+            apiUrl: 'https://api.royk.us',
+            cert: {
+              cert: '/var/cert/royhome/fullchain.pem',
+              key: '/var/cert/royhome/privkey.pem',
+            },
+            enableHttps: true,
           },
         },
       };
@@ -55,7 +57,7 @@ describe('config/index', () => {
   describe('development', () => {
     beforeEach(() => {
       jest.resetModules();
-      process.env.NODE_ENV = 'development';
+      process.env.NODE_ENV = DEVELOPMENT;
     });
 
     afterEach(() => {
@@ -73,20 +75,69 @@ describe('config/index', () => {
             domain: 'royk.auth0.com',
           },
           host: 'http://localhost',
-          mode: 'development',
+          release: DEVELOPMENT,
           root: expect.stringContaining('/royhome-web'),
-          cert: {
-            cert: '/var/cert/royhome/fullchain.pem',
-            key: '/var/cert/royhome/privkey.pem',
-          },
           log: {
-            dir: './log',
+            dir: '/var/log/royhome',
             level: LOG_LEVELS.DEBUG,
             stdout: true,
             includePidFilename: false,
           },
-          api: {
-            url: 'https://api.royk.us',
+          server: {
+            apiUrl: 'https://api.royk.us',
+            cert: {
+              cert: '/var/cert/royhome/fullchain.pem',
+              key: '/var/cert/royhome/privkey.pem',
+            },
+            enableHttps: true,
+          },
+        },
+      };
+
+      // Act
+      const dev = require('./index');
+
+      // Assert
+      expect(dev).toEqual(expected);
+    });
+  });
+
+  describe('docker', () => {
+    beforeEach(() => {
+      jest.resetModules();
+      process.env.NODE_ENV = DOCKER;
+    });
+
+    afterEach(() => {
+      process.env.NODE_ENV = NODE_ENV;
+    });
+
+    it('should load docker as expected', async () => {
+      // Arrange
+      const expected = {
+        default: {
+          appName: 'royhome',
+          auth0: {
+            callbackUrl: 'http://localhost',
+            clientId: 'J5Mu7fSFraTWgQBz1WJgikpnuRnKRkaL',
+            domain: 'royk.auth0.com',
+          },
+          host: 'http://localhost',
+          release: DOCKER,
+          root: expect.stringContaining('/royhome-web'),
+          log: {
+            dir: './log',
+            level: LOG_LEVELS.WARN,
+            stdout: false,
+            includePidFilename: false,
+          },
+          server: {
+            apiUrl: 'http://localhost:5000',
+            cert: {
+              cert: '/var/cert/royhome/fullchain.pem',
+              key: '/var/cert/royhome/privkey.pem',
+            },
+            enableHttps: false,
           },
         },
       };
@@ -110,7 +161,7 @@ describe('config/index', () => {
     });
 
     it('should load prod if unknown', () => {
-      // Arrange
+    // Arrange
       const expected = {
         default: {
           appName: 'royhome',
@@ -120,20 +171,21 @@ describe('config/index', () => {
             domain: 'royk.auth0.com',
           },
           host: 'https://royk.us',
-          mode: 'production',
+          release: PRODUCTION,
           root: expect.stringContaining('/royhome-web'),
-          cert: {
-            cert: '/var/cert/royhome/fullchain.pem',
-            key: '/var/cert/royhome/privkey.pem',
-          },
           log: {
             dir: '/var/log/royhome',
             level: LOG_LEVELS.WARN,
             stdout: false,
             includePidFilename: true,
           },
-          api: {
-            url: 'https://api.royk.us',
+          server: {
+            apiUrl: 'https://api.royk.us',
+            cert: {
+              cert: '/var/cert/royhome/fullchain.pem',
+              key: '/var/cert/royhome/privkey.pem',
+            },
+            enableHttps: true,
           },
         },
       };

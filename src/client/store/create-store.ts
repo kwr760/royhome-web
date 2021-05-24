@@ -2,6 +2,7 @@ import { configureStore, Action, Store } from '@reduxjs/toolkit';
 import { ThunkAction } from 'redux-thunk';
 
 import env from '../../config';
+import { PRODUCTION } from '../../config/release-environments';
 import rootReducer, { RootState } from './root.reducer';
 
 const createStore = (preloadedState = {}): Store => {
@@ -10,7 +11,7 @@ const createStore = (preloadedState = {}): Store => {
   return configureStore({
     reducer,
     preloadedState,
-    devTools: env.mode === 'development',
+    devTools: env.release !== PRODUCTION,
   });
 };
 

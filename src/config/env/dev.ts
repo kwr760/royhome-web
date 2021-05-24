@@ -1,9 +1,9 @@
 import LOG_LEVELS from '../../util/logger/logger-levels';
+import { DEVELOPMENT } from '../release-environments';
 
 const env = {
-  mode: 'development',
+  release: DEVELOPMENT,
   log: {
-    dir: './log',
     level: LOG_LEVELS.DEBUG,
     stdout: true,
     includePidFilename: false,

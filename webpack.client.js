@@ -7,8 +7,9 @@ import CopyPlugin from 'copy-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 import nodeExternals from 'webpack-node-externals';
+import { EnvironmentPlugin, DefinePlugin } from 'webpack';
 
-const isDevel = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+const isDevel = !process.env.NODE_ENV || ['development', 'docker'].includes(process.env.NODE_ENV);
 
 export const getClientConfig = (target) => {
   let additionalPlugins = [];
@@ -137,6 +138,8 @@ export const getClientConfig = (target) => {
         ],
       }),
       new LodashModuleReplacementPlugin(),
+      new EnvironmentPlugin(['NODE_ENV']),
+      new DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
       ...additionalPlugins,
     ],
     resolve: {

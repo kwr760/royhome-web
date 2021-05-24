@@ -12,6 +12,7 @@ import handleError from './middleware/handle-error';
 import notFound from './middleware/not-found';
 import renderReact from './rendering/render-react';
 import startHttpsServer from './middleware/start-https';
+import startHttpServer from './middleware/start-http';
 
 jest.mock('express');
 jest.mock('cors');
@@ -24,6 +25,7 @@ jest.mock('body-parser', () => ({
 jest.mock('cookie-parser');
 jest.mock('express-http-context');
 jest.mock('./middleware/start-https');
+jest.mock('./middleware/start-http');
 
 describe('server/index', () => {
   const mockExpress = {
@@ -93,13 +95,13 @@ describe('server/index', () => {
       const { default: env } = require('../config');
       const { default: dev } = require('../config/env/dev');
       env.mode = dev.mode;
-      env.server = dev.server;
 
       // Act
       const { default: app } = require('./index');
 
       // Assert
       expect(startHttpsServer).toHaveBeenCalledWith(app, 3000);
+      expect(startHttpServer).not.toHaveBeenCalled();
     });
   });
 
@@ -109,7 +111,6 @@ describe('server/index', () => {
       const { default: env } = require('../config');
       const { default: prod } = require('../config/env/prod');
       env.mode = prod.mode;
-      env.server = prod.server;
       process.env.SERVER_PORT = '';
 
       // Act
@@ -118,6 +119,26 @@ describe('server/index', () => {
       // Assert
       expect(mockExpress.use).toHaveBeenCalledTimes(10);
       expect(startHttpsServer).toHaveBeenCalledWith(app, 3000);
+      expect(startHttpServer).not.toHaveBeenCalled();
+    });
+  });
+
+  it('should start docker server', () => {
+    // Arrange
+    jest.isolateModules(() => {
+      const { default: env } = require('../config');
+      const { default: docker } = require('../config/env/docker');
+      env.mode = docker.mode;
+      env.server = docker.server;
+      process.env.SERVER_PORT = '';
+
+      // Act
+      const { default: app } = require('./index');
+
+      // Assert
+      expect(mockExpress.use).toHaveBeenCalledTimes(10);
+      expect(startHttpServer).toHaveBeenCalledWith(app, 3000);
+      expect(startHttpsServer).not.toHaveBeenCalled();
     });
   });
 });

@@ -8,8 +8,8 @@ import displayMessage from './display-message';
 const throwError = (err: NodeJS.ErrnoException | null) => { if (err) throw err; };
 
 const startHttpsServer = (app: Application, port: number): void => {
-  const privateKey = fs.readFileSync(env.cert.key, 'utf8');
-  const certificate = fs.readFileSync(env.cert.cert, 'utf8');
+  const privateKey = fs.readFileSync(env.server.cert.key, 'utf8');
+  const certificate = fs.readFileSync(env.server.cert.cert, 'utf8');
   const credentials = {
     key: privateKey,
     cert: certificate,

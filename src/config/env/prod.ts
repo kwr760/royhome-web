@@ -1,9 +1,9 @@
 import LOG_LEVELS from '../../util/logger/logger-levels';
+import { PRODUCTION } from '../release-environments';
 
 const env = {
-  mode: 'production',
+  release: PRODUCTION,
   log: {
-    dir: '/var/log/royhome',
     level: LOG_LEVELS.WARN,
     stdout: false,
     includePidFilename: true,
