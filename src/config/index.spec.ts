@@ -78,7 +78,7 @@ describe('config/index', () => {
           release: DEVELOPMENT,
           root: expect.stringContaining('/royhome-web'),
           log: {
-            dir: '/var/log/royhome',
+            dir: './log',
             level: LOG_LEVELS.DEBUG,
             stdout: true,
             includePidFilename: false,
@@ -127,8 +127,8 @@ describe('config/index', () => {
           root: expect.stringContaining('/royhome-web'),
           log: {
             dir: './log',
-            level: LOG_LEVELS.WARN,
-            stdout: false,
+            level: LOG_LEVELS.INFO,
+            stdout: true,
             includePidFilename: false,
           },
           server: {
