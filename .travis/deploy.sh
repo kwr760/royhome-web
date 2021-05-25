@@ -21,7 +21,7 @@ tar -cjf ../deploy.tar -C /home/travis/build/kwr760/royhome-web .
 scp ../deploy.tar $RELEASE_HOST:/var/app/royhome-web
 ssh $RELEASE_HOST 'sudo mkdir /var/app/royhome-web/deploy'
 ssh $RELEASE_HOST 'sudo tar -xf /var/app/royhome-web/deploy.tar -C /var/app/royhome-web/deploy'
-ssh $RELEASE_HOST 'sudo ls -l /var/app/royhome-web/deploy'
+ssh $RELEASE_HOST 'sudo rm /var/log/royhome/royhome-web.log'
 
 echo -e "\nRemote:  copy new code to stage"
 ssh $RELEASE_HOST 'sudo /var/scripts/install-repo.sh royhome-web prod'
