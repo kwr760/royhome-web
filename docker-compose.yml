@@ -4,6 +4,8 @@ services:
   web:
     build:
       context: .
+    environment:
+      - NODE_ENV=docker
     volumes:
       - .:/var/app/royhome-web
       - /var/app/royhome-web/node_modules

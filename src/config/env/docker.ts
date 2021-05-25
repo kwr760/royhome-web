@@ -9,8 +9,8 @@ const env = {
   },
   log: {
     dir: './log',
-    level: LOG_LEVELS.WARN,
-    stdout: false,
+    level: LOG_LEVELS.INFO,
+    stdout: true,
     includePidFilename: false,
   },
 };
