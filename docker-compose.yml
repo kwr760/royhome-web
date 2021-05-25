@@ -4,18 +4,14 @@ services:
   web:
     build:
       context: .
-      args:
-        APP: web
-        RELEASE: ${RELEASE}
+    environment:
+      - NODE_ENV=docker
     volumes:
-      - /var/cert/royhome
       - .:/var/app/royhome-web
       - /var/app/royhome-web/node_modules
-      - /var/log/royhome
     ports:
       - "3000:3000"
-      - "9229:9229"
-    extra_hosts:
-      - "api.royk.us:172.17.0.1"
-      - "api.royhome.net:172.17.0.1"
+#    extra_hosts:
+#      - "api.royk.us:172.17.0.1"
+#      - "api.royhome.net:172.17.0.1"
     network_mode: "host"

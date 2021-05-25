@@ -7,12 +7,15 @@ import CopyPlugin from 'copy-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 import nodeExternals from 'webpack-node-externals';
+import { EnvironmentPlugin, DefinePlugin } from 'webpack';
 
-const isDevel = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+const shouldAnalyze = !process.env.NODE_ENV || ['development'].includes(process.env.NODE_ENV);
+const shouldStartDevServer = !process.env.NODE_ENV || ['development'].includes(process.env.NODE_ENV);
+const isDevMode = !process.env.NODE_ENV || ['development', 'docker'].includes(process.env.NODE_ENV);
 
 export const getClientConfig = (target) => {
   let additionalPlugins = [];
-  if (isDevel) {
+  if (shouldAnalyze) {
     if (target === 'web') {
       additionalPlugins = [
         new BundleAnalyzerPlugin({
@@ -33,7 +36,7 @@ export const getClientConfig = (target) => {
   }
 
   let devServer;
-  if (isDevel) {
+  if (shouldStartDevServer) {
     devServer = {
       contentBase: path.join(__dirname, 'dist'),
       watchContentBase: true,
@@ -45,7 +48,7 @@ export const getClientConfig = (target) => {
 
   return {
     name: target === 'web' ? 'browser' : 'ssr',
-    mode: isDevel ? 'development' : 'production',
+    mode: isDevMode ? 'development' : 'production',
     target,
     devtool: 'source-map',
     entry: `./src/client/index-${target}.tsx`,
@@ -85,7 +88,7 @@ export const getClientConfig = (target) => {
             {
               loader: 'sass-loader',
               options: {
-                sourceMap: isDevel,
+                sourceMap: isDevMode,
               },
             },
           ],
@@ -119,15 +122,15 @@ export const getClientConfig = (target) => {
     ] : undefined,
     output: {
       path: path.resolve(__dirname, 'dist', target === 'web' ? 'browser' : 'ssr'),
-      filename: isDevel ? '[name].js' : '[name].[chunkhash:8].js',
+      filename: isDevMode ? '[name].js' : '[name].[chunkhash:8].js',
       publicPath: '/dist/browser/',
       libraryTarget: target === 'node' ? 'commonjs2' : undefined,
     },
     plugins: [
       new LoadablePlugin(),
       new MiniCssExtractPlugin({
-        filename: isDevel ? '[name].css' : '[name].[chunkhash:8].css',
-        chunkFilename: isDevel ? '[id].css' : '[id].[chunkhash:8].css',
+        filename: isDevMode ? '[name].css' : '[name].[chunkhash:8].css',
+        chunkFilename: isDevMode ? '[id].css' : '[id].[chunkhash:8].css',
       }),
       new WebpackMd5Hash(),
       new CopyPlugin({
@@ -137,6 +140,8 @@ export const getClientConfig = (target) => {
         ],
       }),
       new LodashModuleReplacementPlugin(),
+      new EnvironmentPlugin(['NODE_ENV']),
+      new DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
       ...additionalPlugins,
     ],
     resolve: {

@@ -3,7 +3,8 @@ import { getServerConfig } from './webpack.server';
 
 let config;
 switch (process.env.NODE_ENV) {
-  case 'development': {
+  case 'development':
+  case 'docker': {
     const browserConfig = getClientConfig('web');
     const ssrConfig = getClientConfig('node');
     config = [ browserConfig, ssrConfig ];

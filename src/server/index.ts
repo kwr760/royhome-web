@@ -14,6 +14,7 @@ import handleError from './middleware/handle-error';
 import notFound from './middleware/not-found';
 import renderReact from './rendering/render-react';
 import startHttpsServer from './middleware/start-https';
+import startHttpServer from './middleware/start-http';
 
 const publicDir = path.resolve(env.root);
 
@@ -41,6 +42,10 @@ app.use(notFound);
 
 dotenv.config();
 const port = parseInt(process.env.SERVER_PORT || '3000');
-startHttpsServer(app, port);
+if (env.server.enableHttps) {
+  startHttpsServer(app, port);
+} else {
+  startHttpServer(app, port);
+}
 
 export default app;

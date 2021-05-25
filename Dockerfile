@@ -5,11 +5,7 @@ COPY ["package.json", "yarn.lock", "./"]
 RUN yarn install
 COPY . .
 
-RUN mkdir -p /var/log/royhome-web
-RUN chmod 777 /var/log/royhome-web
+RUN mkdir -p /var/log/royhome/docker
+RUN chmod 777 /var/log/royhome/docker
 
-ARG APP
-ENV APP $APP
-ARG RELEASE
-ENV RELEASE $RELEASE
-CMD yarn run docker:$RELEASE:$APP
+CMD yarn run docker

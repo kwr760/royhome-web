@@ -1,11 +1,15 @@
 import LOG_LEVELS from '../../util/logger/logger-levels';
-import { DEVELOPMENT } from '../release-environments';
+import { DOCKER } from '../release-environments';
 
 const env = {
-  release: DEVELOPMENT,
+  release: DOCKER,
+  server: {
+    enableHttps: false,
+    apiUrl: 'http://localhost:5000',
+  },
   log: {
     dir: './log',
-    level: LOG_LEVELS.DEBUG,
+    level: LOG_LEVELS.INFO,
     stdout: true,
     includePidFilename: false,
   },
