@@ -1,24 +1,8 @@
-import { makeStyles } from '@material-ui/core/styles';
 import React, { FunctionComponent } from 'react';
-import { createStyles, Grid, Theme } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { EducationType } from '../../../../types/resume.types';
 import dateFormat from 'dateformat';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    title: {
-      marginBottom: theme.spacing(3),
-      textTransform: 'uppercase',
-      fontSize: 'larger',
-      fontWeight: 'bold',
-      marginTop: '10px',
-      borderBottom: '1px solid',
-    },
-    date: {
-      textAlign: 'right',
-    },
-  }),
-);
+import { useStyles } from './index.styles';
 
 interface Props {
   education: EducationType[];
@@ -28,15 +12,15 @@ const ResumeEducation: FunctionComponent<Props> = ({ education }) => {
 
   return (
     <Grid container>
-      <Grid item sm={12}>
-        <div className={classes.title}>Education</div>
+      <Grid item sm={12} className={classes.title}>
+        <div>Education</div>
       </Grid>
       {
         education.map((item) => {
           const { degree, school, graduation } = item;
           return (
             <Grid container key={school}>
-              <Grid item sm={9}>
+              <Grid item sm={9} className={classes.school}>
                 {degree}
                 ,
                 <i>{school}</i>

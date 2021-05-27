@@ -1,48 +1,10 @@
-import { makeStyles } from '@material-ui/core/styles';
 import dateFormat from 'dateformat';
 import React, { FunctionComponent } from 'react';
-import { createStyles, Grid, Theme } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { isEmpty } from 'lodash';
 
 import { ExperienceType } from '../../../../types/resume.types';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    title: {
-      marginBottom: theme.spacing(3),
-      textTransform: 'uppercase',
-      fontSize: 'larger',
-      fontWeight: 'bold',
-      marginTop: '10px',
-      borderBottom: '1px solid',
-    },
-    position: {
-      marginTop: '0.5rem',
-      marginBottom: '0.5rem',
-    },
-    list: {
-      marginTop: '0.5rem',
-      marginBottom: 0,
-    },
-    header: {
-      fontStyle: 'italic',
-      fontWeight: 'normal',
-    },
-    role: {
-      fontWeight: 'bold',
-      fontStyle: 'italic',
-    },
-    right: {
-      textAlign: 'right',
-    },
-    justify: {
-      textAlign: 'justify',
-    },
-    fullWidth: {
-      width: '100%',
-    },
-  }),
-);
+import { useStyles } from './index.styles';
 
 interface Props {
   experience: ExperienceType[];
@@ -52,8 +14,8 @@ const ResumeExperience: FunctionComponent<Props> = ({ experience }) => {
 
   return (
     <Grid container>
-      <Grid item sm={12}>
-        <div className={classes.title}>Professional Experience</div>
+      <Grid item sm={12} className={classes.title}>
+        <div>Professional Experience</div>
       </Grid>
       {
         experience.map((item) => {
@@ -67,7 +29,7 @@ const ResumeExperience: FunctionComponent<Props> = ({ experience }) => {
                   <Grid item sm={8} className={classes.role}>
                     {`${title} at ${company}`}
                   </Grid>
-                  <Grid item sm={4} className={classes.right}>
+                  <Grid item sm={4} className={classes.date}>
                     {`${dateFormat(startDate, 'mmmm yyyy', true)} -
                     ${endDate ? dateFormat(endDate, 'mmmm yyyy', true) : 'current'}`}
                   </Grid>
@@ -85,7 +47,7 @@ const ResumeExperience: FunctionComponent<Props> = ({ experience }) => {
                       : (
                         <Grid container className={classes.list}>
                           <Grid item className={classes.header} sm={3}>Technology</Grid>
-                          <Grid item sm={9}>
+                          <Grid item sm={9} className={classes.listItem}>
                             {tech.skills.map((e) => e.name).join(', ')}
                           </Grid>
                         </Grid>

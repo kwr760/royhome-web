@@ -1,29 +1,8 @@
-import { makeStyles } from '@material-ui/core/styles';
 import React, { FunctionComponent } from 'react';
-import { createStyles, Grid, Theme } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 import { SkillGroupType } from '../../../../types/resume.types';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    title: {
-      marginBottom: theme.spacing(3),
-      textTransform: 'uppercase',
-      fontSize: 'larger',
-      fontWeight: 'bold',
-      marginTop: '10px',
-      borderBottom: '1px solid',
-    },
-    header: {
-      fontStyle: 'italic',
-      fontWeight: 'normal',
-    },
-    list: {
-      marginTop: '0.5rem',
-      marginBottom: 0,
-    },
-  }),
-);
+import { useStyles } from './index.styles';
 
 interface Props {
   skillGroups: SkillGroupType[];
@@ -32,8 +11,8 @@ const ResumeSkills: FunctionComponent<Props> = ({ skillGroups }) => {
   const classes = useStyles();
   return (
     <Grid container>
-      <Grid item sm={12}>
-        <div className={classes.title}>Skills</div>
+      <Grid item sm={12} className={classes.title}>
+        <div>Skills</div>
       </Grid>
       {
         skillGroups.map((skillGroup) => {

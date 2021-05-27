@@ -1,19 +1,10 @@
-import { Avatar, createStyles, IconButton, Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Avatar, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import React, { Dispatch, FunctionComponent, SetStateAction } from 'react';
 import { useSelector } from 'react-redux';
 import { isAuthenticated } from '../../../store/session/session.selector';
 import { getUser } from '../../../store/user/user.selector';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    large: {
-      width: theme.spacing(7),
-      height: theme.spacing(7),
-    },
-  }),
-);
+import { useStyles } from './nav-bar-menu-button.styles';
 
 interface Props {
   setAnchor:Dispatch<SetStateAction<null | HTMLElement>>;

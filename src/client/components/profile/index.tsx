@@ -1,60 +1,9 @@
-import { makeStyles } from '@material-ui/core/styles';
 import React, { FunctionComponent } from 'react';
-import { Container, createStyles, Grid, Theme } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 
 import { useSelector } from 'react-redux';
 import { getUser } from '../../store/user/user.selector';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      alignItems: 'center',
-      textAlign: 'center',
-      [theme.breakpoints.up('sm')]: {
-        textAlign: 'left',
-      },
-    },
-    picture: {
-      boxShadow: theme.custom.boxShadow,
-      borderRadius: '50%',
-    },
-    email: {
-      color: theme.palette.text.secondary,
-      margin: '1px',
-      marginLeft: 0,
-      [theme.breakpoints.up('sm')]: {
-        marginLeft: '2rem',
-      },
-      [theme.breakpoints.up('md')]: {
-        marginLeft: 0,
-      },
-    },
-    header: {
-      margin: '1px',
-      marginLeft: 0,
-      [theme.breakpoints.up('sm')]: {
-        marginLeft: '2rem',
-      },
-      [theme.breakpoints.up('md')]: {
-        marginLeft: 0,
-      },
-    },
-    center: {
-      textAlign: 'center',
-    },
-    code: {
-      fontFamily: 'source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace',
-    },
-    pre: {
-      borderRadius: '0.25rem',
-      width: '100%',
-      backgroundColor: theme.palette.background.default,
-      padding: '1rem',
-      boxShadow: theme.custom.boxShadow,
-      color: theme.palette.text.primary,
-    },
-  }),
-);
+import { useStyles } from './index.styles';
 
 const Profile: FunctionComponent = () => {
   const classes = useStyles();
