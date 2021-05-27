@@ -1,40 +1,16 @@
 import React, { FunctionComponent } from 'react';
 import { useLocation } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import { Avatar, Container, AppBar, Toolbar, Theme, createStyles } from '@material-ui/core';
+import { Avatar, Container, AppBar, Toolbar } from '@material-ui/core';
 
 import { findRouteTab } from './find-route-tab';
 import { NavBarMenu } from './nav-bar-menu';
 import { NavBarMenuButton } from './nav-bar-menu-button';
 import { NavBarTabs } from './nav-bar-tabs';
 import DarkButton from '../dark-button';
+import { useStyles } from './index.styles';
 
 import logo from '../../../assets/images/browns-on-gray.png';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      padding: 0,
-      '@media print': {
-        display: 'none',
-      },
-    },
-    avator: {
-      width: theme.spacing(7),
-      height: theme.spacing(7),
-      display: 'flex',
-      marginRight: theme.spacing(3),
-    },
-    banner: {
-      boxShadow: theme.custom.boxShadow,
-      background: theme.custom.backgroundGradient,
-      zIndex: 1,
-    },
-    grow: {
-      flexGrow: 1,
-    },
-  }),
-);
 
 const NavBar: FunctionComponent = () => {
   const classes = useStyles();

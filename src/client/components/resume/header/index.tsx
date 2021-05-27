@@ -1,49 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles';
 import React, { FunctionComponent } from 'react';
-import { createStyles, Grid, Theme } from '@material-ui/core';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    header: {
-      marginBottom: '10px',
-    },
-    name: {
-      fontSize: 'xx-large',
-      fontWeight: 'bold',
-      textAlign: 'center',
-      order: 0,
-      [theme.breakpoints.up('sm')]: {
-        order: 4,
-      },
-    },
-    contact: {
-      marginTop: 'auto',
-      marginBottom: 'auto',
-      fontSize: 'smaller',
-      textAlign: 'center',
-      order: 4,
-      [theme.breakpoints.up('sm')]: {
-        order: 8,
-        textAlign: 'right',
-      },
-    },
-    address: {
-      marginTop: 'auto',
-      marginBottom: 'auto',
-      fontStyle: 'italic',
-      fontSize: 'smaller',
-      textAlign: 'center',
-      order: 8,
-      [theme.breakpoints.up('sm')]: {
-        order: 0,
-        textAlign: 'left',
-      },
-    },
-    phone: {
-      fontWeight: 'bolder',
-    },
-  }),
-);
+import { Grid } from '@material-ui/core';
+import { useStyles } from './index.styles';
 
 interface Props {
   name: string;

@@ -1,6 +1,5 @@
-import { makeStyles } from '@material-ui/core/styles';
 import React, { FunctionComponent } from 'react';
-import { Container, createStyles, Theme } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import {
   EducationType,
   ExperienceType,
@@ -13,14 +12,7 @@ import ResumeSkills from '../skills';
 import ResumeSummary from '../summary';
 import ResumeExperience from '../experience';
 import ResumeEducation from '../education';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      marginBottom: theme.spacing(3),
-    },
-  }),
-);
+import { useStyles } from './index.styles';
 
 interface Props {
   resume: ResumeType;

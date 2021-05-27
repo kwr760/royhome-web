@@ -2,9 +2,8 @@ import React, { Dispatch, FunctionComponent, SetStateAction } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import {
-  createStyles, Divider, ListItemIcon, ListItemText, Menu, MenuItem, Theme, Typography, useMediaQuery, useTheme,
+  Divider, ListItemIcon, ListItemText, Menu, MenuItem, Typography, useMediaQuery, useTheme,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import { FiEyeOff, FiLogIn, FiLogOut, FiUser } from 'react-icons/fi';
 
 import { useAuth0 } from '../../../../util/auth0/auth0-context';
@@ -12,24 +11,7 @@ import { isAuthenticated } from '../../../store/session/session.selector';
 import { getUser } from '../../../store/user/user.selector';
 import { displayPage } from './display-page';
 import { pages } from './pages';
-
-export const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    paper: {
-      border: '1px solid #000',
-    },
-    list: {
-      paddingTop: 0,
-      paddingBottom: 0,
-    },
-    profile: {
-      paddingRight: theme.spacing(2),
-      paddingLeft: theme.spacing(2),
-      marginTop: theme.spacing(2),
-      marginBottom: theme.spacing(2),
-    },
-  }),
-);
+import { useStyles } from './nav-bar-menu.styles';
 
 interface Props {
   anchor: null | HTMLElement;

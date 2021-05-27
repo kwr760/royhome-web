@@ -1,7 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles';
 import React, { FunctionComponent } from 'react';
 import { Route, Switch, RouteComponentProps } from 'react-router-dom';
-import { Container, createStyles, Theme } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import loadable from '@loadable/component';
 
@@ -10,8 +9,8 @@ import Footer from './components/page/footer';
 import Loading from './components/page/loading';
 import PrivateRoute from './components/page/private-route';
 import ResumePage from './components/resume';
-
 import { isLoading  } from './store/session/session.selector';
+import { useStyles } from './App.styles';
 
 const AboutPage = /* #__LOADABLE__ */ () => import(/* webpackPrefetch: true */ './components/about');
 const AuthorPage = /* #__LOADABLE__ */ () => import(/* webpackPrefetch: true */ './components/author');
@@ -24,26 +23,6 @@ const PrivacyLoadable = loadable(PrivacyPage, { ssr: true });
 const ProfileLoadable = loadable(ProfilePage, { ssr: true });
 const TicTacToeLoadable = loadable(TicTacToePage, { ssr: true });
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    paper: {
-      background: theme.palette.background.paper,
-      boxShadow: theme.custom.boxShadow,
-      paddingTop: '1rem',
-      flexGrow: 1,
-      overflow: 'auto',
-      '@media print': {
-        overflow: 'visible',
-        boxShadow: 'none',
-      },
-    },
-    app: {
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100vh',
-    },
-  }),
-);
 
 /**
  * @return {string}

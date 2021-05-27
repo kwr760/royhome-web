@@ -1,5 +1,4 @@
-import { createStyles, Tab, Tabs, Theme, useMediaQuery, useTheme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Tab, Tabs, useMediaQuery, useTheme } from '@material-ui/core';
 import React, { Dispatch, FunctionComponent, SetStateAction } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -8,14 +7,7 @@ import { isAuthenticated } from '../../../store/session/session.selector';
 import { getUser } from '../../../store/user/user.selector';
 import { displayPage } from './display-page';
 import { pages } from './pages';
-
-export const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    tab: {
-      color: theme.palette.secondary.main,
-    },
-  }),
-);
+import { useStyles } from './nav-bar-tabs.styles';
 
 interface Props {
   position: number;
