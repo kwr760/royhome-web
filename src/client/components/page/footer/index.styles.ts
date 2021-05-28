@@ -24,5 +24,29 @@ export const useStyles = makeStyles((theme: Theme) =>
         color: emphasize(theme.palette.secondary.main, 0.4),
       },
     },
+    typography: {
+      padding: theme.spacing(1),
+    },
+    popover: {
+      '& .MuiPaper-root': {
+        backgroundColor: emphasize(theme.palette.primary.dark, .1),
+      },
+    },
+    popoverRoot: {
+      backgroundColor: 'red',
+      borderRadius: '16px',
+    },
+    popoverContainer: {
+      display: 'flex',
+      background: emphasize(theme.palette.primary.dark, .1),
+      color: theme.palette.secondary.main,
+    },
+    link: {
+      color: theme.palette.secondary.main,
+    },
+    box: {
+      display: 'flex',
+      justifyContent: 'center',
+    },
   }),
 );

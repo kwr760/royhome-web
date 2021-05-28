@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@material-ui/core/styles';
 import React from 'react';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import themeLight from '../../../theme-light';
 
 import Footer from './index';
@@ -8,14 +8,31 @@ import Footer from './index';
 describe('src/client/components/page/footer', () => {
   it('renders', () => {
     // Arrange/Act
-    const { getByRole, getByText } = render(
+    const test = render(
       <ThemeProvider theme={themeLight}>
         <Footer />
       </ThemeProvider>,
     );
 
     // Assert
-    getByRole(/link/);
-    getByText(/Link to GitHub/);
+    test.getByLabelText(/github/);
+    test.getByText(/Link to GitHub/);
+  });
+  it('render as open', () => {
+    // Arrange
+    const test = render(
+      <ThemeProvider theme={themeLight}>
+        <Footer />
+      </ThemeProvider>,
+    );
+
+    // Act
+    fireEvent.mouseEnter(test.getByLabelText(/github/));
+
+    // Assert
+    test.getByText(/Link to UI GitHub/);
+    test.getByText(/Link to API GitHub/);
+
+    fireEvent.click(test.getByLabelText(/github-ui/));
   });
 });
