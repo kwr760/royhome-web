@@ -12,12 +12,11 @@ export const useStyles = makeStyles((theme: Theme) =>
       paddingRight: '0.5rem',
       paddingLeft: '0.5rem',
       minWidth: 0,
-      background: theme.palette.primary.dark,
       color: theme.palette.secondary.main,
       outline: 'none',
       '&:hover, &:focus&:hover': {
-        background: theme.palette.primary.light,
         color: emphasize(theme.palette.secondary.main, 0.4),
+        background: emphasize(theme.palette.primary.dark, 0.2),
         borderRadius: '1rem',
         outline: 'none',
       },

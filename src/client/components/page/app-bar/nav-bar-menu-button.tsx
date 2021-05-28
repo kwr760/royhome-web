@@ -25,7 +25,7 @@ export const NavBarMenuButton: FunctionComponent<Props> = ({ setAnchor }) => {
     aria-controls='nav-bar-menu'
     aria-haspopup="true"
     onClick={handleMenuOpen}
-    color="inherit"
+    className={classes.iconButton}
   >
     {
       authenticated ?
