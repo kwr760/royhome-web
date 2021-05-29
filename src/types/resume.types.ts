@@ -28,6 +28,14 @@ export interface EducationType {
   graduation: string;
 }
 
+export interface ProjectType {
+  name: string;
+  url: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+}
+
 export interface ResumeType {
   name: string;
   address: string;
@@ -38,4 +46,5 @@ export interface ResumeType {
   skillGroups: SkillGroupType[];
   experience: ExperienceType[];
   education: EducationType[];
+  project: ProjectType[];
 }
