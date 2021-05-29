@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid, Link } from '@material-ui/core';
 import { useStyles } from './index.styles';
 
 interface Props {
@@ -17,11 +17,13 @@ const ResumeHeader: FunctionComponent<Props> = ({ name, address, email, phone, d
         { name }
       </Grid>
       <Grid item xs={12} sm={4} className={classes.contact}>
-        <div>
-          <a href="mailto:{ contact.email }?Subject=In%20response%20to%20your%20resume" target="_top">
-            { email }
-          </a>
-        </div>
+        <Link
+          href="mailto:{ contact.email }?Subject=In%20response%20to%20your%20resume"
+          target="_target"
+          className={classes.email}
+        >
+          { email }
+        </Link>
         <div className={classes.phone}>{ displayPhone ? phone : 'Cell upon request' }</div>
       </Grid>
       <Grid item xs={12} sm={4} className={classes.address}>

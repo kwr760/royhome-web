@@ -5,6 +5,7 @@ import {
   ExperienceType,
   ResumeType,
   SkillGroupType,
+  ProjectType,
 } from '../../../../types/resume.types';
 
 import ResumeHeader from '../header';
@@ -12,6 +13,7 @@ import ResumeSkills from '../skills';
 import ResumeSummary from '../summary';
 import ResumeExperience from '../experience';
 import ResumeEducation from '../education';
+import ResumeProject from '../project';
 import { useStyles } from './index.styles';
 
 interface Props {
@@ -30,6 +32,7 @@ const ResumePage: FunctionComponent<Props> = ({ resume = {} as ResumeType}) => {
     skillGroups = [] as SkillGroupType[],
     experience = [] as ExperienceType[],
     education = [] as EducationType[],
+    project = [] as ProjectType[],
   } = resume;
 
   return (
@@ -39,6 +42,7 @@ const ResumePage: FunctionComponent<Props> = ({ resume = {} as ResumeType}) => {
       <ResumeSkills skillGroups={skillGroups} />
       <ResumeExperience experience={experience} />
       <ResumeEducation education={education} />
+      <ResumeProject project={project} />
     </Container>
   );
 };
