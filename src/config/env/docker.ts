@@ -5,7 +5,7 @@ const env = {
   release: DOCKER,
   server: {
     enableHttps: false,
-    apiUrl: 'http://localhost:5000',
+    apiUrl: 'http://host.docker.internal:5000',
   },
   log: {
     dir: './log',
