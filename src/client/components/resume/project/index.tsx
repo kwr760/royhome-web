@@ -19,8 +19,8 @@ const ResumeProject: FunctionComponent<Props> = ({ project }) => {
         project.map((item) => {
           const { name, url, description, startDate, endDate } = item;
           return (
-            <>
-              <Grid container>
+            <Grid container key={name}>
+              <Grid container key={`${name}-url`}>
                 <Grid item sm={9} className={classes.project}>
                   <b>{name}</b>
                   {', '}
@@ -37,12 +37,12 @@ const ResumeProject: FunctionComponent<Props> = ({ project }) => {
                   {endDate ? dateFormat(endDate, 'mmmm yyyy', true) : 'current' }
                 </Grid>
               </Grid>
-              <Grid container>
+              <Grid container key={`${name}-description`}>
                 <Grid item className={classes.description}>
                   {description}
                 </Grid>
               </Grid>
-            </>
+            </Grid>
           );
         })
       }

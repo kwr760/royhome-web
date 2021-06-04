@@ -132,7 +132,7 @@ describe('config/index', () => {
             includePidFilename: false,
           },
           server: {
-            apiUrl: 'http://localhost:5000',
+            apiUrl: 'http://host.docker.internal:5000',
             cert: {
               cert: '/var/cert/royhome/fullchain.pem',
               key: '/var/cert/royhome/privkey.pem',

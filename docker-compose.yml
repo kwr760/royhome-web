@@ -11,3 +11,7 @@ services:
       - /var/app/royhome-web/node_modules
     ports:
       - "3000:3000"
+    extra_hosts:
+      - "host.docker.internal:127.0.0.1"
+    network_mode: "host"
+#    network_mode: "host" # This is required on linux, but prevents the port from being exposed on windows
