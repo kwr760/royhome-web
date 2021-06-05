@@ -24,6 +24,7 @@ const BottomBar: FunctionComponent = () => {
             aria-owns={id}
             aria-haspopup="true"
             onMouseEnter={handleOpen}
+            onClick={handleOpen}
             align="center"
             aria-label="github"
           >
