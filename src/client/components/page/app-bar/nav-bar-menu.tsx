@@ -47,38 +47,38 @@ export const NavBarMenu: FunctionComponent<Props> = ( { anchor, setAnchor }) => 
       classes={{ list: classes.list, paper: classes.paper }}
     >
       { authenticated ? <Typography className={classes.profile}>Kevin Roy</Typography> : null }
-      { authenticated ? <Divider /> : null }
+      { authenticated ? <Divider classes={{ root: classes.divider}} /> : null }
       { isMobile ?
         pages.filter(displayPage(authenticated, user)).map((page) => {
           const IconComponent = page.icon;
           return (
             <MenuItem component={NavLink} key={page.path} to={page.path} onClick={handleMenuClose}>
-              <ListItemIcon ><IconComponent /></ListItemIcon>
+              <ListItemIcon classes={{ root: classes.icon }}><IconComponent /></ListItemIcon>
               <ListItemText primary={page.name} />
             </MenuItem>
           );
         }) :
         null }
-      { isMobile ? <Divider /> : null }
+      { isMobile ? <Divider classes={{ root: classes.divider }} /> : null }
       { authenticated ? (
         <MenuItem component={NavLink} to="/profile" onClick={handleMenuClose}>
-          <ListItemIcon><FiUser /></ListItemIcon>
+          <ListItemIcon classes={{ root: classes.icon }}><FiUser /></ListItemIcon>
           <ListItemText primary="Profile"/>
         </MenuItem>
       ) : null }
       <MenuItem component={NavLink} to="/privacy" onClick={handleMenuClose}>
-        <ListItemIcon><FiEyeOff /></ListItemIcon>
+        <ListItemIcon classes={{ root: classes.icon }}><FiEyeOff /></ListItemIcon>
         <ListItemText primary="Privacy"/>
       </MenuItem>
-      <Divider />
+      <Divider classes={{ root: classes.divider}} />
       { authenticated ? (
         <MenuItem onClick={onLogout}>
-          <ListItemIcon><FiLogOut /></ListItemIcon>
+          <ListItemIcon classes={{ root: classes.icon }}><FiLogOut /></ListItemIcon>
           <ListItemText primary="Logout"/>
         </MenuItem>
       ) : (
         <MenuItem onClick={onLogin}>
-          <ListItemIcon><FiLogIn /></ListItemIcon>
+          <ListItemIcon classes={{ root: classes.icon }}><FiLogIn /></ListItemIcon>
           <ListItemText primary="Login"/>
         </MenuItem>
       )}

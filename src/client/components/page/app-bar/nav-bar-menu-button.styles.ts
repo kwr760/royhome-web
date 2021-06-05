@@ -5,10 +5,10 @@ import { emphasize } from '@material-ui/core/styles/colorManipulator';
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     iconButton: {
-      color: theme.palette.secondary.main,
+      color: theme.palette.primary.dark,
       borderRadius: '.25em',
       '&:hover, &:focus&:hover': {
-        color: emphasize(theme.palette.secondary.main, 0.4),
+        color: emphasize(theme.palette.secondary.main, 0.5),
         background: emphasize(theme.palette.primary.dark, 0.2),
       },
     },

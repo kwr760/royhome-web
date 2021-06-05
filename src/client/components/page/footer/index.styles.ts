@@ -21,7 +21,7 @@ export const useStyles = makeStyles((theme: Theme) =>
     icon: {
       color: theme.palette.secondary.main,
       '&:hover, &:focus': {
-        color: emphasize(theme.palette.secondary.main, 0.4),
+        color: emphasize(theme.palette.secondary.main, .5),
       },
     },
     typography: {
@@ -29,7 +29,7 @@ export const useStyles = makeStyles((theme: Theme) =>
     },
     popover: {
       '& .MuiPaper-root': {
-        backgroundColor: emphasize(theme.palette.primary.dark, .1),
+        backgroundColor: emphasize(theme.palette.primary.dark, .2),
       },
     },
     popoverRoot: {
@@ -38,8 +38,8 @@ export const useStyles = makeStyles((theme: Theme) =>
     },
     popoverContainer: {
       display: 'flex',
-      background: emphasize(theme.palette.primary.dark, .1),
-      color: theme.palette.secondary.main,
+      background: emphasize(theme.palette.primary.dark, .2),
+      color: emphasize(theme.palette.secondary.main, .5),
     },
     link: {
       color: theme.palette.secondary.main,

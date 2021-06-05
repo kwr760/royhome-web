@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
+      color: theme.palette.primary.dark,
       background: theme.palette.background.paper,
       boxShadow: theme.custom.boxShadow,
       paddingTop: '1rem',

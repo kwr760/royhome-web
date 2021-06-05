@@ -21,8 +21,6 @@ export const useStyles = makeStyles((theme: Theme) =>
         outline: 'none',
       },
       '&:focus': {
-        background: theme.palette.primary.main,
-        color: theme.palette.secondary.main,
         borderRadius: '1rem',
         outline: 'none',
       },

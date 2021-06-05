@@ -4,11 +4,20 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
-      border: '1px solid #000',
+      color: theme.palette.primary.dark,
+      borderColor: theme.palette.primary.dark,
+      border: '1px solid',
     },
     list: {
+      color: theme.palette.primary.dark,
       paddingTop: 0,
       paddingBottom: 0,
+    },
+    icon: {
+      color: theme.palette.primary.dark,
+    },
+    divider: {
+      backgroundColor: theme.palette.primary.main,
     },
     profile: {
       paddingRight: theme.spacing(2),
