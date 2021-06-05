@@ -50,9 +50,11 @@ export const NavBarMenu: FunctionComponent<Props> = ( { anchor, setAnchor }) => 
       { authenticated ? <Divider /> : null }
       { isMobile ?
         pages.filter(displayPage(authenticated, user)).map((page) => {
+          const IconComponent = page.icon;
           return (
             <MenuItem component={NavLink} key={page.path} to={page.path} onClick={handleMenuClose}>
-              <ListItemIcon /><ListItemText primary={page.name} />
+              <ListItemIcon ><IconComponent /></ListItemIcon>
+              <ListItemText primary={page.name} />
             </MenuItem>
           );
         }) :
