@@ -34,7 +34,7 @@ const ResumeExperience: FunctionComponent<Props> = ({ experience }) => {
                     ${endDate ? dateFormat(endDate, 'mmmm yyyy', true) : 'current'}`}
                   </Grid>
                 </Grid>
-                <Grid container className={classes.justify}>
+                <Grid container>
                   <Grid item>
                     {description.map((e) => (<p key={e.id}>{e.name}</p>))}
                     { isEmpty(bullets) ? ''

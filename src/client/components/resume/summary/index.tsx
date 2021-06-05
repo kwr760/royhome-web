@@ -13,7 +13,7 @@ const ResumeSummary: FunctionComponent<Props> = ({ summary }) => {
         <div>Summary</div>
       </Grid>
       <Grid item>
-        <div className={classes.content}>
+        <div>
           { summary }
         </div>
       </Grid>
