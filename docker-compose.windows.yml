@@ -11,6 +11,3 @@ services:
       - /var/app/royhome-web/node_modules
     ports:
       - "3000:3000"
-    extra_hosts:
-      - "host.docker.internal:127.0.0.1"
-    network_mode: "host"
