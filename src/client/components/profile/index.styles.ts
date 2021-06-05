@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
+      color: theme.palette.primary.dark,
       alignItems: 'center',
       textAlign: 'center',
       [theme.breakpoints.up('sm')]: {
@@ -15,7 +16,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       borderRadius: '50%',
     },
     email: {
-      color: theme.palette.text.secondary,
+      color: theme.palette.primary.dark,
       margin: '1px',
       marginLeft: 0,
       [theme.breakpoints.up('sm')]: {
@@ -47,7 +48,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.default,
       padding: '1rem',
       boxShadow: theme.custom.boxShadow,
-      color: theme.palette.text.primary,
+      color: theme.palette.primary.dark,
     },
   }),
 );

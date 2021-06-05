@@ -20,17 +20,11 @@ declare module '@material-ui/core/styles/createMuiTheme' {
 const themeLight = createMuiTheme({
   palette: {
     primary: {
-      // light: '#9ea8ab',
-      // main: '#70797c',
-      // dark: '#454d50',
       light: '#828fa4',
       main: '#556275',
       dark: '#2b3849',
     },
     secondary: {
-      // light: '#fbf3e7',
-      // main: '#c8c0b5',
-      // dark: '#979085',
       light: '#e1ccaa',
       main: '#af9b7b',
       dark: '#816f50',

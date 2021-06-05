@@ -23,7 +23,6 @@ const PrivacyLoadable = loadable(PrivacyPage, { ssr: true });
 const ProfileLoadable = loadable(ProfilePage, { ssr: true });
 const TicTacToeLoadable = loadable(TicTacToePage, { ssr: true });
 
-
 /**
  * @return {string}
  */

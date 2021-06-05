@@ -12,14 +12,14 @@ const Profile: FunctionComponent = () => {
   return (
     <Container>
       <Grid container className={classes.container}>
-        <Grid item xs={12} sm={2} className={classes.center}>
+        <Grid item xs={12} sm={4} className={classes.center}>
           <img
             src={user.picture}
             alt="Profile"
             className={classes.picture}
           />
         </Grid>
-        <Grid item xs={12} sm >
+        <Grid item xs={12} sm={8} >
           <h2 className={classes.header}>{user.name}</h2>
           <p className={classes.email}>{user.email}</p>
         </Grid>
