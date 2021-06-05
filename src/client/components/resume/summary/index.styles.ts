@@ -16,8 +16,5 @@ export const useStyles = makeStyles((theme: Theme) =>
         flexBasis: '100%',
       },
     },
-    content: {
-      textAlign: 'justify',
-    },
   }),
 );
