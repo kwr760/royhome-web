@@ -1,96 +1,114 @@
-# Overview
-This is my website.
+# RoyHome Web Server
 
-## Intent
-I want to create a robust website, even if it is over engineered.  Using good practices.
+## Purpose
 
-This is built with SSR react and will have a database on the backend
+A react SSR web server using react redux and material-ui.
 
-## Deploy
+## Running
 
-### Development
+Use these steps to start locally as a build.
 
-Use these steps to start locally as a development build.
+### docker
 
-#### Steps
-- `yarn start build:dev`
-- `yarn start start:dev`
+To run the web site locally, the easiest way is with docker.  This avoids the issues you will face with setting up
+the server /etc/hosts, nginx and the handling of the https certificates.  Actually https is not used with this
+docker installation.
 
-### Secure
-
-Use these steps to start locally as a production build.
-
-### encrypted passcodes
-
-Only can include one encrpyted file in travis at a time.  So we need
-to tar up the encrypted information.
-
-Currently including the ssh private key for transport and .env for the 
-connection to resources, such as the database.
-
-travis encrypt-file needed some setup.  google it.
-
+```shell
+docker-compose up
 ```
+### compiling and running
+
+#### development
+```shell
+yarn start webpack:dev
+yarn start run:dev
+```
+
+#### production
+
+Follow the commands for dev, except replace `dev` with `prod`.
+
+## Encryption
+
+### travis encryption
+
+Travis supports one encrypted file for a repository.  If more than one files needs to be encrypted
+tar the files together and encrypt the tar file. 
+
+In order to be able to copy files to the linode production server we need a secure login.  This is done by the 
+key file.  I'm placing the file in the tar and encrypting it so that key file is not available to github.  Keeping 
+this file in github will only allow travis access to the contents of the tar file.
+
+```shell
 tar cvf secrets.tar private-key .env
 cp secrets.tar <project>/.travis
 travis encrypt-file secrets.tar
 rm <project>/.travis/secrets.tar
 ```
 
-#### https
+## Certificate - https
 
-Starting https on localhost is a little trickie, at least I don't know
-an easy way to way to do it.  At least not one I do not think is hackie.
-I updated /etc/hosts to redirect to loopback for local.<domain>.  This 
-way I can use my cert for my production site signed at let's encrypt. 
-This seems to avoid the self-signing cert required for localhost.
+### letsencrypt
 
+letsencrypt provides free https certificates.  I'm using a script which runs periodically to renew the certificate.
 
-### Production
-
-At least for now I'm going to pm2 to deploy on a linode server.  I am expecting that pm2 can to used to 
-scale the number of servers based on the number of cpus of my instance.  And I believe it could be used to 
-help with docker or AWS instance.  When I want to pay for these things, I'll figure it out.
-
-## Certificate - letsencrypt renewal
-
+#### create
+```shell
+sudo certbot certonly --manual -d royk.us -d www.royk.us -d royhome.net -d www.royhome.net -d api.royk.us -d api.royhome.net
 ```
-sudo yarn pm2:stop
+#### renewal
+```shell
 sudo -H certbot renew --standalone
-sudo yarn pm2:start
 ```
 
-## Database
-### Setup
-#### install postgres
-```
-sudo apt update
-sudo apt install postgresql postgresql-contrib
-```
-#### create user
-```
-sudo -u postgres createuser --interactive
-> Enter name of role to add: server
-> Shall the new role be a superuser? (y/n) y
+## Reverse Proxy
 
-sudo -u postgres psql
-=# ALTER USER postgres WITH PASSWORD '<password>';
-=# ALTER USER server WITH PASSWORD '<password>';
+### hosts file
+For development, the url needs to redirected to the localhost
+```shell
+127.0.0.1 localhost royk.us api.royk.us
 ```
-#### create database
-```
-sudo -u postgres createdb royhome
-sudo -u postgres psql
-=# grant all privileges on database royhome to server;
-```
-#### scripts
-An important thing to note, is that these scripts will not retain changes made to the database.  This includes the 
-the incrementing of the sequences.  This will become a problem when adding user added data.  
-```
-deploy.sql - drops/creates/verifies
 
-rollback-0.sql - drop the sequences and tables
-upgrade-0.sql - create tables and sequences
-validate-0.sql - add the data to the tables
+This keeps the request from being directed to the production and the request is processed on the local machine.
+
+Since I have two url, I can develop with `royk.us`, while still see the released production version on `royhome.net`.
+
+### nginx
+
+I using ngnix to direct my request to the correct server.  `<royk.us|royhome.net>` goes to the web server, for production I run a 
+blue/green environment mainly to limit the downtime when releasing.  The downtime currently is the time to bounce
+the ngnix server, very quick.  `api.<royk.us|royhome.net>` directs the requests to the API server.
+
+### headers
+
+I am using nginx to pass some information from the request to the server.  In short, I want to know which url the 
+browser is using for the request
+
+```text
+request_host
+request_full_uri
+request_uri
+request_addr
+server_addr
+server_name
+server_hostname
+time_iso8601
 ```
+
+I want to know more information to try to split the session, say between tabs.  But so far I've only found solutions
+using the cookie to accomplish this.  For example, creating a new `session-id`.
+
+## Production
+
+I using the linux systemd to start the web server as a service, so that reboot will handle the restart of the web
+server.
+
+I used `pm2` for a while, I had no complaints. I stopped using it as it adds a layer without benefit to me.  My linode
+server is very small and has only one cpu.  I believe the benefits of the `pm2` is creating a cluster, and handling 
+server crashes.  When I need to upgrade my server to something with more cpus, I think I start using `pm2` again.
+
+When I need more than one instance of the web server, I need to understand how to create a load balancer.  Easy 
+solution and expensive, AWS.  I wonder if `pm2` will be able to load balancer, or probably `nginx`.
+
 
