@@ -9,6 +9,12 @@ const env = {
     stdout: true,
     includePidFilename: false,
   },
+  server: {
+    cert: {
+      key: '/local/cert/royhome/privkey.pem',
+      cert: '/local/cert/royhome/fullchain.pem',
+    },
+  },
 };
 
 export default env;
