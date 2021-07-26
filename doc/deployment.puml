@@ -1,0 +1,31 @@
+@startuml
+
+start
+partition github
+:commit code;
+partition travis {
+if (verify build) then (success)
+if (main branch) then (no)
+stop
+else (yes)
+:package code;
+partition linode {
+if (release) then (green)
+:release blue;
+:bring up blue;
+:bring down green;
+else (blue)
+:release green;
+:bring up green;
+:bring down blue;
+endif
+:restart nginx;
+stop
+}
+endif
+
+else (failure)
+end
+endif
+
+@enduml

@@ -14,4 +14,12 @@ export const ApiConfigs = {
     path: '/resume/{email}',
     authenticated: false,
   } as ApiConfigType,
+  PUT_ACCESS_LOG: {
+    method: 'put',
+    path: '/access/log',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    authenticated: false,
+  } as ApiConfigType,
 };

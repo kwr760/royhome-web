@@ -11,6 +11,7 @@ import { COOKIE_JWT_PAYLOAD } from './auth0.constants';
 import { updateAuthentication, setLoading, clearLoading } from '../../client/store/session/session.slice';
 import { updateUser } from '../../client/store/user/user.slice';
 import { Auth0ProviderType } from '../../types/auth0.types';
+import { noop } from '../noop';
 
 const DEFAULT_REDIRECT_CALLBACK = () => window.history.replaceState(
   {},
@@ -35,7 +36,6 @@ const setCookies = (newCookies?: unknown) => {
   }
 };
 
-const noop = () => {};
 const initialContext = {
   loginWithRedirect: noop,
   logout: noop,

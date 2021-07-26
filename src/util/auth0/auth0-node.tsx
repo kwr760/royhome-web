@@ -1,15 +1,16 @@
 import React from 'react';
 import { Auth0Context } from './auth0-context';
 import { Auth0ProviderType } from '../../types/auth0.types';
+import { noop } from '../noop';
 
 const Auth0Provider: React.FC<Auth0ProviderType> = ({
   children,
 }) => (
   <Auth0Context.Provider
     value={{
-      logout: () => {},
-      login: () => {},
-      getToken: () => {},
+      logout: noop,
+      login: noop,
+      getToken: noop,
     }}
   >
     {children}
