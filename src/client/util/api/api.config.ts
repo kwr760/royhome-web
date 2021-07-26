@@ -22,4 +22,9 @@ export const ApiConfigs = {
     },
     authenticated: false,
   } as ApiConfigType,
+  GET_SESSION: {
+    method: 'get',
+    path: '/access/{sessionId}',
+    authenticated: false,
+  } as ApiConfigType,
 };

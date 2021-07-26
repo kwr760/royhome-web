@@ -12,6 +12,10 @@ import env from '../../config';
 import populateState from './populate-state';
 import displayMessage from '../middleware/display-message';
 import createStore from '../../client/store/create-store';
+import {getCookies} from "./cookies/get-cookies";
+import {generateCookieIds} from "./cookies/generate-cookie-ids";
+import {BROWSER_ID, SESSION_ID} from "./cookies/cookie.constants";
+import {generateCookieOptions} from "./cookies/generate-cookie-options";
 
 interface Props {
   url: string,
@@ -31,8 +35,8 @@ const renderReact = async (req: Request, res: Response): Promise<void> => {
   const webExtractor = new ChunkExtractor({ statsFile: webStats });
   const url = parseUrl(req) || { pathname: ''};
   const pathname = url.pathname || '';
-  const { cookies } = req;
-  const state = await populateState(pathname, cookies);
+  const { browserId, sessionId } = getCookies(req);
+  const state = await populateState(pathname, sessionId);
   const store = createStore(state);
   const sheets = new ServerStyleSheets();
   const jsx = webExtractor.collectChunks(
@@ -55,6 +59,10 @@ const renderReact = async (req: Request, res: Response): Promise<void> => {
     .replace('{styleTags}', webExtractor.getStyleTags())
     .replace('{scriptTags}', webExtractor.getScriptTags())
     .replace('{preloadedState}', preloadedState);
+
+  const { browserId: resBrowserId, sessionId: resSessionId } = generateCookieIds(browserId, sessionId);
+  res.cookie(BROWSER_ID, resBrowserId, generateCookieOptions());
+  res.cookie(SESSION_ID, resSessionId, generateCookieOptions());
   res.send(responseHtml);
 };
 
