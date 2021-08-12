@@ -1,7 +1,7 @@
 import { isEmpty } from 'lodash';
 import React, { FunctionComponent, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ResumeType } from '../../../types/resume.types';
+import { ResumeType } from '../../../types/object/resume';
 
 import { useAuth0 } from '../../../util/auth0/auth0-context';
 import Resume from './resume';

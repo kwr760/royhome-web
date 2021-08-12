@@ -1,19 +1,12 @@
-import { CookieType } from '../../types/state.types';
-import { COOKIE_JWT_PAYLOAD } from '../../util/auth0/auth0.constants';
-import { TOKEN_URL } from '../../util/auth0/role.constants';
-
-import { getResumeProxy } from '../proxy/resume.proxy';
+import { getResumeProxy } from '../proxy/get-resume.proxy';
+import { getSessionProxy } from '../proxy/get-session.proxy';
 import populateState from './populate-state';
 import { DarkModes } from '../../client/store/session/session.constants';
 
-jest.mock('../proxy/resume.proxy');
+jest.mock('../proxy/get-resume.proxy');
+jest.mock('../proxy/get-session.proxy');
 
 describe('server/rendering/populate-state', () => {
-  const jwt = {
-    exp: 10,
-    [TOKEN_URL]: 'test data',
-    user: {},
-  };
   const email = 'kroy760@gmail.com';
   const resume = {
     owner: 'owner',
@@ -21,18 +14,32 @@ describe('server/rendering/populate-state', () => {
   it('should return an state from empty context', async () => {
     // Arrange
     const url = '/';
-    const cookies: CookieType = {
-      [COOKIE_JWT_PAYLOAD]: JSON.stringify(jwt),
+    const sessionId = 'session-id';
+    const session = {
+      browserId: 'browser-id',
+      expiration: 1000,
+      darkMode: 'dark-node',
+      user: {
+        userId: 'user-id',
+        email: 'person@email.com',
+        context: '"context"',
+      },
     };
     (getResumeProxy as jest.Mock).mockResolvedValueOnce(resume);
+    (getSessionProxy as jest.Mock).mockResolvedValueOnce(session);
     const expected = {
       session: {
         authenticated: true,
-        expiration: -1,
-        isLoading: false,
-        darkMode: DarkModes.CLEAR_MODE,
+        'browserId': 'browser-id',
+        'darkMode': 'dark-node',
+        'expiration': 1000,
+        'sessionId': 'session-id',
       },
-      user: {},
+      user: {
+        'context': 'context',
+        'email': 'person@email.com',
+        'userId': 'user-id',
+      },
       resume: {
         email: email,
         resumes: {
@@ -42,7 +49,7 @@ describe('server/rendering/populate-state', () => {
     };
 
     // Act
-    const state = await populateState(url, cookies);
+    const state = await populateState(url, sessionId);
 
     // Assert
     expect(state).toEqual(expected);
@@ -50,18 +57,29 @@ describe('server/rendering/populate-state', () => {
   it('should not find route', async () => {
     // Arrange
     const url = '/notfound';
-    const cookies: CookieType = {
-      [COOKIE_JWT_PAYLOAD]: JSON.stringify(jwt),
+    const sessionId = 'session-id';
+    const session = {
+      browserId: 'browser-id',
+      darkMode: 'dark-node',
+      user: {
+        userId: 'user-id',
+        email: 'person@email.com',
+      },
     };
     (getResumeProxy as jest.Mock).mockResolvedValueOnce(resume);
+    (getSessionProxy as jest.Mock).mockResolvedValueOnce(session);
     const expected = {
       session: {
-        authenticated: true,
-        expiration: -1,
-        isLoading: false,
-        darkMode: DarkModes.CLEAR_MODE,
+        authenticated: false,
+        'browserId': 'browser-id',
+        'darkMode': 'dark-node',
+        'sessionId': 'session-id',
       },
-      user: {},
+      user: {
+        'context': {},
+        'email': 'person@email.com',
+        'userId': 'user-id',
+      },
       resume: {
         email: '',
         resumes: {},
@@ -69,7 +87,7 @@ describe('server/rendering/populate-state', () => {
     };
 
     // Act
-    const state = await populateState(url, cookies);
+    const state = await populateState(url, sessionId);
 
     // Assert
     expect(state).toEqual(expected);
@@ -77,7 +95,6 @@ describe('server/rendering/populate-state', () => {
   it('should not find payload', async () => {
     // Arrange
     const url = '/';
-    const cookies: CookieType = {};
     (getResumeProxy as jest.Mock).mockResolvedValueOnce({});
     const expected = {
       session: {
@@ -86,7 +103,7 @@ describe('server/rendering/populate-state', () => {
         isLoading: false,
         darkMode: DarkModes.CLEAR_MODE,
       },
-      user: {},
+      user: { },
       resume: {
         email: email,
         resumes: {
@@ -96,7 +113,7 @@ describe('server/rendering/populate-state', () => {
     };
 
     // Act
-    const state = await populateState(url, cookies);
+    const state = await populateState(url);
 
     // Assert
     expect(state).toEqual(expected);

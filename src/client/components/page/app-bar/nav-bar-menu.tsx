@@ -1,10 +1,11 @@
-import React, { Dispatch, FunctionComponent, SetStateAction } from 'react';
+import React, { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import {
   Divider, ListItemIcon, ListItemText, Menu, MenuItem, Typography, useMediaQuery, useTheme,
 } from '@material-ui/core';
 import { FiEyeOff, FiLogIn, FiLogOut, FiUser } from 'react-icons/fi';
+import { NavBarMenuPropType } from '../../../../types/prop/nav-bar/menu';
 
 import { useAuth0 } from '../../../../util/auth0/auth0-context';
 import { isAuthenticated } from '../../../store/session/session.selector';
@@ -13,11 +14,7 @@ import { displayPage } from './display-page';
 import { pages } from './pages';
 import { useStyles } from './nav-bar-menu.styles';
 
-interface Props {
-  anchor: null | HTMLElement;
-  setAnchor: Dispatch<SetStateAction<null | HTMLElement>>;
-}
-export const NavBarMenu: FunctionComponent<Props> = ( { anchor, setAnchor }) => {
+export const NavBarMenu: FunctionComponent<NavBarMenuPropType> = ( { anchor, setAnchor }) => {
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));

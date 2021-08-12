@@ -1,7 +1,7 @@
 export interface ResumeFetchType {
   resume: {
     email: string;
-    [emai: string]: unknown;
+    [email: string]: unknown;
   }
 }
 export interface RouteFetchType {

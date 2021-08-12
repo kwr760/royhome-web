@@ -1,16 +1,11 @@
 import { getMaxAgeInDays } from './get-max-age-in-days';
-import {Method} from "axios";
-
-export interface CookieOptions {
-  maxAge: number;
-  httpOnly: boolean;
-  secure: boolean;
-}
+import { CookieOptions } from 'express';
 
 export const generateCookieOptions = (): CookieOptions => {
   return {
     maxAge: getMaxAgeInDays(365),
     httpOnly: true,
     secure: true,
+    domain: 'royk.us',
   };
 };

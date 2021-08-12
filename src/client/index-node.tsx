@@ -1,17 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { Provider } from 'react-redux';
 import { StaticRouter as Router, Route, RouteComponentProps } from 'react-router-dom';
-import { Store } from 'redux';
+import { IndexPropType } from '../types/prop';
 
 import Auth0Provider from '../util/auth0/auth0-node';
 import { config } from '../util/auth0/auth0.constants';
 import Theme from './Theme';
 
-interface Props {
-  url: string;
-  store: Store;
-}
-const Main: FunctionComponent<Props> = ({ url, store }) => {
+const Main: FunctionComponent<IndexPropType> = ({ url, store }) => {
   return (
     <Provider store={store}>
       <Auth0Provider

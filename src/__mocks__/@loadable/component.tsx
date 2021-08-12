@@ -5,7 +5,7 @@ export const loadableReady = (done: () => unknown) => (done());
 
 const loadable = (load: any) => {
   let Component: FunctionComponent;
-  const loadPromise = load().then((val:any ) => (Component = val.default));
+  const loadPromise = load().then((val: any ) => (Component = val.default));
   const Loadable = (props: PropsWithChildren<unknown>) => {
     if (!Component) {
       throw new Error(

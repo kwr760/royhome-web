@@ -1,13 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { Grid, Link } from '@material-ui/core';
-import { ProjectType } from '../../../../types/resume.types';
+import { ProjectPropType } from '../../../../types/prop/resume/project';
 import dateFormat from 'dateformat';
 import { useStyles } from './index.styles';
 
-interface Props {
-  project: ProjectType[];
-}
-const ResumeProject: FunctionComponent<Props> = ({ project }) => {
+const ResumeProject: FunctionComponent<ProjectPropType> = ({ project }) => {
   const classes = useStyles();
 
   return (

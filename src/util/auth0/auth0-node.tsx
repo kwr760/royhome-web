@@ -1,6 +1,6 @@
 import React from 'react';
 import { Auth0Context } from './auth0-context';
-import { Auth0ProviderType } from '../../types/auth0.types';
+import { Auth0ProviderType } from '../../types/auth0';
 import { noop } from '../noop';
 
 const Auth0Provider: React.FC<Auth0ProviderType> = ({

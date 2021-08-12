@@ -1,13 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { Grid } from '@material-ui/core';
+import { SkillsPropType } from '../../../../types/prop/resume/skills';
 
-import { SkillGroupType } from '../../../../types/resume.types';
 import { useStyles } from './index.styles';
 
-interface Props {
-  skillGroups: SkillGroupType[];
-}
-const ResumeSkills: FunctionComponent<Props> = ({ skillGroups }) => {
+const ResumeSkills: FunctionComponent<SkillsPropType> = ({ skillGroups }) => {
   const classes = useStyles();
   return (
     <Grid container>

@@ -1,4 +1,4 @@
-import { LogMsgType } from '../../types/logger.types';
+import { LogMsgType } from '../../types/logger';
 import LOG_LEVELS from '../../util/logger/logger-levels';
 import log from './log';
 

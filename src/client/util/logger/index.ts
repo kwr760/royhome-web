@@ -1,5 +1,5 @@
 import LOG_LEVELS from '../../../util/logger/logger-levels';
-import { LogMsgType } from '../../../types/logger.types';
+import { LogMsgType } from '../../../types/logger';
 import log from './log';
 
 class Logger {

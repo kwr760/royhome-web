@@ -1,13 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { Grid } from '@material-ui/core';
-import { EducationType } from '../../../../types/resume.types';
+import { EducationPropType } from '../../../../types/prop/resume/education';
 import dateFormat from 'dateformat';
 import { useStyles } from './index.styles';
 
-interface Props {
-  education: EducationType[];
-}
-const ResumeEducation: FunctionComponent<Props> = ({ education }) => {
+const ResumeEducation: FunctionComponent<EducationPropType> = ({ education }) => {
   const classes = useStyles();
 
   return (

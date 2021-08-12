@@ -1,5 +1,5 @@
-import { TabPageType } from '../../../../types/pages.types';
-import { UserStateType } from '../../../../types/state.types';
+import { TabPageType } from '../../../../types/object/tab-page';
+import { UserStateType } from '../../../../types/state/user';
 import { displayPage } from './display-page';
 
 describe('web/client/components/page/app-bar/display-page', () => {

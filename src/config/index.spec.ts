@@ -76,7 +76,7 @@ describe('config/index', () => {
           },
           host: 'http://localhost',
           release: DEVELOPMENT,
-          root: expect.stringContaining('/royhome-web'),
+          root: expect.stringContaining('web'),
           log: {
             dir: './log',
             level: LOG_LEVELS.DEBUG,
@@ -86,8 +86,8 @@ describe('config/index', () => {
           server: {
             apiUrl: 'https://api.royk.us',
             cert: {
-              cert: '/var/cert/royhome/fullchain.pem',
-              key: '/var/cert/royhome/privkey.pem',
+              cert: expect.stringContaining('fullchain.pem'),
+              key: expect.stringContaining('privkey.pem'),
             },
             enableHttps: true,
           },
@@ -124,7 +124,7 @@ describe('config/index', () => {
           },
           host: 'http://localhost',
           release: DOCKER,
-          root: expect.stringContaining('/royhome-web'),
+          root: expect.stringContaining('web'),
           log: {
             dir: './log',
             level: LOG_LEVELS.INFO,
@@ -172,7 +172,7 @@ describe('config/index', () => {
           },
           host: 'https://royk.us',
           release: PRODUCTION,
-          root: expect.stringContaining('/royhome-web'),
+          root: expect.stringContaining('web'),
           log: {
             dir: '/var/log/royhome',
             level: LOG_LEVELS.WARN,

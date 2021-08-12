@@ -4,13 +4,14 @@ import createAuth0Client, { Auth0Client, GetTokenSilentlyOptions, RedirectLoginO
 import Cookies from 'universal-cookie';
 
 import env from '../../config';
+import { UserStateType } from '../../types/state/user';
+import { SaveSessionType } from '../../types/store/session';
 import { TOKEN_URL } from './role.constants';
-import { UserStateType } from '../../types/state.types';
 import { Auth0Context } from './auth0-context';
 import { COOKIE_JWT_PAYLOAD } from './auth0.constants';
-import { updateAuthentication, setLoading, clearLoading } from '../../client/store/session/session.slice';
+import {updateAuthentication, setLoading, clearLoading, saveSession} from '../../client/store/session/session.slice';
 import { updateUser } from '../../client/store/user/user.slice';
-import { Auth0ProviderType } from '../../types/auth0.types';
+import { Auth0ProviderType } from '../../types/auth0';
 import { noop } from '../noop';
 
 const DEFAULT_REDIRECT_CALLBACK = () => window.history.replaceState(
@@ -62,6 +63,7 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
       }
 
       const authenticated = await auth0FromHook.isAuthenticated();
+      let claim: SaveSessionType = {};
       if (authenticated) {
         const auth0User = await auth0FromHook.getUser();
         const tokenClaims = await auth0FromHook.getIdTokenClaims();
@@ -76,12 +78,22 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
         setCookies(token);
         dispatch(updateAuthentication({ authenticated: true, expiration: token.exp}));
         dispatch(updateUser(token.user));
+        claim = {
+          authenticated: true,
+          expiration: token.exp,
+          email: token.user.email,
+          context: JSON.stringify(token.user.context),
+        };
       } else {
         setCookies();
         dispatch(updateAuthentication({ authenticated: false, expiration: 0 }));
         dispatch(updateUser({} as UserStateType));
+        claim = {
+          authenticated: false,
+          expiration: 0,
+        };
       }
-
+      dispatch(saveSession(claim));
       dispatch(clearLoading());
     };
     initAuth0();
@@ -96,6 +108,7 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
     await auth0Client.logout(logoutProps);
     dispatch(updateAuthentication({ authenticated: false, expiration: 0 }));
     dispatch(updateUser({} as UserStateType));
+    dispatch(saveSession({authenticated: false, expiration: 0}));
     setCookies();
   };
 

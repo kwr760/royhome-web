@@ -6,7 +6,7 @@ import createAuth0Client from '@auth0/auth0-spa-js';
 
 import Auth0Provider from './auth0-spa';
 import { useAuth0 } from './auth0-context';
-import { Auth0ContextType } from '../../types/auth0.types';
+import { Auth0ContextType } from '../../types/auth0';
 
 jest.mock('@auth0/auth0-spa-js');
 jest.mock('react-redux');
@@ -88,13 +88,13 @@ describe('util/auth0/react-auth0-spa', () => {
     await waitFor(() => {});
 
     // Assert
-    expect(dispatch).toBeCalledTimes(6);
+    expect(dispatch).toBeCalledTimes(8);
     expect(dispatch).toHaveBeenNthCalledWith(1, expectedLoadingOn);
     expect(dispatch).toHaveBeenNthCalledWith(2, expectedAuthOn);
     expect(dispatch).toHaveBeenNthCalledWith(3, expectedUserOn);
-    expect(dispatch).toHaveBeenNthCalledWith(4, expectedLoadingOff);
-    expect(dispatch).toHaveBeenNthCalledWith(5, expectedAuthOff);
-    expect(dispatch).toHaveBeenNthCalledWith(6, expectedUserOff);
+    expect(dispatch).toHaveBeenNthCalledWith(5, expectedLoadingOff);
+    expect(dispatch).toHaveBeenNthCalledWith(6, expectedAuthOff);
+    expect(dispatch).toHaveBeenNthCalledWith(7, expectedUserOff);
   });
   it('should login a limited authenticated provider', async () => {
     // Arrange
@@ -116,7 +116,7 @@ describe('util/auth0/react-auth0-spa', () => {
     await waitFor(() => {});
 
     // Assert
-    expect(dispatch).toBeCalledTimes(4);
+    expect(dispatch).toBeCalledTimes(5);
     expect(dispatch).toHaveBeenNthCalledWith(2, expectedAuthOn);
   });
   it('should handle redirect callback', async () => {
@@ -149,11 +149,11 @@ describe('util/auth0/react-auth0-spa', () => {
     await waitFor(() => {});
 
     // Assert
-    expect(dispatch).toBeCalledTimes(4);
+    expect(dispatch).toBeCalledTimes(5);
     expect(dispatch).toHaveBeenNthCalledWith(1, expectedLoadingOn);
     expect(dispatch).toHaveBeenNthCalledWith(2, expectedAuthOff);
     expect(dispatch).toHaveBeenNthCalledWith(3, expectedUserOff);
-    expect(dispatch).toHaveBeenNthCalledWith(4, expectedLoadingOff);
+    expect(dispatch).toHaveBeenNthCalledWith(5, expectedLoadingOff);
     global.window = savedWindow;
   });
 });

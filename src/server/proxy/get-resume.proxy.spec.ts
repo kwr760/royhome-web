@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-import { getResumeProxy } from './resume.proxy';
+import { getResumeProxy } from './get-resume.proxy';
 
 jest.mock('axios');
 
-describe('web/server/proxy/resume.proxy', () => {
+describe('web/server/proxy/get-resume.proxy', () => {
   it('should get resume', async () => {
     // Arrange
     const email = 'kroy760@gmail.com';

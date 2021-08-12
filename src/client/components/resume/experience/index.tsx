@@ -2,14 +2,11 @@ import dateFormat from 'dateformat';
 import React, { FunctionComponent } from 'react';
 import { Grid } from '@material-ui/core';
 import { isEmpty } from 'lodash';
+import { ExperiencePropType } from '../../../../types/prop/resume/experience';
 
-import { ExperienceType } from '../../../../types/resume.types';
 import { useStyles } from './index.styles';
 
-interface Props {
-  experience: ExperienceType[];
-}
-const ResumeExperience: FunctionComponent<Props> = ({ experience }) => {
+const ResumeExperience: FunctionComponent<ExperiencePropType> = ({ experience }) => {
   const classes = useStyles();
 
   return (

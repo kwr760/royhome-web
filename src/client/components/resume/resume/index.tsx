@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { Container } from '@material-ui/core';
+import { ResumePropType } from '../../../../types/prop/resume/resume';
 import {
   EducationType,
   ExperienceType,
   ResumeType,
   SkillGroupType,
   ProjectType,
-} from '../../../../types/resume.types';
+} from '../../../../types/object/resume';
 
 import ResumeHeader from '../header';
 import ResumeSkills from '../skills';
@@ -16,10 +17,7 @@ import ResumeEducation from '../education';
 import ResumeProject from '../project';
 import { useStyles } from './index.styles';
 
-interface Props {
-  resume: ResumeType;
-}
-const ResumePage: FunctionComponent<Props> = ({ resume = {} as ResumeType}) => {
+const ResumePage: FunctionComponent<ResumePropType> = ({ resume = {} as ResumeType}) => {
   const classes = useStyles();
 
   const {

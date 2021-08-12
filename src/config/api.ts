@@ -1,4 +1,4 @@
-import { ApiConfigType } from '../../../types/api.types';
+import { ApiConfigType } from '../types/api/api';
 
 export const ApiConfigs = {
   PUT_LOG: {
@@ -14,9 +14,9 @@ export const ApiConfigs = {
     path: '/resume/{email}',
     authenticated: false,
   } as ApiConfigType,
-  PUT_ACCESS_LOG: {
-    method: 'put',
-    path: '/access/log',
+  SAVE_SESSION: {
+    method: 'post',
+    path: '/session',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -24,7 +24,7 @@ export const ApiConfigs = {
   } as ApiConfigType,
   GET_SESSION: {
     method: 'get',
-    path: '/access/{sessionId}',
+    path: '/session/{sessionId}',
     authenticated: false,
   } as ApiConfigType,
 };

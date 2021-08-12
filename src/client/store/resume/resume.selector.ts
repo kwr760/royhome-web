@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
-import { ResumeStateType, StateType } from '../../../types/state.types';
+import { StateType } from '../../../types/state/state';
+import { ResumeStateType } from '../../../types/state/resume';
 
 export const getResume = createSelector(
   (state: StateType) => state.resume,
