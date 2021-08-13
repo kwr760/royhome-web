@@ -2,7 +2,7 @@ import { OWNER, ROLES } from './role.constants';
 import { ContextStateType } from '../../types/state/context';
 
 const hasNeededRole = (neededRole: string, context: ContextStateType = { role: '' }): boolean => {
-  const { role } = context;
+  const { role = ''} = context;
 
   let grantedRoles = role.split(' ');
   if (grantedRoles.includes(OWNER)) {

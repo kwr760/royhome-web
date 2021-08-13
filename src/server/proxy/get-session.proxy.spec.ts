@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { Application } from 'express';
-import startHttpsServer from '../middleware/start-https';
 
 import { getSessionProxy } from './get-session.proxy';
 

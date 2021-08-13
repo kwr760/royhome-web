@@ -13,8 +13,10 @@ import sessionReducer, {
   clearLoading,
   saveSession,
 } from './session.slice';
+import logger from '../../util/logger';
 
 jest.mock('../../util/api/call-api');
+jest.mock('../../util/logger');
 
 describe('client/store/session/session.slice', () => {
   const mockStore = configureMockStore([thunk]);
@@ -107,32 +109,44 @@ describe('client/store/session/session.slice', () => {
   });
   it('should call saveSession',  async () => {
     // Arrange
+    const user = {
+      email: 'person@email.com',
+    };
     const claim = {
       authenticated: true,
-      expiration: 1000,
+      expiration: 10000000000000,
       email: 'person@email.com',
       darkMode: 'dark-mode',
       context: '"context"',
+      user,
     };
     const expectedSession = {
-      output: {},
+      session: {
+        ...claim,
+      },
+      user,
     };
     const response = {
-      data: expectedSession,
+      data: {
+        output: {
+          ...claim,
+          user,
+        },
+      },
     } as AxiosResponse;
     const store = mockStore();
 
     (callApi as jest.Mock).mockReturnValue(response);
 
     // Act
-    await store.dispatch(saveSession(claim) as unknown as AnyAction);
+    await store.dispatch(saveSession(claim, user) as unknown as AnyAction);
     const actions = store.getActions();
     const newState = sessionReducer(store.getState() as SessionStateType, actions[0]);
 
     // Assert
-    expect(actions[0].type).toEqual('session/saveSessionSuccess');
+    expect(actions[0].type).toEqual('session/updateSession');
     expect(actions[0].payload).toEqual(expectedSession);
-    expect(newState).toEqual({});
+    expect(newState).toEqual(expectedSession.session);
   });
   it('saveSession throw error',  async () => {
     // Arrange
@@ -143,6 +157,7 @@ describe('client/store/session/session.slice', () => {
       darkMode: 'dark-mode',
       context: '"context"',
     };
+    const user = {};
     const errorMsg = 'Failure';
     const expected = 'Error: ' + errorMsg;
     const store = mockStore();
@@ -150,13 +165,9 @@ describe('client/store/session/session.slice', () => {
     (callApi as jest.Mock).mockImplementation(() => { throw Error(errorMsg); });
 
     // Act
-    await store.dispatch(saveSession(claim) as unknown as AnyAction);
-    const actions = store.getActions();
-    const newState = sessionReducer(store.getState() as SessionStateType, actions[0]);
+    await store.dispatch(saveSession(claim, user) as unknown as AnyAction);
 
     // Assert
-    expect(actions[0].type).toEqual('session/saveSessionFailure');
-    expect(actions[0].payload).toEqual(expected);
-    expect(newState).toEqual( {});
+    expect(logger.error).toHaveBeenCalledWith(expected);
   });
 });

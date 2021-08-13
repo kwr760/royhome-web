@@ -1,5 +1,5 @@
 export interface ContextStateType {
-  role: string;
+  role?: string;
   app?: string;
   data?: string;
 }

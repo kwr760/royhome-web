@@ -11,7 +11,7 @@ describe('server/rendering/populate-state', () => {
   const resume = {
     owner: 'owner',
   };
-  it('should return an state from empty context', async () => {
+  it('should return an state from session', async () => {
     // Arrange
     const url = '/';
     const sessionId = 'session-id';
@@ -29,16 +29,16 @@ describe('server/rendering/populate-state', () => {
     (getSessionProxy as jest.Mock).mockResolvedValueOnce(session);
     const expected = {
       session: {
-        authenticated: true,
+        authenticated: false,
         'browserId': 'browser-id',
         'darkMode': 'dark-node',
         'expiration': 1000,
         'sessionId': 'session-id',
-      },
-      user: {
-        'context': 'context',
-        'email': 'person@email.com',
-        'userId': 'user-id',
+        user: {
+          'context': 'context',
+          'email': 'person@email.com',
+          'userId': 'user-id',
+        },
       },
       resume: {
         email: email,
@@ -61,24 +61,16 @@ describe('server/rendering/populate-state', () => {
     const session = {
       browserId: 'browser-id',
       darkMode: 'dark-node',
-      user: {
-        userId: 'user-id',
-        email: 'person@email.com',
-      },
     };
     (getResumeProxy as jest.Mock).mockResolvedValueOnce(resume);
     (getSessionProxy as jest.Mock).mockResolvedValueOnce(session);
     const expected = {
       session: {
         authenticated: false,
-        'browserId': 'browser-id',
-        'darkMode': 'dark-node',
-        'sessionId': 'session-id',
-      },
-      user: {
-        'context': {},
-        'email': 'person@email.com',
-        'userId': 'user-id',
+        browserId: 'browser-id',
+        darkMode: 'dark-node',
+        sessionId: 'session-id',
+        user: {},
       },
       resume: {
         email: '',
@@ -102,8 +94,8 @@ describe('server/rendering/populate-state', () => {
         expiration: -1,
         isLoading: false,
         darkMode: DarkModes.CLEAR_MODE,
+        user: {},
       },
-      user: { },
       resume: {
         email: email,
         resumes: {

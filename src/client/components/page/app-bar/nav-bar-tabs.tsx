@@ -4,8 +4,7 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { NavBarTabsPropType } from '../../../../types/prop/nav-bar/tabs';
 
-import { isAuthenticated } from '../../../store/session/session.selector';
-import { getUser } from '../../../store/user/user.selector';
+import { isAuthenticated, getUser } from '../../../store/session/session.selector';
 import { displayPage } from './display-page';
 import { pages } from './pages';
 import { useStyles } from './nav-bar-tabs.styles';

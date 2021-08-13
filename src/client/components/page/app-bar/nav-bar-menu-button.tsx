@@ -3,8 +3,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import React, { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { NavBarMenuButtonPropType } from '../../../../types/prop/nav-bar/menu-button';
-import { isAuthenticated } from '../../../store/session/session.selector';
-import { getUser } from '../../../store/user/user.selector';
+import { isAuthenticated, getUser } from '../../../store/session/session.selector';
 import { useStyles } from './nav-bar-menu-button.styles';
 
 export const NavBarMenuButton: FunctionComponent<NavBarMenuButtonPropType> = ({ setAnchor }) => {

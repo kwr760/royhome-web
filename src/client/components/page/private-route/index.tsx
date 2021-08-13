@@ -5,8 +5,7 @@ import { PrivateRoutePropType } from '../../../../types/prop/private-route';
 import { UserStateType } from '../../../../types/state/user';
 
 import hasNeededRole from '../../../../util/auth0/has-needed-role';
-import { isAuthenticated } from '../../../store/session/session.selector';
-import { getUser } from '../../../store/user/user.selector';
+import { isAuthenticated, getUser } from '../../../store/session/session.selector';
 
 const PrivateRoute: FunctionComponent<PrivateRoutePropType> = ({
   component: Component, path, userRole = '', ...rest

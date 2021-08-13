@@ -8,8 +8,7 @@ import { FiEyeOff, FiLogIn, FiLogOut, FiUser } from 'react-icons/fi';
 import { NavBarMenuPropType } from '../../../../types/prop/nav-bar/menu';
 
 import { useAuth0 } from '../../../../util/auth0/auth0-context';
-import { isAuthenticated } from '../../../store/session/session.selector';
-import { getUser } from '../../../store/user/user.selector';
+import { isAuthenticated, getUser } from '../../../store/session/session.selector';
 import { displayPage } from './display-page';
 import { pages } from './pages';
 import { useStyles } from './nav-bar-menu.styles';

@@ -30,11 +30,11 @@ describe('client/components/resume/profile', () => {
         expiration: 1,
         darkMode: 'dark-mode',
         authenticated: true,
-      },
-      user: {
-        nickname: 'Nickname',
-        picture: 'Picture',
-        email: 'User Email',
+        user: {
+          nickname: 'Nickname',
+          picture: 'Picture',
+          email: 'User Email',
+        },
       },
       resume: {
         email: 'Resume Email',

@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SessionStateType } from '../../../types/state/session';
-import { SaveSessionType } from '../../../types/store/session';
+import { UserStateType } from '../../../types/state/user';
+import { UpdateSessionType, SaveSessionType } from '../../../types/store/session';
 import { DarkModes } from './session.constants';
 import { AppThunk } from '../create-store';
 import { callApi } from '../../util/api/call-api';
 import { ApiConfigs } from '../../../config/api';
-import { AnyAction } from 'redux';
+import logger from '../../util/logger';
 
 const initialState: SessionStateType = {
   authenticated: false,
@@ -37,27 +38,34 @@ const sessionSlice = createSlice({
     updateDarkMode: (state, action: PayloadAction<string>) => {
       state.darkMode = action.payload;
     },
-    saveSessionSuccess: (_state, action: PayloadAction<AnyAction>) => {
-      console.log(action.payload);
-    },
-    saveSessionFailure: (_state, action: PayloadAction<string>) => {
-      console.log(action.payload);
+    updateSession: (state, action: PayloadAction<UpdateSessionType>) => {
+      Object.assign(state, {
+        ...action.payload.session,
+        user: action.payload.user,
+      });
     },
   },
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/explicit-module-boundary-types
-export const saveSession = (claim: SaveSessionType): AppThunk => async dispatch => {
-  const {saveSessionSuccess, saveSessionFailure} = sessionSlice.actions;
+export const saveSession = (claim: SaveSessionType, user: UserStateType): AppThunk => async dispatch => {
+  const {updateSession} = sessionSlice.actions;
   try {
-    const response = await callApi(ApiConfigs.SAVE_SESSION, {
+    const { data } = await callApi(ApiConfigs.SAVE_SESSION, {
       payload: {
         ...claim,
       },
     });
-    dispatch(saveSessionSuccess(response.data));
+    const current = Date.now();
+    const payload = {
+      session: {
+        ...data.output,
+        authenticated: data.output.expiration > current,
+      },
+      user,
+    };
+    dispatch(updateSession(payload));
   } catch (err) {
-    dispatch(saveSessionFailure(err.toString()));
+    logger.error(err.toString());
   }
 };
 

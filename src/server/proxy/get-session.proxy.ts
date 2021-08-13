@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { NOT_FOUND } from 'http-status-codes';
 
 import env from '../../config';
 import { ApiConfigs } from '../../config/api';

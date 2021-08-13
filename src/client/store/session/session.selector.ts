@@ -16,3 +16,8 @@ export const getDarkMode = createSelector(
   (state: StateType) => state.session,
   (session): string => session.darkMode || DarkModes.CLEAR_MODE,
 );
+
+export const getUser = createSelector(
+  (state: StateType) => state.session,
+  (session) => session.user || {},
+);
