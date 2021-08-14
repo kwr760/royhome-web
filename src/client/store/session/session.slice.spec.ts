@@ -61,21 +61,48 @@ describe('client/store/session/session.slice', () => {
     // Assert
     expect(result).toEqual(expected);
   });
-  it('should call updateDarkMode', () => {
+  it('should call updateDarkMode', async () => {
     // Arrange
-    const action = DarkModes.DARK_MODE;
-    const expected = {
-      authenticated: false,
-      expiration: 0,
-      isLoading: false,
-      darkMode: DarkModes.DARK_MODE,
+    const darkMode = DarkModes.DARK_MODE;
+    const expectedSession = {
+      session: {
+        authenticated: false,
+        darkMode,
+      },
     };
+    const response = {
+      data: {
+        output: {
+          darkMode,
+        },
+      },
+    };
+    const store = mockStore();
+    (callApi as jest.Mock).mockReturnValue(response);
 
     // Act
-    const result = sessionReducer(initialState, updateDarkMode(action));
+    await store.dispatch(updateDarkMode(darkMode) as unknown as AnyAction);
+    const actions = store.getActions();
+    const newState = sessionReducer(store.getState() as SessionStateType, actions[0]);
 
     // Assert
-    expect(result).toEqual(expected);
+    expect(actions[0].type).toEqual('session/updateSession');
+    expect(actions[0].payload).toEqual(expectedSession);
+    expect(newState).toEqual(expectedSession.session);
+  });
+  it('should call updateDarkMode - failure', async () => {
+    // Arrange
+    const darkMode = DarkModes.DARK_MODE;
+    const errorMsg = 'Failure';
+    const expected = 'Error: ' + errorMsg;
+    const store = mockStore();
+    (callApi as jest.Mock).mockImplementation(() => { throw Error(errorMsg); });
+
+    // Act
+    await store.dispatch(updateDarkMode(darkMode) as unknown as AnyAction);
+
+    // Assert
+    expect(logger.error).toHaveBeenCalledWith(expected);
   });
   it('should call clearLoading', () => {
     // Arrange
@@ -135,7 +162,6 @@ describe('client/store/session/session.slice', () => {
       },
     } as AxiosResponse;
     const store = mockStore();
-
     (callApi as jest.Mock).mockReturnValue(response);
 
     // Act
@@ -148,7 +174,7 @@ describe('client/store/session/session.slice', () => {
     expect(actions[0].payload).toEqual(expectedSession);
     expect(newState).toEqual(expectedSession.session);
   });
-  it('saveSession throw error',  async () => {
+  it('should call saveSession - failure',  async () => {
     // Arrange
     const claim = {
       authenticated: true,
@@ -161,7 +187,6 @@ describe('client/store/session/session.slice', () => {
     const errorMsg = 'Failure';
     const expected = 'Error: ' + errorMsg;
     const store = mockStore();
-
     (callApi as jest.Mock).mockImplementation(() => { throw Error(errorMsg); });
 
     // Act

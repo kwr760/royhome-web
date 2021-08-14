@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import createAuth0Client, { Auth0Client, GetTokenSilentlyOptions, RedirectLoginOptions } from '@auth0/auth0-spa-js';
+import { getDarkMode } from '../../client/store/session/session.selector';
 
 import env from '../../config';
 import { ContextStateType } from '../../types/state/context';
@@ -30,6 +31,7 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
   ...initOptions
 }) => {
   const [auth0Client, setAuth0] = useState<Auth0Client>(initialContext);
+  const darkMode = useSelector(getDarkMode);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -55,6 +57,7 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
         claim = {
           authenticated,
           expiration,
+          darkMode,
           email: tokenClaims.email,
           context: JSON.stringify(context),
         };
@@ -62,6 +65,7 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
         claim = {
           authenticated,
           expiration: 0,
+          darkMode,
         };
       }
       dispatch(saveSession(claim, { ...user, context } ));
@@ -69,7 +73,7 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
     };
     initAuth0();
     // eslint-disable-next-line
-  }, []);
+  }, [darkMode]);
 
   const logout = async (...p: unknown[]) => {
     const logoutProps = {

@@ -73,7 +73,6 @@ describe('util/auth0/react-auth0-spa', () => {
     (useDispatch as jest.Mock).mockReturnValue(dispatch);
     const expectedLoadingOn = { payload: undefined, type: 'session/setLoading' };
     const expectedLoadingOff = { payload: undefined, type: 'session/clearLoading' };
-    // const expectedSaveSession = { payload: {}, type: 'session/updateSession' };
 
     // Act
     const { getByText } = render(testProvider(testContext));
@@ -84,9 +83,7 @@ describe('util/auth0/react-auth0-spa', () => {
     // Assert
     expect(dispatch).toBeCalledTimes(4);
     expect(dispatch).toHaveBeenNthCalledWith(1, expectedLoadingOn);
-    // expect(dispatch).toHaveBeenNthCalledWith(2, expectedSaveSession);
     expect(dispatch).toHaveBeenNthCalledWith(3, expectedLoadingOff);
-    // expect(dispatch).toHaveBeenNthCalledWith(4, expectedSaveSession);
   });
   it('should login a limited authenticated provider', async () => {
     // Arrange
@@ -98,10 +95,6 @@ describe('util/auth0/react-auth0-spa', () => {
     });
     const dispatch = jest.fn();
     (useDispatch as jest.Mock).mockReturnValue(dispatch);
-    // const expectedAuthOn = {
-    //   payload: { authenticated: true, expiration: 0 },
-    //   type: 'session/updateAuthentication',
-    // };
     const expectedLoadingOn = { payload: undefined, type: 'session/setLoading' };
     const expectedLoadingOff = { payload: undefined, type: 'session/clearLoading' };
 
@@ -112,7 +105,6 @@ describe('util/auth0/react-auth0-spa', () => {
     // Assert
     expect(dispatch).toBeCalledTimes(3);
     expect(dispatch).toHaveBeenNthCalledWith(1, expectedLoadingOn);
-    // expect(dispatch).toHaveBeenNthCalledWith(2, expectedAuthOn);
     expect(dispatch).toHaveBeenNthCalledWith(3, expectedLoadingOff);
   });
   it('should handle redirect callback', async () => {
@@ -137,9 +129,6 @@ describe('util/auth0/react-auth0-spa', () => {
     (useDispatch as jest.Mock).mockReturnValue(dispatch);
     const expectedLoadingOn = { payload: undefined, type: 'session/setLoading' };
     const expectedLoadingOff = { payload: undefined, type: 'session/clearLoading' };
-    // const expectedAuthOff = { payload: { authenticated: false, expiration: 0 },
-    // type: 'session/updateAuthentication' };
-    // const expectedUserOff = { payload: { }, type: 'user/updateUser' };
 
     // Act
     render(testProvider(testContext, true));
@@ -148,8 +137,6 @@ describe('util/auth0/react-auth0-spa', () => {
     // Assert
     expect(dispatch).toBeCalledTimes(3);
     expect(dispatch).toHaveBeenNthCalledWith(1, expectedLoadingOn);
-    // expect(dispatch).toHaveBeenNthCalledWith(2, expectedAuthOff);
-    // expect(dispatch).toHaveBeenNthCalledWith(3, expectedUserOff);
     expect(dispatch).toHaveBeenNthCalledWith(3, expectedLoadingOff);
     global.window = savedWindow;
   });
