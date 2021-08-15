@@ -4,7 +4,7 @@ import { isEmpty } from 'lodash';
 import { ERROR_CODE } from '../../../util/error-codes';
 import { getParsedUrl } from './get-parsed-url';
 import { getApiUrl } from './get-api-url';
-import { ApiDetailsType, ApiConfigType } from '../../../types/api.types';
+import { ApiDetailsType, ApiConfigType } from '../../../types/api/api';
 
 export const callApi = async (
   api: ApiConfigType,
@@ -27,7 +27,8 @@ export const callApi = async (
       method,
       url,
       headers,
-      data: payload,
+      data: JSON.stringify(payload),
+      withCredentials: true,
     },
   );
 };

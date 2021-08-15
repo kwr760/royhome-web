@@ -8,6 +8,16 @@ describe('util/auth0/has-needed-role', () => {
     // Assert
     expect(result).toEqual(false);
   });
+  it('should return false if empty', () => {
+    // Arrange
+    const data = {};
+
+    // Act
+    const result = hasNeededRole('admin', data);
+
+    // Assert
+    expect(result).toEqual(false);
+  });
   it('should return true if role is in data', () => {
     // Arrange
     const data = {

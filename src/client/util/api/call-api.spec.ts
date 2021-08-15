@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { ApiDetailsType } from '../../../types/api.types';
+import { ApiDetailsType } from '../../../types/api/api';
 
 import { callApi } from './call-api';
-import { ApiConfigs } from './api.config';
+import { ApiConfigs } from '../../../config/api';
 
 jest.mock('axios');
 
@@ -24,12 +24,11 @@ describe('client/util/api/call-api', () => {
       resume: 'resume',
     };
     const expectedCall = {
-      'data': {
-        'email': 'kroy760@gmail.com',
-      },
+      'data': JSON.stringify({'email':'kroy760@gmail.com'}),
       'headers': {},
       'method': 'get',
       'url': 'http://api.localhost/resume/kroy760%40gmail.com',
+      'withCredentials': true,
     };
     (axios as unknown as jest.Mock).mockResolvedValue(expected);
 
@@ -58,12 +57,11 @@ describe('client/util/api/call-api', () => {
       resume: 'resume',
     };
     const expectedCall = {
-      'data': {
-        'email': 'kroy760@gmail.com',
-      },
+      'data': JSON.stringify({'email':'kroy760@gmail.com'}),
       'headers': {},
       'method': 'get',
       'url': 'http://api.localhost/resume/kroy760%40gmail.com',
+      'withCredentials': true,
     };
     (axios as unknown as jest.Mock).mockResolvedValue(expected);
 
@@ -91,12 +89,11 @@ describe('client/util/api/call-api', () => {
       resume: 'resume',
     };
     const expectedCall = {
-      'data': {
-        'email': 'kroy760@gmail.com',
-      },
+      'data': JSON.stringify({'email':'kroy760@gmail.com'}),
       'headers': {},
       'method': 'get',
       'url': 'http://api.localhost/resume/kroy760%40gmail.com',
+      'withCredentials': true,
     };
     const expectedError = {
       code: 'API_UNAUTHENTICATED',

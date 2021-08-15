@@ -1,4 +1,9 @@
-import { SessionStateType } from '../../../types/state.types';
+import { AxiosResponse } from 'axios';
+import { AnyAction } from 'redux';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import { SessionStateType } from '../../../types/state/session';
+import { callApi } from '../../util/api/call-api';
 import { DarkModes } from './session.constants';
 import sessionReducer, {
   updateAuthentication,
@@ -6,9 +11,15 @@ import sessionReducer, {
   updateLoading,
   setLoading,
   clearLoading,
+  saveSession,
 } from './session.slice';
+import logger from '../../util/logger';
+
+jest.mock('../../util/api/call-api');
+jest.mock('../../util/logger');
 
 describe('client/store/session/session.slice', () => {
+  const mockStore = configureMockStore([thunk]);
   const initialState: SessionStateType = {
     authenticated: false,
     expiration: 0,
@@ -16,7 +27,7 @@ describe('client/store/session/session.slice', () => {
     darkMode: DarkModes.CLEAR_MODE,
   } as SessionStateType;
 
-  it('should call updateAuthenication', () => {
+  it('should call updateAuthentication', () => {
     // Arrange
     const action = {
       authenticated: true,
@@ -50,36 +61,48 @@ describe('client/store/session/session.slice', () => {
     // Assert
     expect(result).toEqual(expected);
   });
-  it('should call updateDarkMode', () => {
+  it('should call updateDarkMode', async () => {
     // Arrange
-    const action = DarkModes.DARK_MODE;
-    const expected = {
-      authenticated: false,
-      expiration: 0,
-      isLoading: false,
-      darkMode: DarkModes.DARK_MODE,
+    const darkMode = DarkModes.DARK_MODE;
+    const expectedSession = {
+      session: {
+        authenticated: false,
+        darkMode,
+      },
     };
+    const response = {
+      data: {
+        output: {
+          darkMode,
+        },
+      },
+    };
+    const store = mockStore();
+    (callApi as jest.Mock).mockReturnValue(response);
 
     // Act
-    const result = sessionReducer(initialState, updateDarkMode(action));
+    await store.dispatch(updateDarkMode(darkMode) as unknown as AnyAction);
+    const actions = store.getActions();
+    const newState = sessionReducer(store.getState() as SessionStateType, actions[0]);
 
     // Assert
-    expect(result).toEqual(expected);
+    expect(actions[0].type).toEqual('session/updateSession');
+    expect(actions[0].payload).toEqual(expectedSession);
+    expect(newState).toEqual(expectedSession.session);
   });
-  it('should call setLoading', () => {
+  it('should call updateDarkMode - failure', async () => {
     // Arrange
-    const expected = {
-      authenticated: false,
-      expiration: 0,
-      isLoading: true,
-      darkMode: DarkModes.CLEAR_MODE,
-    };
+    const darkMode = DarkModes.DARK_MODE;
+    const errorMsg = 'Failure';
+    const expected = 'Error: ' + errorMsg;
+    const store = mockStore();
+    (callApi as jest.Mock).mockImplementation(() => { throw Error(errorMsg); });
 
     // Act
-    const result = sessionReducer(initialState, setLoading());
+    await store.dispatch(updateDarkMode(darkMode) as unknown as AnyAction);
 
     // Assert
-    expect(result).toEqual(expected);
+    expect(logger.error).toHaveBeenCalledWith(expected);
   });
   it('should call clearLoading', () => {
     // Arrange
@@ -110,5 +133,66 @@ describe('client/store/session/session.slice', () => {
 
     // Assert
     expect(result).toEqual(expected);
+  });
+  it('should call saveSession',  async () => {
+    // Arrange
+    const user = {
+      email: 'person@email.com',
+    };
+    const claim = {
+      authenticated: true,
+      expiration: 10000000000000,
+      email: 'person@email.com',
+      darkMode: 'dark-mode',
+      context: '"context"',
+      user,
+    };
+    const expectedSession = {
+      session: {
+        ...claim,
+      },
+      user,
+    };
+    const response = {
+      data: {
+        output: {
+          ...claim,
+          user,
+        },
+      },
+    } as AxiosResponse;
+    const store = mockStore();
+    (callApi as jest.Mock).mockReturnValue(response);
+
+    // Act
+    await store.dispatch(saveSession(claim, user) as unknown as AnyAction);
+    const actions = store.getActions();
+    const newState = sessionReducer(store.getState() as SessionStateType, actions[0]);
+
+    // Assert
+    expect(actions[0].type).toEqual('session/updateSession');
+    expect(actions[0].payload).toEqual(expectedSession);
+    expect(newState).toEqual(expectedSession.session);
+  });
+  it('should call saveSession - failure',  async () => {
+    // Arrange
+    const claim = {
+      authenticated: true,
+      expiration: 1000,
+      email: 'person@email.com',
+      darkMode: 'dark-mode',
+      context: '"context"',
+    };
+    const user = {};
+    const errorMsg = 'Failure';
+    const expected = 'Error: ' + errorMsg;
+    const store = mockStore();
+    (callApi as jest.Mock).mockImplementation(() => { throw Error(errorMsg); });
+
+    // Act
+    await store.dispatch(saveSession(claim, user) as unknown as AnyAction);
+
+    // Assert
+    expect(logger.error).toHaveBeenCalledWith(expected);
   });
 });

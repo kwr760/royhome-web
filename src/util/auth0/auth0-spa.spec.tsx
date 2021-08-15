@@ -6,7 +6,7 @@ import createAuth0Client from '@auth0/auth0-spa-js';
 
 import Auth0Provider from './auth0-spa';
 import { useAuth0 } from './auth0-context';
-import { Auth0ContextType } from '../../types/auth0.types';
+import { Auth0ContextType } from '../../types/auth0';
 
 jest.mock('@auth0/auth0-spa-js');
 jest.mock('react-redux');
@@ -73,13 +73,6 @@ describe('util/auth0/react-auth0-spa', () => {
     (useDispatch as jest.Mock).mockReturnValue(dispatch);
     const expectedLoadingOn = { payload: undefined, type: 'session/setLoading' };
     const expectedLoadingOff = { payload: undefined, type: 'session/clearLoading' };
-    const expectedAuthOn = {
-      payload: { authenticated: true, expiration: 999999999 },
-      type: 'session/updateAuthentication',
-    };
-    const expectedAuthOff = { payload: { authenticated: false, expiration: 0 }, type: 'session/updateAuthentication' };
-    const expectedUserOn = { payload: { name: 'Tester' }, type: 'user/updateUser' };
-    const expectedUserOff = { payload: {}, type: 'user/updateUser' };
 
     // Act
     const { getByText } = render(testProvider(testContext));
@@ -88,13 +81,9 @@ describe('util/auth0/react-auth0-spa', () => {
     await waitFor(() => {});
 
     // Assert
-    expect(dispatch).toBeCalledTimes(6);
+    expect(dispatch).toBeCalledTimes(4);
     expect(dispatch).toHaveBeenNthCalledWith(1, expectedLoadingOn);
-    expect(dispatch).toHaveBeenNthCalledWith(2, expectedAuthOn);
-    expect(dispatch).toHaveBeenNthCalledWith(3, expectedUserOn);
-    expect(dispatch).toHaveBeenNthCalledWith(4, expectedLoadingOff);
-    expect(dispatch).toHaveBeenNthCalledWith(5, expectedAuthOff);
-    expect(dispatch).toHaveBeenNthCalledWith(6, expectedUserOff);
+    expect(dispatch).toHaveBeenNthCalledWith(3, expectedLoadingOff);
   });
   it('should login a limited authenticated provider', async () => {
     // Arrange
@@ -106,18 +95,17 @@ describe('util/auth0/react-auth0-spa', () => {
     });
     const dispatch = jest.fn();
     (useDispatch as jest.Mock).mockReturnValue(dispatch);
-    const expectedAuthOn = {
-      payload: { authenticated: true, expiration: 0 },
-      type: 'session/updateAuthentication',
-    };
+    const expectedLoadingOn = { payload: undefined, type: 'session/setLoading' };
+    const expectedLoadingOff = { payload: undefined, type: 'session/clearLoading' };
 
     // Act
     render(testProvider(testContext));
     await waitFor(() => {});
 
     // Assert
-    expect(dispatch).toBeCalledTimes(4);
-    expect(dispatch).toHaveBeenNthCalledWith(2, expectedAuthOn);
+    expect(dispatch).toBeCalledTimes(3);
+    expect(dispatch).toHaveBeenNthCalledWith(1, expectedLoadingOn);
+    expect(dispatch).toHaveBeenNthCalledWith(3, expectedLoadingOff);
   });
   it('should handle redirect callback', async () => {
     // Arrange
@@ -141,19 +129,15 @@ describe('util/auth0/react-auth0-spa', () => {
     (useDispatch as jest.Mock).mockReturnValue(dispatch);
     const expectedLoadingOn = { payload: undefined, type: 'session/setLoading' };
     const expectedLoadingOff = { payload: undefined, type: 'session/clearLoading' };
-    const expectedAuthOff = { payload: { authenticated: false, expiration: 0 }, type: 'session/updateAuthentication' };
-    const expectedUserOff = { payload: { }, type: 'user/updateUser' };
 
     // Act
     render(testProvider(testContext, true));
     await waitFor(() => {});
 
     // Assert
-    expect(dispatch).toBeCalledTimes(4);
+    expect(dispatch).toBeCalledTimes(3);
     expect(dispatch).toHaveBeenNthCalledWith(1, expectedLoadingOn);
-    expect(dispatch).toHaveBeenNthCalledWith(2, expectedAuthOff);
-    expect(dispatch).toHaveBeenNthCalledWith(3, expectedUserOff);
-    expect(dispatch).toHaveBeenNthCalledWith(4, expectedLoadingOff);
+    expect(dispatch).toHaveBeenNthCalledWith(3, expectedLoadingOff);
     global.window = savedWindow;
   });
 });

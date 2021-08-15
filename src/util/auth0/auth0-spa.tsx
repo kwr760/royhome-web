@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import createAuth0Client, { Auth0Client, GetTokenSilentlyOptions, RedirectLoginOptions } from '@auth0/auth0-spa-js';
-import Cookies from 'universal-cookie';
+import { getDarkMode } from '../../client/store/session/session.selector';
 
 import env from '../../config';
+import { ContextStateType } from '../../types/state/context';
+import { UserStateType } from '../../types/state/user';
+import { SaveSessionType } from '../../types/store/session';
 import { TOKEN_URL } from './role.constants';
-import { UserStateType } from '../../types/state.types';
 import { Auth0Context } from './auth0-context';
-import { COOKIE_JWT_PAYLOAD } from './auth0.constants';
-import { updateAuthentication, setLoading, clearLoading } from '../../client/store/session/session.slice';
-import { updateUser } from '../../client/store/user/user.slice';
-import { Auth0ProviderType } from '../../types/auth0.types';
+import { setLoading, clearLoading, saveSession } from '../../client/store/session/session.slice';
+import { Auth0ProviderType } from '../../types/auth0';
+import { noop } from '../noop';
 
 const DEFAULT_REDIRECT_CALLBACK = () => window.history.replaceState(
   {},
@@ -18,24 +19,6 @@ const DEFAULT_REDIRECT_CALLBACK = () => window.history.replaceState(
   window.location.pathname,
 );
 
-const setCookies = (newCookies?: unknown) => {
-  const cookies = new Cookies();
-  if (newCookies) {
-    cookies.set(
-      COOKIE_JWT_PAYLOAD,
-      newCookies,
-      {
-        maxAge: 60 * 60 * 24 * 7,
-        sameSite: 'none',
-        secure: true,
-      },
-    );
-  } else {
-    cookies.remove(COOKIE_JWT_PAYLOAD);
-  }
-};
-
-const noop = () => {};
 const initialContext = {
   loginWithRedirect: noop,
   logout: noop,
@@ -48,6 +31,7 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
   ...initOptions
 }) => {
   const [auth0Client, setAuth0] = useState<Auth0Client>(initialContext);
+  const darkMode = useSelector(getDarkMode);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -62,31 +46,34 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
       }
 
       const authenticated = await auth0FromHook.isAuthenticated();
+      let claim: SaveSessionType;
+      let user: UserStateType = {};
+      let context: ContextStateType | undefined;
       if (authenticated) {
-        const auth0User = await auth0FromHook.getUser();
+        user = await auth0FromHook.getUser();
         const tokenClaims = await auth0FromHook.getIdTokenClaims();
-        const context = tokenClaims[TOKEN_URL];
-        const token = {
-          exp: tokenClaims.exp || 0,
-          user: {
-            ...auth0User,
-            context,
-          },
+        context = tokenClaims[TOKEN_URL];
+        const expiration = (tokenClaims.exp || 0) * 1000;
+        claim = {
+          authenticated,
+          expiration,
+          darkMode,
+          email: tokenClaims.email,
+          context: JSON.stringify(context),
         };
-        setCookies(token);
-        dispatch(updateAuthentication({ authenticated: true, expiration: token.exp}));
-        dispatch(updateUser(token.user));
       } else {
-        setCookies();
-        dispatch(updateAuthentication({ authenticated: false, expiration: 0 }));
-        dispatch(updateUser({} as UserStateType));
+        claim = {
+          authenticated,
+          expiration: 0,
+          darkMode,
+        };
       }
-
+      dispatch(saveSession(claim, { ...user, context } ));
       dispatch(clearLoading());
     };
     initAuth0();
     // eslint-disable-next-line
-  }, []);
+  }, [darkMode]);
 
   const logout = async (...p: unknown[]) => {
     const logoutProps = {
@@ -94,9 +81,7 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
       returnTo: env.host,
     };
     await auth0Client.logout(logoutProps);
-    dispatch(updateAuthentication({ authenticated: false, expiration: 0 }));
-    dispatch(updateUser({} as UserStateType));
-    setCookies();
+    dispatch(saveSession({authenticated: false, expiration: 0}, {}));
   };
 
   const login = (props: RedirectLoginOptions) => {

@@ -1,15 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { Grid, Link } from '@material-ui/core';
+import { HeaderPropType } from '../../../../types/prop/resume/header';
 import { useStyles } from './index.styles';
 
-interface Props {
-  name: string;
-  address: string;
-  email: string;
-  phone: string;
-  displayPhone: boolean;
-}
-const ResumeHeader: FunctionComponent<Props> = ({ name, address, email, phone, displayPhone }) => {
+const ResumeHeader: FunctionComponent<HeaderPropType> = ({ name, address, email, phone, displayPhone }) => {
   const classes = useStyles();
   return (
     <Grid container>

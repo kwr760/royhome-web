@@ -1,16 +1,12 @@
 import { Avatar, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import React, { Dispatch, FunctionComponent, SetStateAction } from 'react';
+import React, { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
-import { isAuthenticated } from '../../../store/session/session.selector';
-import { getUser } from '../../../store/user/user.selector';
+import { NavBarMenuButtonPropType } from '../../../../types/prop/nav-bar/menu-button';
+import { isAuthenticated, getUser } from '../../../store/session/session.selector';
 import { useStyles } from './nav-bar-menu-button.styles';
 
-interface Props {
-  setAnchor:Dispatch<SetStateAction<null | HTMLElement>>;
-}
-
-export const NavBarMenuButton: FunctionComponent<Props> = ({ setAnchor }) => {
+export const NavBarMenuButton: FunctionComponent<NavBarMenuButtonPropType> = ({ setAnchor }) => {
   const classes = useStyles();
   const authenticated = useSelector(isAuthenticated);
   const user = useSelector(getUser);

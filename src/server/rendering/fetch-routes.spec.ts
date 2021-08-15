@@ -1,9 +1,9 @@
 import { matchPath } from 'react-router-dom';
 
-import { getResumeProxy } from '../proxy/resume.proxy';
+import { getResumeProxy } from '../proxy/get-resume.proxy';
 import { fetchRoutes } from './fetch-routes';
 
-jest.mock('../proxy/resume.proxy');
+jest.mock('../proxy/get-resume.proxy');
 
 describe('server/rendering/fetch-routes', () => {
   const email = 'kroy760@gmail.com';

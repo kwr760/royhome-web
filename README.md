@@ -80,25 +80,6 @@ I using ngnix to direct my request to the correct server.  `<royk.us|royhome.net
 blue/green environment mainly to limit the downtime when releasing.  The downtime currently is the time to bounce
 the ngnix server, very quick.  `api.<royk.us|royhome.net>` directs the requests to the API server.
 
-### headers
-
-I am using nginx to pass some information from the request to the server.  In short, I want to know which url the 
-browser is using for the request
-
-```text
-request_host
-request_full_uri
-request_uri
-request_addr
-server_addr
-server_name
-server_hostname
-time_iso8601
-```
-
-I want to know more information to try to split the session, say between tabs.  But so far I've only found solutions
-using the cookie to accomplish this.  For example, creating a new `session-id`.
-
 ## Production
 
 I using the linux systemd to start the web server as a service, so that reboot will handle the restart of the web

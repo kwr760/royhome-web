@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Container, Grid } from '@material-ui/core';
 
 import { useSelector } from 'react-redux';
-import { getUser } from '../../store/user/user.selector';
+import { getUser } from '../../store/session/session.selector';
 import { useStyles } from './index.styles';
 
 const Profile: FunctionComponent = () => {

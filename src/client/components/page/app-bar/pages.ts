@@ -1,4 +1,4 @@
-import { TabPageType } from '../../../../types/pages.types';
+import { TabPageType } from '../../../../types/object/tab-page';
 
 import { FiInfo, FiBookOpen, FiAlertTriangle, FiLayers } from 'react-icons/fi';
 

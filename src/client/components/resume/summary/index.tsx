@@ -1,11 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { Grid } from '@material-ui/core';
+import { SummaryPropType } from '../../../../types/prop/resume/summary';
 import { useStyles } from './index.styles';
 
-interface Props {
-  summary: string;
-}
-const ResumeSummary: FunctionComponent<Props> = ({ summary }) => {
+const ResumeSummary: FunctionComponent<SummaryPropType> = ({ summary }) => {
   const classes = useStyles();
   return (
     <Grid container>

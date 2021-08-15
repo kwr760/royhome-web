@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { getResumeProxy } from '../proxy/resume.proxy';
+import { getResumeProxy } from '../proxy/get-resume.proxy';
 import renderReact from './render-react';
 
 jest.mock('parseurl');
 jest.mock('@loadable/server');
-jest.mock('../proxy/resume.proxy');
+jest.mock('../proxy/get-resume.proxy');
 
 describe('server/rendering/render-react', () => {
   const resume = {
@@ -19,6 +19,7 @@ describe('server/rendering/render-react', () => {
     const res = {
       send: jest.fn(),
       sendStatus: jest.fn(),
+      cookie: jest.fn(),
     } as unknown as Response;
     (getResumeProxy as jest.Mock).mockResolvedValue(resume);
 

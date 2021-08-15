@@ -6,8 +6,7 @@ import { BrowserRouter as Router, Route, RouteComponentProps } from 'react-route
 import { Provider } from 'react-redux';
 import { loadableReady } from '@loadable/component';
 
-import { Store } from 'redux';
-import { StateType } from '../types/state.types';
+import { IndexPropType } from '../types/prop';
 
 import Auth0Provider from '../util/auth0/auth0-spa';
 import { config } from '../util/auth0/auth0.constants';
@@ -16,16 +15,8 @@ import Theme from './Theme';
 import createStore from './store/create-store';
 import { removeJssStyle } from './util/remove-jss-style';
 
-declare global {
-  interface Window {
-    __PRELOADED_STATE__?: StateType;
-  }
-}
 
-interface Props {
-  store: Store;
-}
-const Main: FunctionComponent<Props> = ({ store }) => {
+const Main: FunctionComponent<IndexPropType> = ({ store }) => {
   React.useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side');
     removeJssStyle(jssStyles);

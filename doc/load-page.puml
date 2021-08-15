@@ -1,0 +1,42 @@
+@startuml
+title Page Load
+
+actor user
+participant browser
+participant "web-server" as web
+participant "api-server" as api
+participant "auth0" as auth
+
+autonumber
+autoactivate on
+
+user -> browser : load page
+
+browser -> web : get page with ssr
+
+group load data if needed
+alt if protected and\n cookie says authorized
+web -> api : get data
+return
+else if unprotected
+web -> api : get data
+return
+end
+end
+
+return
+
+browser -> auth : check if authorized
+
+return
+
+alt unprotected or\n authorized
+autoactivate off
+browser -> browser : render
+else unauthorized
+browser -> browser : render blank
+end
+
+return
+
+@enduml

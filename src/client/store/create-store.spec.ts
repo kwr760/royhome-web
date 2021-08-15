@@ -11,7 +11,6 @@ describe('client/store/configure', () => {
         isLoading: false,
         darkMode: DarkModes.CLEAR_MODE,
       },
-      user: {},
       resume: {
         email: 'kroy760@gmail.com',
         resumes: {},
@@ -33,8 +32,8 @@ describe('client/store/configure', () => {
         expiration: -1,
         isLoading: false,
         darkMode: DarkModes.CLEAR_MODE,
+        user: {},
       },
-      user: {},
       resume: {
         email: 'kroy760@gmail.com',
       },

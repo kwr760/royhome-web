@@ -1,5 +1,5 @@
+import { UserStateType } from '../../../../types/state/user';
 import hasNeededRole from '../../../../util/auth0/has-needed-role';
-import { UserStateType } from '../../../../types/state.types';
 
 export const shouldDisplayTab = (authenticated: boolean, checkRole: string, user: UserStateType): boolean => {
   if (checkRole.length > 0) {

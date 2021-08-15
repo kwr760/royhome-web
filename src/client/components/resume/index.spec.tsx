@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { render, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { Auth0ContextType } from '../../../types/auth0.types';
+import { Auth0ContextType } from '../../../types/auth0';
 
 import { Auth0Context } from '../../../util/auth0/auth0-context';
 import { fetchResume } from '../../store/resume/resume.slice';

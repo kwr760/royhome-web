@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Auth0ContextType } from '../../types/auth0.types';
+import { Auth0ContextType } from '../../types/auth0';
 import { noop } from '../noop';
 
 import { Auth0Context, useAuth0 } from './auth0-context';

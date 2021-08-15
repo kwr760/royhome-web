@@ -7,7 +7,7 @@ import '@testing-library/jest-dom/extend-expect';
 
 import { Provider } from 'react-redux';
 import { Store } from 'redux';
-import { StateType } from '../../../types/state.types';
+import { StateType } from '../../../types/state/state';
 import themeLight from '../../theme-light';
 import Profile from './index';
 import createStore from '../../store/create-store';
@@ -30,11 +30,11 @@ describe('client/components/resume/profile', () => {
         expiration: 1,
         darkMode: 'dark-mode',
         authenticated: true,
-      },
-      user: {
-        nickname: 'Nickname',
-        picture: 'Picture',
-        email: 'User Email',
+        user: {
+          nickname: 'Nickname',
+          picture: 'Picture',
+          email: 'User Email',
+        },
       },
       resume: {
         email: 'Resume Email',

@@ -1,6 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SessionStateType } from '../../../types/state.types';
+import { SessionStateType } from '../../../types/state/session';
+import { UserStateType } from '../../../types/state/user';
+import { UpdateSessionType, SaveSessionType } from '../../../types/store/session';
 import { DarkModes } from './session.constants';
+import { AppThunk } from '../create-store';
+import { callApi } from '../../util/api/call-api';
+import { ApiConfigs } from '../../../config/api';
+import logger from '../../util/logger';
 
 const initialState: SessionStateType = {
   authenticated: false,
@@ -29,11 +35,60 @@ const sessionSlice = createSlice({
     updateLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
-    updateDarkMode: (state, action: PayloadAction<string>) => {
-      state.darkMode = action.payload;
+    // updateDarkMode: (state, action: PayloadAction<string>) => {
+    //   state.darkMode = action.payload;
+    // },
+    updateSession: (state, action: PayloadAction<UpdateSessionType>) => {
+      const user = action.payload.user || state.user;
+      Object.assign(state, {
+        ...action.payload.session,
+        user,
+      });
     },
   },
 });
 
-export const { updateAuthentication, updateLoading, updateDarkMode, setLoading, clearLoading } = sessionSlice.actions;
+export const updateDarkMode = (darkMode: string): AppThunk => async dispatch => {
+  const {updateSession} = sessionSlice.actions;
+  try {
+    const { data } = await callApi(ApiConfigs.SAVE_SESSION, {
+      payload: {
+        darkMode,
+      },
+    });
+    const current = Date.now();
+    const payload = {
+      session: {
+        ...data.output,
+        authenticated: data.output.expiration > current,
+      },
+    };
+    dispatch(updateSession(payload));
+  } catch (err) {
+    logger.error(err.toString());
+  }
+};
+export const saveSession = (claim: SaveSessionType, user: UserStateType): AppThunk => async dispatch => {
+  const {updateSession} = sessionSlice.actions;
+  try {
+    const { data } = await callApi(ApiConfigs.SAVE_SESSION, {
+      payload: {
+        ...claim,
+      },
+    });
+    const current = Date.now();
+    const payload = {
+      session: {
+        ...data.output,
+        authenticated: data.output.expiration > current,
+      },
+      user,
+    };
+    dispatch(updateSession(payload));
+  } catch (err) {
+    logger.error(err.toString());
+  }
+};
+
+export const {updateAuthentication, updateLoading, setLoading, clearLoading} = sessionSlice.actions;
 export default sessionSlice.reducer;

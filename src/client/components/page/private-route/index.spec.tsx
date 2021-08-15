@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { Store } from 'redux';
-import { Auth0ContextType } from '../../../../types/auth0.types';
+import { Auth0ContextType } from '../../../../types/auth0';
 import { Auth0Context } from '../../../../util/auth0/auth0-context';
 import hasNeededRole from '../../../../util/auth0/has-needed-role';
 import PrivateRoute from './index';

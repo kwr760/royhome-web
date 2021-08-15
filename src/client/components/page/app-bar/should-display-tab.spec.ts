@@ -1,4 +1,4 @@
-import { UserStateType } from '../../../../types/state.types';
+import { UserStateType } from '../../../../types/state/user';
 import { shouldDisplayTab } from './should-display-tab';
 
 describe('web/client/components/page/app-bar/should-display-tab', () => {

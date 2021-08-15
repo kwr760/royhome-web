@@ -1,8 +1,8 @@
 import { OWNER, ROLES } from './role.constants';
-import { ContextType } from '../../types/context.types';
+import { ContextStateType } from '../../types/state/context';
 
-const hasNeededRole = (neededRole: string, context: ContextType = { role: '' }): boolean => {
-  const { role } = context;
+const hasNeededRole = (neededRole: string, context: ContextStateType = { role: '' }): boolean => {
+  const { role = ''} = context;
 
   let grantedRoles = role.split(' ');
   if (grantedRoles.includes(OWNER)) {

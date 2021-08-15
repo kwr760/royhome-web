@@ -1,21 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
-interface CustomOptions {
-  boxShadow?: string;
-  backgroundGradient?: string;
-}
-interface Custom {
-  boxShadow?: string;
-  backgroundGradient?: string;
-}
-declare module '@material-ui/core/styles/createMuiTheme' {
-  interface ThemeOptions {
-    custom?: CustomOptions;
-  }
-  interface Theme {
-    custom: Custom;
-  }
-}
 
 const themeLight = createMuiTheme({
   palette: {

@@ -1,21 +1,13 @@
-import { LoadableComponent } from '@loadable/component';
-import React, { ElementType, FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { Route } from 'react-router-dom';
+import { PrivateRoutePropType } from '../../../../types/prop/private-route';
+import { UserStateType } from '../../../../types/state/user';
 
 import hasNeededRole from '../../../../util/auth0/has-needed-role';
-import { UserStateType } from '../../../../types/state.types';
-import { isAuthenticated } from '../../../store/session/session.selector';
-import { getUser } from '../../../store/user/user.selector';
+import { isAuthenticated, getUser } from '../../../store/session/session.selector';
 
-interface PrivateRouteProps {
-  component: FunctionComponent | LoadableComponent<unknown> | ElementType;
-  path: string;
-  url?: string;
-  userRole?: string;
-}
-
-const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({
+const PrivateRoute: FunctionComponent<PrivateRoutePropType> = ({
   component: Component, path, userRole = '', ...rest
 }) => {
   const authenticated = useSelector(isAuthenticated);
