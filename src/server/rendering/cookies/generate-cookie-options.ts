@@ -7,10 +7,13 @@ export const generateCookieOptions = (): CookieOptions => {
   const { host } = env;
   const { hostname } = url.parse(host);
 
-  return {
+  const options = {
     maxAge: getMaxAgeInDays(365),
     httpOnly: true,
     secure: true,
     domain: hostname || host,
   };
+
+  console.log(JSON.stringify(options));
+  return options;
 };
