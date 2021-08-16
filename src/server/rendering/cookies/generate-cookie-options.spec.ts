@@ -1,26 +1,12 @@
+import { Request } from 'express';
 import { generateCookieOptions } from './generate-cookie-options';
-import env from '../../../config';
 
 describe('server/rendering/cookies/generate-cookie-options', () => {
+  const req = {
+    header: jest.fn(),
+  };
   it('should create options - no host', () => {
     // Arrange
-    env.host = '';
-    const expected = {
-      domain: '',
-      httpOnly: true,
-      maxAge: 31536000000,
-      secure: true,
-    };
-
-    // Act
-    const result = generateCookieOptions();
-
-    // Assert
-    expect(result).toEqual(expected);
-  });
-  it('should create options with host', () => {
-    // Arrange
-    env.host = 'https://royk.us';
     const expected = {
       domain: 'royk.us',
       httpOnly: true,
@@ -29,7 +15,23 @@ describe('server/rendering/cookies/generate-cookie-options', () => {
     };
 
     // Act
-    const result = generateCookieOptions();
+    const result = generateCookieOptions(req as unknown as Request);
+
+    // Assert
+    expect(result).toEqual(expected);
+  });
+  it('should create options with host', () => {
+    // Arrange
+    const expected = {
+      domain: 'royhome.net',
+      httpOnly: true,
+      maxAge: 31536000000,
+      secure: true,
+    };
+    req.header = jest.fn(() => 'royhome.net');
+
+    // Act
+    const result = generateCookieOptions(req as unknown as Request);
 
     // Assert
     expect(result).toEqual(expected);

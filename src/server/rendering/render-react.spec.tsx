@@ -15,7 +15,8 @@ describe('server/rendering/render-react', () => {
     const req = {
       url: '/',
       cookies: {},
-    } as Request;
+      header: jest.fn(),
+    };
     const res = {
       send: jest.fn(),
       sendStatus: jest.fn(),
@@ -24,7 +25,7 @@ describe('server/rendering/render-react', () => {
     (getResumeProxy as jest.Mock).mockResolvedValue(resume);
 
     // Act
-    await renderReact(req, res);
+    await renderReact(req as unknown as Request, res);
 
     // Assert
     expect(res.send).toMatchSnapshot();
