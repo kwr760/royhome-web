@@ -54,8 +54,9 @@ const renderReact = async (req: Request, res: Response): Promise<void> => {
     .replace('{preloadedState}', preloadedState);
 
   const {browserId: resBrowserId, sessionId: resSessionId} = generateCookieIds(browserId, sessionId);
-  res.cookie(BROWSER_ID, resBrowserId, generateCookieOptions());
-  res.cookie(SESSION_ID, resSessionId, generateCookieOptions());
+  const cookieOptions = generateCookieOptions(req);
+  res.cookie(BROWSER_ID, resBrowserId, cookieOptions);
+  res.cookie(SESSION_ID, resSessionId, cookieOptions);
   res.send(responseHtml);
 };
 
