@@ -6,6 +6,7 @@ import loadable from '@loadable/component';
 
 import NavBar from './components/page/app-bar';
 import Footer from './components/page/footer';
+import CookieBanner from './components/page/cookie-banner';
 import Loading from './components/page/loading';
 import PrivateRoute from './components/page/private-route';
 import ResumePage from './components/resume';
@@ -55,6 +56,7 @@ const App: FunctionComponent<RouteComponentProps> = () => {
           </Switch>
         </Container>
         <Footer />
+        <CookieBanner />
       </div>
     </>
   );
