@@ -33,8 +33,11 @@ For the purposes of this Privacy Policy:
 While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:
 
 - Usage Data
+- Dark-Mode Selection
+- Parts of your Public Data you agreed to share.
+
 ### Usage Data
-Usage Data is collected automatically when using the Service.
+Usage Data is being collected automatically when using the Service.
 
 Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.
 
