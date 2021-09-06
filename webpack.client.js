@@ -51,7 +51,7 @@ export const getClientConfig = (target) => {
     mode: isDevMode ? 'development' : 'production',
     target,
     devtool: 'source-map',
-    entry: `./src/client/index-${target}.tsx`,
+    entry: `./src/index-${target}.tsx`,
     module: {
       rules: [
         {
@@ -135,8 +135,8 @@ export const getClientConfig = (target) => {
       new WebpackMd5Hash(),
       new CopyPlugin({
         patterns: [
-          { from: 'src/client/assets/favicon.ico', to: './favicon.ico' },
-          { from: 'src/client/assets/images/gold-on-blue.png', to: './favicon.png' },
+          { from: 'src/assets/favicon.ico', to: './favicon.ico' },
+          { from: 'src/assets/images/gold-on-blue.png', to: './favicon.png' },
         ],
       }),
       new LodashModuleReplacementPlugin(),

@@ -8,7 +8,7 @@ export const getServerConfig = () => {
     mode: 'production',
     target: 'node',
     devtool: 'source-map',
-    entry: './src/server/index.ts',
+    entry: './src/server.ts',
     module: {
       rules: [
         {

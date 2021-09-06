@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import createAuth0Client, { Auth0Client, GetTokenSilentlyOptions, RedirectLoginOptions } from '@auth0/auth0-spa-js';
-import { getDarkMode } from '../../client/store/session/session.selector';
+import { getDarkMode } from '../../store/session/session.selector';
 
 import env from '../../config';
 import { ContextStateType } from '../../types/state/context';
@@ -9,7 +9,7 @@ import { UserStateType } from '../../types/state/user';
 import { SaveSessionType } from '../../types/store/session';
 import { TOKEN_URL } from './role.constants';
 import { Auth0Context } from './auth0-context';
-import { setLoading, clearLoading, saveSession } from '../../client/store/session/session.slice';
+import { setLoading, clearLoading, saveSession } from '../../store/session/session.slice';
 import { Auth0ProviderType } from '../../types/auth0';
 import { noop } from '../noop';
 
