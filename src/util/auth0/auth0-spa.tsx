@@ -45,17 +45,15 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
         onRedirectCallback(appState);
       }
 
-      const authenticated = await auth0FromHook.isAuthenticated();
       let claim: SaveSessionType;
-      let user: UserStateType = {};
+      const user: UserStateType = await auth0FromHook.getUser();
       let context: ContextStateType | undefined;
-      if (authenticated) {
-        user = await auth0FromHook.getUser();
+      if (user) {
         const tokenClaims = await auth0FromHook.getIdTokenClaims();
         context = tokenClaims[TOKEN_URL];
         const expiration = (tokenClaims.exp || 0) * 1000;
         claim = {
-          authenticated,
+          authenticated: true,
           expiration,
           darkMode,
           email: tokenClaims.email,
@@ -63,7 +61,7 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
         };
       } else {
         claim = {
-          authenticated,
+          authenticated: false,
           expiration: 0,
           darkMode,
         };
