@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { NOT_FOUND } from 'http-status-codes';
 
 import env from '../../config';
 import { ApiConfigs } from '../../config/api';
@@ -11,15 +12,15 @@ export const getSessionProxy = async (sessionId: string): Promise<SessionApiType
   const path = `${config.path}`.replace('{sessionId}', sessionId);
   const url = getParsedUrl(apiUrl, path);
 
-  let response, data;
+  let response, data = {};
   // eslint-disable-next-line no-useless-catch
   try {
     response = await axios.get(url);
     data = response.data.output;
   } catch (err) {
-    // if (err.response.status !== NOT_FOUND) {
-    throw err;
-    // }
+    if (err.response.status !== NOT_FOUND) {
+      throw err;
+    }
   }
   return data;
 };

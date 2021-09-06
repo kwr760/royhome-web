@@ -11,8 +11,14 @@ const populateState = async (path: string, sessionId?: string): Promise<StateTyp
   const data = (activeRoute && activeRoute.fetchData) ? await activeRoute.fetchData() : {};
   let session: SessionStateType;
   if (sessionId) {
-    const {browserId, expiration, darkMode, user: sessionUser } = await getSessionProxy(sessionId);
-    const {userId, email, context} = sessionUser || { userId: undefined, email: undefined, context: undefined };
+    const currentSession = await getSessionProxy(sessionId);
+    const {
+      browserId = '',
+      expiration = 0,
+      darkMode = DarkModes.CLEAR_MODE,
+      user: sessionUser = { userId: undefined, email: undefined, context: undefined },
+    } = currentSession;
+    const {userId, email, context} = sessionUser;
     const current = Date.now();
     session = {
       sessionId,

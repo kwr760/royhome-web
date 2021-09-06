@@ -18,7 +18,7 @@ describe('server/rendering/populate-state', () => {
     const session = {
       browserId: 'browser-id',
       expiration: 1000,
-      darkMode: 'dark-node',
+      darkMode: DarkModes.DARK_MODE,
       user: {
         userId: 'user-id',
         email: 'person@email.com',
@@ -31,7 +31,7 @@ describe('server/rendering/populate-state', () => {
       session: {
         authenticated: false,
         'browserId': 'browser-id',
-        'darkMode': 'dark-node',
+        'darkMode': DarkModes.DARK_MODE,
         'expiration': 1000,
         'sessionId': 'session-id',
         user: {
@@ -58,19 +58,21 @@ describe('server/rendering/populate-state', () => {
     // Arrange
     const url = '/notfound';
     const sessionId = 'session-id';
-    const session = {
-      browserId: 'browser-id',
-      darkMode: 'dark-node',
-    };
+    const session = {};
     (getResumeProxy as jest.Mock).mockResolvedValueOnce(resume);
     (getSessionProxy as jest.Mock).mockResolvedValueOnce(session);
     const expected = {
       session: {
         authenticated: false,
-        browserId: 'browser-id',
-        darkMode: 'dark-node',
+        browserId: '',
+        darkMode: DarkModes.CLEAR_MODE,
         sessionId: 'session-id',
-        user: {},
+        expiration: 0,
+        user: {
+          context: undefined,
+          email: undefined,
+          userId: undefined,
+        },
       },
       resume: {
         email: '',

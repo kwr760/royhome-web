@@ -28,6 +28,8 @@ const Main: FunctionComponent<IndexPropType> = ({ store }) => {
         domain={config.domain}
         client_id={config.clientId}
         redirect_uri={window.location.origin}
+        useRefreshTokens={true}
+        cacheLocation="localstorage"
       >
         <Router>
           <Route component={(props: RouteComponentProps) => <Theme {...props} />} />

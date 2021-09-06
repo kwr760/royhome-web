@@ -120,7 +120,7 @@ describe('util/auth0/react-auth0-spa', () => {
       },
     });
     (createAuth0Client as jest.Mock).mockResolvedValue({
-      isAuthenticated: jest.fn(() => false),
+      getUser: jest.fn(() => {}),
       loginWithRedirect: jest.fn(() => ({})),
       getTokenSilently: jest.fn(() => ({})),
       handleRedirectCallback: jest.fn(() => ({ test: 'kroy' })),
