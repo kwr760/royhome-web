@@ -16,9 +16,9 @@ const populateState = async (path: string, sessionId?: string): Promise<StateTyp
       browserId = '',
       expiration = 0,
       darkMode = DarkModes.CLEAR_MODE,
-      user: sessionUser = { userId: undefined, email: undefined, context: undefined },
+      user: sessionUser,
     } = currentSession;
-    const {userId, email, context} = sessionUser;
+    const {userId, email, context} = sessionUser || {};
     const current = Date.now();
     session = {
       sessionId,
