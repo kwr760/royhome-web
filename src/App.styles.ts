@@ -7,7 +7,6 @@ export const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.primary.dark,
       background: theme.palette.background.paper,
       boxShadow: theme.custom.boxShadow,
-      // paddingTop: '1rem',
       padding: 0,
       flexGrow: 1,
       overflow: 'auto',
