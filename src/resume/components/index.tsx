@@ -1,11 +1,9 @@
-import { Container } from '@material-ui/core';
 import { isEmpty } from 'lodash';
 import React, { FunctionComponent, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ResumeType } from '../../types/object/resume';
 
 import { useAuth0 } from '../../util/auth0/auth0-context';
-import { useStyles } from './index.styles';
 import Resume from './resume';
 import { fetchResume } from '../store/resume.slice';
 import { getResume } from '../store/resume.selector';
@@ -17,7 +15,6 @@ const ResumePage: FunctionComponent = () => {
   const dispatch = useDispatch();
   const loading = useSelector(isLoading);
   const isResumeEmpty = isEmpty(resume);
-  const classes = useStyles();
 
   useEffect(() => {
     const callResumeApi = async () => {
@@ -29,9 +26,7 @@ const ResumePage: FunctionComponent = () => {
   }, [isResumeEmpty, dispatch, getToken]);
 
   return (
-    loading ? null : <Container className={classes.container}>
-      <Resume resume={resume} />
-    </Container>
+    loading ? null : <Resume resume={resume} />
   );
 };
 
