@@ -4,6 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
+      padding: theme.spacing(3),
+    },
+    grid: {
       color: theme.palette.primary.dark,
       alignItems: 'center',
       textAlign: 'center',

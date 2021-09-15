@@ -17,7 +17,7 @@ const BottomBar: FunctionComponent = () => {
   const id = open ? 'github-repo' : undefined;
 
   return (
-    <Container className={classes.container}>
+    <Container className={classes.grid}>
       <footer className={classes.banner}>
         <Box className={classes.box}>
           <Typography

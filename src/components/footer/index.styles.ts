@@ -4,7 +4,7 @@ import { emphasize } from '@material-ui/core/styles/colorManipulator';
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    container: {
+    grid: {
       paddingRight: 0,
       paddingLeft: 0,
       '@media print': {
