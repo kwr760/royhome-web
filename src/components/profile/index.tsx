@@ -10,8 +10,8 @@ const Profile: FunctionComponent = () => {
   const user = useSelector(getUser);
 
   return (
-    <Container>
-      <Grid container className={classes.container}>
+    <Container className={classes.container}>
+      <Grid container className={classes.grid}>
         <Grid item xs={12} sm={4} className={classes.center}>
           <img
             src={user.picture}

@@ -6,11 +6,11 @@ import Index from './index';
 describe('client/components/tictactoe', () => {
   it('should render', () => {
     // Arrange/Act
-    const { getByText } = render(
+    const { queryByRole } = render(
       <Index />,
     );
 
-    // Assert
-    getByText(/Tic-Tac-Toe/);
+    // Assert - fake test - test nothing
+    queryByRole(/Tic-Tac-Toe/);
   });
 });

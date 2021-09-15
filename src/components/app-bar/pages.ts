@@ -22,7 +22,7 @@ export const pages: TabPageType[] = [
     tab: 2,
   },
   {
-    name: 'Work In Progress',
+    name: 'Tic-Tac-Toe',
     path: '/tictactoe',
     icon: FiAlertTriangle,
     role: 'engineer',
