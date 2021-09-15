@@ -34,7 +34,7 @@ const ResumePage: FunctionComponent<ResumePropType> = ({ resume = {} as ResumeTy
   } = resume;
 
   return (
-    <Container className={classes.grid}>
+    <Container className={classes.container}>
       <ResumeHeader name={name} address={address} email={email} phone={phone} displayPhone={displayPhone} />
       <ResumeSummary summary={summary} />
       <ResumeSkills skillGroups={skillGroups} />

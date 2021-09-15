@@ -20,7 +20,7 @@ const NavBar: FunctionComponent = () => {
   const [anchor, setAnchor] = React.useState<null | HTMLElement>(null);
 
   return (
-    <Container className={classes.grid}>
+    <Container className={classes.container}>
       <div className={classes.grow}>
         <AppBar className={classes.banner} position="static">
           <Toolbar>
