@@ -2,10 +2,10 @@ import { AxiosResponse } from 'axios';
 import { AnyAction } from 'redux';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import { ResumeStateType } from '../../types/state/resume';
+import { ResumeStateType } from '../../../types/state/resume';
 
 import resumeReducer, { fetchResume } from './resume.slice';
-import { callApi } from '../../util/api/call-api';
+import { callApi } from '../../../util/api/call-api';
 
 jest.mock('../../util/api/call-api');
 

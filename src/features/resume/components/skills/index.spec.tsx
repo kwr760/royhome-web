@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { SkillGroupType } from '../../../types/object/resume';
+import { SkillGroupType } from '../../../../types/object/resume';
 
 import ResumeSkills from './index';
 

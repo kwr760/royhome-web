@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Grid } from '@material-ui/core';
-import { SummaryPropType } from '../../../types/prop/resume/summary';
+import { SummaryPropType } from '../../../../types/prop/resume/summary';
 import { useStyles } from './index.styles';
 
 const ResumeSummary: FunctionComponent<SummaryPropType> = ({ summary }) => {

@@ -10,10 +10,10 @@ import App from './App';
 import Loading from './components/loading';
 import NavBar from './components/app-bar';
 import Footer from './components/footer';
-import Resume from './resume/components';
+import Resume from './features/resume/components';
 import About from './components/about';
 import Author from './components/author';
-import TicTacToe from './tictactoe/components';
+import TicTacToe from './features/tictactoe/components';
 import createStore from './store/create-store';
 import themeLight from './theme-light';
 

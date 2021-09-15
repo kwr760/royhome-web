@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Grid } from '@material-ui/core';
-import { EducationPropType } from '../../../types/prop/resume/education';
+import { EducationPropType } from '../../../../types/prop/resume/education';
 import dateFormat from 'dateformat';
 import { useStyles } from './index.styles';
 

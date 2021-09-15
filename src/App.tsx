@@ -9,7 +9,7 @@ import Footer from './components/footer';
 import CookieBanner from './components/cookie-banner';
 import Loading from './components/loading';
 import PrivateRoute from './components/private-route';
-import ResumePage from './resume/components';
+import ResumePage from './features/resume/components';
 import { isLoading  } from './store/session/session.selector';
 import { useStyles } from './App.styles';
 
@@ -17,7 +17,7 @@ const AboutPage = /* #__LOADABLE__ */ () => import(/* webpackPrefetch: true */ '
 const AuthorPage = /* #__LOADABLE__ */ () => import(/* webpackPrefetch: true */ './components/author');
 const PrivacyPage = /* #__LOADABLE__ */ () => import(/* webpackPrefetch: true */ './components/privacy');
 const ProfilePage = /* #__LOADABLE__ */ () => import(/* webpackPrefetch: true */ './components/profile');
-const TicTacToePage = /* #__LOADABLE__ */ () => import(/* webpackPrefetch: true */ './tictactoe/components');
+const TicTacToePage = /* #__LOADABLE__ */ () => import(/* webpackPrefetch: true */ './features/tictactoe/components');
 const AboutLoadable = loadable(AboutPage, { ssr: true });
 const AuthorLoadable = loadable(AuthorPage, { ssr: true });
 const PrivacyLoadable = loadable(PrivacyPage, { ssr: true });

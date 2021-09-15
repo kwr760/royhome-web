@@ -2,7 +2,7 @@ import dateFormat from 'dateformat';
 import React, { FunctionComponent } from 'react';
 import { Grid } from '@material-ui/core';
 import { isEmpty } from 'lodash';
-import { ExperiencePropType } from '../../../types/prop/resume/experience';
+import { ExperiencePropType } from '../../../../types/prop/resume/experience';
 
 import { useStyles } from './index.styles';
 

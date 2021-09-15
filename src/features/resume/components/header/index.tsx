@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Grid, Link } from '@material-ui/core';
-import { HeaderPropType } from '../../../types/prop/resume/header';
+import { HeaderPropType } from '../../../../types/prop/resume/header';
 import { useStyles } from './index.styles';
 
 const ResumeHeader: FunctionComponent<HeaderPropType> = ({ name, address, email, phone, displayPhone }) => {
