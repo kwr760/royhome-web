@@ -24,10 +24,10 @@ jest.mock('axios', () => ({
 jest.mock('./components/loading');
 jest.mock('./components/app-bar');
 jest.mock('./components/footer');
-jest.mock('./resume/components');
+jest.mock('./features/resume/components');
 jest.mock('./components/about');
 jest.mock('./components/author');
-jest.mock('./tictactoe/components');
+jest.mock('./features/tictactoe/components');
 
 describe('src/client/App', () => {
   const getApp = (store: Store, props: RouteComponentProps) => (
