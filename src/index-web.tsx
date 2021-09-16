@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, RouteComponentProps } from 'react-route
 import { Provider } from 'react-redux';
 import { loadableReady } from '@loadable/component';
 
-import { IndexPropType } from './types/prop';
+import { IndexPropType } from './type/prop';
 
 import Auth0Provider from './util/auth0/auth0-spa';
 import { config } from './util/auth0/auth0.constants';

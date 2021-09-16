@@ -16,7 +16,7 @@
     "lib": ["es6", "dom"],
     "typeRoots" : [
       "node_modules/@types",
-      "src/types"
+      "src/type"
     ],
     "removeComments": true,
     "noImplicitReturns": true,
@@ -27,13 +27,13 @@
     "strict": true
   },
   "include": [
-    "src/types",
+    "src/type",
     "src/**/*",
     "src/**/**/*"
   ],
   "exclude": [
     "node_modules",
-    "src/**/__mocks__/**"
+    "test/**/__mocks__/**"
   ]
 }
 

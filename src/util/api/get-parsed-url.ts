@@ -1,4 +1,4 @@
-import { Params } from '../../types/api/api';
+import { Params } from '../../type/api/api';
 
 export const getParsedUrl = (baseUrl: string, path: string, params: Params = {}): string => {
   let parsedUrl = `${baseUrl}${path}`;

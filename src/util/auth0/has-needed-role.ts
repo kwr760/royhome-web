@@ -1,5 +1,5 @@
 import { OWNER, ROLES } from './role.constants';
-import { ContextStateType } from '../../types/state/context';
+import { ContextStateType } from '../../type/state/context';
 
 const hasNeededRole = (neededRole: string, context: ContextStateType = { role: '' }): boolean => {
   const { role = ''} = context;

@@ -14,13 +14,13 @@ module.exports = {
       testEnvironment: 'jsdom',
       verbose: true,
       testMatch: [
-        '**/src/**/?(*.)spec.ts?(x)',
+        '**/test/**/?(*.)spec.ts?(x)',
       ],
       transform: {
         '^.+\\.tsx?$': 'ts-jest',
       },
       moduleNameMapper: {
-        '\\.(svg|md|png)$': '<rootDir>/src/mocks/file.ts',
+        '\\.(svg|md|png)$': '<rootDir>/test/mock/file.ts',
         '\\.(css|scss)$': 'identity-obj-proxy',
       },
       modulePathIgnorePatterns: commonIgnoreDirs,

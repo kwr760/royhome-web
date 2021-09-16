@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Auth0ContextType } from '../../types/auth0';
+import { Auth0ContextType } from '../../type/auth0';
 import { noop } from '../noop';
 
 const initialContext = {

@@ -1,4 +1,4 @@
-import { ResumeFetchType, RouteFetchType } from '../types/server/fetch-routes';
+import { ResumeFetchType, RouteFetchType } from '../type/server/fetch-routes';
 import { getResumeProxy } from '../proxy/get-resume.proxy';
 
 export const fetchRoutes: RouteFetchType[] = [

@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { StateType } from '../../types/state/state';
+import { StateType } from '../../type/state/state';
 import { DarkModes } from './session.constants';
 
 export const isAuthenticated = createSelector(
