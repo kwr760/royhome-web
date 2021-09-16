@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { Container } from '@material-ui/core';
-import { ResumePropType } from '../../../../type/prop/resume/resume';
+import { ResumePropType } from '../../type/prop/resume/resume';
 import {
   EducationType,
   ExperienceType,
   ResumeType,
   SkillGroupType,
   ProjectType,
-} from '../../../../type/object/resume';
+} from '../../type/object/resume';
 
 import ResumeHeader from '../header';
 import ResumeSkills from '../skills';

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AnyAction } from 'redux';
-import { ResumeStateType } from '../../../type/state/resume';
+import { ResumeStateType } from '../type/state/resume';
 import { callApi } from '../../../util/api/call-api';
 import { ApiConfigs } from '../../../config/api';
 import { setLoading, clearLoading } from '../../../store/session/session.slice';

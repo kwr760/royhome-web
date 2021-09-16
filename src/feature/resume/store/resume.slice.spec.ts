@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { AnyAction } from 'redux';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import { ResumeStateType } from '../../../type/state/resume';
+import { ResumeStateType } from '../type/state/resume';
 
 import resumeReducer, { fetchResume } from './resume.slice';
 import { callApi } from '../../../util/api/call-api';

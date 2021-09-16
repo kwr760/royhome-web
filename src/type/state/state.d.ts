@@ -1,4 +1,4 @@
-import { ResumeStateType } from './resume';
+import { ResumeStateType } from '../../feature/resume/type/state/resume';
 import { SessionStateType } from './session';
 
 export interface StateType {

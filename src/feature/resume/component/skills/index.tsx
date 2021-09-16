@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Grid } from '@material-ui/core';
-import { SkillsPropType } from '../../../../type/prop/resume/skills';
+import { SkillsPropType } from '../../type/prop/resume/skills';
 
 import { useStyles } from './index.styles';
 

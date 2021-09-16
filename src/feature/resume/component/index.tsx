@@ -2,7 +2,7 @@ import { Container } from '@material-ui/core';
 import { isEmpty } from 'lodash';
 import React, { FunctionComponent, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ResumeType } from '../../../type/object/resume';
+import { ResumeType } from '../type/object/resume';
 
 import { useAuth0 } from '../../../util/auth0/auth0-context';
 import { useStyles } from './index.styles';
