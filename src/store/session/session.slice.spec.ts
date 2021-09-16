@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { AnyAction } from 'redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { SessionStateType } from '../../types/state/session';
+import { SessionStateType } from '../../type/state/session';
 import { callApi } from '../../util/api/call-api';
 import { DarkModes } from './session.constants';
 import sessionReducer, {

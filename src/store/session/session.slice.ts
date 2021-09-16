@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SessionStateType } from '../../types/state/session';
-import { UserStateType } from '../../types/state/user';
-import { UpdateSessionType, SaveSessionType } from '../../types/store/session';
+import { SessionStateType } from '../../type/state/session';
+import { UserStateType } from '../../type/state/user';
+import { UpdateSessionType, SaveSessionType } from '../../type/store/session';
 import { DarkModes } from './session.constants';
 import { AppThunk } from '../create-store';
 import { callApi } from '../../util/api/call-api';

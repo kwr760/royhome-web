@@ -1,6 +1,6 @@
 import { Response, NextFunction } from 'express';
 import { UNAUTHORIZED } from 'http-status-codes';
-import { TokenRequest } from '../types/token';
+import { TokenRequest } from '../type/token';
 
 import { TOKEN_URL } from '../util/auth0/role.constants';
 import checkRole from './check-role';

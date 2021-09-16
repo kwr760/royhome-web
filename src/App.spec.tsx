@@ -7,13 +7,13 @@ import { Store } from 'redux';
 
 import { Auth0Context } from './util/auth0/auth0-context';
 import App from './App';
-import Loading from './components/loading';
-import NavBar from './components/app-bar';
-import Footer from './components/footer';
-import Resume from './features/resume/components';
-import About from './components/about';
-import Author from './components/author';
-import TicTacToe from './features/tictactoe/components';
+import Loading from './component/loading';
+import NavBar from './component/app-bar';
+import Footer from './component/footer';
+import Resume from './feature/resume/component';
+import About from './component/about';
+import Author from './component/author';
+import TicTacToe from './feature/tictactoe/component';
 import createStore from './store/create-store';
 import themeLight from './theme-light';
 
@@ -21,13 +21,13 @@ jest.mock('@loadable/component');
 jest.mock('axios', () => ({
   put: jest.fn().mockResolvedValue({}),
 }));
-jest.mock('./components/loading');
-jest.mock('./components/app-bar');
-jest.mock('./components/footer');
-jest.mock('./features/resume/components');
-jest.mock('./components/about');
-jest.mock('./components/author');
-jest.mock('./features/tictactoe/components');
+jest.mock('./component/loading');
+jest.mock('./component/app-bar');
+jest.mock('./component/footer');
+jest.mock('./feature/resume/component');
+jest.mock('./component/about');
+jest.mock('./component/author');
+jest.mock('./feature/tictactoe/component');
 
 describe('src/client/App', () => {
   const getApp = (store: Store, props: RouteComponentProps) => (

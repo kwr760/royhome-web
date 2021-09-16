@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LogMsgType } from '../../../types/logger';
+import { LogMsgType } from '../../../type/logger';
 import { ApiConfigs } from '../../../config/api';
 
 import { getParsedUrl } from '../../api/get-parsed-url';

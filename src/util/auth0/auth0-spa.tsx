@@ -4,13 +4,13 @@ import createAuth0Client, { Auth0Client, GetTokenSilentlyOptions, RedirectLoginO
 import { getDarkMode } from '../../store/session/session.selector';
 
 import env from '../../config';
-import { ContextStateType } from '../../types/state/context';
-import { UserStateType } from '../../types/state/user';
-import { SaveSessionType } from '../../types/store/session';
+import { ContextStateType } from '../../type/state/context';
+import { UserStateType } from '../../type/state/user';
+import { SaveSessionType } from '../../type/store/session';
 import { TOKEN_URL } from './role.constants';
 import { Auth0Context } from './auth0-context';
 import { setLoading, clearLoading, saveSession } from '../../store/session/session.slice';
-import { Auth0ProviderType } from '../../types/auth0';
+import { Auth0ProviderType } from '../../type/auth0';
 import { noop } from '../noop';
 
 const DEFAULT_REDIRECT_CALLBACK = () => window.history.replaceState(

@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
 import sessionReducer from './session/session.slice';
-import resumeReducer from '../features/resume/store/resume.slice';
+import resumeReducer from '../feature/resume/store/resume.slice';
 
 const rootReducer = combineReducers({
   session: sessionReducer,

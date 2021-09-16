@@ -4,7 +4,7 @@ import { NOT_FOUND } from 'http-status-codes';
 import env from '../config';
 import { ApiConfigs } from '../config/api';
 import { getParsedUrl } from '../util/api/get-parsed-url';
-import { SessionApiType } from '../types/api/session';
+import { SessionApiType } from '../type/api/session';
 
 export const getSessionProxy = async (sessionId: string): Promise<SessionApiType> => {
   const config = ApiConfigs.GET_SESSION;

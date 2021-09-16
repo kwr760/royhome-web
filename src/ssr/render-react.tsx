@@ -15,7 +15,7 @@ import { getCookies } from './cookies/get-cookies';
 import { generateCookieIds } from './cookies/generate-cookie-ids';
 import { BROWSER_ID, SESSION_ID } from './cookies/cookie.constants';
 import { generateCookieOptions } from './cookies/generate-cookie-options';
-import { MainType } from '../types/server/ssr';
+import { MainType } from '../type/server/ssr';
 
 const renderReact = async (req: Request, res: Response): Promise<void> => {
   displayMessage(`Server render:  ${req.url}`);
@@ -42,7 +42,7 @@ const renderReact = async (req: Request, res: Response): Promise<void> => {
   const css = sheets.toString();
 
   // Extract the creation of the html to a separate file
-  const indexFile = path.resolve('./src/assets/index.html');
+  const indexFile = path.resolve('./src/asset/index.html');
   const contents = fs.readFileSync(indexFile, 'utf8');
   const preloadedState = JSON.stringify(store.getState()).replace(/</g, '\\u003c');
   const responseHtml = contents

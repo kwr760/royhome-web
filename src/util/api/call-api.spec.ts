@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ApiDetailsType } from '../../types/api/api';
+import { ApiDetailsType } from '../../type/api/api';
 
 import { callApi } from './call-api';
 import { ApiConfigs } from '../../config/api';

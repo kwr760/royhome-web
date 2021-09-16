@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Provider } from 'react-redux';
 import { StaticRouter as Router, Route, RouteComponentProps } from 'react-router-dom';
-import { IndexPropType } from './types/prop';
+import { IndexPropType } from './type/prop';
 
 import Auth0Provider from './util/auth0/auth0-node';
 import { config } from './util/auth0/auth0.constants';

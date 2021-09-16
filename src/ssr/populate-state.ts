@@ -1,6 +1,6 @@
 import { matchPath } from 'react-router-dom';
-import { SessionStateType } from '../types/state/session';
-import { StateType } from '../types/state/state';
+import { SessionStateType } from '../type/state/session';
+import { StateType } from '../type/state/state';
 
 import { fetchRoutes } from './fetch-routes';
 import { DarkModes } from '../store/session/session.constants';

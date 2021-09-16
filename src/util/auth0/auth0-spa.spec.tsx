@@ -6,7 +6,7 @@ import createAuth0Client from '@auth0/auth0-spa-js';
 
 import Auth0Provider from './auth0-spa';
 import { useAuth0 } from './auth0-context';
-import { Auth0ContextType } from '../../types/auth0';
+import { Auth0ContextType } from '../../type/auth0';
 
 jest.mock('@auth0/auth0-spa-js');
 jest.mock('react-redux');

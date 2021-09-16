@@ -135,8 +135,8 @@ export const getClientConfig = (target) => {
       new WebpackMd5Hash(),
       new CopyPlugin({
         patterns: [
-          { from: 'src/assets/favicon.ico', to: './favicon.ico' },
-          { from: 'src/assets/images/gold-on-blue.png', to: './favicon.png' },
+          { from: 'src/asset/favicon.ico', to: './favicon.ico' },
+          { from: 'src/asset/images/gold-on-blue.png', to: './favicon.png' },
         ],
       }),
       new LodashModuleReplacementPlugin(),
