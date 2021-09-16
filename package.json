@@ -16,7 +16,7 @@
     "run:dev": "NODE_ENV=development ts-node src/server.ts",
     "webpack:dev": "yarn clean & NODE_ENV=development webpack --watch",
     "test": "yarn test:lint && yarn test:only",
-    "test:lint": "eslint src && tsc",
+    "test:lint": "eslint src test && tsc",
     "test:only": "jest --colors",
     "clean": "rimraf started dist build log/*.log reports",
     "docker": "yarn clean && webpack && ts-node src/server.ts",
