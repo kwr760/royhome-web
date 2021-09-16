@@ -4,7 +4,7 @@ import { ExperienceType } from '../../../../type/object/resume';
 
 import ResumeExperience from './index';
 
-describe('client/components/resume/experience', () => {
+describe('feature/resume/componentexperience', () => {
   it('should render', () => {
     // Arrange
     const experiences = [{

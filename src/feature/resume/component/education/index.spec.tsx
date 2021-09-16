@@ -4,7 +4,7 @@ import { EducationType } from '../../../../type/object/resume';
 
 import ResumeEducation from './index';
 
-describe('client/components/resume/education', () => {
+describe('feature/resume/componenteducation', () => {
   it('should render', () => {
     // Arrange
     const education = [{

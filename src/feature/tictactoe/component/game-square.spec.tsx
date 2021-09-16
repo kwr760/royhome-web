@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import GameSquare from './game-square';
 
-describe('features/tictactoe/components/game-square', () => {
+describe('feature/tictactoe/component/game-square', () => {
   it('should render', () => {
     // Arrange/Act
     const { queryByRole } = render(

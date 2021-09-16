@@ -5,7 +5,7 @@ import themeLight from '../../theme-light';
 
 import Footer from './index';
 
-describe('src/client/components/page/footer', () => {
+describe('component/page/footer', () => {
   it('renders', () => {
     // Arrange/Act
     const test = render(

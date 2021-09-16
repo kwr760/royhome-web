@@ -2,7 +2,7 @@ import { TabPageType } from '../../type/object/tab-page';
 import { UserStateType } from '../../type/state/user';
 import { displayPage } from './display-page';
 
-describe('web/client/components/page/app-bar/display-page', () => {
+describe('component/page/app-bar/display-page', () => {
   const pages = [
     {
       name: 'NoRoleNoAuth',

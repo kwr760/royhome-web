@@ -1,16 +1,22 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import GameBoard from './game-board';
+import GameSquare from './game-square';
 
-import Index from './index';
+jest.mock('./game-square');
 
-describe('client/components/tictactoe', () => {
+describe('component/tictactoe/game-board', () => {
+  beforeEach(() => {
+    (GameSquare as jest.Mock).mockReturnValue('Game Square');
+  });
   it('should render', () => {
     // Arrange/Act
-    const { queryByRole } = render(
-      <Index />,
+    const { getAllByText } = render(
+      <GameBoard />,
     );
 
-    // Assert - fake test - test nothing
-    queryByRole(/Tic-Tac-Toe/);
+    // Assert
+    const squares = getAllByText(/Game Square/);
+    expect(squares.length).toBe(9);
   });
 });

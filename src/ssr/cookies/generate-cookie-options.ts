@@ -12,6 +12,5 @@ export const generateCookieOptions = (req: Request): CookieOptions => {
     domain: domain || defaultHost,
   };
 
-  console.log(JSON.stringify(options));
   return options;
 };

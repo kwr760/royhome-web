@@ -18,7 +18,7 @@ import logger from '../../util/logger/browser';
 jest.mock('../../util/api/call-api');
 jest.mock('../../util/logger/browser');
 
-describe('client/store/session/session.slice', () => {
+describe('store/session/session.slice', () => {
   const mockStore = configureMockStore([thunk]);
   const initialState: SessionStateType = {
     authenticated: false,

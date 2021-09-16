@@ -23,7 +23,7 @@ declare global {
   }
 }
 
-describe('src/client/components/page/app-bar/nav-bar-menu', () => {
+describe('component/page/app-bar/nav-bar-menu', () => {
   const mockStore = configureMockStore([thunk]);
   const getComponent = (
     store: Store,

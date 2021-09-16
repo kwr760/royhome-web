@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 
 import ResumeSummary from './index';
 
-describe('client/components/resume/summary', () => {
+describe('feature/resume/componentsummary', () => {
   it('should render', () => {
     // Arrange
     const summary = 'summary';

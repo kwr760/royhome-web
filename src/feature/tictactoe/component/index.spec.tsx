@@ -1,16 +1,21 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-
+import GameBoard from './game-board';
 import Index from './index';
 
-describe('client/components/tictactoe', () => {
+jest.mock('./game-board');
+
+describe('component/tictactoe', () => {
+  beforeEach(() => {
+    (GameBoard as jest.Mock).mockReturnValue('Game Board');
+  });
   it('should render', () => {
     // Arrange/Act
-    const { queryByRole } = render(
+    const { getByText } = render(
       <Index />,
     );
 
     // Assert - fake test - test nothing
-    queryByRole(/Tic-Tac-Toe/);
+    getByText(/Game Board/);
   });
 });

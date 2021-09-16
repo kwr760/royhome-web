@@ -12,7 +12,7 @@ import themeLight from '../../theme-light';
 import Profile from './index';
 import createStore from '../../store/create-store';
 
-describe('client/components/resume/profile', () => {
+describe('feature/resume/componentprofile', () => {
   const getProfile = (store: Store) => (
     <Provider store={store}>
       <ThemeProvider theme={themeLight}>

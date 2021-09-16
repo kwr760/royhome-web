@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 
 import ResumeHeader from './index';
 
-describe('client/components/resume/header', () => {
+describe('feature/resume/componentheader', () => {
   it('should render with phone', () => {
     // Arrange
     const name = 'name';

@@ -1,7 +1,7 @@
 import { findRouteTab } from './find-route-tab';
 import { pages } from './pages';
 
-describe('web/client/components/page/app-bar/find-route-tab', () => {
+describe('component/page/app-bar/find-route-tab', () => {
   it('returns correct routes for tabs', () => {
     // Arrange // Act // Assert
     expect(findRouteTab('/')).toBe(0);

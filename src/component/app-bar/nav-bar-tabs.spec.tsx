@@ -23,7 +23,7 @@ declare global {
   }
 }
 
-describe('src/client/components/page/app-bar/nav-bar-tabs', () => {
+describe('component/page/app-bar/nav-bar-tabs', () => {
   const mockStore = configureMockStore([thunk]);
   const getComponent = (store: Store, position: number, setPosition: Dispatch<SetStateAction<number>>) => (
     <Provider store={store}>

@@ -19,7 +19,7 @@ jest.mock('react-router-dom', () => ({
   }),
 }));
 
-describe('src/client/components/page/app-bar/index', () => {
+describe('component/page/app-bar/index', () => {
   it('renders app-bar', () => {
     // Arrange
     (NavBarTabs as jest.Mock).mockImplementation(() => <div>NavBar Tabs</div>);

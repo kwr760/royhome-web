@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 
 import Loading from './index';
 
-describe('src/client/components/page/loading', () => {
+describe('component/page/loading', () => {
   it('renders without crashing', () => {
     // Arrange/Act
     const { getByAltText } = render(

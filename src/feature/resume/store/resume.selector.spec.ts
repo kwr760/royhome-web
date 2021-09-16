@@ -4,7 +4,7 @@ import { getResume } from './resume.selector';
 
 jest.mock('react-redux');
 
-describe('client/store/resume/resume.selector', () => {
+describe('store/resume/resume.selector', () => {
   it('should return resume', () => {
     // Arrange
     const email = 'kroy760@gmail.com';

@@ -5,7 +5,7 @@ import { DarkModes } from './session.constants';
 
 jest.mock('react-redux');
 
-describe('client/store/session/session.selector', () => {
+describe('store/session/session.selector', () => {
   it('should return session information', () => {
     // Arrange
     const expectedAuthentication = true;

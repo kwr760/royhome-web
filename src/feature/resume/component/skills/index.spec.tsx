@@ -4,7 +4,7 @@ import { SkillGroupType } from '../../../../type/object/resume';
 
 import ResumeSkills from './index';
 
-describe('client/components/resume/skills', () => {
+describe('feature/resume/componentskills', () => {
   it('should render', () => {
     // Arrange
     const skills = [{

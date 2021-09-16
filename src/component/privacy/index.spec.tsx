@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 
 import Privacy from './index';
 
-describe('client/components/privacy', () => {
+describe('component/privacy', () => {
   it('should render', () => {
     // Arrange/Act
     const { getByText } = render(

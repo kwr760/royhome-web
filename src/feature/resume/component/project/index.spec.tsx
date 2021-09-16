@@ -4,7 +4,7 @@ import { ProjectType } from '../../../../type/object/resume';
 
 import ResumeProject from './index';
 
-describe('client/components/resume/project', () => {
+describe('feature/resume/componentproject', () => {
   it('should render', () => {
     // Arrange
     const project = [{

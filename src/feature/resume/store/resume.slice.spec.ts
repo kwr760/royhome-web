@@ -9,7 +9,7 @@ import { callApi } from '../../../util/api/call-api';
 
 jest.mock('../../../util/api/call-api');
 
-describe('client/store/resume/resume.slice', () => {
+describe('store/resume/resume.slice', () => {
   const mockStore = configureMockStore([thunk]);
 
   it('should call fetchResume',  async () => {

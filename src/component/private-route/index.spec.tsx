@@ -11,7 +11,7 @@ import createStore from '../../store/create-store';
 
 jest.mock('../../util/auth0/has-needed-role');
 
-describe('client/components/page/private-route', () => {
+describe('component/page/private-route', () => {
   const userRole = 'admin';
   const mockComponent = () => <div>Mocked</div>;
   const getPrivateRoute = (store: Store, auth: Auth0ContextType, role?: string, path = '/') => (

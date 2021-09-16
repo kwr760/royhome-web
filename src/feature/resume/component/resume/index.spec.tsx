@@ -4,7 +4,7 @@ import { ResumeType } from '../../../../type/object/resume';
 
 import Resume from './index';
 
-describe('client/components/resume/resume', () => {
+describe('feature/resume/componentresume', () => {
   it('should render', () => {
     // Arrange
     const resume = {

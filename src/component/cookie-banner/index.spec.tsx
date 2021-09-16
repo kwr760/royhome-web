@@ -5,7 +5,7 @@ import themeLight from '../../theme-light';
 
 import CookieBanner from './index';
 
-describe('src/client/components/page/cookie-banner', () => {
+describe('component/page/cookie-banner', () => {
   it('renders', () => {
     // Arrange/Act
     const test = render(

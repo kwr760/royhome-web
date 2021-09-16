@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 
 import Author from './index';
 
-describe('client/components/author', () => {
+describe('component/author', () => {
   it('should render', () => {
     // Arrange/Act
     const { getByText } = render(

@@ -1,7 +1,7 @@
 import { UserStateType } from '../../type/state/user';
 import { shouldDisplayTab } from './should-display-tab';
 
-describe('web/client/components/page/app-bar/should-display-tab', () => {
+describe('component/page/app-bar/should-display-tab', () => {
   it('displays with no role not authenticate', () => {
     // Arrange
     const user = {

@@ -22,7 +22,7 @@ jest.mock('./skills');
 jest.mock('./experience');
 jest.mock('./education');
 
-describe('client/components/private/resume', () => {
+describe('component/private/resume', () => {
   const token = 'token';
   const email = 'kroy760@gmail.com';
   const dispatch = jest.fn();

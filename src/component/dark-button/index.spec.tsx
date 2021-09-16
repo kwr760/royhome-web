@@ -14,7 +14,7 @@ import { DarkModes } from '../../store/session/session.constants';
 jest.mock('react-icons/fi');
 jest.mock('../../util/api/call-api');
 
-describe('src/client/components/page/dark-mode', () => {
+describe('component/page/dark-mode', () => {
   const mockStore = configureMockStore([thunk]);
   const actionType = 'session/updateSession';
   const getComponent = (store: Store) => (

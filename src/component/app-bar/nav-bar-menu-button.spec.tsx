@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import { NavBarMenuButton } from './nav-bar-menu-button';
 
-describe('src/client/components/page/app-bar/nav-bar-menu-button', () => {
+describe('component/page/app-bar/nav-bar-menu-button', () => {
   const mockStore = configureMockStore([thunk]);
   const getComponent = (store: Store, setAnchor: Dispatch<SetStateAction<HTMLElement | null>>) => (
     <Provider store={store}>

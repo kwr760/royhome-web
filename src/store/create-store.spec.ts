@@ -1,7 +1,7 @@
 import createStore from './create-store';
 import { DarkModes } from './session/session.constants';
 
-describe('client/store/configure', () => {
+describe('store/configure', () => {
   it('should configure the store without initialState', () => {
     // Arrange
     const expectedState = {

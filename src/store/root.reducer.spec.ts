@@ -1,6 +1,6 @@
 import rootReducer from './root.reducer';
 
-describe('client/store/reducers/root', () => {
+describe('store/reducers/root', () => {
   it('should call rootReducer', () => {
     // Arrange/Act
 
