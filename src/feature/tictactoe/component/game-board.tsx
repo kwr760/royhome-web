@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import GameSquare from './game-square';
 import { useStyles } from './game-board.styles';
 
-const TicTacToe: FunctionComponent = () => {
+export const GameBoard: FunctionComponent = () => {
   const classes = useStyles();
   return (
     <Grid container className={classes.grid}>
@@ -12,10 +12,12 @@ const TicTacToe: FunctionComponent = () => {
           return (
             <Grid container item className={classes.row} xs={12} key={`row-${row}`} >
               {
-                [...Array(3).keys()].map((column) => {
-                  return (<Grid item className={classes.item} xs={4} key={`square-${row}-${column}`}>
-                    <GameSquare row={row} column={column} />
-                  </Grid>);
+                [...Array(3).keys()].map((col) => {
+                  return (
+                    <Grid item className={classes.item} xs={4} key={`square-${row}-${col}`}>
+                      <GameSquare row={row} col={col} />
+                    </Grid>
+                  );
                 })
               }
             </Grid>
@@ -26,4 +28,4 @@ const TicTacToe: FunctionComponent = () => {
   );
 };
 
-export default TicTacToe;
+export default GameBoard;

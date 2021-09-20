@@ -7,15 +7,11 @@ export const useStyles = makeStyles((theme: Theme) => {
 
   return createStyles({
     grid: {
+      padding: theme.spacing(1),
       border: `${borderLength}px solid ${borderColor}`,
       borderRadius: theme.spacing(1),
-      backgroundColor: theme.palette.primary.dark,
-    },
-    row: {
-    },
-    item: {
-      position: 'relative',
-      display: 'block',
+      backgroundColor: theme.palette.background.default,
     },
   });
 });
+

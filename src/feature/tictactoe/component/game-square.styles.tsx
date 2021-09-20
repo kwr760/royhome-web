@@ -1,13 +1,27 @@
 import { createStyles, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Simulate } from 'react-dom/test-utils';
 
-export const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    paper: {
-      paddingBottom: '100%',
-      backgroundColor: theme.palette.primary.light,
-      color: theme.palette.primary.main,
+export const useStyles = makeStyles((theme: Theme) => {
+  const borderColor = theme.palette.primary.dark;
+  const borderLength = theme.spacing(1);
+
+  return createStyles({
+    square: {
+      width: '100%',
       textAlign: 'center',
+      paddingBottom: '100%',
+      border: `${borderLength}px solid ${borderColor}`,
+      borderRadius: 0,
+      backgroundColor: theme.palette.background.default,
+      boxShadow: 'none',
     },
-  }),
-);
+    label: {
+      color: theme.palette.primary.dark,
+      position: 'absolute',
+      left: '50%',
+      top: '50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  });
+});
