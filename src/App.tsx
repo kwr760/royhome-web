@@ -50,7 +50,6 @@ const App: FunctionComponent<RouteComponentProps> = () => {
             <PrivateRoute
               path="/tictactoe"
               component={TicTacToeLoadable}
-              userRole="engineer"
             />
             <PrivateRoute path="/profile" component={ProfileLoadable} />
           </Switch>
