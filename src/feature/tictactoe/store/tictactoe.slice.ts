@@ -3,7 +3,7 @@ import { TicTacToeStateType } from '../type/state/tictactoe';
 
 const initialState: TicTacToeStateType = {
   playerTurn: 0,
-  players: ['PLayer #1', 'Player #2'],
+  players: ['Player #1', 'Player #2'],
   game: [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]],
 };
 

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { getPlayerTurn, getPlayers } from '../store/tictactoe.selector';
 import { useStyles } from './game-info.styles';
 
-const GameInfo: FunctionComponent = () => {
+export const GameInfo: FunctionComponent = () => {
   const classes = useStyles();
   const turn = useSelector(getPlayerTurn);
   const players = useSelector(getPlayers);

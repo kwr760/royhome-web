@@ -6,7 +6,7 @@ import { incrementTurn, takeTurn } from '../store/tictactoe.slice';
 import { useStyles } from './game-square.styles';
 import { GameSquarePropType } from '../type/prop/game-square';
 
-const GameSquare: FunctionComponent<GameSquarePropType> = ({row, col}) => {
+export const GameSquare: FunctionComponent<GameSquarePropType> = ({row, col}) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const turn = useSelector(getPlayerTurn);
@@ -18,20 +18,18 @@ const GameSquare: FunctionComponent<GameSquarePropType> = ({row, col}) => {
   };
 
   return (
-    <>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Button className={classes.square} onClick={clickAction} key={`control-${row}-${col}`}>
-          <Typography variant='h1' className={classes.label}>
-            {piece}
-          </Typography>
-        </Button>
-      </Box>
-    </>
-);
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Button className={classes.square} onClick={clickAction} key={`control-${row}-${col}`}>
+        <Typography variant='h1' className={classes.label}>
+          {piece}
+        </Typography>
+      </Button>
+    </Box>
+  );
 };
 
 export default GameSquare;

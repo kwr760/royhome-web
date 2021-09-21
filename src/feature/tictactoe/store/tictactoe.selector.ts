@@ -12,7 +12,12 @@ export const getPlayers = createSelector(
   (tictactoe: TicTacToeStateType) => tictactoe.players,
 );
 
-export const getSquare = (row: number, column: number) => createSelector(
-  (state: StateType) => state.tictactoe,
-  (tictactoe: TicTacToeStateType) => tictactoe.game[row][column],
-);
+export const getSquare: (row: number, col: number) => ((state: StateType) => number) &
+  {
+    resultFunc: (res: TicTacToeStateType) => number;
+    recomputations: () => number;
+    resetRecomputations: () => number
+  } = (row: number, col: number) => createSelector(
+    (state: StateType) => state.tictactoe,
+    (tictactoe: TicTacToeStateType) => tictactoe.game[row][col],
+  );

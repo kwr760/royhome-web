@@ -1,6 +1,6 @@
 import { Grid } from '@material-ui/core';
 import React, { FunctionComponent } from 'react';
-import GameSquare from './game-square';
+import { GameSquare } from './game-square';
 import { useStyles } from './game-board.styles';
 
 export const GameBoard: FunctionComponent = () => {

@@ -1,6 +1,5 @@
 import { createStyles, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Simulate } from 'react-dom/test-utils';
 
 export const useStyles = makeStyles((theme: Theme) => {
   const borderColor = theme.palette.primary.dark;
