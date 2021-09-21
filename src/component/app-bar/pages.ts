@@ -25,8 +25,8 @@ export const pages: TabPageType[] = [
     name: 'Tic-Tac-Toe',
     path: '/tictactoe',
     icon: FiAlertTriangle,
-    role: 'engineer',
-    authenticated: true,
+    // role: 'engineer',
+    // authenticated: true,
     tab: 3,
   },
 ];

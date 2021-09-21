@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import GameBoard from '../../../../src/feature/tictactoe/component/game-board';
-import GameSquare from '../../../../src/feature/tictactoe/component/game-square';
+import { GameBoard } from '../../../../src/feature/tictactoe/component/game-board';
+import { GameSquare } from '../../../../src/feature/tictactoe/component/game-square';
 
 jest.mock('../../../../src/feature/tictactoe/component/game-square');
 

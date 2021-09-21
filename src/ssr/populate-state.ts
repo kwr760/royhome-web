@@ -48,6 +48,15 @@ const populateState = async (path: string, sessionId?: string): Promise<StateTyp
       email: '',
       resumes: {},
     },
+    tictactoe: {
+      playerTurn: 0,
+      players: ['Player #1', 'Player #2'],
+      game: [
+        [-1, -1, -1],
+        [-1, -1, -1],
+        [-1, -1, -1],
+      ],
+    },
     ...data,
   };
 };

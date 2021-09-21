@@ -1,13 +1,34 @@
-import { Paper } from '@material-ui/core';
+import { Box, Button, Typography } from '@material-ui/core';
 import React, { FunctionComponent } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPlayerTurn, getSquare } from '../store/tictactoe.selector';
+import { incrementTurn, takeTurn } from '../store/tictactoe.slice';
 import { useStyles } from './game-square.styles';
-import { GameSquarePropType } from './game-square.types';
+import { GameSquarePropType } from '../type/prop/game-square';
 
-const GameSquare: FunctionComponent<GameSquarePropType> = ({row, column}) => {
-  console.log(row, column);
+export const GameSquare: FunctionComponent<GameSquarePropType> = ({row, col}) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const turn = useSelector(getPlayerTurn);
+  const owner = useSelector(getSquare(row, col));
+  const piece = owner === 0 ? 'O' : owner === 1 ? 'X' : '';
+  const clickAction = () => {
+    dispatch(takeTurn({ row, col, player: turn }));
+    dispatch(incrementTurn());
+  };
+
   return (
-    <Paper className={classes.paper} />
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Button className={classes.square} onClick={clickAction} key={`control-${row}-${col}`}>
+        <Typography variant='h1' className={classes.label}>
+          {piece}
+        </Typography>
+      </Button>
+    </Box>
   );
 };
 

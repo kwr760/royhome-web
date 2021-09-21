@@ -40,6 +40,11 @@ describe('feature/resume/componentprofile', () => {
         email: 'Resume Email',
         resumes: {},
       },
+      tictactoe: {
+        playerTurn: 1,
+        players: ['Player #1', 'Player #2'],
+        game: [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]],
+      },
     };
     const store = createStore(state);
 

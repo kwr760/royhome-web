@@ -11,6 +11,7 @@ describe('server/rendering/populate-state', () => {
   const resume = {
     owner: 'owner',
   };
+  const initialGame = [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]];
   it('should return an state from session', async () => {
     // Arrange
     const url = '/';
@@ -46,6 +47,14 @@ describe('server/rendering/populate-state', () => {
           [email]: resume,
         },
       },
+      tictactoe: {
+        game: initialGame,
+        playerTurn: 0,
+        players: [
+          'Player #1',
+          'Player #2',
+        ],
+      },
     };
 
     // Act
@@ -78,6 +87,14 @@ describe('server/rendering/populate-state', () => {
         email: '',
         resumes: {},
       },
+      tictactoe: {
+        game: initialGame,
+        playerTurn: 0,
+        players: [
+          'Player #1',
+          'Player #2',
+        ],
+      },
     };
 
     // Act
@@ -103,6 +120,14 @@ describe('server/rendering/populate-state', () => {
         resumes: {
           [email]: resume,
         },
+      },
+      tictactoe: {
+        game: initialGame,
+        playerTurn: 0,
+        players: [
+          'Player #1',
+          'Player #2',
+        ],
       },
     };
 
