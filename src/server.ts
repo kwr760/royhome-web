@@ -25,7 +25,9 @@ app.enable('etag');
 app.enable('query parser');
 
 app.use(cors());
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: false,
+}));
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
