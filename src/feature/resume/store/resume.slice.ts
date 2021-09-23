@@ -42,7 +42,8 @@ export const fetchResume = (email: string): AppThunk => async dispatch => {
     dispatch(getResumeSuccess(response.data));
   } catch (err) {
     dispatch(clearLoading());
-    dispatch(getResumeFailure(err.toString()));
+    const errorMsg = (err as Error).toString();
+    dispatch(getResumeFailure(errorMsg));
   }
 };
 

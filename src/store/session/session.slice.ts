@@ -65,7 +65,8 @@ export const updateDarkMode = (darkMode: string): AppThunk => async dispatch => 
     };
     dispatch(updateSession(payload));
   } catch (err) {
-    logger.error(err.toString());
+    const errorMsg = (err as Error).toString();
+    logger.error(errorMsg);
   }
 };
 export const saveSession = (claim: SaveSessionType, user: UserStateType): AppThunk => async dispatch => {
@@ -86,7 +87,8 @@ export const saveSession = (claim: SaveSessionType, user: UserStateType): AppThu
     };
     dispatch(updateSession(payload));
   } catch (err) {
-    logger.error(err.toString());
+    const errorMsg = (err as Error).toString();
+    logger.error(errorMsg);
   }
 };
 
