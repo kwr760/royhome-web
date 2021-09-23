@@ -30,8 +30,9 @@ app.use(helmet({
     useDefaults: true,
     directives: {
       'script-src': ['\'self\'', '\'unsafe-inline\'', '*.royk.us', '*.royhome.net'],
-      'connect-src': ['\'self\'', '*.royk.us', '*.royhome.net'],
+      'connect-src': ['\'self\'', '*.royk.us', '*.royhome.net', 'royk.auth0.com'],
       'frame-src': ['\'self\'', 'royk.auth0.com'],
+      'img-src': ['\'self\'', 'data:', 'avatars.githubusercontent.com'],
     },
   },
 }));

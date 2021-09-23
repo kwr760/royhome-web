@@ -15,7 +15,6 @@ import Theme from './Theme';
 import createStore from './store/create-store';
 import { removeJssStyle } from './util/remove-jss-style';
 
-
 const Main: FunctionComponent<IndexPropType> = ({ store }) => {
   React.useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side');
