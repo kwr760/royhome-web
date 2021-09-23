@@ -1,4 +1,3 @@
-import { DOCKER } from '../../../src/config/release-environments';
 import { getApiUrl } from '../../../src/util/api/get-api-url';
 
 describe('client/util/url/get-browser-url-info', () => {
@@ -29,10 +28,8 @@ describe('client/util/url/get-browser-url-info', () => {
   /* eslint-disable @typescript-eslint/no-var-requires */
   it('should return apiUrl for DOCKER', () => {
     jest.isolateModules(() => {
-      const { default: env } = require('../../../src/config');
-      const { default: docker } = require('../../../src/config/env/docker');
-      env.server = docker.server;
-      env.release = DOCKER;
+      process.env['NODE_ENV'] = 'docker';
+      const { getApiUrl } = require('../../../src/util/api/get-api-url');
       const expected = 'http://localhost:5000';
 
       // Act
