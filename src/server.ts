@@ -26,7 +26,14 @@ app.enable('query parser');
 
 app.use(cors());
 app.use(helmet({
-  contentSecurityPolicy: false,
+  contentSecurityPolicy: {
+    useDefaults: true,
+    directives: {
+      'script-src': ['\'self\'', '\'unsafe-inline\'', '*.royk.us', '*.royhome.net'],
+      'connect-src': ['\'self\'', '*.royk.us', '*.royhome.net'],
+      'frame-src': ['\'self\'', 'royk.auth0.com'],
+    },
+  },
 }));
 app.use(compression());
 app.use(bodyParser.json());
