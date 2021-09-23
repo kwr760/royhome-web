@@ -9,7 +9,7 @@ export const GameInfo: FunctionComponent = () => {
   const turn = useSelector(getPlayerTurn);
   const players = useSelector(getPlayers);
   return (
-    <Grid justify="space-between"  container className={classes.grid}>
+    <Grid justifyContent="space-between" container className={classes.grid}>
       <Grid item>
         <Typography>{players[0]}</Typography>
       </Grid>

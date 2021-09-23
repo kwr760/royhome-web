@@ -1,7 +1,5 @@
 /* eslint-disable camelcase */
 import { GetTokenSilentlyOptions, RedirectLoginOptions } from '@auth0/auth0-spa-js';
-import { CacheLocation } from '@auth0/auth0-spa-js/src/global';
-import React from 'react';
 
 export interface Auth0ProviderType {
   children: React.ReactNode;
@@ -12,7 +10,7 @@ export interface Auth0ProviderType {
   domain: string;
   redirect_uri?: string;
   useRefreshTokens?: boolean;
-  cacheLocation?: CacheLocation;
+  cacheLocation?: unknown;
 }
 export interface Auth0ContextType {
   login: (props: RedirectLoginOptions) => unknown;

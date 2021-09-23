@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { NOT_FOUND } from 'http-status-codes';
 
 import env from '../config';
@@ -18,7 +18,8 @@ export const getSessionProxy = async (sessionId: string): Promise<SessionApiType
     response = await axios.get(url);
     data = response.data.output;
   } catch (err) {
-    if (err.response.status !== NOT_FOUND) {
+    const status = (err as AxiosError).response?.status;
+    if (status !== NOT_FOUND) {
       throw err;
     }
   }

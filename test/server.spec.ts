@@ -26,6 +26,9 @@ jest.mock('cookie-parser');
 jest.mock('express-http-context');
 jest.mock('../src/middleware/start-https');
 jest.mock('../src/middleware/start-http');
+jest.mock('../src/middleware/handle-error');
+jest.mock('../src/middleware/not-found');
+jest.mock('../src/ssr/render-react');
 
 describe('server/index', () => {
   const mockExpress = {
@@ -41,6 +44,9 @@ describe('server/index', () => {
   const bodyParserJsonCb = jest.fn();
   const bodyParserUrlencodedCb = jest.fn();
   const cookieParserCb = jest.fn();
+  const handleErrorCb = jest.fn();
+  const notFoundCb = jest.fn();
+  const renderReactCb = jest.fn();
 
   beforeEach(() => {
     (express as unknown as jest.Mock).mockReturnValue(mockExpress);
@@ -50,6 +56,9 @@ describe('server/index', () => {
     (bodyParser.json as jest.Mock).mockReturnValue(bodyParserJsonCb);
     (bodyParser.urlencoded as jest.Mock).mockReturnValue(bodyParserUrlencodedCb);
     (cookieParser as unknown as jest.Mock).mockReturnValue(cookieParserCb);
+    (handleError as unknown as jest.Mock).mockReturnValue(handleErrorCb);
+    (notFound as unknown as jest.Mock).mockReturnValue(notFoundCb);
+    (renderReact as unknown as jest.Mock).mockReturnValue(renderReactCb);
   });
   afterEach(() => {
     jest.clearAllMocks();
@@ -59,6 +68,17 @@ describe('server/index', () => {
     jest.isolateModules(() => {
       // Arrange/Act
       require('../src/server');
+      const expectedHelmet = {
+        contentSecurityPolicy: {
+          directives: {
+            'connect-src': ['\'self\'', '*.royk.us', '*.royhome.net', 'royk.auth0.com'],
+            'frame-src': ['\'self\'', 'royk.auth0.com'],
+            'script-src': ['\'self\'', '\'unsafe-inline\'', '*.royk.us', '*.royhome.net'],
+            'img-src': ['\'self\'', 'data:', 'avatars.githubusercontent.com'],
+          },
+          useDefaults: true,
+        },
+      };
 
       // Assert
       expect(mockExpress.set).toHaveBeenCalledWith('json spaces', 2);
@@ -69,7 +89,7 @@ describe('server/index', () => {
       expect(mockExpress.use).toHaveBeenCalledTimes(10);
       expect(cors).toHaveBeenCalledWith();
       expect(mockExpress.use).toHaveBeenCalledWith(corsCb);
-      expect(helmet).toHaveBeenCalledWith();
+      expect(helmet).toHaveBeenCalledWith(expectedHelmet);
       expect(mockExpress.use).toHaveBeenCalledWith(helmetCb);
       expect(compression).toHaveBeenCalledWith();
       expect(mockExpress.use).toHaveBeenCalledWith(compressionCb);

@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import 'core-js';
-import React, { FunctionComponent } from 'react';
+import React, { useEffect, FunctionComponent } from 'react';
 import { hydrate } from 'react-dom';
 import { BrowserRouter as Router, Route, RouteComponentProps } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -15,11 +15,12 @@ import Theme from './Theme';
 import createStore from './store/create-store';
 import { removeJssStyle } from './util/remove-jss-style';
 
-
 const Main: FunctionComponent<IndexPropType> = ({ store }) => {
-  React.useEffect(() => {
+  useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side');
     removeJssStyle(jssStyles);
+    const preloadedState = document.querySelector('#preloaded-state');
+    removeJssStyle(preloadedState);
   }, []);
 
   return (

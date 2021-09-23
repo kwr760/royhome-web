@@ -58,7 +58,8 @@ describe('server/middleware/start-https', () => {
     try {
       startHttpsServer(app as Application, port);
     } catch (e) {
-      expect(e.toString()).toBe('Error: Message');
+      const errMessage = (e as Error).toString();
+      expect(errMessage).toBe('Error: Message');
     }
 
     // Assert

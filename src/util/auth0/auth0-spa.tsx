@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import createAuth0Client, { Auth0Client, GetTokenSilentlyOptions, RedirectLoginOptions } from '@auth0/auth0-spa-js';
+import createAuth0Client, {
+  Auth0Client,
+  Auth0ClientOptions,
+  GetTokenSilentlyOptions,
+  RedirectLoginOptions,
+} from '@auth0/auth0-spa-js';
 import { getDarkMode } from '../../store/session/session.selector';
 
 import env from '../../config';
@@ -37,7 +42,7 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
   useEffect(() => {
     const initAuth0 = async () => {
       dispatch(setLoading());
-      const auth0FromHook = await createAuth0Client(initOptions);
+      const auth0FromHook = await createAuth0Client(initOptions as Auth0ClientOptions);
       setAuth0(auth0FromHook);
 
       if (window.location.search.includes('code=')) {
@@ -46,7 +51,7 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
       }
 
       let claim: SaveSessionType;
-      const user: UserStateType = await auth0FromHook.getUser();
+      const user: UserStateType | undefined = await auth0FromHook.getUser();
       let context: ContextStateType | undefined;
       if (user) {
         const tokenClaims = await auth0FromHook.getIdTokenClaims();

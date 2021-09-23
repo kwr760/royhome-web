@@ -43,12 +43,7 @@ module.exports = (api) => {
           'regenerator': true,
         },
       ],
-      [
-        '@babel/plugin-proposal-class-properties',
-        {
-          loose: true,
-        },
-      ],
+      '@babel/plugin-proposal-class-properties',
       [
         'module-resolver',
       ],

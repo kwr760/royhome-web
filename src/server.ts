@@ -25,7 +25,17 @@ app.enable('etag');
 app.enable('query parser');
 
 app.use(cors());
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: {
+    useDefaults: true,
+    directives: {
+      'script-src': ['\'self\'', '\'unsafe-inline\'', '*.royk.us', '*.royhome.net'],
+      'connect-src': ['\'self\'', '*.royk.us', '*.royhome.net', 'royk.auth0.com'],
+      'frame-src': ['\'self\'', 'royk.auth0.com'],
+      'img-src': ['\'self\'', 'data:', 'avatars.githubusercontent.com'],
+    },
+  },
+}));
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

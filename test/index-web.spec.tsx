@@ -26,21 +26,19 @@ describe('src/client/index-web', () => {
   });
 
   it('launches the App with targetUrl', () => {
-    jest.isolateModules(async () => {
-      // Arrange
-      (App as jest.Mock).mockImplementation(mockApp);
-      (Auth0Provider as jest.Mock).mockImplementation(({ children }) => <div>Auth0Provider: { children }</div>);
-      jest.spyOn(reactDOM, 'hydrate').mockImplementation(
-        (element, container) => render(element, container),
-      );
+    // Arrange
+    (App as jest.Mock).mockImplementation(mockApp);
+    (Auth0Provider as jest.Mock).mockImplementation(({ children }) => <div>Auth0Provider: { children }</div>);
+    jest.spyOn(reactDOM, 'hydrate').mockImplementation(
+      (element, container) => render(element, container),
+    );
 
-      // Act
-      require('../src/index-web');
+    // Act
+    require('../src/index-web');
 
-      // Assert
-      expect(Auth0Provider).toBeCalled();
-      expect(mockApp).toBeCalled();
-    });
+    // Assert
+    expect(Auth0Provider).toBeCalled();
+    expect(mockApp).toBeCalled();
   });
   it('launches the App with empty root', () => {
     jest.isolateModules(() => {
