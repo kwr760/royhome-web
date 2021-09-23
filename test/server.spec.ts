@@ -59,6 +59,15 @@ describe('server/index', () => {
     jest.isolateModules(() => {
       // Arrange/Act
       require('../src/server');
+      const expectedHelmet = {
+        contentSecurityPolicy: {
+          directives: {
+            'connect-src': ['\'self\'', '*.royk.us', '*.royhome.net'],
+            'frame-src': ['\'self\'', 'royk.auth0.com'],
+            'script-src': ['\'self\'', '\'unsafe-inline\'', '*.royk.us', '*.royhome.net']},
+          useDefaults: true,
+        },
+      };
 
       // Assert
       expect(mockExpress.set).toHaveBeenCalledWith('json spaces', 2);
@@ -69,7 +78,7 @@ describe('server/index', () => {
       expect(mockExpress.use).toHaveBeenCalledTimes(10);
       expect(cors).toHaveBeenCalledWith();
       expect(mockExpress.use).toHaveBeenCalledWith(corsCb);
-      expect(helmet).toHaveBeenCalledWith();
+      expect(helmet).toHaveBeenCalledWith(expectedHelmet);
       expect(mockExpress.use).toHaveBeenCalledWith(helmetCb);
       expect(compression).toHaveBeenCalledWith();
       expect(mockExpress.use).toHaveBeenCalledWith(compressionCb);
