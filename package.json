@@ -156,6 +156,6 @@
     "redux-mock-store": "^1.5.4",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.3.0",
-    "stylelint": "^13.6.1"
+    "stylelint": "^13.13.1"
   }
 }
