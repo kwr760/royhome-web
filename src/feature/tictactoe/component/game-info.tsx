@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import { getPlayerTurn, getPlayers } from '../store/tictactoe.selector';
 import { useStyles } from './game-info.styles';
 
+import { FaAngleDoubleLeft as LeftArrow, FaAngleDoubleRight as RightArrow } from 'react-icons/fa';
+
 export const GameInfo: FunctionComponent = () => {
   const classes = useStyles();
   const turn = useSelector(getPlayerTurn);
@@ -14,7 +16,7 @@ export const GameInfo: FunctionComponent = () => {
         <Typography>{players[0]}</Typography>
       </Grid>
       <Grid item>
-        <Typography>The current turn is: {turn}</Typography>
+        { turn ? <RightArrow className={'fa-2x'} /> : <LeftArrow className={'fa-2x'} />  }
       </Grid>
       <Grid item>
         <Typography>{players[1]}</Typography>

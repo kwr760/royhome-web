@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme: Theme) => {
       paddingBottom: '100%',
       border: `${borderLength}px solid ${borderColor}`,
       borderRadius: 0,
-      backgroundColor: theme.palette.background.default,
+      // backgroundColor: 'transparent',
       boxShadow: 'none',
     },
     label: {
