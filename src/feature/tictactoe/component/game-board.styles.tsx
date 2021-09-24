@@ -9,7 +9,6 @@ export const useStyles = makeStyles((theme: Theme) => {
     grid: {
       border: `${borderLength}px solid ${borderColor}`,
       borderRadius: theme.spacing(1),
-      backgroundColor: theme.palette.primary.dark,
     },
     row: {
     },

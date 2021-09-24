@@ -13,17 +13,15 @@ export const GameSquare: FunctionComponent<GameSquarePropType> = ({row, col}) =>
   const owner = useSelector(getSquare(row, col));
   const piece = owner === 0 ? 'O' : owner === 1 ? 'X' : '';
   const clickAction = () => {
+    // console.log("clicked");
     dispatch(takeTurn({ row, col, player: turn }));
     dispatch(incrementTurn());
+    // return true;
   };
 
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Button className={classes.square} onClick={clickAction} key={`control-${row}-${col}`}>
+    <Box>
+      <Button className={classes.square} onClick={clickAction} key={`control-${row}-${col}`} >
         <Typography variant='h1' className={classes.label}>
           {piece}
         </Typography>
