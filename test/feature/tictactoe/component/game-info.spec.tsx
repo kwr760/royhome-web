@@ -22,7 +22,7 @@ describe('feature/tictactoe/component/game-info', () => {
       tictactoe: {
         playerTurn: 1,
         players: ['Player #1', 'Player #2'],
-        game: [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]],
+        game: [[null,null,null],[null,null,null],[null,null,null]],
       },
     };
     (RightArrow as jest.Mock).mockImplementation(() => 'Right Arrow');
@@ -42,7 +42,7 @@ describe('feature/tictactoe/component/game-info', () => {
       tictactoe: {
         playerTurn: 0,
         players: ['Player #1', 'Player #2'],
-        game: [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]],
+        game: [[null,null,null],[null,null,null],[null,null,null]],
       },
     };
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');

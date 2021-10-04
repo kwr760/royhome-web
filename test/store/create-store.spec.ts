@@ -1,8 +1,8 @@
+import { initialGame, initialPlayers, initialPlayerTurn } from '../../src/feature/tictactoe/store/tictactoe.slice';
 import createStore from '../../src/store/create-store';
 import { DarkModes } from '../../src/store/session/session.constants';
 
 describe('store/configure', () => {
-  const initialGame = [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]];
   it('should configure the store without initialState', () => {
     // Arrange
     const expectedState = {
@@ -17,12 +17,9 @@ describe('store/configure', () => {
         resumes: {},
       },
       tictactoe: {
-        game: initialGame,
-        playerTurn: 0,
-        players: [
-          'Player #1',
-          'Player #2',
-        ],
+        game: [ ...initialGame ],
+        playerTurn: initialPlayerTurn,
+        players: [ ...initialPlayers ],
       },
     };
 
@@ -48,11 +45,8 @@ describe('store/configure', () => {
       },
       tictactoe: {
         game: initialGame,
-        playerTurn: 0,
-        players: [
-          'Player #1',
-          'Player #2',
-        ],
+        playerTurn: initialPlayerTurn,
+        players: [ ...initialPlayers ],
       },
     };
 

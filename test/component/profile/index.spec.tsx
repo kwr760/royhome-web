@@ -7,6 +7,7 @@ import '@testing-library/jest-dom/extend-expect';
 
 import { Provider } from 'react-redux';
 import { Store } from 'redux';
+import { initialGame, initialPlayers, initialPlayerTurn } from '../../../src/feature/tictactoe/store/tictactoe.slice';
 import { StateType } from '../../../src/type/state/state';
 import themeLight from '../../../src/theme-light';
 import Profile from '../../../src/component/profile';
@@ -41,9 +42,9 @@ describe('feature/resume/componentprofile', () => {
         resumes: {},
       },
       tictactoe: {
-        playerTurn: 1,
-        players: ['Player #1', 'Player #2'],
-        game: [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]],
+        playerTurn: initialPlayerTurn,
+        players: [ ...initialPlayers ],
+        game: [ ...initialGame ],
       },
     };
     const store = createStore(state);

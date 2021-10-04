@@ -1,4 +1,5 @@
 import { matchPath } from 'react-router-dom';
+import { initialGame, initialPlayers, initialPlayerTurn } from '../feature/tictactoe/store/tictactoe.slice';
 import { SessionStateType } from '../type/state/session';
 import { StateType } from '../type/state/state';
 
@@ -49,13 +50,9 @@ const populateState = async (path: string, sessionId?: string): Promise<StateTyp
       resumes: {},
     },
     tictactoe: {
-      playerTurn: 0,
-      players: ['Player #1', 'Player #2'],
-      game: [
-        [-1, -1, -1],
-        [-1, -1, -1],
-        [-1, -1, -1],
-      ],
+      playerTurn: initialPlayerTurn,
+      players: [ ...initialPlayers ],
+      game: [ ...initialGame ],
     },
     ...data,
   };

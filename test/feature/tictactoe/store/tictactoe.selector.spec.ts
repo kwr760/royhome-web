@@ -1,6 +1,11 @@
 import { useSelector } from 'react-redux';
 
-import { getSquare, getPlayers, getPlayerTurn } from '../../../../src/feature/tictactoe/store/tictactoe.selector';
+import {
+  getSquare,
+  getPlayers,
+  getPlayerTurn,
+  getWinner,
+} from '../../../../src/feature/tictactoe/store/tictactoe.selector';
 
 jest.mock('react-redux');
 
@@ -53,5 +58,33 @@ describe('feature/tictactoe/store/tictactoe.selector', () => {
 
     // Assert
     expect(players).toEqual(['Player #A', 'Player #B']);
+  });
+  it('should return winner', () => {
+    // Arrange
+    const mockState = {
+      tictactoe: {
+        winner: 1,
+      },
+    };
+    (useSelector as jest.Mock).mockImplementation((callback) => callback(mockState));
+
+    // Act
+    const winner = useSelector(getWinner);
+
+    // Assert
+    expect(winner).toEqual(1);
+  });
+  it('should return null if winner is not in state', () => {
+    // Arrange
+    const mockState = {
+      tictactoe: {},
+    };
+    (useSelector as jest.Mock).mockImplementation((callback) => callback(mockState));
+
+    // Act
+    const winner = useSelector(getWinner);
+
+    // Assert
+    expect(winner).toEqual(null);
   });
 });
