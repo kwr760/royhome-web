@@ -5,7 +5,7 @@ import { GameSquare } from '../../../../src/feature/tictactoe/component/game-squ
 
 jest.mock('../../../../src/feature/tictactoe/component/game-square');
 
-describe('component/tictactoe/game-board', () => {
+describe('feature/tictactoe/component/game-board', () => {
   beforeEach(() => {
     (GameSquare as jest.Mock).mockReturnValue('Game Square');
   });

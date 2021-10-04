@@ -6,10 +6,15 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { GameBoard } from '../../../../src/feature/tictactoe/component/game-board';
 import Index from '../../../../src/feature/tictactoe/component';
+import {
+  initialGame,
+  initialPlayers,
+  initialPlayerTurn,
+} from '../../../../src/feature/tictactoe/store/tictactoe.slice';
 
 jest.mock('../../../../src/feature/tictactoe/component/game-board');
 
-describe('component/tictactoe', () => {
+describe('feature/tictactoe/component', () => {
   const mockStore = configureMockStore([thunk]);
   const getComponent = (store: Store) => (
     <Provider store={store}>
@@ -23,9 +28,9 @@ describe('component/tictactoe', () => {
     // Arrange/Act
     const state = {
       tictactoe: {
-        playerTurn: 1,
-        players: ['Player #1', 'Player #2'],
-        game: [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]],
+        playerTurn: initialPlayerTurn,
+        players: [ ...initialPlayers ],
+        game: [ ...initialGame ],
       },
     };
     const store = mockStore(state);

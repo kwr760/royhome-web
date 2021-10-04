@@ -1,3 +1,4 @@
+import { initialGame } from '../../src/feature/tictactoe/store/tictactoe.slice';
 import { getResumeProxy } from '../../src/proxy/get-resume.proxy';
 import { getSessionProxy } from '../../src/proxy/get-session.proxy';
 import populateState from '../../src/ssr/populate-state';
@@ -11,7 +12,6 @@ describe('server/rendering/populate-state', () => {
   const resume = {
     owner: 'owner',
   };
-  const initialGame = [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]];
   it('should return an state from session', async () => {
     // Arrange
     const url = '/';

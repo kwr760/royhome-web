@@ -5,6 +5,7 @@ import { Store } from 'redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { GameSquare } from '../../../../src/feature/tictactoe/component/game-square';
+import { initialGame, initialPlayers } from '../../../../src/feature/tictactoe/store/tictactoe.slice';
 
 describe('feature/tictactoe/component/game-square', () => {
   const mockStore = configureMockStore([thunk]);
@@ -18,8 +19,8 @@ describe('feature/tictactoe/component/game-square', () => {
     const state = {
       tictactoe: {
         playerTurn: 1,
-        players: ['Player #1', 'Player #2'],
-        game: [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]],
+        players: [ ...initialPlayers ],
+        game: [ ...initialGame ],
       },
     };
     const store = mockStore(state);
@@ -37,11 +38,9 @@ describe('feature/tictactoe/component/game-square', () => {
     fireEvent.click(button);
 
     // Assert
-    expect(actions.length).toEqual(2);
+    expect(actions.length).toEqual(1);
     expect(actions[0].type).toEqual('tictactoe/takeTurn');
     expect(actions[0].payload).toEqual(expectedPayload);
-    expect(actions[1].type).toEqual('tictactoe/incrementTurn');
-    expect(actions[1].payload).toBeUndefined();
   });
   it('should render - O', () => {
     // Arrange
@@ -49,7 +48,7 @@ describe('feature/tictactoe/component/game-square', () => {
       tictactoe: {
         playerTurn: 1,
         players: ['Player #1', 'Player #2'],
-        game: [[-1,-1,-1],[-1,-1,0],[-1,-1,-1]],
+        game: [[null,null,null],[null,null,0],[null,null,null]],
       },
     };
     const store = mockStore(state);
@@ -66,7 +65,7 @@ describe('feature/tictactoe/component/game-square', () => {
       tictactoe: {
         playerTurn: 1,
         players: ['Player #1', 'Player #2'],
-        game: [[-1,-1,-1],[-1,-1,1],[-1,-1,-1]],
+        game: [[null,null,null],[null,null,1],[null,null,null]],
       },
     };
     const store = mockStore(state);
