@@ -1,4 +1,8 @@
-import { initialGame, initialPlayers, initialPlayerTurn } from '../../src/feature/tictactoe/store/tictactoe.slice';
+import {
+  initialGame,
+  initialPlayers,
+  initialStatus,
+} from '../../src/feature/tictactoe/store/tictactoe.constant';
 import createStore from '../../src/store/create-store';
 import { DarkModes } from '../../src/store/session/session.constants';
 
@@ -18,8 +22,8 @@ describe('store/configure', () => {
       },
       tictactoe: {
         game: [ ...initialGame ],
-        playerTurn: initialPlayerTurn,
         players: [ ...initialPlayers ],
+        status: { ...initialStatus },
       },
     };
 
@@ -45,8 +49,8 @@ describe('store/configure', () => {
       },
       tictactoe: {
         game: initialGame,
-        playerTurn: initialPlayerTurn,
         players: [ ...initialPlayers ],
+        status: { ...initialStatus },
       },
     };
 

@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
+import { GameState } from '../../../../src/feature/tictactoe/store/tictactoe.constant';
 
 import {
   getSquare,
   getPlayers,
-  getPlayerTurn,
-  getWinner,
+  getGameStatus,
 } from '../../../../src/feature/tictactoe/store/tictactoe.selector';
 
 jest.mock('react-redux');
@@ -33,16 +33,24 @@ describe('feature/tictactoe/store/tictactoe.selector', () => {
     // Arrange
     const mockState = {
       tictactoe: {
-        playerTurn: 1,
+        status: {
+          state: GameState.Win,
+          winner: 1,
+          turn: 0,
+        },
       },
     };
     (useSelector as jest.Mock).mockImplementation((callback) => callback(mockState));
 
     // Act
-    const turn = useSelector(getPlayerTurn);
+    const turn = useSelector(getGameStatus);
 
     // Assert
-    expect(turn).toEqual(1);
+    expect(turn).toEqual({
+      state: GameState.Win,
+      winner: 1,
+      turn: 0,
+    });
   });
   it('should return players', () => {
     // Arrange
@@ -58,33 +66,5 @@ describe('feature/tictactoe/store/tictactoe.selector', () => {
 
     // Assert
     expect(players).toEqual(['Player #A', 'Player #B']);
-  });
-  it('should return winner', () => {
-    // Arrange
-    const mockState = {
-      tictactoe: {
-        winner: 1,
-      },
-    };
-    (useSelector as jest.Mock).mockImplementation((callback) => callback(mockState));
-
-    // Act
-    const winner = useSelector(getWinner);
-
-    // Assert
-    expect(winner).toEqual(1);
-  });
-  it('should return null if winner is not in state', () => {
-    // Arrange
-    const mockState = {
-      tictactoe: {},
-    };
-    (useSelector as jest.Mock).mockImplementation((callback) => callback(mockState));
-
-    // Act
-    const winner = useSelector(getWinner);
-
-    // Assert
-    expect(winner).toEqual(null);
   });
 });

@@ -1,4 +1,5 @@
-import { GameType, PlayerIndex } from '../type/state/tictactoe';
+import { GameState } from '../store/tictactoe.constant';
+import { CheckGameReturnType, GameType } from '../type/tictactoe';
 
 const gameSize = 3;
 const checkRows = (game: GameType) => {
@@ -60,7 +61,18 @@ const checkDiagonals = (game: GameType) => {
   }
   return winner;
 };
-export const checkGame = (game: PlayerIndex[][]): PlayerIndex => {
+const isGameDone = (game: GameType) => {
+  for (let i = 0; i < gameSize; i++) {
+    for (let j = 0; j < gameSize; j++) {
+      if (game[i][j] === null) {
+        return false;
+      }
+    }
+  }
+  return true;
+};
+
+export const checkGame = (game: GameType): CheckGameReturnType => {
   let winner = checkRows(game);
   if (winner === null) {
     winner = checkColumns(game);
@@ -68,5 +80,20 @@ export const checkGame = (game: PlayerIndex[][]): PlayerIndex => {
   if (winner === null) {
     winner = checkDiagonals(game);
   }
-  return winner;
+  if (winner !== null) {
+    return {
+      state: GameState.Win,
+      winner,
+    };
+  }
+
+  if (isGameDone(game)) {
+    return {
+      state: GameState.Tie,
+    };
+  }
+
+  return {
+    state: GameState.Active,
+  };
 };

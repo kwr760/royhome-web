@@ -1,7 +1,8 @@
 import { checkGame } from '../../../../src/feature/tictactoe/function/check-game';
-import { GameType, PlayerIndex } from '../../../../src/feature/tictactoe/type/state/tictactoe';
+import { GameState } from '../../../../src/feature/tictactoe/store/tictactoe.constant';
+import { CheckGameReturnType, GameType } from '../../../../src/feature/tictactoe/type/tictactoe';
 
-type TestTuple = {game: GameType, expected: PlayerIndex};
+type TestTuple = {game: GameType, expected: CheckGameReturnType};
 
 describe('feature/tictactoe/component/check-game', () => {
   describe('should determine a column win', () => {
@@ -9,19 +10,19 @@ describe('feature/tictactoe/component/check-game', () => {
     const cases: TestTuple[] = [
       {
         game: [[1, null, null], [1, null, null], [1, null, null]],
-        expected: 1,
+        expected: { state: GameState.Win, winner: 1 },
       },
       {
         game: [[null, 0, null], [1, 0, 1], [null, 0, null]],
-        expected: 0,
+        expected: { state: GameState.Win, winner: 0 },
       },
       {
         game: [[null, null, 1], [null, null, 1], [0, 0, 1]],
-        expected: 1,
+        expected: { state: GameState.Win, winner: 1 },
       },
       {
         game: [[null, null, null], [null, 0, null], [null, null, 1]],
-        expected: null,
+        expected: { state: GameState.Active },
       },
     ];
 
@@ -36,19 +37,19 @@ describe('feature/tictactoe/component/check-game', () => {
     const cases: TestTuple[] = [
       {
         game: [[1, 1, 1], [null, null, null], [null, null, null]],
-        expected: 1,
+        expected: { state: GameState.Win, winner: 1 },
       },
       {
-        game: [[null, -1, -1], [0, 0, 0], [-1, 0, -1]],
-        expected: 0,
+        game: [[null, null, null], [0, 0, 0], [null, 0, null]],
+        expected: { state: GameState.Win, winner: 0 },
       },
       {
-        game: [[-1, -1, 1], [-1, -1, 1], [1, 1, 1]],
-        expected: 1,
+        game: [[null, null, 1], [null, null, 1], [1, 1, 1]],
+        expected: { state: GameState.Win, winner: 1 },
       },
       {
-        game: [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]],
-        expected: -1,
+        game: [[null, null, null], [null, null, null], [null, null, null]],
+        expected: { state: GameState.Active },
       },
     ];
 
@@ -62,20 +63,20 @@ describe('feature/tictactoe/component/check-game', () => {
     // Arrange
     const cases: TestTuple[] = [
       {
-        game: [[1, -1, -1], [-1, 1, - 1], [-1, -1, 1]],
-        expected: 1,
+        game: [[1, null, null], [null, 1, null], [null, null, 1]],
+        expected: { state: GameState.Win, winner: 1 },
       },
       {
-        game: [[-1, -1, 0], [-1, 0, -1], [0, -1, -1]],
-        expected: 0,
+        game: [[null, null, 0], [null, 0, null], [0, null, null]],
+        expected: { state: GameState.Win, winner: 0 },
       },
       {
-        game: [[0, -1, -1], [1, -1, -1], [-1, -1, -1]],
-        expected: -1,
+        game: [[0, null, null], [1, null, null], [null, null, null]],
+        expected: { state: GameState.Active },
       },
       {
-        game: [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]],
-        expected: -1,
+        game: [[null, null, null], [null, null, null], [null, null, null]],
+        expected: { state: GameState.Active },
       },
     ];
 
@@ -86,18 +87,32 @@ describe('feature/tictactoe/component/check-game', () => {
     });
   });
 
-  it('should determine a win', () => {
+  it('should determine a tie', () => {
     // Arrange
     const game: GameType = [
-      [-1, -1, -1],
-      [-1, -1, -1],
-      [-1, -1, -1],
+      [0, 1, 1],
+      [1, 0, 0],
+      [0, 0, 1],
     ];
 
     // Act
     const winner = checkGame(game);
 
     // Assert
-    expect(winner).toBe(-1);
+    expect(winner).toEqual({ state: GameState.Tie });
+  });
+  it('should determine that we are not done', () => {
+    // Arrange
+    const game: GameType = [
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
+    ];
+
+    // Act
+    const winner = checkGame(game);
+
+    // Assert
+    expect(winner).toEqual({ state: GameState.Active });
   });
 });

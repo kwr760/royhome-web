@@ -1,5 +1,6 @@
 import { Grid } from '@material-ui/core';
 import React, { FunctionComponent } from 'react';
+import { ColumnIndexType, RowIndexType } from '../type/tictactoe';
 import { GameSquare } from './game-square';
 import { useStyles } from './game-board.styles';
 
@@ -15,7 +16,7 @@ export const GameBoard: FunctionComponent = () => {
                 [...Array(3).keys()].map((col) => {
                   return (
                     <Grid item className={classes.item} xs={4} key={`square-${row}-${col}`}>
-                      <GameSquare row={row} col={col} />
+                      <GameSquare row={row as RowIndexType} col={col as ColumnIndexType} />
                     </Grid>
                   );
                 })

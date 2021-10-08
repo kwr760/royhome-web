@@ -12,7 +12,6 @@ export const useStyles = makeStyles((theme: Theme) => {
       paddingBottom: '100%',
       border: `${borderLength}px solid ${borderColor}`,
       borderRadius: 0,
-      // backgroundColor: 'transparent',
       boxShadow: 'none',
     },
     label: {

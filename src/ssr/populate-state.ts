@@ -1,11 +1,15 @@
 import { matchPath } from 'react-router-dom';
-import { initialGame, initialPlayers, initialPlayerTurn } from '../feature/tictactoe/store/tictactoe.slice';
+import {
+  initialGame,
+  initialStatus,
+  initialPlayers,
+} from '../feature/tictactoe/store/tictactoe.constant';
+import { getSessionProxy } from '../proxy/get-session.proxy';
+import { DarkModes } from '../store/session/session.constants';
 import { SessionStateType } from '../type/state/session';
 import { StateType } from '../type/state/state';
 
 import { fetchRoutes } from './fetch-routes';
-import { DarkModes } from '../store/session/session.constants';
-import { getSessionProxy } from '../proxy/get-session.proxy';
 
 const populateState = async (path: string, sessionId?: string): Promise<StateType> => {
   const activeRoute = fetchRoutes.find((route) => matchPath(path, route));
@@ -50,9 +54,9 @@ const populateState = async (path: string, sessionId?: string): Promise<StateTyp
       resumes: {},
     },
     tictactoe: {
-      playerTurn: initialPlayerTurn,
       players: [ ...initialPlayers ],
       game: [ ...initialGame ],
+      status: { ...initialStatus },
     },
     ...data,
   };
