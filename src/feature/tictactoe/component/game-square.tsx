@@ -1,17 +1,17 @@
 import { Box, Button, Typography } from '@material-ui/core';
 import React, { FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPlayerTurn, getSquare, getWinner } from '../store/tictactoe.selector';
+import { getGameStatus, getSquare } from '../store/tictactoe.selector';
 import { takeTurn } from '../store/tictactoe.slice';
-import { PlayerIndex } from '../type/state/tictactoe';
+import { GameState } from '../store/tictactoe.constant';
+import { GameSquarePropType, GameSquareType, GameStateType } from '../type/tictactoe';
 import { useStyles } from './game-square.styles';
-import { GameSquarePropType } from '../type/prop/game-square';
 
-const isSquareDisabled = (winner: PlayerIndex, owner: PlayerIndex) => {
-  return winner !== null || owner !== null;
+const isSquareDisabled = (gameState: GameStateType, owner: GameSquareType) => {
+  return gameState !== GameState.Active || owner !== null;
 };
 
-const getPiece = (owner: PlayerIndex): string => {
+const getPiece = (owner: GameSquareType): string => {
   switch (owner) {
     case 0:
       return 'O';
@@ -24,13 +24,13 @@ const getPiece = (owner: PlayerIndex): string => {
 export const GameSquare: FunctionComponent<GameSquarePropType> = ({row, col}) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const turn = useSelector(getPlayerTurn);
+  const gameStatus = useSelector(getGameStatus);
   const owner = useSelector(getSquare(row, col));
-  const winner = useSelector(getWinner);
+
   const piece = getPiece(owner);
-  const disabled = isSquareDisabled(winner, owner);
+  const disabled = isSquareDisabled(gameStatus.state, owner);
   const clickAction = () => {
-    dispatch(takeTurn({ row, col, player: turn }));
+    dispatch(takeTurn({ row, col, player: gameStatus.turn }));
   };
 
   return (

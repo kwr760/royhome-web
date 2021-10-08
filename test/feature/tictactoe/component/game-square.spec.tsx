@@ -5,7 +5,7 @@ import { Store } from 'redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { GameSquare } from '../../../../src/feature/tictactoe/component/game-square';
-import { initialGame, initialPlayers } from '../../../../src/feature/tictactoe/store/tictactoe.slice';
+import { initialGame, initialPlayers, initialStatus } from '../../../../src/feature/tictactoe/store/tictactoe.constant';
 
 describe('feature/tictactoe/component/game-square', () => {
   const mockStore = configureMockStore([thunk]);
@@ -18,9 +18,12 @@ describe('feature/tictactoe/component/game-square', () => {
     // Arrange
     const state = {
       tictactoe: {
-        playerTurn: 1,
         players: [ ...initialPlayers ],
         game: [ ...initialGame ],
+        status: {
+          ...initialStatus,
+          turn: 1,
+        },
       },
     };
     const store = mockStore(state);
@@ -46,9 +49,12 @@ describe('feature/tictactoe/component/game-square', () => {
     // Arrange
     const state = {
       tictactoe: {
-        playerTurn: 1,
         players: ['Player #1', 'Player #2'],
         game: [[null,null,null],[null,null,0],[null,null,null]],
+        status: {
+          ...initialStatus,
+          turn: 1,
+        },
       },
     };
     const store = mockStore(state);
@@ -63,9 +69,12 @@ describe('feature/tictactoe/component/game-square', () => {
     // Arrange
     const state = {
       tictactoe: {
-        playerTurn: 1,
         players: ['Player #1', 'Player #2'],
         game: [[null,null,null],[null,null,1],[null,null,null]],
+        status: {
+          ...initialStatus,
+          turn: 1,
+        },
       },
     };
     const store = mockStore(state);

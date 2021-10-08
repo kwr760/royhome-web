@@ -1,4 +1,8 @@
-import { initialGame } from '../../src/feature/tictactoe/store/tictactoe.slice';
+import {
+  initialGame,
+  initialPlayers,
+  initialStatus,
+} from '../../src/feature/tictactoe/store/tictactoe.constant';
 import { getResumeProxy } from '../../src/proxy/get-resume.proxy';
 import { getSessionProxy } from '../../src/proxy/get-session.proxy';
 import populateState from '../../src/ssr/populate-state';
@@ -49,11 +53,8 @@ describe('server/rendering/populate-state', () => {
       },
       tictactoe: {
         game: initialGame,
-        playerTurn: 0,
-        players: [
-          'Player #1',
-          'Player #2',
-        ],
+        players: initialPlayers,
+        status: initialStatus,
       },
     };
 
@@ -89,11 +90,8 @@ describe('server/rendering/populate-state', () => {
       },
       tictactoe: {
         game: initialGame,
-        playerTurn: 0,
-        players: [
-          'Player #1',
-          'Player #2',
-        ],
+        players: initialPlayers,
+        status: initialStatus,
       },
     };
 
@@ -123,11 +121,8 @@ describe('server/rendering/populate-state', () => {
       },
       tictactoe: {
         game: initialGame,
-        playerTurn: 0,
-        players: [
-          'Player #1',
-          'Player #2',
-        ],
+        players: initialPlayers,
+        status: initialStatus,
       },
     };
 

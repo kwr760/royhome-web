@@ -9,8 +9,8 @@ import Index from '../../../../src/feature/tictactoe/component';
 import {
   initialGame,
   initialPlayers,
-  initialPlayerTurn,
-} from '../../../../src/feature/tictactoe/store/tictactoe.slice';
+  initialStatus,
+} from '../../../../src/feature/tictactoe/store/tictactoe.constant';
 
 jest.mock('../../../../src/feature/tictactoe/component/game-board');
 
@@ -28,9 +28,9 @@ describe('feature/tictactoe/component', () => {
     // Arrange/Act
     const state = {
       tictactoe: {
-        playerTurn: initialPlayerTurn,
         players: [ ...initialPlayers ],
         game: [ ...initialGame ],
+        status: { ...initialStatus },
       },
     };
     const store = mockStore(state);

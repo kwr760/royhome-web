@@ -1,17 +1,20 @@
 import { ThemeProvider } from '@material-ui/core/styles';
-import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-
-import { render, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
+import { render, waitFor } from '@testing-library/react';
+import React from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Store } from 'redux';
-import { initialGame, initialPlayers, initialPlayerTurn } from '../../../src/feature/tictactoe/store/tictactoe.slice';
-import { StateType } from '../../../src/type/state/state';
-import themeLight from '../../../src/theme-light';
 import Profile from '../../../src/component/profile';
+import {
+  initialGame,
+  initialPlayers,
+  initialStatus,
+} from '../../../src/feature/tictactoe/store/tictactoe.constant';
 import createStore from '../../../src/store/create-store';
+import themeLight from '../../../src/theme-light';
+import { StateType } from '../../../src/type/state/state';
 
 describe('feature/resume/componentprofile', () => {
   const getProfile = (store: Store) => (
@@ -42,9 +45,9 @@ describe('feature/resume/componentprofile', () => {
         resumes: {},
       },
       tictactoe: {
-        playerTurn: initialPlayerTurn,
         players: [ ...initialPlayers ],
         game: [ ...initialGame ],
+        status: { ...initialStatus },
       },
     };
     const store = createStore(state);
