@@ -1,38 +1,36 @@
-import React from 'react';
+import React, { Reducer } from 'react';
 import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { Store } from 'redux';
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 import { FaAngleDoubleLeft as LeftArrow, FaAngleDoubleRight as RightArrow } from 'react-icons/fa';
 import { GameHeader } from '../../../../src/feature/tictactoe/component/game-header';
-import { GameState, initialGame, initialPlayers } from '../../../../src/feature/tictactoe/store/tictactoe.constant';
+import { TicTacToeProvider } from '../../../../src/feature/tictactoe/context';
+import { GameState, initialGame, initialPlayers } from '../../../../src/feature/tictactoe/context/tictactoe.constant';
+import { PlayerType, StateType } from '../../../../src/feature/tictactoe/type/tictactoe';
 
 jest.mock('react-icons/fa');
 
-describe('feature/tictactoe/component/game-info', () => {
-  const mockStore = configureMockStore([thunk]);
-  const getComponent = (store: Store) => (
-    <Provider store={store}>
-      <GameHeader />
-    </Provider>
-  );
+describe('feature/tictactoe/component/game-header', () => {
+  const emptyReducer = jest.fn();
+  const getComponent = (initialState: StateType, reducer: Reducer<unknown, unknown>) => {
+    return (
+      <TicTacToeProvider state={initialState} reducer={reducer}>
+        <GameHeader />
+      </TicTacToeProvider>
+    );
+  };
   it('should render', () => {
     // Arrange
     const state = {
-      tictactoe: {
-        players: initialPlayers,
-        game: initialGame,
-        status: {
-          turn: 1,
-        },
+      players: initialPlayers,
+      game: initialGame,
+      status: {
+        state: GameState.Active,
+        turn: 1 as PlayerType,
       },
     };
     (RightArrow as jest.Mock).mockImplementation(() => 'Right Arrow');
-    const store = mockStore(state);
 
     // Act
-    const { getByText } = render(getComponent(store));
+    const { getByText } = render(getComponent(state, emptyReducer));
 
     // Assert
     getByText(/Player #1/);
@@ -42,19 +40,17 @@ describe('feature/tictactoe/component/game-info', () => {
   it('should render as Left Arrow', () => {
     // Arrange
     const state = {
-      tictactoe: {
-        players: initialPlayers,
-        game: initialGame,
-        status: {
-          turn: 0,
-        },
+      players: initialPlayers,
+      game: initialGame,
+      status: {
+        state: GameState.Active,
+        turn: 0 as PlayerType,
       },
     };
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
-    const store = mockStore(state);
 
     // Act
-    const { getByText } = render(getComponent(store));
+    const { getByText } = render(getComponent(state, emptyReducer));
 
     // Assert
     getByText(/Player #1/);
@@ -64,20 +60,17 @@ describe('feature/tictactoe/component/game-info', () => {
   it('should render as Tie', () => {
     // Arrange
     const state = {
-      tictactoe: {
-        players: initialPlayers,
-        game: initialGame,
-        status: {
-          state: GameState.Tie,
-          turn: 0,
-        },
+      players: initialPlayers,
+      game: initialGame,
+      status: {
+        state: GameState.Tie,
+        turn: 0 as PlayerType,
       },
     };
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
-    const store = mockStore(state);
 
     // Act
-    const { getByText } = render(getComponent(store));
+    const { getByText } = render(getComponent(state, emptyReducer));
 
     // Assert
     const playerOneClassName = getByText(/Player #1/).className;
@@ -88,21 +81,18 @@ describe('feature/tictactoe/component/game-info', () => {
   it('should render as Win', () => {
     // Arrange
     const state = {
-      tictactoe: {
-        players: initialPlayers,
-        game: initialGame,
-        status: {
-          state: GameState.Win,
-          turn: 0,
-          winner: 1,
-        },
+      players: initialPlayers,
+      game: initialGame,
+      status: {
+        state: GameState.Win,
+        turn: 0 as PlayerType,
+        winner: 1 as PlayerType,
       },
     };
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
-    const store = mockStore(state);
 
     // Act
-    const { getByText } = render(getComponent(store));
+    const { getByText } = render(getComponent(state, emptyReducer));
 
     // Assert
     const playerOneClassName = getByText(/Player #1/).className;

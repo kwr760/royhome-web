@@ -18,7 +18,7 @@ exports[`server/rendering/render-react should return a html page 1`] = `
     <div>Links</div>
     <div>Styles</div>
     <style id=\\"jss-server-side\\">$</style>
-    <script id=\\"preloaded-state\\">window.__PRELOADED_STATE__ = {\\"session\\":{\\"authenticated\\":false,\\"expiration\\":-1,\\"isLoading\\":false,\\"darkMode\\":\\"clear-mode\\",\\"user\\":{}},\\"resume\\":{\\"email\\":\\"kroy760@gmail.com\\",\\"resumes\\":{\\"kroy760@gmail.com\\":{\\"owner\\":\\"owner\\"}}},\\"tictactoe\\":{\\"players\\":[\\"Player #1\\",\\"Player #2\\"],\\"game\\":[[null,null,null],[null,null,null],[null,null,null]],\\"status\\":{\\"turn\\":0,\\"state\\":\\"ACTIVE\\"}}}</script>
+    <script id=\\"preloaded-state\\">window.__PRELOADED_STATE__ = {\\"session\\":{\\"authenticated\\":false,\\"expiration\\":-1,\\"isLoading\\":false,\\"darkMode\\":\\"clear-mode\\",\\"user\\":{}},\\"resume\\":{\\"email\\":\\"kroy760@gmail.com\\",\\"resumes\\":{\\"kroy760@gmail.com\\":{\\"owner\\":\\"owner\\"}}}}</script>
   </head>
   <body>
     <div id=\\"main\\">&lt;div&gt;Chunks&lt;/div&gt;</div>

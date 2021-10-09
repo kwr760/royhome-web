@@ -1,8 +1,3 @@
-import {
-  initialGame,
-  initialPlayers,
-  initialStatus,
-} from '../../src/feature/tictactoe/store/tictactoe.constant';
 import createStore from '../../src/store/create-store';
 import { DarkModes } from '../../src/store/session/session.constants';
 
@@ -19,11 +14,6 @@ describe('store/configure', () => {
       resume: {
         email: 'kroy760@gmail.com',
         resumes: {},
-      },
-      tictactoe: {
-        game: [ ...initialGame ],
-        players: [ ...initialPlayers ],
-        status: { ...initialStatus },
       },
     };
 
@@ -46,11 +36,6 @@ describe('store/configure', () => {
       },
       resume: {
         email: 'kroy760@gmail.com',
-      },
-      tictactoe: {
-        game: initialGame,
-        players: [ ...initialPlayers ],
-        status: { ...initialStatus },
       },
     };
 

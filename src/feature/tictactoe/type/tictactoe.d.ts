@@ -1,37 +1,58 @@
-import { GameState } from '../store/tictactoe.constant';
+import { ReactNode, Reducer } from 'react';
+import { ActionEnumType } from '../context/context.actions';
+import { GameState } from '../context/tictactoe.constant';
 
 export type PlayersType = string[];
-export type PlayerIndex = 0 | 1;
-export type GameSquareType = PlayerIndex | null;
-export type GameType = GameSquareType[][];
-export type GameStateType = GameState.Active | GameState.Win | GameState.Tie;
+export type PlayerType = 0 | 1;
+export type SquareType = PlayerType | null;
+export type GameType = SquareType[][];
+export type StateEnumType = GameState.Active | GameState.Win | GameState.Tie;
 export type RowIndexType = 0 | 1 | 2;
-export type ColumnIndexType = 0 | 1 | 2;
+export type ColIndexType = 0 | 1 | 2;
 
-export interface GameStatusType {
-  state: GameStateType,
-  turn: PlayerIndex,
-  winner?: PlayerIndex,
+export interface StatusType {
+  state: StateEnumType,
+  turn: PlayerType,
+  winner?: PlayerType,
 }
-export interface TicTacToeStateType {
+export interface StateType {
   players: PlayersType,
   game: GameType,
-  status: GameStatusType,
+  status: StatusType,
 }
 
-export interface GameSquarePropType {
+export interface SquareProps {
   row: RowIndexType;
-  col: ColumnIndexType;
+  col: ColIndexType;
 }
 
-export interface CheckGameReturnType {
-  state: GameStateType,
-  winner?: PlayerIndex,
+export interface CheckGameReturn {
+  state: StateEnumType,
+  winner?: PlayerType,
 }
 
-export interface TakeTurnPayloadType {
+export interface TakeTurnPayload {
   row: RowIndexType,
-  col: ColumnIndexType,
-  player: PlayerIndex
+  col: ColIndexType,
+  player: PlayerType
 }
 
+export type TakeTurnAction = {
+  type: ActionEnumType.takeTurn,
+  payload: TakeTurnPayload,
+};
+export type ResetAction = {
+  type: ActionEnumType.reset,
+};
+export type ActionsType = TakeTurnAction | ResetAction;
+export type DispatchType = (action: ActionsType) => void;
+export type ContextType = {
+  state: StateType,
+  dispatch: DispatchType,
+};
+
+export type ProviderType = {
+  state?: StateType,
+  reducer?: Reducer<unknown, unknown>,
+  children: ReactNode,
+}

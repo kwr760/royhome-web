@@ -1,66 +1,63 @@
-import React from 'react';
+import React, { Reducer } from 'react';
 import { fireEvent, render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { Store } from 'redux';
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 import { GameSquare } from '../../../../src/feature/tictactoe/component/game-square';
-import { initialGame, initialPlayers, initialStatus } from '../../../../src/feature/tictactoe/store/tictactoe.constant';
+import { TicTacToeProvider } from '../../../../src/feature/tictactoe/context';
+import { ActionEnumType } from '../../../../src/feature/tictactoe/context/context.actions';
+import {
+  initialGame,
+  initialPlayers,
+  initialStatus,
+} from '../../../../src/feature/tictactoe/context/tictactoe.constant';
+import { GameType, PlayerType, StateType } from '../../../../src/feature/tictactoe/type/tictactoe';
 
 describe('feature/tictactoe/component/game-square', () => {
-  const mockStore = configureMockStore([thunk]);
-  const getComponent = (store: Store) => (
-    <Provider store={store}>
-      <GameSquare row={1} col={2} />
-    </Provider>
-  );
+  const emptyReducer = jest.fn();
+  const getComponent = (initialState: StateType, reducer: Reducer<unknown, unknown>) => {
+    return (
+      <TicTacToeProvider state={initialState} reducer={reducer}>
+        <GameSquare row={1} col={2} />
+      </TicTacToeProvider>
+    );
+  };
   it('should render', () => {
     // Arrange
     const state = {
-      tictactoe: {
-        players: [ ...initialPlayers ],
-        game: [ ...initialGame ],
-        status: {
-          ...initialStatus,
-          turn: 1,
-        },
+      players: [ ...initialPlayers ],
+      game: [ ...initialGame ],
+      status: {
+        ...initialStatus,
+        turn: 1 as PlayerType,
       },
     };
-    const store = mockStore(state);
-    const actions = store.getActions();
     const expectedPayload = {
       row: 1,
       col: 2,
       player: 1,
     };
+    const reducer = jest.fn(() => (state));
 
     // Act
-    const { getByRole } = render(getComponent(store));
+    const { getByRole } = render(getComponent(state, reducer));
     const button = getByRole(/button/);
     getByRole(/heading/);
     fireEvent.click(button);
 
     // Assert
-    expect(actions.length).toEqual(1);
-    expect(actions[0].type).toEqual('tictactoe/takeTurn');
-    expect(actions[0].payload).toEqual(expectedPayload);
+    expect(reducer).toBeCalledWith(state, { type: ActionEnumType.takeTurn, payload: expectedPayload});
   });
   it('should render - O', () => {
     // Arrange
     const state = {
-      tictactoe: {
-        players: ['Player #1', 'Player #2'],
-        game: [[null,null,null],[null,null,0],[null,null,null]],
-        status: {
-          ...initialStatus,
-          turn: 1,
-        },
+      players: initialPlayers,
+      game: [[null,null,null],[null,null,0],[null,null,null]] as GameType,
+      status: {
+        ...initialStatus,
+        turn: 1 as PlayerType,
       },
     };
-    const store = mockStore(state);
 
     // Act
-    const { getByText } = render(getComponent(store));
+    const { getByText } = render(getComponent(state, emptyReducer));
 
     // Assert
     getByText(/O/);
@@ -68,19 +65,16 @@ describe('feature/tictactoe/component/game-square', () => {
   it('should render - X', () => {
     // Arrange
     const state = {
-      tictactoe: {
-        players: ['Player #1', 'Player #2'],
-        game: [[null,null,null],[null,null,1],[null,null,null]],
-        status: {
-          ...initialStatus,
-          turn: 1,
-        },
+      players: initialPlayers,
+      game: [[null,null,null],[null,null,1],[null,null,null]] as GameType,
+      status: {
+        ...initialStatus,
+        turn: 1 as PlayerType,
       },
     };
-    const store = mockStore(state);
 
     // Act
-    const { getByText } = render(getComponent(store));
+    const { getByText } = render(getComponent(state, emptyReducer));
 
     // Assert
     getByText(/X/);

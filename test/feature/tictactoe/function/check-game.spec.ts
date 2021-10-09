@@ -1,8 +1,8 @@
 import { checkGame } from '../../../../src/feature/tictactoe/function/check-game';
-import { GameState } from '../../../../src/feature/tictactoe/store/tictactoe.constant';
-import { CheckGameReturnType, GameType } from '../../../../src/feature/tictactoe/type/tictactoe';
+import { GameState } from '../../../../src/feature/tictactoe/context/tictactoe.constant';
+import { CheckGameReturn, GameType } from '../../../../src/feature/tictactoe/type/tictactoe';
 
-type TestTuple = {game: GameType, expected: CheckGameReturnType};
+type TestTuple = {game: GameType, expected: CheckGameReturn};
 
 describe('feature/tictactoe/component/check-game', () => {
   describe('should determine a column win', () => {

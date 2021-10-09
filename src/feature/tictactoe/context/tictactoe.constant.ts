@@ -1,4 +1,4 @@
-import { PlayerIndex, TicTacToeStateType } from '../type/tictactoe';
+import { PlayerType, StateType } from '../type/tictactoe';
 
 export enum GameState {
   Active = 'ACTIVE',
@@ -7,7 +7,7 @@ export enum GameState {
 }
 
 export const initialStatus = {
-  turn: 0 as PlayerIndex,
+  turn: 0 as PlayerType,
   state: GameState.Active,
 };
 export const initialPlayers = ['Player #1', 'Player #2'];
@@ -17,7 +17,7 @@ export const initialGame = [
   [null, null, null],
 ];
 
-export const initialState: TicTacToeStateType = {
+export const initialState: StateType = {
   players: initialPlayers,
   game: initialGame,
   status: initialStatus,
