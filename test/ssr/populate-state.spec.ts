@@ -1,8 +1,3 @@
-import {
-  initialGame,
-  initialPlayers,
-  initialStatus,
-} from '../../src/feature/tictactoe/store/tictactoe.constant';
 import { getResumeProxy } from '../../src/proxy/get-resume.proxy';
 import { getSessionProxy } from '../../src/proxy/get-session.proxy';
 import populateState from '../../src/ssr/populate-state';
@@ -51,11 +46,6 @@ describe('server/rendering/populate-state', () => {
           [email]: resume,
         },
       },
-      tictactoe: {
-        game: initialGame,
-        players: initialPlayers,
-        status: initialStatus,
-      },
     };
 
     // Act
@@ -88,11 +78,6 @@ describe('server/rendering/populate-state', () => {
         email: '',
         resumes: {},
       },
-      tictactoe: {
-        game: initialGame,
-        players: initialPlayers,
-        status: initialStatus,
-      },
     };
 
     // Act
@@ -118,11 +103,6 @@ describe('server/rendering/populate-state', () => {
         resumes: {
           [email]: resume,
         },
-      },
-      tictactoe: {
-        game: initialGame,
-        players: initialPlayers,
-        status: initialStatus,
       },
     };
 

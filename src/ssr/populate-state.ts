@@ -1,9 +1,4 @@
 import { matchPath } from 'react-router-dom';
-import {
-  initialGame,
-  initialStatus,
-  initialPlayers,
-} from '../feature/tictactoe/store/tictactoe.constant';
 import { getSessionProxy } from '../proxy/get-session.proxy';
 import { DarkModes } from '../store/session/session.constants';
 import { SessionStateType } from '../type/state/session';
@@ -52,11 +47,6 @@ const populateState = async (path: string, sessionId?: string): Promise<StateTyp
     resume: {
       email: '',
       resumes: {},
-    },
-    tictactoe: {
-      players: [ ...initialPlayers ],
-      game: [ ...initialGame ],
-      status: { ...initialStatus },
     },
     ...data,
   };

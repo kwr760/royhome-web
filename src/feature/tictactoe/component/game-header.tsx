@@ -1,16 +1,15 @@
 import { Grid, Typography } from '@material-ui/core';
-import React, { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
-import { GameState } from '../store/tictactoe.constant';
-import { getGameStatus, getPlayers } from '../store/tictactoe.selector';
-import { GameStatusType } from '../type/tictactoe';
+import React, { FunctionComponent, useMemo } from 'react';
+import { useTicTacToe } from '../context';
+import { GameState } from '../context/tictactoe.constant';
+import { StatusType } from '../type/tictactoe';
 import { useStyles } from './game-header.styles';
 
 import { FaAngleDoubleLeft as LeftArrow, FaAngleDoubleRight as RightArrow } from 'react-icons/fa';
 import { ClassNameMap } from '@material-ui/styles';
 
 type ClassNames = ClassNameMap<'grid' | 'active' | 'inactive' | 'winner' | 'loser' | 'player'>;
-const addClasses = (classes: ClassNames, gameStatus: GameStatusType) => {
+const addClasses = (classes: ClassNames, gameStatus: StatusType) => {
   if (gameStatus.state === GameState.Tie) {
     return [classes.loser, classes.loser];
   }
@@ -26,11 +25,15 @@ const addClasses = (classes: ClassNames, gameStatus: GameStatusType) => {
 
 export const GameHeader: FunctionComponent = () => {
   const classes = useStyles();
-  const players = useSelector(getPlayers);
-  const status = useSelector(getGameStatus);
+  const {
+    state: {
+      players,
+      status,
+    },
+  } = useTicTacToe();
   const [playerOneClass, playerTwoClass] = addClasses(classes, status);
 
-  return (
+  return useMemo(() => (
     <Grid justifyContent="space-between" container className={classes.grid}>
       <Grid item className={classes.player}>
         <Typography className={playerOneClass}>{players[0]}</Typography>
@@ -42,6 +45,8 @@ export const GameHeader: FunctionComponent = () => {
         <Typography className={playerTwoClass}>{players[1]}</Typography>
       </Grid>
     </Grid>
+  ),
+  [classes.grid, classes.player, playerOneClass, playerTwoClass, players, status.turn],
   );
 };
 

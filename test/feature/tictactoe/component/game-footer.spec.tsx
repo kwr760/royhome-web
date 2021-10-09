@@ -1,36 +1,34 @@
-import React from 'react';
+import React, { Reducer } from 'react';
 import { fireEvent, render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { Store } from 'redux';
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 import { GameFooter } from '../../../../src/feature/tictactoe/component/game-footer';
-import { GameState, initialGame, initialPlayers } from '../../../../src/feature/tictactoe/store/tictactoe.constant';
-
-jest.mock('react-icons/fa');
+import { TicTacToeProvider } from '../../../../src/feature/tictactoe/context';
+import { ActionEnumType } from '../../../../src/feature/tictactoe/context/context.actions';
+import { GameState, initialGame, initialPlayers } from '../../../../src/feature/tictactoe/context/tictactoe.constant';
+import { PlayerType, StateType } from '../../../../src/feature/tictactoe/type/tictactoe';
 
 describe('feature/tictactoe/component/game-footer', () => {
-  const mockStore = configureMockStore([thunk]);
-  const getComponent = (store: Store) => (
-    <Provider store={store}>
-      <GameFooter />
-    </Provider>
-  );
+  const emptyReducer = jest.fn();
+  const getComponent = (initialState: StateType, reducer: Reducer<unknown, unknown>) => {
+    return (
+      <TicTacToeProvider state={initialState} reducer={reducer}>
+        <GameFooter />
+      </TicTacToeProvider>
+    );
+  };
+
   it('should render - Active', () => {
     // Arrange
     const state = {
-      tictactoe: {
-        players: initialPlayers,
-        game: initialGame,
-        status: {
-          state: GameState.Active,
-        },
+      players: initialPlayers,
+      game: initialGame,
+      status: {
+        state: GameState.Active,
+        turn: 0 as PlayerType,
       },
     };
-    const store = mockStore(state);
 
     // Act
-    const { getByText } = render(getComponent(store));
+    const { getByText } = render(getComponent(state, emptyReducer));
 
     // Assert
     getByText(/Reset/);
@@ -39,18 +37,16 @@ describe('feature/tictactoe/component/game-footer', () => {
   it('should render - Win', () => {
     // Arrange
     const state = {
-      tictactoe: {
-        players: initialPlayers,
-        game: initialGame,
-        status: {
-          state: GameState.Win,
-        },
+      players: initialPlayers,
+      game: initialGame,
+      status: {
+        state: GameState.Win,
+        turn: 0 as PlayerType,
       },
     };
-    const store = mockStore(state);
 
     // Act
-    const { getByText } = render(getComponent(store));
+    const { getByText } = render(getComponent(state, emptyReducer));
 
     // Assert
     getByText(/Reset/);
@@ -59,25 +55,22 @@ describe('feature/tictactoe/component/game-footer', () => {
   it('should render - Tie', async () => {
     // Arrange
     const state = {
-      tictactoe: {
-        players: initialPlayers,
-        game: initialGame,
-        status: {
-          state: GameState.Tie,
-        },
+      players: initialPlayers,
+      game: initialGame,
+      status: {
+        state: GameState.Tie,
+        turn: 0 as PlayerType,
       },
     };
-    const store = mockStore(state);
+    const reducer = jest.fn(() => (state));
 
     // Act
-    const { getByText } = render(getComponent(store));
-    const actions = store.getActions();
+    const { getByText } = render(getComponent(state, reducer));
+
     await fireEvent.click(getByText(/Reset/));
 
     // Assert
     getByText(/Two losers/);
-    expect(actions.length).toEqual(1);
-    expect(actions[0].type).toEqual('tictactoe/reset');
-    expect(actions[0].payload).toBeUndefined();
+    expect(reducer).toBeCalledWith(state, { type: ActionEnumType.reset});
   });
 });

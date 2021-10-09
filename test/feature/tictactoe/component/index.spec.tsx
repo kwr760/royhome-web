@@ -10,7 +10,7 @@ import {
   initialGame,
   initialPlayers,
   initialStatus,
-} from '../../../../src/feature/tictactoe/store/tictactoe.constant';
+} from '../../../../src/feature/tictactoe/context/tictactoe.constant';
 
 jest.mock('../../../../src/feature/tictactoe/component/game-board');
 

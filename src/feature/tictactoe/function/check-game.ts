@@ -1,5 +1,5 @@
-import { GameState } from '../store/tictactoe.constant';
-import { CheckGameReturnType, GameType } from '../type/tictactoe';
+import { GameState } from '../context/tictactoe.constant';
+import { CheckGameReturn, GameType } from '../type/tictactoe';
 
 const gameSize = 3;
 const checkRows = (game: GameType) => {
@@ -72,7 +72,7 @@ const isGameDone = (game: GameType) => {
   return true;
 };
 
-export const checkGame = (game: GameType): CheckGameReturnType => {
+export const checkGame = (game: GameType): CheckGameReturn => {
   let winner = checkRows(game);
   if (winner === null) {
     winner = checkColumns(game);
