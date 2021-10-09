@@ -7,6 +7,11 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Store } from 'redux';
 import Profile from '../../../src/component/profile';
+import {
+  initialGame,
+  initialPlayers,
+  initialStatus,
+} from '../../../src/feature/tictactoe/store/tictactoe.constant';
 import createStore from '../../../src/store/create-store';
 import themeLight from '../../../src/theme-light';
 import { StateType } from '../../../src/type/state/state';
@@ -39,6 +44,14 @@ describe('feature/resume/componentprofile', () => {
         email: 'Resume Email',
         resumes: {},
       },
+<<<<<<< HEAD
+=======
+      tictactoe: {
+        players: [ ...initialPlayers ],
+        game: [ ...initialGame ],
+        status: { ...initialStatus },
+      },
+>>>>>>> 3231e5d44429fd939aa21ed5a0ca73669132de9c
     };
     const store = createStore(state);
 
