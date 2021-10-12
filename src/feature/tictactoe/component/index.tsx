@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import { TicTacToeProvider } from '../context';
 import { GameHeader } from './game-header';
 import { GameFooter } from './game-footer';
-import { useStyles } from './index.styles';
+import { useStyles } from '../style/index.styles';
 import { GameBoard } from './game-board';
 
 const TicTacToe: FunctionComponent = () => {

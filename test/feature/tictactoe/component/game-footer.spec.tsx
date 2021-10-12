@@ -2,9 +2,14 @@ import React, { Reducer } from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { GameFooter } from '../../../../src/feature/tictactoe/component/game-footer';
 import { TicTacToeProvider } from '../../../../src/feature/tictactoe/context';
-import { ActionEnumType } from '../../../../src/feature/tictactoe/context/context.actions';
-import { GameState, initialGame, initialPlayers } from '../../../../src/feature/tictactoe/context/tictactoe.constant';
-import { PlayerType, StateType } from '../../../../src/feature/tictactoe/type/tictactoe';
+import {
+  ActionEnum,
+  initialGame,
+  initialPlayers,
+  PlayerEnum,
+  StatusEnum,
+} from '../../../../src/feature/tictactoe/constant/tictactoe.constant';
+import { StateType } from '../../../../src/feature/tictactoe/type/tictactoe';
 
 describe('feature/tictactoe/component/game-footer', () => {
   const emptyReducer = jest.fn();
@@ -21,10 +26,8 @@ describe('feature/tictactoe/component/game-footer', () => {
     const state = {
       players: initialPlayers,
       game: initialGame,
-      status: {
-        state: GameState.Active,
-        turn: 0 as PlayerType,
-      },
+      status: StatusEnum.Active,
+      turn: PlayerEnum.One,
     };
 
     // Act
@@ -39,10 +42,8 @@ describe('feature/tictactoe/component/game-footer', () => {
     const state = {
       players: initialPlayers,
       game: initialGame,
-      status: {
-        state: GameState.Win,
-        turn: 0 as PlayerType,
-      },
+      status: StatusEnum.Win,
+      turn: PlayerEnum.Two,
     };
 
     // Act
@@ -57,10 +58,8 @@ describe('feature/tictactoe/component/game-footer', () => {
     const state = {
       players: initialPlayers,
       game: initialGame,
-      status: {
-        state: GameState.Tie,
-        turn: 0 as PlayerType,
-      },
+      status: StatusEnum.Tie,
+      turn: PlayerEnum.One,
     };
     const reducer = jest.fn(() => (state));
 
@@ -71,6 +70,6 @@ describe('feature/tictactoe/component/game-footer', () => {
 
     // Assert
     getByText(/Two losers/);
-    expect(reducer).toBeCalledWith(state, { type: ActionEnumType.reset});
+    expect(reducer).toBeCalledWith(state, { type: ActionEnum.reset});
   });
 });

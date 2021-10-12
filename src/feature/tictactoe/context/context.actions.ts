@@ -1,22 +1,17 @@
+import { ActionEnum } from '../constant/tictactoe.constant';
 import {
   ResetAction,
   TakeTurnAction,
   TakeTurnPayload,
 } from '../type/tictactoe';
 
-export enum ActionEnumType {
-  reset = 'reset',
-  takeTurn = 'takeTurn',
-}
-
 export const reset = (): ResetAction => ({
-  type: ActionEnumType.reset,
+  type: ActionEnum.reset,
 });
-export const takeTurn = ({row, col, player} : TakeTurnPayload): TakeTurnAction => ({
-  type: ActionEnumType.takeTurn,
+export const takeTurn = ({position, player} : TakeTurnPayload): TakeTurnAction => ({
+  type: ActionEnum.takeTurn,
   payload: {
-    row,
-    col,
+    position,
     player,
   },
 });

@@ -2,20 +2,20 @@ import React, { Reducer } from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { GameSquare } from '../../../../src/feature/tictactoe/component/game-square';
 import { TicTacToeProvider } from '../../../../src/feature/tictactoe/context';
-import { ActionEnumType } from '../../../../src/feature/tictactoe/context/context.actions';
 import {
-  initialGame,
+  ActionEnum,
   initialPlayers,
   initialStatus,
-} from '../../../../src/feature/tictactoe/context/tictactoe.constant';
-import { GameType, PlayerType, StateType } from '../../../../src/feature/tictactoe/type/tictactoe';
+  PlayerEnum,
+} from '../../../../src/feature/tictactoe/constant/tictactoe.constant';
+import { StateType } from '../../../../src/feature/tictactoe/type/tictactoe';
 
 describe('feature/tictactoe/component/game-square', () => {
   const emptyReducer = jest.fn();
   const getComponent = (initialState: StateType, reducer: Reducer<unknown, unknown>) => {
     return (
       <TicTacToeProvider state={initialState} reducer={reducer}>
-        <GameSquare row={1} col={2} />
+        <GameSquare position={5} />
       </TicTacToeProvider>
     );
   };
@@ -23,16 +23,13 @@ describe('feature/tictactoe/component/game-square', () => {
     // Arrange
     const state = {
       players: [ ...initialPlayers ],
-      game: [ ...initialGame ],
-      status: {
-        ...initialStatus,
-        turn: 1 as PlayerType,
-      },
+      game: '---------',
+      status: initialStatus,
+      turn: PlayerEnum.Two,
     };
     const expectedPayload = {
-      row: 1,
-      col: 2,
-      player: 1,
+      position: 5,
+      player: PlayerEnum.Two,
     };
     const reducer = jest.fn(() => (state));
 
@@ -43,17 +40,15 @@ describe('feature/tictactoe/component/game-square', () => {
     fireEvent.click(button);
 
     // Assert
-    expect(reducer).toBeCalledWith(state, { type: ActionEnumType.takeTurn, payload: expectedPayload});
+    expect(reducer).toBeCalledWith(state, { type: ActionEnum.takeTurn, payload: expectedPayload});
   });
   it('should render - O', () => {
     // Arrange
     const state = {
       players: initialPlayers,
-      game: [[null,null,null],[null,null,0],[null,null,null]] as GameType,
-      status: {
-        ...initialStatus,
-        turn: 1 as PlayerType,
-      },
+      game: '-----O---',
+      status: initialStatus,
+      turn: PlayerEnum.Two,
     };
 
     // Act
@@ -66,11 +61,9 @@ describe('feature/tictactoe/component/game-square', () => {
     // Arrange
     const state = {
       players: initialPlayers,
-      game: [[null,null,null],[null,null,1],[null,null,null]] as GameType,
-      status: {
-        ...initialStatus,
-        turn: 1 as PlayerType,
-      },
+      game: '-----X---',
+      status: initialStatus,
+      turn: PlayerEnum.One,
     };
 
     // Act

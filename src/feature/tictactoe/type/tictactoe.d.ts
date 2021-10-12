@@ -1,48 +1,36 @@
 import { ReactNode, Reducer } from 'react';
-import { ActionEnumType } from '../context/context.actions';
-import { GameState } from '../context/tictactoe.constant';
+import { ActionEnum, PlayerEnum, StatusEnum } from '../constant/tictactoe.constant';
 
 export type PlayersType = string[];
-export type PlayerType = 0 | 1;
-export type SquareType = PlayerType | null;
-export type GameType = SquareType[][];
-export type StateEnumType = GameState.Active | GameState.Win | GameState.Tie;
-export type RowIndexType = 0 | 1 | 2;
-export type ColIndexType = 0 | 1 | 2;
-
-export interface StatusType {
-  state: StateEnumType,
-  turn: PlayerType,
-  winner?: PlayerType,
-}
+export type GameType = string;
 export interface StateType {
   players: PlayersType,
   game: GameType,
-  status: StatusType,
+  status: StatusEnum,
+  turn: PlayerEnum,
+  winner?: PlayerEnum,
 }
 
 export interface SquareProps {
-  row: RowIndexType;
-  col: ColIndexType;
+  position: number;
 }
 
 export interface CheckGameReturn {
-  state: StateEnumType,
-  winner?: PlayerType,
+  status: StatusEnum,
+  winner?: PlayerEnum,
 }
 
 export interface TakeTurnPayload {
-  row: RowIndexType,
-  col: ColIndexType,
-  player: PlayerType
+  position: number,
+  player: PlayerEnum
 }
 
 export type TakeTurnAction = {
-  type: ActionEnumType.takeTurn,
+  type: ActionEnum.takeTurn,
   payload: TakeTurnPayload,
 };
 export type ResetAction = {
-  type: ActionEnumType.reset,
+  type: ActionEnum.reset,
 };
 export type ActionsType = TakeTurnAction | ResetAction;
 export type DispatchType = (action: ActionsType) => void;

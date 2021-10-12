@@ -1,26 +1,27 @@
 import { Grid, Typography } from '@material-ui/core';
+import { ClassNameMap } from '@material-ui/styles';
 import React, { FunctionComponent, useMemo } from 'react';
-import { useTicTacToe } from '../context';
-import { GameState } from '../context/tictactoe.constant';
-import { StatusType } from '../type/tictactoe';
-import { useStyles } from './game-header.styles';
 
 import { FaAngleDoubleLeft as LeftArrow, FaAngleDoubleRight as RightArrow } from 'react-icons/fa';
-import { ClassNameMap } from '@material-ui/styles';
+import { PlayerEnum, StatusEnum } from '../constant/tictactoe.constant';
+import { useTicTacToe } from '../context';
+import { useStyles } from '../style/game-header.styles';
 
 type ClassNames = ClassNameMap<'grid' | 'active' | 'inactive' | 'winner' | 'loser' | 'player'>;
-const addClasses = (classes: ClassNames, gameStatus: StatusType) => {
-  if (gameStatus.state === GameState.Tie) {
+const addClasses = (classes: ClassNames, status: StatusEnum, winner: PlayerEnum, turn: PlayerEnum) => {
+  if (status === StatusEnum.Tie) {
     return [classes.loser, classes.loser];
   }
-  if (gameStatus.state === GameState.Win) {
-    const result = [classes.loser, classes.loser];
-    result[gameStatus.winner as number] = classes.winner;
-    return result;
+  if (status === StatusEnum.Win) {
+    return [
+      winner === PlayerEnum.One ? classes.winner : classes.loser,
+      winner === PlayerEnum.Two ? classes.winner : classes.loser,
+    ];
   }
-  const result = [classes.inactive, classes.inactive];
-  result[gameStatus.turn] = classes.active;
-  return result;
+  return [
+    turn === PlayerEnum.One ? classes.active : classes.inactive,
+    turn === PlayerEnum.Two ? classes.active : classes.inactive,
+  ];
 };
 
 export const GameHeader: FunctionComponent = () => {
@@ -29,9 +30,11 @@ export const GameHeader: FunctionComponent = () => {
     state: {
       players,
       status,
+      winner,
+      turn,
     },
   } = useTicTacToe();
-  const [playerOneClass, playerTwoClass] = addClasses(classes, status);
+  const [playerOneClass, playerTwoClass] = addClasses(classes, status, winner || PlayerEnum.None, turn);
 
   return useMemo(() => (
     <Grid justifyContent="space-between" container className={classes.grid}>
@@ -39,14 +42,14 @@ export const GameHeader: FunctionComponent = () => {
         <Typography className={playerOneClass}>{players[0]}</Typography>
       </Grid>
       <Grid item>
-        { status.turn ? <RightArrow className={'fa-2x'} /> : <LeftArrow className={'fa-2x'} />  }
+        { turn === PlayerEnum.One ? <LeftArrow className={'fa-2x'} /> : <RightArrow className={'fa-2x'} />  }
       </Grid>
       <Grid item className={classes.player}>
         <Typography className={playerTwoClass}>{players[1]}</Typography>
       </Grid>
     </Grid>
   ),
-  [classes.grid, classes.player, playerOneClass, playerTwoClass, players, status.turn],
+  [classes.grid, classes.player, playerOneClass, playerTwoClass, players, turn],
   );
 };
 
