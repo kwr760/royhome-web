@@ -3,8 +3,13 @@ import { render } from '@testing-library/react';
 import { FaAngleDoubleLeft as LeftArrow, FaAngleDoubleRight as RightArrow } from 'react-icons/fa';
 import { GameHeader } from '../../../../src/feature/tictactoe/component/game-header';
 import { TicTacToeProvider } from '../../../../src/feature/tictactoe/context';
-import { GameState, initialGame, initialPlayers } from '../../../../src/feature/tictactoe/context/tictactoe.constant';
-import { PlayerType, StateType } from '../../../../src/feature/tictactoe/type/tictactoe';
+import {
+  initialGame,
+  initialPlayers,
+  PlayerEnum,
+  StatusEnum,
+} from '../../../../src/feature/tictactoe/constant/tictactoe.constant';
+import { StateType } from '../../../../src/feature/tictactoe/type/tictactoe';
 
 jest.mock('react-icons/fa');
 
@@ -22,12 +27,11 @@ describe('feature/tictactoe/component/game-header', () => {
     const state = {
       players: initialPlayers,
       game: initialGame,
-      status: {
-        state: GameState.Active,
-        turn: 1 as PlayerType,
-      },
+      status: StatusEnum.Active,
+      turn: PlayerEnum.Two,
     };
     (RightArrow as jest.Mock).mockImplementation(() => 'Right Arrow');
+    (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
 
     // Act
     const { getByText } = render(getComponent(state, emptyReducer));
@@ -42,10 +46,8 @@ describe('feature/tictactoe/component/game-header', () => {
     const state = {
       players: initialPlayers,
       game: initialGame,
-      status: {
-        state: GameState.Active,
-        turn: 0 as PlayerType,
-      },
+      status: StatusEnum.Active,
+      turn: PlayerEnum.One,
     };
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
 
@@ -62,10 +64,8 @@ describe('feature/tictactoe/component/game-header', () => {
     const state = {
       players: initialPlayers,
       game: initialGame,
-      status: {
-        state: GameState.Tie,
-        turn: 0 as PlayerType,
-      },
+      status: StatusEnum.Tie,
+      turn: PlayerEnum.One,
     };
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
 
@@ -78,16 +78,34 @@ describe('feature/tictactoe/component/game-header', () => {
     const playerTwoClassName = getByText(/Player #2/).className;
     expect(playerTwoClassName).toContain('loser');
   });
-  it('should render as Win', () => {
+  it('should render One as Win', () => {
     // Arrange
     const state = {
       players: initialPlayers,
       game: initialGame,
-      status: {
-        state: GameState.Win,
-        turn: 0 as PlayerType,
-        winner: 1 as PlayerType,
-      },
+      status: StatusEnum.Win,
+      turn: PlayerEnum.One,
+      winner: PlayerEnum.One,
+    };
+    (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
+
+    // Act
+    const { getByText } = render(getComponent(state, emptyReducer));
+
+    // Assert
+    const playerOneClassName = getByText(/Player #1/).className;
+    expect(playerOneClassName).toContain('winner');
+    const playerTwoClassName = getByText(/Player #2/).className;
+    expect(playerTwoClassName).toContain('loser');
+  });
+  it('should render Two as Win', () => {
+    // Arrange
+    const state = {
+      players: initialPlayers,
+      game: initialGame,
+      status: StatusEnum.Win,
+      turn: PlayerEnum.One,
+      winner: PlayerEnum.Two,
     };
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
 

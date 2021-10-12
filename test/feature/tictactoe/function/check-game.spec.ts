@@ -1,118 +1,57 @@
+import { initialGame, PlayerEnum, StatusEnum } from '../../../../src/feature/tictactoe/constant/tictactoe.constant';
 import { checkGame } from '../../../../src/feature/tictactoe/function/check-game';
-import { GameState } from '../../../../src/feature/tictactoe/context/tictactoe.constant';
-import { CheckGameReturn, GameType } from '../../../../src/feature/tictactoe/type/tictactoe';
+import { findWinner } from '../../../../src/feature/tictactoe/function/find-winner';
+import { isGameOver } from '../../../../src/feature/tictactoe/function/is-game-over';
+import { GameType } from '../../../../src/feature/tictactoe/type/tictactoe';
 
-type TestTuple = {game: GameType, expected: CheckGameReturn};
+jest
+  .mock('../../../../src/feature/tictactoe/function/find-winner')
+  .mock('../../../../src/feature/tictactoe/function/is-game-over');
 
-describe('feature/tictactoe/component/check-game', () => {
-  describe('should determine a column win', () => {
+describe('feature/tictactoe/function/check-game', () => {
+  it('should determine a win', () => {
     // Arrange
-    const cases: TestTuple[] = [
-      {
-        game: [[1, null, null], [1, null, null], [1, null, null]],
-        expected: { state: GameState.Win, winner: 1 },
-      },
-      {
-        game: [[null, 0, null], [1, 0, 1], [null, 0, null]],
-        expected: { state: GameState.Win, winner: 0 },
-      },
-      {
-        game: [[null, null, 1], [null, null, 1], [0, 0, 1]],
-        expected: { state: GameState.Win, winner: 1 },
-      },
-      {
-        game: [[null, null, null], [null, 0, null], [null, null, 1]],
-        expected: { state: GameState.Active },
-      },
-    ];
-
-    cases.forEach(({ game, expected }: TestTuple) => {
-      it(`should check game - ${JSON.stringify(game)} : ${expected}`, () => {
-        expect(checkGame(game)).toEqual(expected);
-      });
-    });
-  });
-  describe('should determine a row win', () => {
-    // Arrange
-    const cases: TestTuple[] = [
-      {
-        game: [[1, 1, 1], [null, null, null], [null, null, null]],
-        expected: { state: GameState.Win, winner: 1 },
-      },
-      {
-        game: [[null, null, null], [0, 0, 0], [null, 0, null]],
-        expected: { state: GameState.Win, winner: 0 },
-      },
-      {
-        game: [[null, null, 1], [null, null, 1], [1, 1, 1]],
-        expected: { state: GameState.Win, winner: 1 },
-      },
-      {
-        game: [[null, null, null], [null, null, null], [null, null, null]],
-        expected: { state: GameState.Active },
-      },
-    ];
-
-    cases.forEach(({ game, expected }: TestTuple) => {
-      it(`should check game - ${JSON.stringify(game)} : ${expected}`, () => {
-        expect(checkGame(game)).toEqual(expected);
-      });
-    });
-  });
-  describe('should determine a diagonal win', () => {
-    // Arrange
-    const cases: TestTuple[] = [
-      {
-        game: [[1, null, null], [null, 1, null], [null, null, 1]],
-        expected: { state: GameState.Win, winner: 1 },
-      },
-      {
-        game: [[null, null, 0], [null, 0, null], [0, null, null]],
-        expected: { state: GameState.Win, winner: 0 },
-      },
-      {
-        game: [[0, null, null], [1, null, null], [null, null, null]],
-        expected: { state: GameState.Active },
-      },
-      {
-        game: [[null, null, null], [null, null, null], [null, null, null]],
-        expected: { state: GameState.Active },
-      },
-    ];
-
-    cases.forEach(({ game, expected }: TestTuple) => {
-      it(`should check game - ${JSON.stringify(game)} : ${expected}`, () => {
-        expect(checkGame(game)).toEqual(expected);
-      });
-    });
-  });
-
-  it('should determine a tie', () => {
-    // Arrange
-    const game: GameType = [
-      [0, 1, 1],
-      [1, 0, 0],
-      [0, 0, 1],
-    ];
+    const game: GameType = initialGame;
+    (findWinner as jest.Mock).mockReturnValue(PlayerEnum.One);
+    const expected = {
+      status: StatusEnum.Win,
+      winner: PlayerEnum.One,
+    };
 
     // Act
     const winner = checkGame(game);
 
     // Assert
-    expect(winner).toEqual({ state: GameState.Tie });
+    expect(winner).toEqual(expected);
+  });
+  it('should determine a tie', () => {
+    // Arrange
+    const game: GameType = initialGame;
+    (findWinner as jest.Mock).mockReturnValue(PlayerEnum.None);
+    (isGameOver as jest.Mock).mockReturnValue(true);
+    const expected = {
+      status: StatusEnum.Tie,
+    };
+
+    // Act
+    const winner = checkGame(game);
+
+    // Assert
+    expect(winner).toEqual(expected);
   });
   it('should determine that we are not done', () => {
     // Arrange
-    const game: GameType = [
-      [null, null, null],
-      [null, null, null],
-      [null, null, null],
-    ];
+    const game: GameType = initialGame;
+    (findWinner as jest.Mock).mockReturnValue(PlayerEnum.None);
+    (isGameOver as jest.Mock).mockReturnValue(false);
+    const expected = {
+      status: StatusEnum.Active,
+    };
 
     // Act
     const winner = checkGame(game);
 
     // Assert
-    expect(winner).toEqual({ state: GameState.Active });
+    expect(winner).toEqual(expected);
   });
 });

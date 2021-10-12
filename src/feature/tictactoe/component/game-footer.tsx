@@ -1,18 +1,18 @@
 import { Button, Grid, Typography } from '@material-ui/core';
 import React, { FunctionComponent, useMemo } from 'react';
+import { StatusEnum } from '../constant/tictactoe.constant';
 import { useTicTacToe } from '../context';
 import { reset } from '../context/context.actions';
-import { GameState } from '../context/tictactoe.constant';
-import { useStyles } from './game-footer.styles';
+import { useStyles } from '../style/game-footer.styles';
 
-const isActive = (state: GameState) => state === GameState.Active;
-const hasWinner = (state: GameState) => state === GameState.Win;
-const hasTie = (state: GameState) => state === GameState.Tie;
+const isActive = (state: StatusEnum) => state === StatusEnum.Active;
+const hasWinner = (state: StatusEnum) => state === StatusEnum.Win;
+const hasTie = (state: StatusEnum) => state === StatusEnum.Tie;
 export const GameFooter: FunctionComponent = () => {
   const classes = useStyles();
   const {
     state: {
-      status: { state: gameState },
+      status,
     },
     dispatch,
   } = useTicTacToe();
@@ -22,17 +22,17 @@ export const GameFooter: FunctionComponent = () => {
     };
     return (<Grid justifyContent="space-between" container className={classes.footer}>
       <Grid item className={classes.status} >
-        {isActive(gameState) &&
+        {isActive(status) &&
         <Typography>
           Game is being played
         </Typography>
         }
-        {hasWinner(gameState) &&
+        {hasWinner(status) &&
         <Typography>
           There is a winner
         </Typography>
         }
-        {hasTie(gameState) &&
+        {hasTie(status) &&
         <Typography>
           Two losers
         </Typography>
@@ -46,7 +46,7 @@ export const GameFooter: FunctionComponent = () => {
         </Button>
       </Grid>
     </Grid>);
-  }, [classes.button, classes.footer, classes.status, dispatch, gameState]);
+  }, [classes.button, classes.footer, classes.status, dispatch, status]);
 };
 
 export default GameFooter;

@@ -1,52 +1,38 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import { checkGame } from '../function/check-game';
-import { initialGame, initialPlayers, initialStatus } from './tictactoe.constant';
 import {
-  PlayerType,
+  initialState,
+  PlayerEnum,
+} from '../constant/tictactoe.constant';
+import { replaceAt } from '../function/replace-at';
+import {
   ProviderType,
   ActionsType,
   ContextType,
-  StateType, ColIndexType, RowIndexType, GameType, StatusType, PlayersType,
+  StateType,
 } from '../type/tictactoe';
 
 const TicTacToeContext = createContext<ContextType | undefined>(undefined);
 
-const updateGame = (game: GameType, update: { row: RowIndexType, col: ColIndexType, player: PlayerType }) => {
-  const newGame = JSON.parse(JSON.stringify(game));
-  newGame[update.row][update.col] = update.player;
-  return newGame;
-};
-
-const updateTurn = (status: StatusType, players: PlayersType) => {
-  const nextTurn = status.turn + 1;
-  const numPlayers = players.length;
-  return (nextTurn % numPlayers) as PlayerType;
-};
-
 const ticTacToeReducer = (state: StateType, action: ActionsType) => {
   switch (action.type) {
     case 'takeTurn': {
-      const { row, col, player } = action.payload;
-      const { game, status, players } = state;
-      const newGame = updateGame(game, { row, col, player});
-      const nextStatus = checkGame(newGame);
-      const nextTurn = updateTurn(status, players);
+      const { position, player } = action.payload;
+      const { game } = state;
+      const newGame = replaceAt(game, position, player.toString());
+      const { status, winner } = checkGame(newGame);
+      const turn = player === PlayerEnum.One ? PlayerEnum.Two : PlayerEnum.One;
       return {
         ...state,
         game: newGame,
-        status: {
-          ...nextStatus,
-          turn: nextTurn,
-        },
+        status,
+        turn,
+        winner,
       };
     }
     case 'reset': {
       return {
-        ...state,
-        game: [...initialGame],
-        status: {
-          ...initialStatus,
-        },
+        ...initialState,
       };
     }
   }
@@ -56,13 +42,11 @@ const ticTacToeReducer = (state: StateType, action: ActionsType) => {
 export const TicTacToeProvider = (
   {state: seededState, reducer: seededReducer, children}: ProviderType,
 ): JSX.Element => {
-  const initialState = seededState || {
-    players: [...initialPlayers],
-    game: [...initialGame],
-    status: {...initialStatus},
+  const startState = seededState || {
+    ...initialState,
   };
-  const initialReducer = seededReducer || ticTacToeReducer;
-  const [state, dispatch] = useReducer(initialReducer, initialState);
+  const startReducer = seededReducer || ticTacToeReducer;
+  const [state, dispatch] = useReducer(startReducer, startState);
 
   const value = {state, dispatch} as ContextType;
 
