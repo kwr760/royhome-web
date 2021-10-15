@@ -1,4 +1,4 @@
-import { ReactNode, Reducer } from 'react';
+import React, { ReactNode, Reducer } from 'react';
 import { ActionEnum, PlayerEnum, StatusEnum } from '../constant/tictactoe.constant';
 
 export type PlayersType = string[];
@@ -13,6 +13,11 @@ export interface StateType {
 
 export interface SquareProps {
   position: number;
+}
+export interface PlayerDialogProps {
+  player: PlayerEnum;
+  openDialog: boolean,
+  setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface CheckGameReturn {
