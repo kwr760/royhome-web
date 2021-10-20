@@ -13,6 +13,7 @@
     "url": "https://github.com/kwr760/royhome-web/issues"
   },
   "scripts": {
+    "mock-server": "NODE_ENV=development ts-node mock-server/server.ts",
     "run:dev": "NODE_ENV=development ts-node src/server.ts",
     "webpack:dev": "yarn clean & NODE_ENV=development webpack --watch",
     "test": "yarn test:lint && yarn test:only",
