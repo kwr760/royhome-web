@@ -13,12 +13,14 @@
     "url": "https://github.com/kwr760/royhome-web/issues"
   },
   "scripts": {
-    "mock-server": "NODE_ENV=development ts-node mock-server/server.ts",
     "run:dev": "NODE_ENV=development ts-node src/server.ts",
     "webpack:dev": "yarn clean & NODE_ENV=development webpack --watch",
     "test": "yarn test:lint && yarn test:only",
     "test:lint": "eslint src test && tsc",
     "test:only": "jest --colors",
+    "run:local": "NODE_ENV=local ts-node src/server.ts",
+    "webpack:local": "yarn clean & NODE_ENV=local webpack --watch",
+    "mock-server": "ts-node mock-server/server.ts",
     "clean": "rimraf started dist build log/*.log reports",
     "docker": "yarn clean && webpack && ts-node src/server.ts",
     "run:prod": "NODE_ENV=production node dist/server/start.js",

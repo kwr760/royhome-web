@@ -11,7 +11,7 @@ import { EnvironmentPlugin, DefinePlugin } from 'webpack';
 
 const shouldAnalyze = !process.env.NODE_ENV || ['development'].includes(process.env.NODE_ENV);
 const shouldStartDevServer = !process.env.NODE_ENV || ['development'].includes(process.env.NODE_ENV);
-const isDevMode = !process.env.NODE_ENV || ['development', 'docker'].includes(process.env.NODE_ENV);
+const isDevMode = !process.env.NODE_ENV || ['development', 'local', 'docker'].includes(process.env.NODE_ENV);
 
 export const getClientConfig = (target) => {
   let additionalPlugins = [];
