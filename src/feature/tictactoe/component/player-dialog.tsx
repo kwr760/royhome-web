@@ -20,7 +20,7 @@ export const PlayerDialog: FunctionComponent<PlayerDialogProps> = ({ player, ope
     };
     return (
       <Dialog open={openDialog} onClose={clickCloseDialog}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>{playerName}</DialogTitle>
         <DialogContent>
           <DialogContentText>
             {playerName}
@@ -33,6 +33,6 @@ export const PlayerDialog: FunctionComponent<PlayerDialogProps> = ({ player, ope
       </Dialog>
     );
   },
-  [openDialog, playerName],
+  [openDialog, playerName, setOpenDialog],
   );
 };

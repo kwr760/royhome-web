@@ -38,7 +38,7 @@ export const GameSquare: FunctionComponent<SquareProps> = ({position}) => {
       </Box>
     );
   },
-  [classes.label, classes.square, disabled, dispatch, owner, position, turn],
+  [classes.label, classes.square, disabled, dispatch, piece, position, turn],
   );
 };
 

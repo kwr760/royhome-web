@@ -67,7 +67,8 @@ export const GameHeader: FunctionComponent = () => {
       </Grid>
     </Grid>
   ),
-  [classes.grid, classes.icon, classes.player, openPlayerOne, openPlayerTwo, playerOneClass, playerTwoClass, players, turn],
+  [classes.grid, classes.icon, classes.player, openPlayerOne, openPlayerTwo, playerOneClass, playerTwoClass,
+    players, turn],
   );
 };
 

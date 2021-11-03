@@ -39,4 +39,18 @@ describe('client/util/url/get-browser-url-info', () => {
       expect(result).toEqual(expected);
     });
   });
+
+  it('should return apiUrl for local', () => {
+    jest.isolateModules(() => {
+      process.env['NODE_ENV'] = 'local';
+      const { getApiUrl } = require('../../../src/util/api/get-api-url');
+      const expected = 'https://localhost:5000';
+
+      // Act
+      const result = getApiUrl();
+
+      // Assert
+      expect(result).toEqual(expected);
+    });
+  });
 });
