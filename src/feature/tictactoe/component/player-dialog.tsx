@@ -23,7 +23,7 @@ export const PlayerDialog: FunctionComponent<PlayerDialogProps> = ({ player, ope
         <DialogTitle>{playerName}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {playerName}
+            Content
           </DialogContentText>
         </DialogContent>
         <DialogActions>
