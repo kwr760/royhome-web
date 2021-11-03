@@ -2,7 +2,6 @@ import path from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import LoadablePlugin from '@loadable/webpack-plugin';
-import WebpackMd5Hash from 'webpack-md5-hash';
 import CopyPlugin from 'copy-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
@@ -52,6 +51,11 @@ export const getClientConfig = (target) => {
     target,
     devtool: 'source-map',
     entry: `./src/index-${target}.tsx`,
+    node: {
+      __dirname: true,
+      Buffer: false,
+      process: false,
+    },
     module: {
       rules: [
         {
@@ -122,17 +126,16 @@ export const getClientConfig = (target) => {
     ] : undefined,
     output: {
       path: path.resolve(__dirname, 'dist', target === 'web' ? 'browser' : 'ssr'),
-      filename: isDevMode ? '[name].js' : '[name].[chunkhash:8].js',
+      filename: isDevMode ? '[name].js' : '[name].[contenthash].js',
       publicPath: '/dist/browser/',
       libraryTarget: target === 'node' ? 'commonjs2' : undefined,
     },
     plugins: [
       new LoadablePlugin(),
       new MiniCssExtractPlugin({
-        filename: isDevMode ? '[name].css' : '[name].[chunkhash:8].css',
-        chunkFilename: isDevMode ? '[id].css' : '[id].[chunkhash:8].css',
+        filename: isDevMode ? '[name].css' : '[name].[contenthash].css',
+        chunkFilename: isDevMode ? '[id].css' : '[id].[contenthash].css',
       }),
-      new WebpackMd5Hash(),
       new CopyPlugin({
         patterns: [
           { from: 'src/asset/favicon.ico', to: './favicon.ico' },
