@@ -11,7 +11,7 @@ const env = {
     dir: './log',
     level: LOG_LEVELS.INFO,
     stdout: true,
-    includePidFilename: false,
+    includePidFilename: true,
   },
 };
 

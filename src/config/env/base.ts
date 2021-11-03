@@ -14,6 +14,7 @@ const env = (host: string) => ({
       cert: '/var/cert/royhome/fullchain.pem',
     },
     apiUrl: 'https://api.royk.us',
+    deriveApiUrl: true,
   },
   log: {
     dir: '/var/log/royhome',

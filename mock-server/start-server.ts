@@ -13,14 +13,13 @@ const loadCredentials = () => {
   };
 };
 
-export const startMockServer = (app: Application): void => {
-  const httpServer = http.createServer(app);
-  httpServer.listen(80, () => console.log('Server is running'));
+export const startServer = (app: Application): void => {
+  // const httpServer = http.createServer(app);
+  // httpServer.listen(80, () => console.log('Server is running'));
 
   const credentials = loadCredentials();
-
   spdy.createServer(credentials, app).listen(
-    443,
+    5000,
     () => {
       console.log('Secure server is running');
     },

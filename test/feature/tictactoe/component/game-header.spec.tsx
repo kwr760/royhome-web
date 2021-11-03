@@ -1,7 +1,8 @@
 import React, { Reducer } from 'react';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { FaAngleDoubleLeft as LeftArrow, FaAngleDoubleRight as RightArrow } from 'react-icons/fa';
 import { GameHeader } from '../../../../src/feature/tictactoe/component/game-header';
+import { PlayerDialog } from '../../../../src/feature/tictactoe/component/player-dialog';
 import { TicTacToeProvider } from '../../../../src/feature/tictactoe/context';
 import {
   initialGame,
@@ -11,7 +12,9 @@ import {
 } from '../../../../src/feature/tictactoe/constant/tictactoe.constant';
 import { StateType } from '../../../../src/feature/tictactoe/type/tictactoe';
 
-jest.mock('react-icons/fa');
+jest
+  .mock('../../../../src/feature/tictactoe/component/player-dialog')
+  .mock('react-icons/fa');
 
 describe('feature/tictactoe/component/game-header', () => {
   const emptyReducer = jest.fn();
@@ -32,9 +35,12 @@ describe('feature/tictactoe/component/game-header', () => {
     };
     (RightArrow as jest.Mock).mockImplementation(() => 'Right Arrow');
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
+    (PlayerDialog as jest.Mock).mockImplementation(() => 'Player Dialog');
 
     // Act
     const { getByText } = render(getComponent(state, emptyReducer));
+    fireEvent.click(getByText(/Player #1/));
+    fireEvent.click(getByText(/Player #2/));
 
     // Assert
     getByText(/Player #1/);
@@ -50,6 +56,7 @@ describe('feature/tictactoe/component/game-header', () => {
       turn: PlayerEnum.One,
     };
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
+    (PlayerDialog as jest.Mock).mockImplementation(() => 'Player Dialog');
 
     // Act
     const { getByText } = render(getComponent(state, emptyReducer));
@@ -68,6 +75,7 @@ describe('feature/tictactoe/component/game-header', () => {
       turn: PlayerEnum.One,
     };
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
+    (PlayerDialog as jest.Mock).mockImplementation(() => 'Player Dialog');
 
     // Act
     const { getByText } = render(getComponent(state, emptyReducer));
@@ -88,6 +96,7 @@ describe('feature/tictactoe/component/game-header', () => {
       winner: PlayerEnum.One,
     };
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
+    (PlayerDialog as jest.Mock).mockImplementation(() => 'Player Dialog');
 
     // Act
     const { getByText } = render(getComponent(state, emptyReducer));
@@ -108,6 +117,7 @@ describe('feature/tictactoe/component/game-header', () => {
       winner: PlayerEnum.Two,
     };
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
+    (PlayerDialog as jest.Mock).mockImplementation(() => 'Player Dialog');
 
     // Act
     const { getByText } = render(getComponent(state, emptyReducer));

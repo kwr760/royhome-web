@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import LOG_LEVELS from '../../src/util/logger/logger-levels';
-import { DEVELOPMENT, DOCKER, PRODUCTION } from '../../src/config/release-environments';
+import { DEVELOPMENT, DOCKER, LOCAL, PRODUCTION } from '../../src/config/release-environments';
 
 describe('config/index', () => {
   const { NODE_ENV } = process.env;
@@ -42,6 +42,7 @@ describe('config/index', () => {
               key: '/var/cert/royhome/privkey.pem',
             },
             enableHttps: true,
+            deriveApiUrl: true,
           },
         },
       };
@@ -90,6 +91,7 @@ describe('config/index', () => {
               key: expect.stringContaining('privkey.pem'),
             },
             enableHttps: true,
+            deriveApiUrl: true,
           },
         },
       };
@@ -129,7 +131,7 @@ describe('config/index', () => {
             dir: './log',
             level: LOG_LEVELS.INFO,
             stdout: true,
-            includePidFilename: false,
+            includePidFilename: true,
           },
           server: {
             apiUrl: 'http://host.docker.internal:5000',
@@ -138,6 +140,56 @@ describe('config/index', () => {
               key: '/var/cert/royhome/privkey.pem',
             },
             enableHttps: false,
+            deriveApiUrl: true,
+          },
+        },
+      };
+
+      // Act
+      const dev = require('../../src/config');
+
+      // Assert
+      expect(dev).toEqual(expected);
+    });
+  });
+
+  describe('local', () => {
+    beforeEach(() => {
+      jest.resetModules();
+      process.env.NODE_ENV = LOCAL;
+    });
+
+    afterEach(() => {
+      process.env.NODE_ENV = NODE_ENV;
+    });
+
+    it('should load local as expected', async () => {
+      // Arrange
+      const expected = {
+        default: {
+          appName: 'royhome',
+          auth0: {
+            callbackUrl: 'http://localhost',
+            clientId: 'J5Mu7fSFraTWgQBz1WJgikpnuRnKRkaL',
+            domain: 'royk.auth0.com',
+          },
+          host: 'http://localhost',
+          release: LOCAL,
+          root: expect.stringContaining('web'),
+          log: {
+            dir: './log',
+            level: LOG_LEVELS.DEBUG,
+            stdout: true,
+            includePidFilename: false,
+          },
+          server: {
+            apiUrl: 'https://localhost:5000',
+            cert: {
+              cert: './cert/localhost.crt',
+              key: './cert/localhost.key',
+            },
+            enableHttps: true,
+            deriveApiUrl: false,
           },
         },
       };
@@ -186,6 +238,7 @@ describe('config/index', () => {
               key: '/var/cert/royhome/privkey.pem',
             },
             enableHttps: true,
+            deriveApiUrl: true,
           },
         },
       };

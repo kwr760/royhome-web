@@ -18,6 +18,12 @@ import startHttpServer from './middleware/start-http';
 
 const publicDir = path.resolve(env.root);
 
+// Resolves:  Error: unable to verify the first certificate
+// The self-signed license can be rejected by some browsers because it is missing an intermediate certificate.
+// The following avoids this problem and makes the server insecure (http).  Do not use in Production.
+// If your OS/browser combo is having problem -- use this or create a real certificate for a real URL.
+// process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+
 const app = express();
 
 app.set('json spaces', 2);
@@ -30,7 +36,7 @@ app.use(helmet({
     useDefaults: true,
     directives: {
       'script-src': ['\'self\'', '\'unsafe-inline\'', '*.royk.us', '*.royhome.net'],
-      'connect-src': ['\'self\'', '*.royk.us', '*.royhome.net', 'royk.auth0.com'],
+      'connect-src': ['\'self\'', '*.royk.us', '*.royhome.net', 'royk.auth0.com', 'localhost:5000'],
       'frame-src': ['\'self\'', 'royk.auth0.com'],
       'img-src': ['\'self\'', 'data:', 'avatars.githubusercontent.com'],
     },
