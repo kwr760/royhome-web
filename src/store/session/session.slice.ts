@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { SessionStateType } from '../../type/state/session';
 import { UserStateType } from '../../type/state/user';
 import { UpdateSessionType, SaveSessionType } from '../../type/store/session';

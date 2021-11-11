@@ -53,8 +53,6 @@ export const getClientConfig = (target) => {
     entry: `./src/index-${target}.tsx`,
     node: {
       __dirname: true,
-      Buffer: false,
-      process: false,
     },
     module: {
       rules: [
@@ -138,19 +136,31 @@ export const getClientConfig = (target) => {
       }),
       new CopyPlugin({
         patterns: [
-          { from: 'src/asset/favicon.ico', to: './favicon.ico' },
-          { from: 'src/asset/images/gold-on-blue.png', to: './favicon.png' },
+          {from: 'src/asset/favicon.ico', to: './favicon.ico'},
+          {from: 'src/asset/images/gold-on-blue.png', to: './favicon.png'},
         ],
       }),
       new LodashModuleReplacementPlugin(),
       new EnvironmentPlugin(['NODE_ENV']),
-      new DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
+      new DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}),
       ...additionalPlugins,
     ],
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
       alias: {
         '@src': path.resolve(__dirname, 'src/'),
+      },
+      fallback: {
+        'fs': false,
+        'tls': false,
+        'net': false,
+        'path': require.resolve('path-browserify'),
+        'zlib': false,
+        'http': false,
+        'https': false,
+        'stream': false,
+        'crypto': false,
+        'crypto-browserify': false,
       },
     },
     optimization: {
@@ -163,21 +173,23 @@ export const getClientConfig = (target) => {
             test: /[\\/]node_modules[\\/]/,
             name(module) {
               const splitMap = [
-                { name: 'core-js', packages: ['core-js'] },
-                { name: 'react', packages: [
-                  'react',
-                  'react-router',
-                  'react-router-dom',
-                  'react-redux',
-                  'redux',
-                  'react-dom',
-                  'react-transition-group',
-                ]},
-                { name: 'axios', packages: ['axios'] },
-                { name: 'lodash', packages: ['lodash'] },
-                { name: 'auth0-spa', packages: ['auth0'] },
-                { name: 'react-icons', packages: ['react-icons'] },
-                { name: 'markdown', packages: ['react-markdown', 'remark-parse'] },
+                {name: 'core-js', packages: ['core-js']},
+                {
+                  name: 'react', packages: [
+                    'react',
+                    'react-router',
+                    'react-router-dom',
+                    'react-redux',
+                    'redux',
+                    'react-dom',
+                    'react-transition-group',
+                  ],
+                },
+                {name: 'axios', packages: ['axios']},
+                {name: 'lodash', packages: ['lodash']},
+                {name: 'auth0-spa', packages: ['auth0']},
+                {name: 'react-icons', packages: ['react-icons']},
+                {name: 'markdown', packages: ['react-markdown', 'remark-parse']},
               ];
               const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1].replace('@', '');
               const splitPackage = splitMap.filter((e) => e.packages.includes(packageName));

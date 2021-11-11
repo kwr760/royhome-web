@@ -37,8 +37,6 @@ export const getServerConfig = () => {
     context: path.resolve(__dirname),
     node: {
       __dirname: true,
-      Buffer: false,
-      process: false,
     },
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
