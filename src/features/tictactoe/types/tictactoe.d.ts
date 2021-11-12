@@ -1,4 +1,4 @@
-import React, { ReactNode, Reducer } from 'react';
+import { ReactNode, Reducer } from 'react';
 import { ActionEnum, PlayerEnum, StatusEnum } from '../constants/tictactoe.constant';
 
 export type PlayersType = string[];

@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 
 import authorMarkdown from '../../AUTHOR.md';
 
-export const Author: FunctionComponent = () => (
+const Author: FunctionComponent = () => (
   <Container>
     <ReactMarkdown>
       {authorMarkdown}

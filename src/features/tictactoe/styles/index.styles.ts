@@ -1,6 +1,7 @@
 import { createStyles } from '@mui/styles';
+import type { StyleRules } from '@mui/styles/withStyles';
 
-export const styles = () =>
+export const styles = (): StyleRules =>
   createStyles({
     container: {
       flexGrow: 1,
