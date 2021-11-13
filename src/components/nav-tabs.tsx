@@ -34,6 +34,7 @@ export const NavTabsComponent: FunctionComponent<NavBarTabsProps> = ({ position,
       value={position}
       onChange={handleChange}
       aria-label="tabs"
+      className={classes.tabs}
     >
       {
         pages.filter(displayPage(authenticated, user)).map((page) => {

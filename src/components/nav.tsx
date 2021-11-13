@@ -24,7 +24,7 @@ const NavComponent: FunctionComponent<NavProps> = ({classes}) => {
       <div className={classes.grow}>
         <AppBar className={classes.banner} position="static">
           <Toolbar>
-            <Avatar alt="RoyHome" src={logo} className={classes.avator}/>
+            <Avatar alt="RoyHome" src={logo} className={classes.avatar}/>
             <NavTabs position={position} setPosition={setPosition} />
             <div className={classes.grow} />
             <DarkMode />

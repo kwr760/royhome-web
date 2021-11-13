@@ -10,7 +10,7 @@ export const styles = (theme: Theme): StyleRules =>
         display: 'none',
       },
     },
-    avator: {
+    avatar: {
       width: theme.spacing(7),
       height: theme.spacing(7),
       display: 'flex',

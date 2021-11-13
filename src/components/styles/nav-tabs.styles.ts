@@ -12,5 +12,13 @@ export const styles = (theme: Theme): StyleRules =>
         background: emphasize(theme.palette.primary.dark, 0.2),
         borderRadius: '.25em',
       },
+      '&.Mui-selected': {
+        color: emphasize(theme.palette.secondary.main, 0.6),
+      },
+    },
+    tabs: {
+      '& .MuiTabs-indicator': {
+        backgroundColor: emphasize(theme.palette.secondary.main, 0.6),
+      },
     },
   });
