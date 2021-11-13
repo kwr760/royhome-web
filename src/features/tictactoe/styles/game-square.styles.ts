@@ -11,7 +11,7 @@ export const styles = (theme: Theme): StyleRules => {
       width: '100%',
       textAlign: 'center',
       paddingBottom: '100%',
-      border: `${borderLength}px solid ${borderColor}`,
+      border: `${borderLength} solid ${borderColor}`,
       borderRadius: 0,
       boxShadow: 'none',
     },

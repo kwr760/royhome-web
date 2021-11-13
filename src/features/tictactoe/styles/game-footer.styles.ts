@@ -9,12 +9,12 @@ export const styles = (theme: Theme): StyleRules => {
   return createStyles({
     footer: {
       padding: theme.spacing(1),
-      border: `${borderLength}px solid ${borderColor}`,
+      border: `${borderLength} solid ${borderColor}`,
       borderRadius: theme.spacing(1),
       backgroundColor: theme.palette.background.default,
     },
     button: {
-      border: `${borderLength}px solid ${borderColor}`,
+      border: `${borderLength} solid ${borderColor}`,
       borderRadius: theme.spacing(1),
       backgroundColor: theme.palette.background.default,
       color: theme.palette.primary.dark,

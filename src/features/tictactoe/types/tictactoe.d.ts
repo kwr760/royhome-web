@@ -11,7 +11,6 @@ export interface StateType {
   winner?: PlayerEnum,
 }
 
-
 export interface CheckGameReturn {
   status: StatusEnum,
   winner?: PlayerEnum,

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, memo, useMemo } from 'react';
+import React, { FunctionComponent, memo } from 'react';
 import { Button, Grid, Typography } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
@@ -20,11 +20,12 @@ export const GameFooterComponent: FunctionComponent<GameFooterProps> = ({classes
     },
     dispatch,
   } = useTicTacToe();
-  return useMemo(() => {
-    const clickReset = () => {
-      dispatch(reset());
-    };
-    return (<Grid justifyContent="space-between" container className={classes.footer}>
+  const clickReset = () => {
+    dispatch(reset());
+  };
+
+  return (
+    <Grid justifyContent="space-between" container className={classes.footer}>
       <Grid item className={classes.status} >
         {isActive(status) &&
         <Typography>
@@ -49,8 +50,8 @@ export const GameFooterComponent: FunctionComponent<GameFooterProps> = ({classes
           </Typography>
         </Button>
       </Grid>
-    </Grid>);
-  }, [classes.button, classes.footer, classes.status, dispatch, status]);
+    </Grid>
+  );
 };
 
 export default memo(withStyles(styles)(GameFooterComponent));

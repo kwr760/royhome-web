@@ -1,4 +1,4 @@
-import React, { FunctionComponent, memo, useMemo } from 'react';
+import React, { FunctionComponent, memo } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
@@ -28,22 +28,18 @@ export const GameSquareComponent: FunctionComponent<GameSquareProps> = ({positio
   const owner: PlayerEnum = game[position] as PlayerEnum;
   const disabled = isSquareDisabled(status, owner);
   const piece = (owner === PlayerEnum.None) ? '' : owner;
+  const clickAction = () => {
+    dispatch(takeTurn({ position, player: turn }));
+  };
 
-  return useMemo(() => {
-    const clickAction = () => {
-      dispatch(takeTurn({ position, player: turn }));
-    };
-    return (
-      <Box>
-        <Button className={classes.square} onClick={clickAction} disabled={disabled} key={`control-${position}`}>
-          <Typography variant='h1' className={classes.label}>
-            {piece}
-          </Typography>
-        </Button>
-      </Box>
-    );
-  },
-  [classes.label, classes.square, disabled, dispatch, piece, position, turn],
+  return (
+    <Box>
+      <Button className={classes.square} onClick={clickAction} disabled={disabled} key={`control-${position}`}>
+        <Typography variant='h1' className={classes.label}>
+          {piece}
+        </Typography>
+      </Button>
+    </Box>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, memo, useMemo } from 'react';
+import React, { FunctionComponent, memo } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
@@ -20,26 +20,23 @@ const PlayerDialogComponent: FunctionComponent<PlayerDialogProps> = ({ player, o
     },
   } = useTicTacToe();
   const playerName = (player === PlayerEnum.One) ? players[0] : players[1];
-  return useMemo(() => {
-    const clickCloseDialog = () => {
-      setOpenDialog(false);
-    };
-    return (
-      <Dialog open={openDialog} onClose={clickCloseDialog} className={classes.dialog}>
-        <DialogTitle>{playerName}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Content
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={clickCloseDialog}>Cancel</Button>
-          <Button onClick={clickCloseDialog}>Update</Button>
-        </DialogActions>
-      </Dialog>
-    );
-  },
-  [classes.dialog, openDialog, playerName, setOpenDialog],
+  const clickCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
+  return (
+    <Dialog open={openDialog} onClose={clickCloseDialog} className={classes.dialog}>
+      <DialogTitle>{playerName}</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          Content
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={clickCloseDialog}>Cancel</Button>
+        <Button onClick={clickCloseDialog}>Update</Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 

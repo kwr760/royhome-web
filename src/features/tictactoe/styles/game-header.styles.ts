@@ -4,12 +4,13 @@ import type { StyleRules } from '@mui/styles/withStyles';
 
 export const styles = (theme: Theme): StyleRules => {
   const borderColor = theme.palette.primary.dark;
-  const borderLength = parseInt(theme.spacing(.5));
+  const halfBorderLength = theme.spacing(.5);
+  const quarterBorderLength = theme.spacing(.25);
 
   return createStyles({
     grid: {
       padding: theme.spacing(1),
-      border: `${borderLength}px solid ${borderColor}`,
+      border: `${halfBorderLength} solid ${borderColor}`,
       borderRadius: theme.spacing(1),
       backgroundColor: theme.palette.background.default,
     },
@@ -17,7 +18,7 @@ export const styles = (theme: Theme): StyleRules => {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      border: `${borderLength / 2}px solid ${borderColor}`,
+      border: `${quarterBorderLength} solid ${borderColor}`,
       borderRadius: theme.spacing(1),
       backgroundColor: theme.palette.background.default,
     },

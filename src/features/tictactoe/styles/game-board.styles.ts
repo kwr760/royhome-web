@@ -8,7 +8,7 @@ export const styles = (theme: Theme): StyleRules => {
 
   return createStyles({
     grid: {
-      border: `${borderLength}px solid ${borderColor}`,
+      border: `${borderLength} solid ${borderColor}`,
       borderRadius: theme.spacing(1),
     },
     row: {
