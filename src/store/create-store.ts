@@ -1,5 +1,6 @@
-import { configureStore, Action, Store } from '@reduxjs/toolkit';
-import { ThunkAction } from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
+import type { Action, Store } from '@reduxjs/toolkit';
+import type { ThunkAction } from 'redux-thunk';
 
 import env from '../config';
 import { PRODUCTION } from '../config/release-environments';

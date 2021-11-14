@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 import { ChunkExtractor } from '@loadable/server';
 import React  from 'react';
 import { renderToString } from 'react-dom/server';
-import { ServerStyleSheets } from '@material-ui/core/styles';
+import { ServerStyleSheets } from '@mui/styles';
 
 import env from '../config';
 import populateState from './populate-state';
@@ -42,7 +42,7 @@ const renderReact = async (req: Request, res: Response): Promise<void> => {
   const css = sheets.toString();
 
   // Extract the creation of the html to a separate file
-  const indexFile = path.resolve('./src/asset/index.html');
+  const indexFile = path.resolve('./src/assets/index.html');
   const contents = fs.readFileSync(indexFile, 'utf8');
   const preloadedState = JSON.stringify(store.getState()).replace(/</g, '\\u003c');
   const responseHtml = contents

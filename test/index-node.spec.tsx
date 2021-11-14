@@ -1,18 +1,15 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import thunk from 'redux-thunk';
-
-import Main from '../src/index-node';
 import configureMockStore from 'redux-mock-store';
-import App from '../src/App';
+import { render } from '@testing-library/react';
+import Main from '../src/index-node';
 
-jest.mock('../src/App');
+jest.mock('../src/App', () => jest.fn(() => <div>App</div>));
 
 describe('src/client/index-node', () => {
   const mockStore = configureMockStore([thunk]);
   it('launches the App', () => {
     // Arrange
-    const url = '/';
     const state = {
       session: {
         isLoading: true,
@@ -22,10 +19,9 @@ describe('src/client/index-node', () => {
       },
     };
     const store = mockStore(state);
-    (App as jest.Mock).mockImplementation(() => { return <div>App</div>; });
 
     // Act
-    const { getByText } = render(<Main url={url} store={store} />);
+    const { getByText } = render(<Main store={store} />);
 
     // Assert
     getByText(/App/);

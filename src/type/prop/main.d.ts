@@ -1,4 +1,4 @@
-import { Store } from '@reduxjs/toolkit';
+import type { Store } from 'redux';
 
 export interface MainPropType {
   url: string,
