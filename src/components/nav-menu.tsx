@@ -11,7 +11,7 @@ import { FiEyeOff, FiLogIn, FiLogOut, FiUser } from 'react-icons/fi';
 import { useAuth0 } from '../util/auth0/auth0-context';
 import { isAuthenticated, getUser } from '../store/session/session.selector';
 import { displayPage } from './functions/display-page';
-import { pages } from './functions/pages';
+import { pages } from '../config/pages';
 import { styles } from './styles/nav-menu.styles';
 
 interface Props {

@@ -1,4 +1,4 @@
-import { TabPageType } from '../../type/object/tab-page';
+import { TabPageType } from '../type/object/tab-page';
 
 import { FiInfo, FiBookOpen, FiAlertTriangle, FiLayers } from 'react-icons/fi';
 
@@ -26,7 +26,7 @@ export const pages: TabPageType[] = [
     path: '/tictactoe',
     icon: FiAlertTriangle,
     // role: 'engineer',
-    // authenticated: true,
+    authenticated: true,
     tab: 3,
   },
 ];
