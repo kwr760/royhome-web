@@ -1,5 +1,5 @@
 import { findRouteTab } from '../../../src/components/functions/find-route-tab';
-import { pages } from '../../../src/components/functions/pages';
+import { pages } from '../../../src/config/pages';
 
 describe('component/page/app-bar/find-route-tab', () => {
   it('returns correct routes for tabs', () => {
