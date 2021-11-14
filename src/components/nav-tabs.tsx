@@ -7,7 +7,7 @@ import type { WithStyles } from '@mui/styles';
 
 import { isAuthenticated, getUser } from '../store/session/session.selector';
 import { displayPage } from './functions/display-page';
-import { pages } from './functions/pages';
+import { pages } from '../config/pages';
 import { styles } from './styles/nav-tabs.styles';
 
 interface Props {
