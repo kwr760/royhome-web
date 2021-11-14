@@ -26,7 +26,7 @@ const PlayerDialogComponent: FunctionComponent<PlayerDialogProps> = ({ player, o
 
   return (
     <Dialog open={openDialog} onClose={clickCloseDialog} className={classes.dialog}>
-      <DialogTitle>{playerName}</DialogTitle>
+      <DialogTitle>Update {playerName}</DialogTitle>
       <DialogContent>
         <DialogContentText>
           Content
