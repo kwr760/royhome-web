@@ -2,7 +2,7 @@
 import 'core-js';
 import React, { useEffect, FunctionComponent } from 'react';
 import { hydrate } from 'react-dom';
-import { BrowserRouter as Router, Route, RouteComponentProps } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { loadableReady } from '@loadable/component';
 
@@ -33,7 +33,7 @@ const Main: FunctionComponent<IndexPropType> = ({ store }) => {
         cacheLocation="localstorage"
       >
         <Router>
-          <Route component={(props: RouteComponentProps) => <Theme {...props} />} />
+          <Theme />
         </Router>
       </Auth0Provider>
     </Provider>

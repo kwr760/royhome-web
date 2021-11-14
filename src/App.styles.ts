@@ -1,7 +1,8 @@
-import { createStyles, Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import type { Theme } from '@mui/material';
+import { createStyles } from '@mui/styles';
+import type { StyleRules } from '@mui/styles/withStyles';
 
-export const useStyles = makeStyles((theme: Theme) =>
+export const styles = (theme: Theme): StyleRules =>
   createStyles({
     paper: {
       color: theme.palette.primary.dark,
@@ -23,5 +24,4 @@ export const useStyles = makeStyles((theme: Theme) =>
       flexDirection: 'column',
       height: '100vh',
     },
-  }),
-);
+  });

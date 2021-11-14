@@ -1,4 +1,4 @@
-import { matchPath } from 'react-router-dom';
+import { matchPath } from 'react-router';
 import { getSessionProxy } from '../proxy/get-session.proxy';
 import { DarkModes } from '../store/session/session.constants';
 import { SessionStateType } from '../type/state/session';
@@ -7,7 +7,7 @@ import { StateType } from '../type/state/state';
 import { fetchRoutes } from './fetch-routes';
 
 const populateState = async (path: string, sessionId?: string): Promise<StateType> => {
-  const activeRoute = fetchRoutes.find((route) => matchPath(path, route));
+  const activeRoute = fetchRoutes.find((route) => matchPath(path, route.path));
   const data = (activeRoute && activeRoute.fetchData) ? await activeRoute.fetchData() : {};
   let session: SessionStateType;
   if (sessionId) {

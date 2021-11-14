@@ -29,7 +29,9 @@
   "include": [
     "src/type",
     "src/**/*",
-    "src/**/**/*"
+    "src/**/**/*",
+    "test/**/*",
+    "test/**/**/*"
   ],
   "exclude": [
     "node_modules",

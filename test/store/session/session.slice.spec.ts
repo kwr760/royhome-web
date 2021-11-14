@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { AnyAction } from 'redux';
+import type { AnyAction } from 'redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { SessionStateType } from '../../../src/type/state/session';
