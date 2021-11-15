@@ -1,5 +1,6 @@
-import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
+import { fireEvent, render } from '@testing-library/react';
+import { ThemeProvider } from '@mui/styles';
 import PlayerDialog from '../../../../src/features/tictactoe/components/player-dialog';
 import {
   initialGame,
@@ -8,6 +9,7 @@ import {
   StatusEnum,
 } from '../../../../src/features/tictactoe/constants/tictactoe.constant';
 import { TicTacToeProvider } from '../../../../src/features/tictactoe/context';
+import themeLight from '../../../../src/theme-light';
 
 
 describe('feature/tictactoe/component/player-dialog', () => {
@@ -22,22 +24,26 @@ describe('feature/tictactoe/component/player-dialog', () => {
   const setOpenDialog = jest.fn(open => { openDialog = open; });
   const getComponent = (player: PlayerEnum) => {
     return (
-      <TicTacToeProvider state={state} reducer={reducer}>
-        <PlayerDialog player={player} openDialog={openDialog} setOpenDialog={setOpenDialog}/>
-      </TicTacToeProvider>
+      <ThemeProvider theme={themeLight}>
+        <TicTacToeProvider state={state} reducer={reducer}>
+          <PlayerDialog player={player} openDialog={openDialog} setOpenDialog={setOpenDialog}/>
+        </TicTacToeProvider>
+      </ThemeProvider>
     );
   };
   it('should render player #1', () => {
     // Arrange // Act
-    const { getByText } = render(getComponent(PlayerEnum.One));
+    const { getByText, getByLabelText } = render(getComponent(PlayerEnum.One));
+    fireEvent.change(getByLabelText(/Name/), {target: {value: 'Test Name'}});
 
     // Assert
-    getByText(/Player #1/);
+    getByText(/Test Name/);
     expect(openDialog).toBe(true);
   });
   it('should render player #2', () => {
     // Arrange // Act
     const { getByText } = render(getComponent(PlayerEnum.Two));
+    fireEvent.click(getByText(/Remote/));
     fireEvent.click(getByText(/Cancel/));
 
     // Assert

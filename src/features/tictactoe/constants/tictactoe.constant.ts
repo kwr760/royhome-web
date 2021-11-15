@@ -14,6 +14,11 @@ export enum ActionEnum {
   reset = 'reset',
   takeTurn = 'takeTurn',
 }
+export enum GameTypeEnum {
+  pvp = 'pvp',
+  pvc = 'pvc',
+  remote = 'remote',
+}
 
 export const initialPlayers = ['Player #1', 'Player #2'];
 export const initialGame = '---------';
