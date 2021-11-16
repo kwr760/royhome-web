@@ -10,10 +10,6 @@ import {
 import { StateType } from '../../../../src/features/tictactoe/types/tictactoe';
 import themeLight from '../../../../src/theme-light';
 
-// jest.mock(
-//   '../../../../src/features/tictactoe/components/player-dialog',
-//   () => jest.fn(() => 'Player Dialog'),
-// );
 jest.mock('react-icons/fa');
 
 describe('feature/tictactoe/component/game-header', () => {
