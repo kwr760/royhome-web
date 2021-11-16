@@ -13,9 +13,12 @@ interface Props {
   player: PlayerEnum;
   openDialog: boolean,
   setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>;
+  handleSubmit: (player: PlayerEnum, playerName: string, gameType: GameTypeEnum) => void,
 }
 type PlayerDialogProps = Props & WithStyles<typeof styles>;
-const PlayerDialogComponent: FunctionComponent<PlayerDialogProps> = ({ player, openDialog, setOpenDialog, classes}) => {
+const PlayerDialogComponent: FunctionComponent<PlayerDialogProps> = (
+  { player, openDialog, setOpenDialog, handleSubmit, classes },
+) => {
   const {
     state: {
       players,
@@ -23,8 +26,12 @@ const PlayerDialogComponent: FunctionComponent<PlayerDialogProps> = ({ player, o
   } = useTicTacToe();
   const [ playerName, setPlayerName ] = useState((player === PlayerEnum.One) ? players[0] : players[1]);
   const [ gameType, setGameType ] = useState(GameTypeEnum.pvp);
-  const clickCloseDialog = () => {
+  const onClose = () => {
     setOpenDialog(false);
+  };
+  const onSubmit = () => {
+    setOpenDialog(false);
+    handleSubmit(player, playerName, gameType);
   };
   const handleChangeName = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -40,7 +47,7 @@ const PlayerDialogComponent: FunctionComponent<PlayerDialogProps> = ({ player, o
   };
 
   return (
-    <Dialog open={openDialog} onClose={clickCloseDialog} >
+    <Dialog open={openDialog} onClose={onClose} >
       <DialogTitle>Update {playerName}</DialogTitle>
       <DialogContent>
         <TextField
@@ -73,8 +80,8 @@ const PlayerDialogComponent: FunctionComponent<PlayerDialogProps> = ({ player, o
         </ToggleButtonGroup>
       </DialogContent>
       <DialogActions>
-        <Button onClick={clickCloseDialog}>Cancel</Button>
-        <Button onClick={clickCloseDialog}>Update</Button>
+        <Button onClick={onClose}>Cancel</Button>
+        <Button onClick={onSubmit}>Update</Button>
       </DialogActions>
     </Dialog>
   );

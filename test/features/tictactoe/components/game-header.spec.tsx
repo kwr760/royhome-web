@@ -1,6 +1,6 @@
 import React, { Reducer } from 'react';
 import { ThemeProvider } from '@mui/styles';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, waitForElementToBeRemoved } from '@testing-library/react';
 import { FaAngleDoubleLeft as LeftArrow, FaAngleDoubleRight as RightArrow } from 'react-icons/fa';
 import GameHeader from '../../../../src/features/tictactoe/components/game-header';
 import { TicTacToeProvider } from '../../../../src/features/tictactoe/context';
@@ -10,10 +10,10 @@ import {
 import { StateType } from '../../../../src/features/tictactoe/types/tictactoe';
 import themeLight from '../../../../src/theme-light';
 
-jest.mock(
-  '../../../../src/features/tictactoe/components/player-dialog',
-  () => jest.fn(() => 'Player Dialog'),
-);
+// jest.mock(
+//   '../../../../src/features/tictactoe/components/player-dialog',
+//   () => jest.fn(() => 'Player Dialog'),
+// );
 jest.mock('react-icons/fa');
 
 describe('feature/tictactoe/component/game-header', () => {
@@ -27,7 +27,14 @@ describe('feature/tictactoe/component/game-header', () => {
       </ThemeProvider>
     );
   };
-  it('should render', () => {
+
+  beforeEach(() => {
+    global.console.log = jest.fn();
+  });
+  afterEach(() => {
+    (global.console.log as jest.Mock).mockRestore();
+  });
+  it('should render', async () => {
     // Arrange
     const state = {
       players: initialPlayers,
@@ -41,14 +48,15 @@ describe('feature/tictactoe/component/game-header', () => {
     // Act
     const { getByText } = render(getComponent(state, emptyReducer));
     fireEvent.click(getByText(/Player #1/));
-    fireEvent.click(getByText(/Player #2/));
+    fireEvent.click(getByText(/Cancel/));
+    await waitForElementToBeRemoved(getByText(/Cancel/));
 
     // Assert
     getByText(/Player #1/);
     getByText(/Right Arrow/);
     getByText(/Player #2/);
   });
-  it('should render as Left Arrow', () => {
+  it('should render as Left Arrow', async () => {
     // Arrange
     const state = {
       players: initialPlayers,
@@ -59,7 +67,10 @@ describe('feature/tictactoe/component/game-header', () => {
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
 
     // Act
-    const { getByText } = render(getComponent(state, emptyReducer));
+    const { getByText, getAllByText } = render(getComponent(state, emptyReducer));
+    fireEvent.click(getByText(/Player #2/));
+    fireEvent.click(getAllByText(/Update/)[1]);
+    await waitForElementToBeRemoved(getByText(/Cancel/));
 
     // Assert
     getByText(/Player #1/);

@@ -20,13 +20,19 @@ describe('feature/tictactoe/component/player-dialog', () => {
     turn: PlayerEnum.Two,
   };
   const reducer = jest.fn();
+  const handleSubmit = jest.fn();
   let openDialog = true;
   const setOpenDialog = jest.fn(open => { openDialog = open; });
   const getComponent = (player: PlayerEnum) => {
     return (
       <ThemeProvider theme={themeLight}>
         <TicTacToeProvider state={state} reducer={reducer}>
-          <PlayerDialog player={player} openDialog={openDialog} setOpenDialog={setOpenDialog}/>
+          <PlayerDialog
+            player={player}
+            openDialog={openDialog}
+            setOpenDialog={setOpenDialog}
+            handleSubmit={handleSubmit}
+          />
         </TicTacToeProvider>
       </ThemeProvider>
     );
@@ -35,6 +41,7 @@ describe('feature/tictactoe/component/player-dialog', () => {
     // Arrange // Act
     const { getByText, getByLabelText } = render(getComponent(PlayerEnum.One));
     fireEvent.change(getByLabelText(/Name/), {target: {value: 'Test Name'}});
+    fireEvent.click(getByText(/Remote/));
 
     // Assert
     getByText(/Test Name/);
@@ -42,12 +49,13 @@ describe('feature/tictactoe/component/player-dialog', () => {
   });
   it('should render player #2', () => {
     // Arrange // Act
-    const { getByText } = render(getComponent(PlayerEnum.Two));
-    fireEvent.click(getByText(/Remote/));
+    const { getByText, getAllByText } = render(getComponent(PlayerEnum.Two));
     fireEvent.click(getByText(/Cancel/));
+    fireEvent.click(getAllByText(/Update/)[1]);
 
     // Assert
     getByText(/Player #2/);
     expect(openDialog).toBe(false);
+    expect(handleSubmit).toBeCalled();
   });
 });
