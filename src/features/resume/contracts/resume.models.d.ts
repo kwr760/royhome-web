@@ -1,18 +1,18 @@
-export interface SkillType {
+interface SkillType {
   name: string;
 }
 
-export interface SkillGroupType {
+interface SkillGroupType {
   name: string;
   skills: SkillType[];
 }
 
-export interface ExperienceItemType {
+interface ExperienceItemType {
   id: string;
   name: string;
 }
 
-export interface ExperienceType {
+interface ExperienceType {
   title: string;
   company: string;
   startDate: string;
@@ -22,13 +22,13 @@ export interface ExperienceType {
   tech: SkillGroupType;
 }
 
-export interface EducationType {
+interface EducationType {
   degree: string;
   school: string;
   graduation: string;
 }
 
-export interface ProjectType {
+interface ProjectType {
   name: string;
   url: string;
   description: string;
@@ -36,7 +36,7 @@ export interface ProjectType {
   endDate: string;
 }
 
-export interface ResumeType {
+interface ResumeType {
   name: string;
   address: string;
   email: string;
@@ -48,3 +48,5 @@ export interface ResumeType {
   education: EducationType[];
   project: ProjectType[];
 }
+
+export { SkillGroupType, ExperienceType, EducationType, ProjectType, ResumeType };

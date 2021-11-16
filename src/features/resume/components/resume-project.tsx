@@ -3,7 +3,8 @@ import dateFormat from 'dateformat';
 import { Grid, Link } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
-import { ProjectType } from '../types/object/resume';
+
+import { ProjectType } from '../contracts/resume.models';
 import { styles } from '../styles/resume-project.styles';
 
 interface Props {

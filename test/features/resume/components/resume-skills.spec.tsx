@@ -1,9 +1,9 @@
 import React from 'react';
 import { ThemeProvider } from '@mui/styles';
 import { render } from '@testing-library/react';
-import { SkillGroupType } from '../../../../src/features/resume/types/object/resume';
 
 import ResumeSkills from '../../../../src/features/resume/components/resume-skills';
+import { SkillGroupType } from '../../../../src/features/resume/contracts/resume.models';
 import theme from '../../../../src/theme-light';
 
 describe('features/resume/components/resume-skills', () => {

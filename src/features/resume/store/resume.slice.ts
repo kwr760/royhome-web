@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { AnyAction } from 'redux';
-import { ResumeStateType } from '../types/state/resume';
 import { callApi } from '../../../util/api/call-api';
 import { ApiConfigs } from '../../../config/api';
 import { setLoading, clearLoading } from '../../../store/session/session.slice';
 import { AppThunk } from '../../../store/create-store';
+import { ResumeStateType } from '../contracts/resume.state';
 
 const initialState: ResumeStateType = {
   email: 'kroy760@gmail.com',

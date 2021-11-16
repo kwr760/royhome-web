@@ -6,12 +6,12 @@ import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
 
 import { styles } from '../styles/resume-page.styles';
-import { ResumeType } from '../types/object/resume';
 import { useAuth0 } from '../../../util/auth0/auth0-context';
 import Resume from './resume';
 import { fetchResume } from '../store/resume.slice';
 import { getResume } from '../store/resume.selector';
 import { isLoading } from '../../../store/session/session.selector';
+import { ResumeType } from '../contracts/resume.models';
 
 type ResumeProps = WithStyles<typeof styles>;
 const ResumeComponent: FunctionComponent<ResumeProps> = ({ classes }) => {

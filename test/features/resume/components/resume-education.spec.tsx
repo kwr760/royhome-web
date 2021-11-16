@@ -2,8 +2,8 @@ import React from 'react';
 import { ThemeProvider } from '@mui/styles';
 import { render } from '@testing-library/react';
 
-import { EducationType } from '../../../../src/features/resume/types/object/resume';
 import ResumeEducation from '../../../../src/features/resume/components/resume-education';
+import { EducationType } from '../../../../src/features/resume/contracts/resume.models';
 import theme from '../../../../src/theme-light';
 
 describe('features/resume/components/resume-education', () => {

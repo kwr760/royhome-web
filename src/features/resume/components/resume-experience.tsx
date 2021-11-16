@@ -4,8 +4,8 @@ import dateFormat from 'dateformat';
 import { Grid } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
+import { ExperienceType } from '../contracts/resume.models';
 import { styles } from '../styles/resume-experience.styles';
-import { ExperienceType } from '../types/object/resume';
 
 interface Props {
   experience: ExperienceType[];
