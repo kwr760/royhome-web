@@ -4,7 +4,7 @@ import { withStyles } from '@mui/styles';
 import type { WithStyles, ClassNameMap } from '@mui/styles';
 import { FaAngleDoubleLeft as LeftArrow, FaAngleDoubleRight as RightArrow } from 'react-icons/fa';
 
-import { PlayerEnum, StatusEnum } from '../constants/tictactoe.constant';
+import { GameTypeEnum, PlayerEnum, StatusEnum } from '../constants/tictactoe.constant';
 import { useTicTacToe } from '../context';
 import { styles } from '../styles/game-header.styles';
 import PlayerDialog from './player-dialog';
@@ -37,6 +37,9 @@ const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) =>
       turn,
     },
   } = useTicTacToe();
+  const handleSubmit = (player: PlayerEnum, playerName: string, gameType: GameTypeEnum) => {
+    console.log(player, playerName, gameType);
+  };
   const [playerOneClass, playerTwoClass] = addClasses(classes, status, winner || PlayerEnum.None, turn);
   const clickPlayerOne = () => { setOpenPlayerOne(true); };
   const clickPlayerTwo = () => { setOpenPlayerTwo(true); };
@@ -45,7 +48,12 @@ const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) =>
       <Button className={classes.player} onClick={clickPlayerOne}>
         <Typography className={playerOneClass}>{players[0]}</Typography>
       </Button>
-      <PlayerDialog player={PlayerEnum.One} openDialog={openPlayerOne} setOpenDialog={setOpenPlayerOne} />
+      <PlayerDialog
+        player={PlayerEnum.One}
+        openDialog={openPlayerOne}
+        setOpenDialog={setOpenPlayerOne}
+        handleSubmit={handleSubmit}
+      />
     </Grid>
     <Grid item className={classes.icon}>
       { turn === PlayerEnum.One ? <LeftArrow className={'fa-2x'} /> : <RightArrow className={'fa-2x'} />  }
@@ -54,7 +62,12 @@ const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) =>
       <Button className={classes.player} onClick={clickPlayerTwo}>
         <Typography className={playerTwoClass}>{players[1]}</Typography>
       </Button>
-      <PlayerDialog player={PlayerEnum.Two} openDialog={openPlayerTwo} setOpenDialog={setOpenPlayerTwo} />
+      <PlayerDialog
+        player={PlayerEnum.Two}
+        openDialog={openPlayerTwo}
+        setOpenDialog={setOpenPlayerTwo}
+        handleSubmit={handleSubmit}
+      />
     </Grid>
   </Grid>;
 };

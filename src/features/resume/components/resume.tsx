@@ -15,7 +15,7 @@ import ResumeEducation from './resume-education';
 import ResumeProject from './resume-project';
 
 interface Props {
-  resume: ResumeType;
+  resume?: ResumeType;
 }
 type PageProps = Props & WithStyles<typeof styles>;
 const ResumePageComponent: FunctionComponent<PageProps> = ({ resume = {} as ResumeType, classes}) => {
