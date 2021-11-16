@@ -34,10 +34,12 @@ describe('features/resume/components/resume-page', () => {
     getByText('Education');
   });
   it('should render with empty object', () => {
-    // Arrange // Act
+    // Arrange
+    const resume = undefined;
+    // Act
     const { getByText } = render(
       <ThemeProvider theme={theme}>
-        <Resume />
+        <Resume resume={resume}/>
       </ThemeProvider>,
     );
 
