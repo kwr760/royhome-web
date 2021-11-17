@@ -1,8 +1,9 @@
-import { initialGame, PlayerEnum, StatusEnum } from '../../../../src/features/tictactoe/constants/tictactoe.constant';
+import { PlayerEnum, StatusEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { initialGame } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
+import { GameType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
 import { checkGame } from '../../../../src/features/tictactoe/functions/check-game';
 import { findWinner } from '../../../../src/features/tictactoe/functions/find-winner';
 import { isGameOver } from '../../../../src/features/tictactoe/functions/is-game-over';
-import { GameType } from '../../../../src/features/tictactoe/types/tictactoe';
 
 jest
   .mock('../../../../src/features/tictactoe/functions/find-winner')

@@ -1,6 +1,6 @@
-import { PlayerEnum } from '../../../../src/features/tictactoe/constants/tictactoe.constant';
+import { PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { GameType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
 import { findWinner } from '../../../../src/features/tictactoe/functions/find-winner';
-import { GameType } from '../../../../src/features/tictactoe/types/tictactoe';
 
 type TestTuple = {game: GameType, expected: PlayerEnum};
 

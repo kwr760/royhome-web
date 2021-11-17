@@ -2,7 +2,7 @@ import type { Theme } from '@mui/material';
 import { createStyles } from '@mui/styles';
 import type { StyleRules } from '@mui/styles/withStyles';
 
-export const styles = (theme: Theme): StyleRules => {
+const styles = (theme: Theme): StyleRules => {
   const borderColor = theme.palette.primary.dark;
   const borderLength = theme.spacing(1);
 
@@ -24,3 +24,5 @@ export const styles = (theme: Theme): StyleRules => {
     },
   });
 };
+
+export { styles };

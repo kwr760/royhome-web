@@ -38,7 +38,7 @@ jest.mock('../src/components/privacy',
 jest.mock('../src/components/profile',
   () => jest.fn(() => 'Profile'),
 );
-jest.mock('../src/features/tictactoe/components',
+jest.mock('../src/features/tictactoe/components/tictactoe',
   () => jest.fn(() => 'Tic Tac Toe'),
 );
 

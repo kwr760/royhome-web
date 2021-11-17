@@ -1,7 +1,7 @@
 import { createStyles } from '@mui/styles';
 import type { StyleRules } from '@mui/styles/withStyles';
 
-export const styles = (): StyleRules =>
+const styles = (): StyleRules =>
   createStyles({
     container: {
       flexGrow: 1,
@@ -10,3 +10,5 @@ export const styles = (): StyleRules =>
       paddingRight: '15%',
     },
   });
+
+export { styles };

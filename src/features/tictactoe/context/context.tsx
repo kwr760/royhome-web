@@ -1,20 +1,13 @@
 import React, { createContext, useContext, useReducer } from 'react';
+import { PlayerEnum } from '../contracts/tictactoe.enum';
+import { initialTicTacToeState } from '../contracts/tictactoe.initial';
+import { ActionsType, ContextType, ProviderType, TicTacToeStateType } from '../contracts/tictactoe.context';
 import { checkGame } from '../functions/check-game';
-import {
-  initialState,
-  PlayerEnum,
-} from '../constants/tictactoe.constant';
 import { replaceAt } from '../functions/replace-at';
-import {
-  ProviderType,
-  ActionsType,
-  ContextType,
-  StateType,
-} from '../types/tictactoe';
 
 const TicTacToeContext = createContext<ContextType | undefined>(undefined);
 
-const ticTacToeReducer = (state: StateType, action: ActionsType) => {
+const ticTacToeReducer = (state: TicTacToeStateType, action: ActionsType) => {
   switch (action.type) {
     case 'takeTurn': {
       const { position, player } = action.payload;
@@ -32,18 +25,18 @@ const ticTacToeReducer = (state: StateType, action: ActionsType) => {
     }
     case 'reset': {
       return {
-        ...initialState,
+        ...initialTicTacToeState,
       };
     }
   }
   return state;
 };
 
-export const TicTacToeProvider = (
+const TicTacToeProvider = (
   {state: seededState, reducer: seededReducer, children}: ProviderType,
 ): JSX.Element => {
   const startState = seededState || {
-    ...initialState,
+    ...initialTicTacToeState,
   };
   const startReducer = seededReducer || ticTacToeReducer;
   const [state, dispatch] = useReducer(startReducer, startState);
@@ -57,10 +50,12 @@ export const TicTacToeProvider = (
   );
 };
 
-export const useTicTacToe = (): ContextType => {
+const useTicTacToe = (): ContextType => {
   const context = useContext(TicTacToeContext);
   if (context === undefined) {
     throw new Error('useTicTacToe must be used within a TicTacToeProvider');
   }
   return context;
 };
+
+export { TicTacToeProvider, useTicTacToe };

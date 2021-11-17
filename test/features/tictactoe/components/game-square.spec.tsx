@@ -2,19 +2,15 @@ import React, { Reducer } from 'react';
 import { ThemeProvider } from '@mui/styles';
 import { fireEvent, render } from '@testing-library/react';
 import GameSquare from '../../../../src/features/tictactoe/components/game-square';
-import { TicTacToeProvider } from '../../../../src/features/tictactoe/context';
-import {
-  ActionEnum,
-  initialPlayers,
-  initialStatus,
-  PlayerEnum,
-} from '../../../../src/features/tictactoe/constants/tictactoe.constant';
-import { StateType } from '../../../../src/features/tictactoe/types/tictactoe';
+import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context';
+import { ActionEnum, PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { initialPlayers, initialStatus } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
+import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
 import themeLight from '../../../../src/theme-light';
 
 describe('feature/tictactoe/component/game-square', () => {
   const emptyReducer = jest.fn();
-  const getComponent = (initialState: StateType, reducer: Reducer<unknown, unknown>) => {
+  const getComponent = (initialState: TicTacToeStateType, reducer: Reducer<unknown, unknown>) => {
     return (
       <ThemeProvider theme={themeLight}>
         <TicTacToeProvider state={initialState} reducer={reducer}>

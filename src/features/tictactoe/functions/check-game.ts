@@ -1,9 +1,13 @@
-import { PlayerEnum, StatusEnum } from '../constants/tictactoe.constant';
-import { CheckGameReturn, GameType } from '../types/tictactoe';
+import { PlayerEnum, StatusEnum } from '../contracts/tictactoe.enum';
+import { GameType } from '../contracts/tictactoe.context';
 import { findWinner } from './find-winner';
 import { isGameOver } from './is-game-over';
 
-export const checkGame = (game: GameType): CheckGameReturn => {
+interface CheckGameReturn {
+  status: StatusEnum,
+  winner?: PlayerEnum,
+}
+const checkGame = (game: GameType): CheckGameReturn => {
   const winner = findWinner(game);
   if (winner !== PlayerEnum.None) {
     return {
@@ -22,3 +26,5 @@ export const checkGame = (game: GameType): CheckGameReturn => {
     status: StatusEnum.Active,
   };
 };
+
+export { checkGame };

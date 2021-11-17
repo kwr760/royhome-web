@@ -3,9 +3,9 @@ import { Box, Button, Typography } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
 
-import { PlayerEnum, StatusEnum } from '../constants/tictactoe.constant';
-import { useTicTacToe } from '../context';
+import { useTicTacToe } from '../context/context';
 import { takeTurn } from '../context/context.actions';
+import { PlayerEnum, StatusEnum } from '../contracts/tictactoe.enum';
 import { styles } from '../styles/game-square.styles';
 
 const isSquareDisabled = (status: StatusEnum, owner: PlayerEnum) => {
