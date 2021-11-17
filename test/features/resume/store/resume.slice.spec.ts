@@ -3,7 +3,7 @@ import type { AnyAction } from 'redux';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 
-import resumeReducer, { fetchResume } from '../../../../src/features/resume/store/resume.slice';
+import { resumeReducer, fetchResume } from '../../../../src/features/resume/store/resume.slice';
 import { callApi } from '../../../../src/util/api/call-api';
 import { ResumeStateType } from '../../../../src/features/resume/contracts/resume.state';
 

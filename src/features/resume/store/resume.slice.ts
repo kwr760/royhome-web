@@ -5,16 +5,12 @@ import { callApi } from '../../../util/api/call-api';
 import { ApiConfigs } from '../../../config/api';
 import { setLoading, clearLoading } from '../../../store/session/session.slice';
 import { AppThunk } from '../../../store/create-store';
+import { initialResumeState } from '../contracts/resume.initial';
 import { ResumeStateType } from '../contracts/resume.state';
-
-const initialState: ResumeStateType = {
-  email: 'kroy760@gmail.com',
-  resumes: {},
-} as ResumeStateType;
 
 const resumeSlice = createSlice({
   name: 'resume',
-  initialState,
+  initialState: initialResumeState,
   reducers: {
     getResumeSuccess: (state: ResumeStateType, action: PayloadAction<AnyAction>) => {
       const { output: resume } = action.payload;
@@ -30,7 +26,7 @@ const resumeSlice = createSlice({
   },
 });
 
-export const fetchResume = (email: string): AppThunk => async dispatch => {
+const fetchResume = (email: string): AppThunk => async dispatch => {
   const { getResumeSuccess, getResumeFailure } = resumeSlice.actions;
   try {
     dispatch(setLoading());
@@ -48,4 +44,10 @@ export const fetchResume = (email: string): AppThunk => async dispatch => {
   }
 };
 
-export default resumeSlice.reducer;
+const resumeReducer = resumeSlice.reducer;
+export {
+  resumeReducer,
+  fetchResume,
+};
+
+// export default resumeSlice.reducer;
