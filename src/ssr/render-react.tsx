@@ -8,9 +8,9 @@ import { renderToString } from 'react-dom/server';
 import { ServerStyleSheets } from '@mui/styles';
 
 import { env } from '../config/env';
-import populateState from './populate-state';
+import { populateState } from './populate-state';
 import { displayMessage } from '../middleware/display-message';
-import createStore from '../store/create-store';
+import { createStore } from '../store/create-store';
 import { getCookies } from './cookies/get-cookies';
 import { generateCookieIds } from './cookies/generate-cookie-ids';
 import { BROWSER_ID, SESSION_ID } from './cookies/cookie.constants';
@@ -60,4 +60,4 @@ const renderReact = async (req: Request, res: Response): Promise<void> => {
   res.send(responseHtml);
 };
 
-export default renderReact;
+export { renderReact };

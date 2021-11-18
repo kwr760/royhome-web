@@ -12,7 +12,7 @@ import { env } from './config/env';
 
 import { handleError } from './middleware/handle-error';
 import { notFound } from './middleware/not-found';
-import renderReact from './ssr/render-react';
+import { renderReact } from './ssr/render-react';
 import { startHttpsServer } from './middleware/start-https';
 import { startHttpServer } from './middleware/start-http';
 

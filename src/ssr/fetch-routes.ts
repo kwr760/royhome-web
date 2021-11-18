@@ -1,7 +1,7 @@
 import { ResumeFetchType, RouteFetchType } from '../type/server/fetch-routes';
 import { getResumeProxy } from '../proxy/get-resume.proxy';
 
-export const fetchRoutes: RouteFetchType[] = [
+const fetchRoutes: RouteFetchType[] = [
   {
     path: '/',
     exact: true,
@@ -19,3 +19,5 @@ export const fetchRoutes: RouteFetchType[] = [
     },
   },
 ];
+
+export { fetchRoutes };

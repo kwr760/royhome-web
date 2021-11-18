@@ -1,5 +1,5 @@
-import createStore from '../../src/store/create-store';
-import { DarkModes } from '../../src/store/session/session.constants';
+import { createStore } from '../../src/store/create-store';
+import { DarkModes } from '../../src/contracts/session.constants';
 
 describe('store/configure', () => {
   it('should configure the store without initialState', () => {

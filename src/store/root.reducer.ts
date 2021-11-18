@@ -1,6 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
-
-import sessionReducer from './session/session.slice';
+import { sessionReducer } from './session/session.slice';
 import { resumeReducer } from '../features/resume/store/resume.slice';
 
 const rootReducer = combineReducers({
@@ -8,6 +7,7 @@ const rootReducer = combineReducers({
   resume: resumeReducer,
 });
 
-export type RootState = ReturnType<typeof rootReducer>
+type RootState = ReturnType<typeof rootReducer>
 
-export default rootReducer;
+export type { RootState };
+export { rootReducer } ;

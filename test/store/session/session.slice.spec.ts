@@ -4,14 +4,14 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { SessionStateType } from '../../../src/type/state/session';
 import { callApi } from '../../../src/util/api/call-api';
-import { DarkModes } from '../../../src/store/session/session.constants';
-import sessionReducer, {
+import { DarkModes } from '../../../src/contracts/session.constants';
+import {
   updateAuthentication,
   updateDarkMode,
   updateLoading,
   setLoading,
   clearLoading,
-  saveSession,
+  saveSession, sessionReducer,
 } from '../../../src/store/session/session.slice';
 import logger from '../../../src/util/logger/browser';
 

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-import { DarkModes } from './store/session/session.constants';
+import { DarkModes } from './contracts/session.constants';
 import { getDarkMode } from './store/session/session.selector';
 import { themeLight } from './theme-light';
 import { themeDark } from './theme-dark';

@@ -8,7 +8,7 @@ import { Auth0ContextType } from '../../src/type/auth0';
 import { Auth0Context } from '../../src/util/auth0/auth0-context';
 import { hasNeededRole } from '../../src/util/auth0/has-needed-role';
 import ProtectRoute from '../../src/components/protect-route';
-import createStore from '../../src/store/create-store';
+import { createStore } from '../../src/store/create-store';
 
 jest.mock('../../src/util/auth0/has-needed-role');
 

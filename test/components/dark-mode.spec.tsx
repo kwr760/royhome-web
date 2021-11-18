@@ -11,7 +11,7 @@ import { fireEvent, render } from '@testing-library/react';
 import { themeLight } from '../../src/theme-light';
 import { callApi } from '../../src/util/api/call-api';
 import DarkMode from '../../src/components/dark-mode';
-import { DarkModes } from '../../src/store/session/session.constants';
+import { DarkModes } from '../../src/contracts/session.constants';
 
 jest.mock('react-icons/fi');
 jest.mock('../../src/util/api/call-api');

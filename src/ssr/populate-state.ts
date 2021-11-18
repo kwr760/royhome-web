@@ -1,9 +1,8 @@
 import { matchPath } from 'react-router';
 import { getSessionProxy } from '../proxy/get-session.proxy';
-import { DarkModes } from '../store/session/session.constants';
+import { DarkModes } from '../contracts/session.constants';
 import { SessionStateType } from '../type/state/session';
 import { StateType } from '../type/state/state';
-
 import { fetchRoutes } from './fetch-routes';
 
 const populateState = async (path: string, sessionId?: string): Promise<StateType> => {
@@ -52,4 +51,4 @@ const populateState = async (path: string, sessionId?: string): Promise<StateTyp
   };
 };
 
-export default populateState;
+export { populateState };

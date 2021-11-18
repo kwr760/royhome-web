@@ -9,7 +9,7 @@ import httpContext from 'express-http-context';
 
 import { handleError } from '../src/middleware/handle-error';
 import { notFound } from '../src/middleware/not-found';
-import renderReact from '../src/ssr/render-react';
+import { renderReact } from '../src/ssr/render-react';
 import { startHttpsServer } from '../src/middleware/start-https';
 import { startHttpServer } from '../src/middleware/start-http';
 

@@ -1,16 +1,16 @@
 import { CookieOptions, Request } from 'express';
 import { getMaxAgeInDays } from './get-max-age-in-days';
 
-export const generateCookieOptions = (req: Request): CookieOptions => {
+const generateCookieOptions = (req: Request): CookieOptions => {
   const defaultHost = 'royk.us';
   const domain = req.header('domain');
 
-  const options = {
+  return {
     maxAge: getMaxAgeInDays(365),
     httpOnly: true,
     secure: true,
     domain: domain || defaultHost,
   };
-
-  return options;
 };
+
+export { generateCookieOptions };
