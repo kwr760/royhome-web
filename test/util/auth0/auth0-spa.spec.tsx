@@ -4,7 +4,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import createAuth0Client from '@auth0/auth0-spa-js';
 
-import Auth0Provider from '../../../src/util/auth0/auth0-spa';
+import { Auth0Provider } from '../../../src/util/auth0/auth0-spa';
 import { useAuth0 } from '../../../src/util/auth0/auth0-context';
 import { Auth0ContextType } from '../../../src/type/auth0';
 

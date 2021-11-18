@@ -1,11 +1,11 @@
 import { merge } from 'lodash';
+import { DEVELOPMENT, DOCKER, LOCAL, PRODUCTION } from '../contracts/release-environments.constants';
 
-import base from './env/base';
-import prod from './env/prod';
-import docker from './env/docker';
-import dev from './env/dev';
-import local from './env/local';
-import { DEVELOPMENT, LOCAL, DOCKER, PRODUCTION } from './release-environments';
+import { base } from './env/base';
+import { prod } from './env/prod';
+import { docker } from './env/docker';
+import { dev } from './env/dev';
+import { local } from './env/local';
 
 let mergedConfig;
 
@@ -27,4 +27,5 @@ switch (release) {
 
 const env = mergedConfig;
 
-export default env;
+export { env };
+

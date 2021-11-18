@@ -5,7 +5,7 @@ import PlayerDialog from '../../../../src/features/tictactoe/components/player-d
 import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context';
 import { PlayerEnum, StatusEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { initialGame, initialPlayers } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
-import themeLight from '../../../../src/theme-light';
+import { themeLight } from '../../../../src/theme-light';
 
 describe('feature/tictactoe/component/player-dialog', () => {
   const state = {

@@ -1,4 +1,4 @@
-import LOG_LEVELS from '../../../src/util/logger/logger-levels';
+import { LOG_LEVELS } from '../../../src/util/logger/logger-levels';
 
 describe('util/logger/levels', () => {
   it('should load the expected levels', () => {

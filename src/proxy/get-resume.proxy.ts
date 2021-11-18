@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import env from '../config';
-import { ApiConfigs } from '../config/api';
+import { env } from '../config/env';
+import { ApiConfigs } from '../contracts/api.contants';
 import { getParsedUrl } from '../util/api/get-parsed-url';
 
 export const getResumeProxy = async (email: string): Promise<unknown> => {

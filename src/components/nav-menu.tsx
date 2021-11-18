@@ -7,11 +7,11 @@ import {
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
 import { FiEyeOff, FiLogIn, FiLogOut, FiUser } from 'react-icons/fi';
+import { pageRoutes } from '../contracts/pages.contants';
 
 import { useAuth0 } from '../util/auth0/auth0-context';
 import { isAuthenticated, getUser } from '../store/session/session.selector';
 import { displayPage } from './functions/display-page';
-import { pages } from '../config/pages';
 import { styles } from './styles/nav-menu.styles';
 
 interface Props {
@@ -19,7 +19,7 @@ interface Props {
   setAnchor: Dispatch<SetStateAction<null | HTMLElement>>;
 }
 type NavMenuProps = Props & WithStyles<typeof styles>;
-export const NavMenuComponent: FunctionComponent<NavMenuProps> = ( { anchor, setAnchor, classes }) => {
+const NavMenuComponent: FunctionComponent<NavMenuProps> = ( { anchor, setAnchor, classes }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const authenticated = useSelector(isAuthenticated);
@@ -50,7 +50,7 @@ export const NavMenuComponent: FunctionComponent<NavMenuProps> = ( { anchor, set
       { authenticated ? <Typography className={classes.profile}>Kevin Roy</Typography> : null }
       { authenticated ? <Divider classes={{ root: classes.divider}} /> : null }
       { isMobile ?
-        pages.filter(displayPage(authenticated, user)).map((page) => {
+        pageRoutes.filter(displayPage(authenticated, user)).map((page) => {
           const IconComponent = page.icon;
           return (
             <MenuItem component={NavLink} key={page.path} to={page.path} onClick={handleMenuClose}>

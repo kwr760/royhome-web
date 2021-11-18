@@ -17,4 +17,4 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
   </Auth0Context.Provider>
 );
 
-export default Auth0Provider;
+export { Auth0Provider };

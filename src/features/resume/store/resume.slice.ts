@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { AnyAction } from 'redux';
+import { ApiConfigs } from '../../../contracts/api.contants';
 import { callApi } from '../../../util/api/call-api';
-import { ApiConfigs } from '../../../config/api';
 import { setLoading, clearLoading } from '../../../store/session/session.slice';
 import { AppThunk } from '../../../store/create-store';
 import { initialResumeState } from '../contracts/resume.initial';
@@ -49,5 +49,3 @@ export {
   resumeReducer,
   fetchResume,
 };
-
-// export default resumeSlice.reducer;

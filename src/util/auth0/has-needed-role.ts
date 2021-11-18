@@ -12,4 +12,4 @@ const hasNeededRole = (neededRole: string, context: ContextStateType = { role: '
   return grantedRoles.includes(neededRole);
 };
 
-export default hasNeededRole;
+export { hasNeededRole };

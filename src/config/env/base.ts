@@ -26,4 +26,5 @@ const env = (host: string) => ({
   },
 });
 
-export default env(currentHost);
+const base = env(currentHost);
+export { base };

@@ -1,11 +1,9 @@
-import env from '../../../../src/config';
-
-import LOG_LEVELS from '../../../../src/util/logger/logger-levels';
-import getConsole from '../../../../src/util/logger/get-console';
-import formatMessage from '../../../../src/util/logger/format-message';
-
-import log from '../../../../src/util/logger/browser/log';
-import writeToServer from '../../../../src/util/logger/browser/write-to-server';
+import { env } from '../../../../src/config/env';
+import { LOG_LEVELS } from '../../../../src/util/logger/logger-levels';
+import { getConsole } from '../../../../src/util/logger/get-console';
+import { formatMessage } from '../../../../src/util/logger/format-message';
+import { log } from '../../../../src/util/logger/browser/log';
+import { writeToServer } from '../../../../src/util/logger/browser/write-to-server';
 
 jest.mock('../../../../src/util/logger/format-message');
 jest.mock('../../../../src/util/logger/browser/write-to-server');

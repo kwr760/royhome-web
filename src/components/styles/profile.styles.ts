@@ -2,7 +2,7 @@ import type { Theme } from '@mui/material';
 import { createStyles } from '@mui/styles';
 import type { StyleRules } from '@mui/styles/withStyles';
 
-export const styles = (theme: Theme): StyleRules =>
+const styles = (theme: Theme): StyleRules =>
   createStyles({
     container: {
       padding: theme.spacing(3),
@@ -55,3 +55,5 @@ export const styles = (theme: Theme): StyleRules =>
       color: theme.palette.primary.dark,
     },
   });
+
+export { styles };

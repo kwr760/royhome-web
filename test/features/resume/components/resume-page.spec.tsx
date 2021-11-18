@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { render, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
-import theme from '../../../../src/theme-light';
+import { themeLight } from '../../../../src/theme-light';
 import { Auth0ContextType } from '../../../../src/type/auth0';
 import { Auth0Context } from '../../../../src/util/auth0/auth0-context';
 import { fetchResume } from '../../../../src/features/resume/store/resume.slice';
@@ -41,7 +41,7 @@ describe('features/resume/component/resume-page', () => {
     getToken: jest.fn(() => token),
   } as unknown as Auth0ContextType;
   const getResume = (auth: Auth0ContextType) => (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themeLight}>
       <Auth0Context.Provider value={auth}>
         <ResumePage />
       </Auth0Context.Provider>

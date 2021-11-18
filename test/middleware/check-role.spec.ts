@@ -1,9 +1,8 @@
 import { Response, NextFunction } from 'express';
 import { UNAUTHORIZED } from 'http-status-codes';
 import { TokenRequest } from '../../src/type/token';
-
 import { TOKEN_URL } from '../../src/util/auth0/role.constants';
-import checkRole from '../../src/middleware/check-role';
+import { checkRole } from '../../src/middleware/check-role';
 
 describe('server/middleware/check-role', () => {
   it('should return error if no role', () => {

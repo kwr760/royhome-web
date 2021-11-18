@@ -1,4 +1,4 @@
-import LOG_LEVELS from './logger-levels';
+import { LOG_LEVELS } from './logger-levels';
 
 import { LogType } from '../../type/logger';
 
@@ -17,4 +17,4 @@ const getConsole = (logType: LogType): (...data: string[]) => void => {
   }
 };
 
-export default getConsole;
+export { getConsole };

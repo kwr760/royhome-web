@@ -7,9 +7,9 @@ import React  from 'react';
 import { renderToString } from 'react-dom/server';
 import { ServerStyleSheets } from '@mui/styles';
 
-import env from '../config';
+import { env } from '../config/env';
 import populateState from './populate-state';
-import displayMessage from '../middleware/display-message';
+import { displayMessage } from '../middleware/display-message';
 import createStore from '../store/create-store';
 import { getCookies } from './cookies/get-cookies';
 import { generateCookieIds } from './cookies/generate-cookie-ids';

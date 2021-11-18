@@ -12,4 +12,4 @@ const getCurrentDatetime = (): string => {
   return util.format('%s-%s-%s_%s:%s:%s.%s', year, month, date, hour, minute, second, milli);
 };
 
-export default getCurrentDatetime;
+export { getCurrentDatetime };

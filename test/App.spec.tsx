@@ -8,7 +8,7 @@ import { render } from '@testing-library/react';
 import { Auth0Context } from '../src/util/auth0/auth0-context';
 import App from '../src/App';
 import createStore from '../src/store/create-store';
-import themeLight from '../src/theme-light';
+import { themeLight } from '../src/theme-light';
 
 jest.mock('@loadable/component');
 jest.mock('axios', () => ({

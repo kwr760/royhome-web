@@ -1,8 +1,7 @@
 import { TabPageType } from '../type/object/tab-page';
-
 import { FiInfo, FiBookOpen, FiAlertTriangle, FiLayers } from 'react-icons/fi';
 
-export const pages: TabPageType[] = [
+const pageRoutes: TabPageType[] = [
   {
     name: 'Resume',
     path: '/',
@@ -31,3 +30,4 @@ export const pages: TabPageType[] = [
   },
 ];
 
+export { pageRoutes };

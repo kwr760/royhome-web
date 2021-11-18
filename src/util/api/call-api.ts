@@ -6,7 +6,7 @@ import { getParsedUrl } from './get-parsed-url';
 import { getApiUrl } from './get-api-url';
 import { ApiDetailsType, ApiConfigType } from '../../type/api/api';
 
-export const callApi = async (
+const callApi = async (
   api: ApiConfigType,
   details: ApiDetailsType,
 ): Promise<AxiosResponse> => {
@@ -32,3 +32,5 @@ export const callApi = async (
     },
   );
 };
+
+export { callApi };

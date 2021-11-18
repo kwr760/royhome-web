@@ -8,5 +8,7 @@ const initialContext = {
   getToken: noop,
 };
 
-export const Auth0Context = React.createContext<Auth0ContextType>(initialContext);
-export const useAuth0 = (): Auth0ContextType => useContext(Auth0Context);
+const Auth0Context = React.createContext<Auth0ContextType>(initialContext);
+const useAuth0 = (): Auth0ContextType => useContext(Auth0Context);
+
+export { Auth0Context, useAuth0 };

@@ -1,7 +1,7 @@
-import { pages } from '../../config/pages';
+import { pageRoutes } from '../../contracts/pages.contants';
 
-export const findRouteTab = (path: string): number => {
-  const page = pages.find((page) => {
+const findRouteTab = (path: string): number => {
+  const page = pageRoutes.find((page) => {
     return page.path === path;
   });
 
@@ -11,3 +11,5 @@ export const findRouteTab = (path: string): number => {
 
   return 0;
 };
+
+export { findRouteTab };

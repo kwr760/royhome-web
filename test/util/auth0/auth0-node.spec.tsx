@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import Auth0Provider from '../../../src/util/auth0/auth0-node';
+import { Auth0Provider } from '../../../src/util/auth0/auth0-node';
 import { useAuth0 } from '../../../src/util/auth0/auth0-context';
 
 describe('util/auth0/react-auth0-node', () => {

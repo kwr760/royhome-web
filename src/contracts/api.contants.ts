@@ -1,6 +1,6 @@
 import { ApiConfigType } from '../type/api/api';
 
-export const ApiConfigs = {
+const ApiConfigs = {
   PUT_LOG: {
     method: 'put',
     path: '/log',
@@ -28,3 +28,5 @@ export const ApiConfigs = {
     authenticated: false,
   } as ApiConfigType,
 };
+
+export { ApiConfigs };

@@ -4,10 +4,9 @@ import { NavLink } from 'react-router-dom';
 import { Tab, Tabs, useMediaQuery, useTheme } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
-
+import { pageRoutes } from '../contracts/pages.contants';
 import { isAuthenticated, getUser } from '../store/session/session.selector';
 import { displayPage } from './functions/display-page';
-import { pages } from '../config/pages';
 import { styles } from './styles/nav-tabs.styles';
 
 interface Props {
@@ -15,7 +14,7 @@ interface Props {
   setPosition: Dispatch<SetStateAction<number>>;
 }
 type NavBarTabsProps = Props & WithStyles<typeof styles>;
-export const NavTabsComponent: FunctionComponent<NavBarTabsProps> = ({ position, setPosition, classes }) => {
+const NavTabsComponent: FunctionComponent<NavBarTabsProps> = ({ position, setPosition, classes }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const authenticated = useSelector(isAuthenticated);
@@ -37,7 +36,7 @@ export const NavTabsComponent: FunctionComponent<NavBarTabsProps> = ({ position,
       className={classes.tabs}
     >
       {
-        pages.filter(displayPage(authenticated, user)).map((page) => {
+        pageRoutes.filter(displayPage(authenticated, user)).map((page) => {
           return <Tab
             component={NavLink}
             key={page.path}

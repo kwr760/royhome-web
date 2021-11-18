@@ -8,11 +8,11 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import httpContext from 'express-http-context';
 
-import handleError from '../src/middleware/handle-error';
-import notFound from '../src/middleware/not-found';
+import { handleError } from '../src/middleware/handle-error';
+import { notFound } from '../src/middleware/not-found';
 import renderReact from '../src/ssr/render-react';
-import startHttpsServer from '../src/middleware/start-https';
-import startHttpServer from '../src/middleware/start-http';
+import { startHttpsServer } from '../src/middleware/start-https';
+import { startHttpServer } from '../src/middleware/start-http';
 
 jest.mock('express');
 jest.mock('cors');
@@ -112,8 +112,8 @@ describe('server/index', () => {
   it('should start dev server', () => {
     // Arrange
     jest.isolateModules(() => {
-      const { default: env } = require('../src/config');
-      const { default: dev } = require('../src/config/env/dev');
+      const { env } = require('../src/config/env');
+      const { dev } = require('../src/config/env/dev');
       env.mode = dev.mode;
 
       // Act
@@ -128,8 +128,8 @@ describe('server/index', () => {
   it('should start prod server', () => {
     // Arrange
     jest.isolateModules(() => {
-      const { default: env } = require('../src/config');
-      const { default: prod } = require('../src/config/env/prod');
+      const { env } = require('../src/config/env');
+      const { prod } = require('../src/config/env/prod');
       env.mode = prod.mode;
       process.env.SERVER_PORT = '';
 
@@ -146,8 +146,8 @@ describe('server/index', () => {
   it('should start docker server', () => {
     // Arrange
     jest.isolateModules(() => {
-      const { default: env } = require('../src/config');
-      const { default: docker } = require('../src/config/env/docker');
+      const { env } = require('../src/config/env');
+      const { docker } = require('../src/config/env/docker');
       env.mode = docker.mode;
       env.server = docker.server;
       process.env.SERVER_PORT = '';

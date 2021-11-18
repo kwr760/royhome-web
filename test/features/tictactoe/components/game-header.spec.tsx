@@ -7,7 +7,7 @@ import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/co
 import { PlayerEnum, StatusEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { initialGame, initialPlayers } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
-import themeLight from '../../../../src/theme-light';
+import { themeLight } from '../../../../src/theme-light';
 
 jest.mock('react-icons/fa');
 

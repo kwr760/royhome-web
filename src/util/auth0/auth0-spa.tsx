@@ -8,7 +8,7 @@ import createAuth0Client, {
 } from '@auth0/auth0-spa-js';
 import { getDarkMode } from '../../store/session/session.selector';
 
-import env from '../../config';
+import { env } from '../../config/env';
 import { ContextStateType } from '../../type/state/context';
 import { UserStateType } from '../../type/state/user';
 import { SaveSessionType } from '../../type/store/session';
@@ -108,4 +108,4 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
   );
 };
 
-export default Auth0Provider;
+export { Auth0Provider };

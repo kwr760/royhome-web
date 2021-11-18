@@ -8,7 +8,7 @@ import { loadableReady } from '@loadable/component';
 
 import { IndexPropType } from './type/prop';
 
-import Auth0Provider from './util/auth0/auth0-spa';
+import { Auth0Provider } from './util/auth0/auth0-spa';
 import { config } from './util/auth0/auth0.constants';
 
 import Theme from './Theme';

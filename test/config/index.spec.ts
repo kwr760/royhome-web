@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
+import { DEVELOPMENT, DOCKER, LOCAL, PRODUCTION } from '../../src/contracts/release-environments.constants';
 /* eslint-disable @typescript-eslint/no-var-requires */
-import LOG_LEVELS from '../../src/util/logger/logger-levels';
-import { DEVELOPMENT, DOCKER, LOCAL, PRODUCTION } from '../../src/config/release-environments';
+import { LOG_LEVELS } from '../../src/util/logger/logger-levels';
 
 describe('config/index', () => {
   const { NODE_ENV } = process.env;
@@ -19,7 +19,7 @@ describe('config/index', () => {
     it('should load prod as expected', () => {
       // Arrange
       const expected = {
-        default: {
+        env: {
           appName: 'royhome',
           auth0: {
             callbackUrl: 'http://localhost',
@@ -48,7 +48,7 @@ describe('config/index', () => {
       };
 
       // Act
-      const prod = require('../../src/config');
+      const prod = require('../../src/config/env');
 
       // Assert
       expect(prod).toEqual(expected);
@@ -68,7 +68,7 @@ describe('config/index', () => {
     it('should load dev as expected', async () => {
       // Arrange
       const expected = {
-        default: {
+        env: {
           appName: 'royhome',
           auth0: {
             callbackUrl: 'http://localhost',
@@ -97,7 +97,7 @@ describe('config/index', () => {
       };
 
       // Act
-      const dev = require('../../src/config');
+      const dev = require('../../src/config/env');
 
       // Assert
       expect(dev).toEqual(expected);
@@ -117,7 +117,7 @@ describe('config/index', () => {
     it('should load docker as expected', async () => {
       // Arrange
       const expected = {
-        default: {
+        env: {
           appName: 'royhome',
           auth0: {
             callbackUrl: 'http://localhost',
@@ -146,7 +146,7 @@ describe('config/index', () => {
       };
 
       // Act
-      const dev = require('../../src/config');
+      const dev = require('../../src/config/env');
 
       // Assert
       expect(dev).toEqual(expected);
@@ -166,7 +166,7 @@ describe('config/index', () => {
     it('should load local as expected', async () => {
       // Arrange
       const expected = {
-        default: {
+        env: {
           appName: 'royhome',
           auth0: {
             callbackUrl: 'http://localhost',
@@ -195,7 +195,7 @@ describe('config/index', () => {
       };
 
       // Act
-      const dev = require('../../src/config');
+      const dev = require('../../src/config/env');
 
       // Assert
       expect(dev).toEqual(expected);
@@ -215,7 +215,7 @@ describe('config/index', () => {
     it('should load prod if unknown', () => {
     // Arrange
       const expected = {
-        default: {
+        env: {
           appName: 'royhome',
           auth0: {
             callbackUrl: 'https://royk.us',
@@ -245,7 +245,7 @@ describe('config/index', () => {
       global.origin = '';
 
       // Act
-      const prod = require('../../src/config');
+      const prod = require('../../src/config/env');
 
       // Assert
       expect(prod).toEqual(expected);

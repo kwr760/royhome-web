@@ -25,4 +25,4 @@ const LOG_LEVELS = {
   },
 };
 
-export default LOG_LEVELS;
+export { LOG_LEVELS };

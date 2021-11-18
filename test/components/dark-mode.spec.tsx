@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import { fireEvent, render } from '@testing-library/react';
 
-import themeLight from '../../src/theme-light';
+import { themeLight } from '../../src/theme-light';
 import { callApi } from '../../src/util/api/call-api';
 import DarkMode from '../../src/components/dark-mode';
 import { DarkModes } from '../../src/store/session/session.constants';

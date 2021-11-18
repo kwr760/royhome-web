@@ -1,4 +1,4 @@
-import hasNeededRole from '../../../src/util/auth0/has-needed-role';
+import { hasNeededRole } from '../../../src/util/auth0/has-needed-role';
 
 describe('util/auth0/has-needed-role', () => {
   it('should return false if empty data', () => {

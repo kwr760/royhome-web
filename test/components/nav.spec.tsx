@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from '@mui/styles';
 import { render } from '@testing-library/react';
-import themeLight from '../../src/theme-light';
+import { themeLight } from '../../src/theme-light';
 
 import Nav from '../../src/components/nav';
 

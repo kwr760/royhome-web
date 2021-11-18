@@ -6,7 +6,7 @@ import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/co
 import { ActionEnum, PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { initialPlayers, initialStatus } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
-import themeLight from '../../../../src/theme-light';
+import { themeLight } from '../../../../src/theme-light';
 
 describe('feature/tictactoe/component/game-square', () => {
   const emptyReducer = jest.fn();

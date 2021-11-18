@@ -9,7 +9,7 @@ import configureMockStore from 'redux-mock-store';
 import mediaQuery from 'css-mediaquery';
 
 import NavTabs from '../../src/components/nav-tabs';
-import themeLight from '../../src/theme-light';
+import { themeLight } from '../../src/theme-light';
 
 function createMatchMedia(width: number) {
   return (query: string): MediaQueryList => ({

@@ -1,7 +1,7 @@
-import LOG_LEVELS from '../../util/logger/logger-levels';
-import { PRODUCTION } from '../release-environments';
+import { PRODUCTION } from '../../contracts/release-environments.constants';
+import { LOG_LEVELS } from '../../util/logger/logger-levels';
 
-const env = {
+const prod = {
   release: PRODUCTION,
   log: {
     level: LOG_LEVELS.WARN,
@@ -10,4 +10,4 @@ const env = {
   },
 };
 
-export default env;
+export { prod };

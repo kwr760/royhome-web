@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 
 import ResumeProject from '../../../../src/features/resume/components/resume-project';
 import { ProjectType } from '../../../../src/features/resume/contracts/resume.models';
-import theme from '../../../../src/theme-light';
+import { themeLight } from '../../../../src/theme-light';
 
 describe('features/resume/components/resume-project', () => {
   it('should render', () => {
@@ -25,7 +25,7 @@ describe('features/resume/components/resume-project', () => {
 
     // Act
     const { getByText } = render(
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeLight}>
         <ResumeProject project={project} />
       </ThemeProvider>,
     );
@@ -42,7 +42,7 @@ describe('features/resume/components/resume-project', () => {
   it('should render without props', () => {
     // Arrange / Act
     const { getByText } = render(
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeLight}>
         <ResumeProject project={[] as ProjectType[]}/>
       </ThemeProvider>,
     );

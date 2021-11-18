@@ -1,8 +1,8 @@
 import axios, { AxiosError } from 'axios';
 import { NOT_FOUND } from 'http-status-codes';
 
-import env from '../config';
-import { ApiConfigs } from '../config/api';
+import { env } from '../config/env';
+import { ApiConfigs } from '../contracts/api.contants';
 import { getParsedUrl } from '../util/api/get-parsed-url';
 import { SessionApiType } from '../type/api/session';
 

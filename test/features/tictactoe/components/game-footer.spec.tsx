@@ -5,14 +5,14 @@ import GameFooter from '../../../../src/features/tictactoe/components/game-foote
 import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context';
 import { ActionEnum, PlayerEnum, StatusEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
-import theme from '../../../../src/theme-light';
+import { themeLight } from '../../../../src/theme-light';
 import { initialGame, initialPlayers } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 
 describe('feature/tictactoe/component/game-footer', () => {
   const emptyReducer = jest.fn();
   const getComponent = (initialState: TicTacToeStateType, reducer: Reducer<unknown, unknown>) => {
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeLight}>
         <TicTacToeProvider state={initialState} reducer={reducer}>
           <GameFooter />
         </TicTacToeProvider>

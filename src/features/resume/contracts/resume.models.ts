@@ -49,4 +49,4 @@ interface ResumeType {
   project: ProjectType[];
 }
 
-export { SkillGroupType, ExperienceType, EducationType, ProjectType, ResumeType };
+export type { SkillGroupType, ExperienceType, EducationType, ProjectType, ResumeType };

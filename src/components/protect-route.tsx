@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { getUser, isAuthenticated } from '../store/session/session.selector';
 import { UserStateType } from '../type/state/user';
-import hasNeededRole from '../util/auth0/has-needed-role';
+import { hasNeededRole } from '../util/auth0/has-needed-role';
 
 interface Props {
   userRole?: string;

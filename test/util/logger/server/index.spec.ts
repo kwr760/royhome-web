@@ -1,6 +1,6 @@
-import LOG_LEVELS from '../../../../src/util/logger/logger-levels';
+import { LOG_LEVELS } from '../../../../src/util/logger/logger-levels';
 import Logger from '../../../../src/util/logger/server';
-import log from '../../../../src/util/logger/server/log';
+import { log } from '../../../../src/util/logger/server/log';
 
 jest.mock('../../../../src/util/logger/server/log');
 

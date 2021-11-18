@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 import React from 'react';
 import reactDOM, { render, unmountComponentAtNode } from 'react-dom';
-import Auth0Provider from '../src/util/auth0/auth0-spa';
+import { Auth0Provider } from '../src/util/auth0/auth0-spa';
 
 const mockApp = jest.fn(() => <div>App</div>);
 

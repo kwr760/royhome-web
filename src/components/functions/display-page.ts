@@ -1,9 +1,8 @@
 import { UserStateType } from '../../type/state/user';
 import { shouldDisplayTab } from './should-display-tab';
-
 import { TabPageType } from '../../type/object/tab-page';
 
-export const displayPage = (authenticated: boolean, user: UserStateType) => (page: TabPageType): boolean => {
+const displayPage = (authenticated: boolean, user: UserStateType) => (page: TabPageType): boolean => {
   if (page.role) {
     return shouldDisplayTab(authenticated, page.role, user);
   }
@@ -14,3 +13,5 @@ export const displayPage = (authenticated: boolean, user: UserStateType) => (pag
 
   return true;
 };
+
+export { displayPage };

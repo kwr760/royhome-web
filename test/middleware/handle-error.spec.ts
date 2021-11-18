@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { INTERNAL_SERVER_ERROR } from 'http-status-codes';
 
-import handleError from '../../src/middleware/handle-error';
+import { handleError } from '../../src/middleware/handle-error';
 import Logger from '../../src/util/logger/server';
 
 describe('server/middleware/handle-error', () => {

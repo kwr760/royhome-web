@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 
 import Resume from '../../../../src/features/resume/components/resume';
 import { ResumeType } from '../../../../src/features/resume/contracts/resume.models';
-import theme from '../../../../src/theme-light';
+import { themeLight } from '../../../../src/theme-light';
 
 describe('features/resume/components/resume-page', () => {
   it('should render', () => {
@@ -19,7 +19,7 @@ describe('features/resume/components/resume-page', () => {
 
     // Act
     const { getByText } = render(
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeLight}>
         <Resume resume={resume} />
       </ThemeProvider>,
     );
@@ -38,7 +38,7 @@ describe('features/resume/components/resume-page', () => {
     const resume = undefined;
     // Act
     const { getByText } = render(
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeLight}>
         <Resume resume={resume}/>
       </ThemeProvider>,
     );
