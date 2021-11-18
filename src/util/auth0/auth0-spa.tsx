@@ -75,8 +75,7 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
       dispatch(clearLoading());
     };
     initAuth0();
-    // eslint-disable-next-line
-  }, [darkMode]);
+  }, [darkMode, dispatch, initOptions, onRedirectCallback]);
 
   const logout = async (...p: unknown[]) => {
     const logoutProps = {

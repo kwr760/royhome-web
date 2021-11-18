@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import express from 'express';
 import cors from 'cors';

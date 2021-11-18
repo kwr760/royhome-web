@@ -1,5 +1,3 @@
-/* eslint-disable no-template-curly-in-string */
-
 function isWebTarget(caller) {
   return Boolean(caller && caller.target === 'web');
 }

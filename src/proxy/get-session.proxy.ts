@@ -13,7 +13,6 @@ export const getSessionProxy = async (sessionId: string): Promise<SessionApiType
   const url = getParsedUrl(apiUrl, path);
 
   let response, data = {};
-  // eslint-disable-next-line no-useless-catch
   try {
     response = await axios.get(url);
     data = response.data.output;

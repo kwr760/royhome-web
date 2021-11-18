@@ -5,3 +5,4 @@ declare global {
     __PRELOADED_STATE__?: StateType;
   }
 }
+

@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import 'core-js';
 import React, { useEffect, FunctionComponent } from 'react';
 import { hydrate } from 'react-dom';
@@ -7,10 +6,8 @@ import { Provider } from 'react-redux';
 import { loadableReady } from '@loadable/component';
 
 import { IndexPropType } from './type/prop';
-
 import { Auth0Provider } from './util/auth0/auth0-spa';
 import { config } from './util/auth0/auth0.constants';
-
 import Theme from './Theme';
 import createStore from './store/create-store';
 import { removeJssStyle } from './util/remove-jss-style';

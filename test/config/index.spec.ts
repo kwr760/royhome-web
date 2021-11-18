@@ -1,6 +1,5 @@
-/* eslint-disable global-require */
-import { DEVELOPMENT, DOCKER, LOCAL, PRODUCTION } from '../../src/contracts/release-environments.constants';
 /* eslint-disable @typescript-eslint/no-var-requires */
+import { DEVELOPMENT, DOCKER, LOCAL, PRODUCTION } from '../../src/contracts/release-environments.constants';
 import { LOG_LEVELS } from '../../src/util/logger/logger-levels';
 
 describe('config/index', () => {
