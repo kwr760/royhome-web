@@ -72,8 +72,8 @@ const AuthProvider: React.FC<Auth0Provider> = ({
       dispatch(clearLoading());
     };
     initAuth0();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [darkMode]);
-
   const logout = async (...p: unknown[]) => {
     const logoutProps = {
       ...p,

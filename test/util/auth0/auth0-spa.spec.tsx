@@ -69,7 +69,7 @@ describe('util/auth0/react-auth0-spa', () => {
     await waitFor(() => {});
 
     // Assert
-    expect(dispatch).toBeCalledTimes(7);
+    expect(dispatch).toBeCalledTimes(4);
     expect(dispatch).toHaveBeenNthCalledWith(1, expectedLoadingOn);
     expect(dispatch).toHaveBeenNthCalledWith(3, expectedLoadingOff);
   });
@@ -91,7 +91,7 @@ describe('util/auth0/react-auth0-spa', () => {
     await waitFor(() => {});
 
     // Assert
-    expect(dispatch).toBeCalledTimes(6);
+    expect(dispatch).toBeCalledTimes(3);
     expect(dispatch).toHaveBeenNthCalledWith(1, expectedLoadingOn);
     expect(dispatch).toHaveBeenNthCalledWith(3, expectedLoadingOff);
   });
@@ -123,7 +123,7 @@ describe('util/auth0/react-auth0-spa', () => {
     await waitFor(() => {});
 
     // Assert
-    expect(dispatch).toBeCalledTimes(6);
+    expect(dispatch).toBeCalledTimes(3);
     expect(dispatch).toHaveBeenNthCalledWith(1, expectedLoadingOn);
     expect(dispatch).toHaveBeenNthCalledWith(3, expectedLoadingOff);
     global.window = savedWindow;
