@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import type { Store } from 'redux';
 import { render } from '@testing-library/react';
 import { createStore } from '../src/store/create-store';
-import { DarkModes } from '../src/contracts/session.constants';
+import { DarkModes } from '../src/contracts/constants/session.constants';
 import Theme from '../src/Theme';
 
 jest.mock('../src/App', () => jest.fn(() => <div>App</div>));

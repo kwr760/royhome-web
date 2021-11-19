@@ -1,9 +1,10 @@
-export interface CustomOptions {
+interface CustomOptions {
   boxShadow?: string;
   backgroundGradient?: string;
 }
-export interface Custom {
+interface Custom {
   boxShadow?: string;
   backgroundGradient?: string;
 }
 
+export type { Custom, CustomOptions };

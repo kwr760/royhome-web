@@ -1,6 +1,6 @@
 import axios from 'axios';
+import { LOG_LEVELS } from '../../../../src/contracts/constants/log-levels.constants';
 
-import { LOG_LEVELS } from '../../../../src/util/logger/logger-levels';
 import { writeToServer } from '../../../../src/util/logger/browser/write-to-server';
 
 jest.mock('axios', () => ({

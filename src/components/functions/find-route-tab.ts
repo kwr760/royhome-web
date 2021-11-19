@@ -1,4 +1,4 @@
-import { pageRoutes } from '../../contracts/pages.contants';
+import { pageRoutes } from '../../contracts/constants/pages.constants';
 
 const findRouteTab = (path: string): number => {
   const page = pageRoutes.find((page) => {

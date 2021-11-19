@@ -1,13 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { ApiConfigs } from '../../contracts/api.contants';
-import { initialSessionState } from '../../contracts/session.initial';
-import { UserStateType } from '../../type/state/user';
-import { UpdateSessionType, SaveSessionType } from '../../type/store/session';
+import { Auth0User } from '../../contracts/auth0.models';
+import { ApiConfigs } from '../../contracts/constants/api.constants';
+import { initialSessionState } from '../../contracts/initial/session.initial';
+import { SaveSessionType, UpdateSessionType } from '../../contracts/store/session.store';
 import { AppThunk } from '../create-store';
 import { callApi } from '../../util/api/call-api';
 import logger from '../../util/logger/browser';
-
 
 const sessionSlice = createSlice({
   name: 'session',
@@ -60,7 +59,7 @@ const updateDarkMode = (darkMode: string): AppThunk => async dispatch => {
     logger.error(errorMsg);
   }
 };
-const saveSession = (claim: SaveSessionType, user: UserStateType): AppThunk => async dispatch => {
+const saveSession = (claim: SaveSessionType, user: Auth0User): AppThunk => async dispatch => {
   const {updateSession} = sessionSlice.actions;
   try {
     const { data } = await callApi(ApiConfigs.SAVE_SESSION, {

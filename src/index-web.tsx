@@ -4,15 +4,18 @@ import { hydrate } from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { loadableReady } from '@loadable/component';
+import type { Store } from 'redux';
 
-import { IndexPropType } from './type/prop';
 import { Auth0Provider } from './util/auth0/auth0-spa';
-import { config } from './util/auth0/auth0.constants';
+import { config } from './contracts/constants/auth0.constants';
 import Theme from './Theme';
 import { createStore } from './store/create-store';
 import { removeJssStyle } from './util/remove-jss-style';
 
-const Main: FunctionComponent<IndexPropType> = ({ store }) => {
+interface Props {
+  store: Store;
+}
+const Main: FunctionComponent<Props> = ({ store }) => {
   useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side');
     removeJssStyle(jssStyles);

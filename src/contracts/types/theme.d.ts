@@ -1,6 +1,7 @@
-import { Custom, CustomOptions } from '../theme';
+import { Custom, CustomOptions } from '../theme.models';
 
 declare module '@mui/material/styles/createTheme' {
+
   interface ThemeOptions {
     custom?: CustomOptions;
   }

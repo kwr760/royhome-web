@@ -1,5 +1,5 @@
-import { LogMsgType } from '../../../type/logger';
 import { env } from '../../../config/env';
+import { LogMsgType } from '../../../contracts/logger.models';
 
 import { getConsole } from '../get-console';
 import { writeToServer } from './write-to-server';

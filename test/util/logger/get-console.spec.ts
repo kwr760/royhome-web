@@ -1,4 +1,4 @@
-import { LOG_LEVELS } from '../../../src/util/logger/logger-levels';
+import { LOG_LEVELS } from '../../../src/contracts/constants/log-levels.constants';
 import { getConsole } from '../../../src/util/logger/get-console';
 
 describe('util/logger/get-console', () => {

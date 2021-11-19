@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { DEVELOPMENT, DOCKER, LOCAL, PRODUCTION } from '../../src/contracts/release-environments.constants';
-import { LOG_LEVELS } from '../../src/util/logger/logger-levels';
+
+import { DEVELOPMENT, DOCKER, LOCAL, PRODUCTION } from '../../src/contracts/constants/environments.constants';
+import { LOG_LEVELS } from '../../src/contracts/constants/log-levels.constants';
 
 describe('config/index', () => {
   const { NODE_ENV } = process.env;

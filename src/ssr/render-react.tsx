@@ -3,10 +3,10 @@ import fs from 'fs';
 import parseUrl from 'parseurl';
 import { Request, Response } from 'express';
 import { ChunkExtractor } from '@loadable/server';
-import React  from 'react';
+import React, { ComponentType } from 'react';
 import { renderToString } from 'react-dom/server';
 import { ServerStyleSheets } from '@mui/styles';
-
+import type { Store } from 'redux';
 import { env } from '../config/env';
 import { populateState } from './populate-state';
 import { displayMessage } from '../middleware/display-message';
@@ -15,8 +15,14 @@ import { getCookies } from './cookies/get-cookies';
 import { generateCookieIds } from './cookies/generate-cookie-ids';
 import { BROWSER_ID, SESSION_ID } from './cookies/cookie.constants';
 import { generateCookieOptions } from './cookies/generate-cookie-options';
-import { MainType } from '../type/server/ssr';
 
+interface Props {
+  url: string,
+  store: Store,
+}
+interface MainType {
+  default: ComponentType<Props>,
+}
 const renderReact = async (req: Request, res: Response): Promise<void> => {
   displayMessage(`Server render:  ${req.url}`);
 

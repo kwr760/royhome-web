@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { AnyAction } from 'redux';
-import { ApiConfigs } from '../../../contracts/api.contants';
+import { ApiConfigs } from '../../../contracts/constants/api.constants';
 import { callApi } from '../../../util/api/call-api';
 import { setLoading, clearLoading } from '../../../store/session/session.slice';
 import { AppThunk } from '../../../store/create-store';

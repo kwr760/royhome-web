@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { ApiConfigs } from '../../../contracts/api.contants';
-import { LogMsgType } from '../../../type/logger';
+import { ApiConfigs } from '../../../contracts/constants/api.constants';
+import { LogMsgType } from '../../../contracts/logger.models';
 import { getParsedUrl } from '../../api/get-parsed-url';
 import { getApiUrl } from '../../api/get-api-url';
 

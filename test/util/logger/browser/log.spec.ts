@@ -1,5 +1,5 @@
 import { env } from '../../../../src/config/env';
-import { LOG_LEVELS } from '../../../../src/util/logger/logger-levels';
+import { LOG_LEVELS } from '../../../../src/contracts/constants/log-levels.constants';
 import { getConsole } from '../../../../src/util/logger/get-console';
 import { formatMessage } from '../../../../src/util/logger/format-message';
 import { log } from '../../../../src/util/logger/browser/log';

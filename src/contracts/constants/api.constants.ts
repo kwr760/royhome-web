@@ -1,4 +1,4 @@
-import { ApiConfigType } from '../type/api/api';
+import { ApiConfigType } from '../api/api';
 
 const ApiConfigs = {
   PUT_LOG: {

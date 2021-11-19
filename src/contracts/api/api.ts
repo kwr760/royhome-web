@@ -1,16 +1,14 @@
 import { Method } from 'axios';
 
-export interface Params {
+interface ApiParams {
   [key: string]: string;
 }
-
-export interface ApiDetailsType {
+interface ApiDetailsType {
   payload?: unknown;
-  params?: Params;
+  params?: ApiParams;
   token?: string;
 }
-
-export interface ApiConfigType {
+interface ApiConfigType {
   method: Method;
   path: string;
   headers?: {
@@ -18,3 +16,5 @@ export interface ApiConfigType {
   };
   authenticated?: boolean;
 }
+
+export type { ApiConfigType, ApiDetailsType, ApiParams };

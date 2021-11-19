@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import type { Store } from 'redux';
 import { render } from '@testing-library/react';
+import { Auth0 } from '../../src/contracts/auth0.models';
 
-import { Auth0ContextType } from '../../src/type/auth0';
 import { Auth0Context } from '../../src/util/auth0/auth0-context';
 import { hasNeededRole } from '../../src/util/auth0/has-needed-role';
 import ProtectRoute from '../../src/components/protect-route';
@@ -14,7 +14,7 @@ jest.mock('../../src/util/auth0/has-needed-role');
 
 describe('components/protect-route', () => {
   const userRole = 'admin';
-  const getPrivateRoute = (store: Store, auth: Auth0ContextType, role?: string, path = '/') => (
+  const getPrivateRoute = (store: Store, auth: Auth0, role?: string, path = '/') => (
     <Router>
       <Provider store={store}>
         <Auth0Context.Provider value={auth}>
@@ -29,7 +29,7 @@ describe('components/protect-route', () => {
 
   it('should render with authentication and role', () => {
     // Arrange
-    const auth = {} as unknown as Auth0ContextType;
+    const auth = {} as unknown as Auth0;
     const state = {
       session: {
         authenticated: true,
@@ -48,7 +48,7 @@ describe('components/protect-route', () => {
     // Arrange
     const auth = {
       isAuthenticated: true,
-    } as unknown as Auth0ContextType;
+    } as unknown as Auth0;
     const state = {
       session: {
         authenticated: true,
@@ -66,7 +66,7 @@ describe('components/protect-route', () => {
   });
   it('should render with authentication and without role', () => {
     // Arrange
-    const auth = {} as unknown as Auth0ContextType;
+    const auth = {} as unknown as Auth0;
     const state = {
       session: {
         authenticated: true,

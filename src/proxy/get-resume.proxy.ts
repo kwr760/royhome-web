@@ -1,10 +1,10 @@
 import axios from 'axios';
-
 import { env } from '../config/env';
-import { ApiConfigs } from '../contracts/api.contants';
+import { ApiConfigs } from '../contracts/constants/api.constants';
+import { ResumeType } from '../features/resume/contracts/resume.models';
 import { getParsedUrl } from '../util/api/get-parsed-url';
 
-export const getResumeProxy = async (email: string): Promise<unknown> => {
+const getResumeProxy = async (email: string): Promise<ResumeType> => {
   const config = ApiConfigs.GET_RESUME;
   const apiUrl = env.server.apiUrl;
   const path = `${config.path}`.replace('{email}', email);
@@ -13,3 +13,5 @@ export const getResumeProxy = async (email: string): Promise<unknown> => {
   const { data } = await axios.get(url);
   return data.output;
 };
+
+export { getResumeProxy };

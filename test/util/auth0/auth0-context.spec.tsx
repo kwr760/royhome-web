@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Auth0ContextType } from '../../../src/type/auth0';
+import { Auth0 } from '../../../src/contracts/auth0.models';
 import { noop } from '../../../src/util/noop';
 
 import { Auth0Context, useAuth0 } from '../../../src/util/auth0/auth0-context';
@@ -15,7 +15,7 @@ const Test = () => {
 };
 
 describe('util/auth0/context', () => {
-  const getTest = (auth: Auth0ContextType) => (
+  const getTest = (auth: Auth0) => (
     <Auth0Context.Provider value={auth}>
       <Test />
     </Auth0Context.Provider>
@@ -23,7 +23,7 @@ describe('util/auth0/context', () => {
 
   it('should produce a context', () => {
     // Arrange
-    const auth: Auth0ContextType = {
+    const auth: Auth0 = {
       login: () => 'login',
       logout: noop,
       getToken: noop,

@@ -1,6 +1,6 @@
 import type { IconType } from 'react-icons';
 
-export interface TabPageType {
+interface TabPageType {
   name: string;
   path: string;
   tab: number;
@@ -8,3 +8,5 @@ export interface TabPageType {
   role?: string;
   authenticated?: boolean;
 }
+
+export type { TabPageType };

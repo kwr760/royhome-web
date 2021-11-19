@@ -1,6 +1,16 @@
-import { ResumeFetchType, RouteFetchType } from '../type/server/fetch-routes';
 import { getResumeProxy } from '../proxy/get-resume.proxy';
 
+interface ResumeFetchType {
+  resume: {
+    email: string;
+    [email: string]: unknown;
+  }
+}
+interface RouteFetchType {
+  path: string;
+  exact: boolean;
+  fetchData: () => Promise<ResumeFetchType>;
+}
 const fetchRoutes: RouteFetchType[] = [
   {
     path: '/',

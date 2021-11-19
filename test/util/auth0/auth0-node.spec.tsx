@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-
+import { Auth0ContextData } from '../../../src/contracts/auth0.models';
 import { Auth0Provider } from '../../../src/util/auth0/auth0-node';
 import { useAuth0 } from '../../../src/util/auth0/auth0-context';
 
@@ -26,16 +26,7 @@ describe('util/auth0/react-auth0-node', () => {
       login: () => {},
       logout: () => {},
       getToken: () => {},
-      jwt: {
-        expiresAt: 99999999999999,
-        user: {
-          name: 'Test',
-        },
-        data: {
-          key: 'Value',
-        },
-      },
-    };
+    } as Auth0ContextData;
     const provider = (
       <Auth0Provider context={context} domain='domain' client_id='client_id'>
         <TestConsumer />

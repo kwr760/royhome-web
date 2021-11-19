@@ -1,8 +1,21 @@
 import { GetTokenSilentlyOptions, RedirectLoginOptions } from '@auth0/auth0-spa-js';
 
-export interface Auth0ProviderType {
+interface Auth0ContextData {
+  role?: string;
+  app?: string;
+  data?: string;
+}
+interface Auth0User {
+  userId?: string,
+  email?: string,
+  context?: Auth0ContextData,
+  nickname?: string,
+  name?: string,
+  picture?: string,
+}
+interface Auth0Provider {
   children: React.ReactNode;
-  context?: Auth0ContextType;
+  context?: Auth0ContextData;
   onRedirectCallback?: (cb: string) => unknown;
   audience?: string;
   client_id: string;
@@ -11,8 +24,10 @@ export interface Auth0ProviderType {
   useRefreshTokens?: boolean;
   cacheLocation?: unknown;
 }
-export interface Auth0ContextType {
+interface Auth0 {
   login: (props: RedirectLoginOptions) => unknown;
   logout: (...p: unknown[]) => unknown;
   getToken: ((props: GetTokenSilentlyOptions) => Promise<string>) | (() => unknown);
 }
+
+export type { Auth0, Auth0ContextData, Auth0Provider, Auth0User };

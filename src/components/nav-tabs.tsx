@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { Tab, Tabs, useMediaQuery, useTheme } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
-import { pageRoutes } from '../contracts/pages.contants';
+import { pageRoutes } from '../contracts/constants/pages.constants';
 import { isAuthenticated, getUser } from '../store/session/session.selector';
 import { displayPage } from './functions/display-page';
 import { styles } from './styles/nav-tabs.styles';

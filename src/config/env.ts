@@ -1,5 +1,5 @@
 import { merge } from 'lodash';
-import { DEVELOPMENT, DOCKER, LOCAL, PRODUCTION } from '../contracts/release-environments.constants';
+import { DEVELOPMENT, DOCKER, LOCAL, PRODUCTION } from '../contracts/constants/environments.constants';
 
 import { base } from './env/base';
 import { prod } from './env/prod';

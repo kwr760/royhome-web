@@ -1,4 +1,4 @@
-import { LOG_LEVELS } from '../../../../src/util/logger/logger-levels';
+import { LOG_LEVELS } from '../../../../src/contracts/constants/log-levels.constants';
 import Logger from '../../../../src/util/logger/server';
 import { log } from '../../../../src/util/logger/server/log';
 

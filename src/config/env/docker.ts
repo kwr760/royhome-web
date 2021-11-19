@@ -1,5 +1,5 @@
-import { DOCKER } from '../../contracts/release-environments.constants';
-import { LOG_LEVELS } from '../../util/logger/logger-levels';
+import { DOCKER } from '../../contracts/constants/environments.constants';
+import { LOG_LEVELS } from '../../contracts/constants/log-levels.constants';
 
 const docker = {
   release: DOCKER,

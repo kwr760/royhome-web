@@ -7,7 +7,7 @@ import {
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
 import { FiEyeOff, FiLogIn, FiLogOut, FiUser } from 'react-icons/fi';
-import { pageRoutes } from '../contracts/pages.contants';
+import { pageRoutes } from '../contracts/constants/pages.constants';
 
 import { useAuth0 } from '../util/auth0/auth0-context';
 import { isAuthenticated, getUser } from '../store/session/session.selector';

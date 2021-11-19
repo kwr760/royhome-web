@@ -1,7 +1,7 @@
 import { Response, NextFunction } from 'express';
 import { UNAUTHORIZED } from 'http-status-codes';
-import { TokenRequest } from '../../src/type/token';
-import { TOKEN_URL } from '../../src/util/auth0/role.constants';
+import { TOKEN_URL } from '../../src/contracts/constants/role.constants';
+import { TokenRequest } from '../../src/contracts/token.models';
 import { checkRole } from '../../src/middleware/check-role';
 
 describe('server/middleware/check-role', () => {

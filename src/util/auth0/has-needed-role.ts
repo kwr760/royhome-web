@@ -1,7 +1,7 @@
-import { OWNER, ROLES } from './role.constants';
-import { ContextStateType } from '../../type/state/context';
+import { Auth0ContextData } from '../../contracts/auth0.models';
+import { OWNER, ROLES } from '../../contracts/constants/role.constants';
 
-const hasNeededRole = (neededRole: string, context: ContextStateType = { role: '' }): boolean => {
+const hasNeededRole = (neededRole: string, context: Auth0ContextData = { role: '' }): boolean => {
   const { role = ''} = context;
 
   let grantedRoles = role.split(' ');

@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
 import { FiSun, FiMoon } from 'react-icons/fi';
-import { DarkModes } from '../contracts/session.constants';
+import { DarkModes } from '../contracts/constants/session.constants';
 import { updateDarkMode } from '../store/session/session.slice';
 import { getDarkMode } from '../store/session/session.selector';
 import { styles } from './styles/dark-mode.styles';

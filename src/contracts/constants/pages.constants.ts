@@ -1,5 +1,5 @@
-import { TabPageType } from '../type/object/tab-page';
 import { FiInfo, FiBookOpen, FiAlertTriangle, FiLayers } from 'react-icons/fi';
+import { TabPageType } from '../tab.models';
 
 const pageRoutes: TabPageType[] = [
   {

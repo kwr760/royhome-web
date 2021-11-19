@@ -1,11 +1,13 @@
-import { UserStateType } from './user';
+import { Auth0User } from './auth0.models';
 
-export interface SessionStateType  {
+interface Session {
   sessionId?: string,
   browserId?: string,
   authenticated?: boolean,
   expiration?: number,
   isLoading?: boolean,
   darkMode?: string,
-  user?: UserStateType,
+  user?: Auth0User,
 }
+
+export type { Session };

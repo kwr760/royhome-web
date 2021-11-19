@@ -1,5 +1,5 @@
 import { env } from '../../config/env';
-import { DOCKER } from '../../contracts/release-environments.constants';
+import { DOCKER } from '../../contracts/constants/environments.constants';
 
 const getApiUrl = (): string => {
   if (env.release === DOCKER) {

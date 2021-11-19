@@ -1,5 +1,5 @@
-import { DEVELOPMENT } from '../../contracts/release-environments.constants';
-import { LOG_LEVELS } from '../../util/logger/logger-levels';
+import { DEVELOPMENT } from '../../contracts/constants/environments.constants';
+import { LOG_LEVELS } from '../../contracts/constants/log-levels.constants';
 
 const dev = {
   release: DEVELOPMENT,
