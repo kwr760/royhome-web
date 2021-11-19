@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getResumeProxy } from '../../src/proxy/get-resume.proxy';
-import renderReact from '../../src/ssr/render-react';
+import { renderReact } from '../../src/ssr/render-react';
 
 jest.mock('parseurl');
 jest.mock('@loadable/server');

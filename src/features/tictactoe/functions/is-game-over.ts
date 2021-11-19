@@ -1,7 +1,9 @@
-import { PlayerEnum } from '../constants/tictactoe.constant';
-import { GameType } from '../types/tictactoe';
+import { PlayerEnum } from '../contracts/tictactoe.enum';
+import { GameType } from '../contracts/tictactoe.context';
 
-export const isGameOver = (game: GameType): boolean => {
+const isGameOver = (game: GameType): boolean => {
   const squares = game.split('');
   return squares.filter(v => v === PlayerEnum.None).length === 0;
 };
+
+export { isGameOver };

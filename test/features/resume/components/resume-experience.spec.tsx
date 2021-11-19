@@ -2,9 +2,9 @@ import React from 'react';
 import { ThemeProvider } from '@mui/styles';
 import { render } from '@testing-library/react';
 
-import { ExperienceType } from '../../../../src/features/resume/types/object/resume';
 import ResumeExperience from '../../../../src/features/resume/components/resume-experience';
-import theme from '../../../../src/theme-light';
+import { ExperienceType } from '../../../../src/features/resume/contracts/resume.models';
+import { themeLight } from '../../../../src/theme-light';
 
 describe('features/resume/components/resume-experience', () => {
   it('should render', () => {
@@ -46,7 +46,7 @@ describe('features/resume/components/resume-experience', () => {
 
     // Act
     const { getByText } = render(
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeLight}>
         <ResumeExperience experience={experiences} />
       </ThemeProvider>,
     );
@@ -66,7 +66,7 @@ describe('features/resume/components/resume-experience', () => {
   it('should render without props', () => {
     // Arrange / Act
     const { getByText } = render(
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeLight}>
         <ResumeExperience experience={[] as ExperienceType[]}/>
       </ThemeProvider>,
     );

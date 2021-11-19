@@ -27,4 +27,4 @@ const themeLight = createTheme({
   },
 });
 
-export default themeLight;
+export { themeLight };

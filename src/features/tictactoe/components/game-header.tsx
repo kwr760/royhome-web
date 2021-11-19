@@ -4,8 +4,8 @@ import { withStyles } from '@mui/styles';
 import type { WithStyles, ClassNameMap } from '@mui/styles';
 import { FaAngleDoubleLeft as LeftArrow, FaAngleDoubleRight as RightArrow } from 'react-icons/fa';
 
-import { GameTypeEnum, PlayerEnum, StatusEnum } from '../constants/tictactoe.constant';
-import { useTicTacToe } from '../context';
+import { useTicTacToe } from '../context/context';
+import { GameTypeEnum, PlayerEnum, StatusEnum } from '../contracts/tictactoe.enum';
 import { styles } from '../styles/game-header.styles';
 import PlayerDialog from './player-dialog';
 

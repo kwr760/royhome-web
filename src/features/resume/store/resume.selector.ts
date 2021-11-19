@@ -1,8 +1,10 @@
 import { createSelector } from 'reselect';
-import { StateType } from '../../../type/state/state';
-import { ResumeStateType } from '../types/state/resume';
+import { State } from '../../../contracts/state.models';
+import { ResumeStateType } from '../contracts/resume.state';
 
-export const getResume = createSelector(
-  (state: StateType) => state.resume,
+const getResume = createSelector(
+  (state: State) => state.resume,
   (resume: ResumeStateType) => resume.resumes[resume.email],
 );
+
+export { getResume };

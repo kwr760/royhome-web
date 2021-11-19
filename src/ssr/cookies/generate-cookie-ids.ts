@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-export const generateCookieIds = (browserId?: string, sessionId?: string): { browserId: string, sessionId: string } => {
+const generateCookieIds = (browserId?: string, sessionId?: string): { browserId: string, sessionId: string } => {
   let newBrowserId = browserId;
   let newSessionId = sessionId;
 
@@ -13,3 +13,4 @@ export const generateCookieIds = (browserId?: string, sessionId?: string): { bro
   return { browserId: newBrowserId, sessionId: newSessionId };
 };
 
+export { generateCookieIds };

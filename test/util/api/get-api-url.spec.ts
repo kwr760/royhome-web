@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires,@typescript-eslint/ban-ts-comment */
 import { getApiUrl } from '../../../src/util/api/get-api-url';
 
 describe('client/util/url/get-browser-url-info', () => {
@@ -9,7 +10,6 @@ describe('client/util/url/get-browser-url-info', () => {
   it('should create an url', () => {
     // Arrange
     const expected = 'https://api.royk.us';
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     delete global.location;
     global.location = {
@@ -25,7 +25,6 @@ describe('client/util/url/get-browser-url-info', () => {
     expect(result).toEqual(expected);
   });
 
-  /* eslint-disable @typescript-eslint/no-var-requires */
   it('should return apiUrl for DOCKER', () => {
     jest.isolateModules(() => {
       process.env['NODE_ENV'] = 'docker';

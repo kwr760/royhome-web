@@ -1,4 +1,4 @@
-import rootReducer from '../../src/store/root.reducer';
+import { rootReducer } from '../../src/store/root.reducer';
 
 describe('store/reducers/root', () => {
   it('should call rootReducer', () => {

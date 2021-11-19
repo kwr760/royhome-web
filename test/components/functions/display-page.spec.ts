@@ -1,5 +1,5 @@
-import { TabPageType } from '../../../src/type/object/tab-page';
-import { UserStateType } from '../../../src/type/state/user';
+import { Auth0User } from '../../../src/contracts/auth0.models';
+import { TabPageType } from '../../../src/contracts/tab.models';
 import { displayPage } from '../../../src/components/functions/display-page';
 
 describe('component/page/app-bar/display-page', () => {
@@ -27,7 +27,7 @@ describe('component/page/app-bar/display-page', () => {
     const authenticated = false;
     const user = {
       role: 'none',
-    } as UserStateType;
+    } as Auth0User;
 
     // Act
     const matches = pages.filter(displayPage(authenticated, user));
@@ -43,7 +43,7 @@ describe('component/page/app-bar/display-page', () => {
       context: {
         role: 'engineer',
       },
-    } as UserStateType;
+    } as Auth0User;
 
     // Act
     const matches = pages.filter(displayPage(authenticated, user));

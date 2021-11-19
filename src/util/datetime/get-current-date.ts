@@ -8,4 +8,4 @@ const getCurrentDate = (): string => {
   return util.format('%s%s%s', year, month, date);
 };
 
-export default getCurrentDate;
+export { getCurrentDate };

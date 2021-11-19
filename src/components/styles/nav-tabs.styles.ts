@@ -3,7 +3,7 @@ import type { Theme } from '@mui/material';
 import { createStyles } from '@mui/styles';
 import type { StyleRules } from '@mui/styles/withStyles';
 
-export const styles = (theme: Theme): StyleRules =>
+const styles = (theme: Theme): StyleRules =>
   createStyles({
     tab: {
       color: theme.palette.secondary.main,
@@ -22,3 +22,5 @@ export const styles = (theme: Theme): StyleRules =>
       },
     },
   });
+
+export { styles };

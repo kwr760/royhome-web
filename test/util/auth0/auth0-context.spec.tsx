@@ -1,12 +1,12 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Auth0ContextType } from '../../../src/type/auth0';
+import { Auth0Context } from '../../../src/contracts/auth0.models';
 import { noop } from '../../../src/util/noop';
 
-import { Auth0Context, useAuth0 } from '../../../src/util/auth0/auth0-context';
+import { AuthContext, useAuth } from '../../../src/util/auth0/auth0-context';
 
 const Test = () => {
-  const { login } = useAuth0();
+  const { login } = useAuth();
   return (
     <div>
       { `TestValue: ${login}` }
@@ -15,15 +15,15 @@ const Test = () => {
 };
 
 describe('util/auth0/context', () => {
-  const getTest = (auth: Auth0ContextType) => (
-    <Auth0Context.Provider value={auth}>
+  const getTest = (auth: Auth0Context) => (
+    <AuthContext.Provider value={auth}>
       <Test />
-    </Auth0Context.Provider>
+    </AuthContext.Provider>
   );
 
   it('should produce a context', () => {
     // Arrange
-    const auth: Auth0ContextType = {
+    const auth: Auth0Context = {
       login: () => 'login',
       logout: noop,
       getToken: noop,

@@ -7,9 +7,9 @@ import '@testing-library/jest-dom/extend-expect';
 import { render, waitFor } from '@testing-library/react';
 
 import Profile from '../../src/components/profile';
-import createStore from '../../src/store/create-store';
-import themeLight from '../../src/theme-light';
-import { StateType } from '../../src/type/state/state';
+import { State } from '../../src/contracts/state.models';
+import { createStore } from '../../src/store/create-store';
+import { themeLight } from '../../src/theme-light';
 
 describe('components/profile', () => {
   const getProfile = (store: Store) => (
@@ -23,7 +23,7 @@ describe('components/profile', () => {
   );
   it('should render profile', async () => {
     // Arrange
-    const state: StateType = {
+    const state: State = {
       session: {
         isLoading: false,
         expiration: 1,

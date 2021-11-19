@@ -8,13 +8,13 @@ import cookieParser from 'cookie-parser';
 import httpContext from 'express-http-context';
 import dotenv from 'dotenv';
 
-import env from './config';
+import { env } from './config/env';
 
-import handleError from './middleware/handle-error';
-import notFound from './middleware/not-found';
-import renderReact from './ssr/render-react';
-import startHttpsServer from './middleware/start-https';
-import startHttpServer from './middleware/start-http';
+import { handleError } from './middleware/handle-error';
+import { notFound } from './middleware/not-found';
+import { renderReact } from './ssr/render-react';
+import { startHttpsServer } from './middleware/start-https';
+import { startHttpServer } from './middleware/start-http';
 
 const publicDir = path.resolve(env.root);
 

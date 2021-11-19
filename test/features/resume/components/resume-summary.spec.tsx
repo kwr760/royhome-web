@@ -3,7 +3,7 @@ import { ThemeProvider } from '@mui/styles';
 import { render } from '@testing-library/react';
 
 import ResumeSummary from '../../../../src/features/resume/components/resume-summary';
-import theme from '../../../../src/theme-light';
+import { themeLight } from '../../../../src/theme-light';
 
 describe('feature/resume/components/resume-summary', () => {
   it('should render', () => {
@@ -12,7 +12,7 @@ describe('feature/resume/components/resume-summary', () => {
 
     // Act
     const { getByText } = render(
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeLight}>
         <ResumeSummary summary={summary} />
       </ThemeProvider>,
     );
@@ -26,7 +26,7 @@ describe('feature/resume/components/resume-summary', () => {
 
     // Act
     const { getByText } = render(
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeLight}>
         <ResumeSummary summary={summary}/>
       </ThemeProvider>,
     );

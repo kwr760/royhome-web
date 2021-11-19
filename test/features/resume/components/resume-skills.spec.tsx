@@ -1,10 +1,10 @@
 import React from 'react';
 import { ThemeProvider } from '@mui/styles';
 import { render } from '@testing-library/react';
-import { SkillGroupType } from '../../../../src/features/resume/types/object/resume';
 
 import ResumeSkills from '../../../../src/features/resume/components/resume-skills';
-import theme from '../../../../src/theme-light';
+import { SkillGroupType } from '../../../../src/features/resume/contracts/resume.models';
+import { themeLight } from '../../../../src/theme-light';
 
 describe('features/resume/components/resume-skills', () => {
   it('should render', () => {
@@ -27,7 +27,7 @@ describe('features/resume/components/resume-skills', () => {
 
     // Act
     const { getByText } = render(
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeLight}>
         <ResumeSkills skillGroups={skills} />
       </ThemeProvider>,
     );
@@ -45,7 +45,7 @@ describe('features/resume/components/resume-skills', () => {
 
     // Act
     const { getByText } = render(
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeLight}>
         <ResumeSkills skillGroups={skills}/>
       </ThemeProvider>,
     );

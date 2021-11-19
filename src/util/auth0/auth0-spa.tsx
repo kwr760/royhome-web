@@ -6,16 +6,13 @@ import createAuth0Client, {
   GetTokenSilentlyOptions,
   RedirectLoginOptions,
 } from '@auth0/auth0-spa-js';
+import { Auth0ContextData, Auth0Provider, Auth0User } from '../../contracts/auth0.models';
+import { SaveSessionType } from '../../contracts/store/session.store';
 import { getDarkMode } from '../../store/session/session.selector';
-
-import env from '../../config';
-import { ContextStateType } from '../../type/state/context';
-import { UserStateType } from '../../type/state/user';
-import { SaveSessionType } from '../../type/store/session';
-import { TOKEN_URL } from './role.constants';
-import { Auth0Context } from './auth0-context';
+import { env } from '../../config/env';
+import { TOKEN_URL } from '../../contracts/constants/role.constants';
+import { AuthContext } from './auth0-context';
 import { setLoading, clearLoading, saveSession } from '../../store/session/session.slice';
-import { Auth0ProviderType } from '../../type/auth0';
 import { noop } from '../noop';
 
 const DEFAULT_REDIRECT_CALLBACK = () => window.history.replaceState(
@@ -30,7 +27,7 @@ const initialContext = {
   getTokenSilently: noop,
 } as Auth0Client;
 
-const Auth0Provider: React.FC<Auth0ProviderType> = ({
+const AuthProvider: React.FC<Auth0Provider> = ({
   children,
   onRedirectCallback = DEFAULT_REDIRECT_CALLBACK,
   ...initOptions
@@ -51,8 +48,8 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
       }
 
       let claim: SaveSessionType;
-      const user: UserStateType | undefined = await auth0FromHook.getUser();
-      let context: ContextStateType | undefined;
+      const user: Auth0User | undefined = await auth0FromHook.getUser();
+      let context: Auth0ContextData | undefined;
       if (user) {
         const tokenClaims = await auth0FromHook.getIdTokenClaims();
         context = tokenClaims[TOKEN_URL];
@@ -75,9 +72,8 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
       dispatch(clearLoading());
     };
     initAuth0();
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [darkMode]);
-
   const logout = async (...p: unknown[]) => {
     const logoutProps = {
       ...p,
@@ -96,7 +92,7 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
   };
 
   return (
-    <Auth0Context.Provider
+    <AuthContext.Provider
       value={{
         logout,
         login,
@@ -104,8 +100,8 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
       }}
     >
       {children}
-    </Auth0Context.Provider>
+    </AuthContext.Provider>
   );
 };
 
-export default Auth0Provider;
+export { AuthProvider };

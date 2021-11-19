@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider } from '@mui/styles';
 import { fireEvent, render } from '@testing-library/react';
 
-import themeLight from '../../src/theme-light';
+import { themeLight } from '../../src/theme-light';
 import CookieBanner from '../../src/components/cookie-banner';
 
 describe('components/cookie-banner', () => {

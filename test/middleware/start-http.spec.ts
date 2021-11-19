@@ -1,6 +1,6 @@
 import { Application } from 'express';
 import http from 'http';
-import startHttpServer from '../../src/middleware/start-http';
+import { startHttpServer } from '../../src/middleware/start-http';
 
 jest.mock('http');
 

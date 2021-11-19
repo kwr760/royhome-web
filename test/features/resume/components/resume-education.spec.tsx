@@ -2,9 +2,9 @@ import React from 'react';
 import { ThemeProvider } from '@mui/styles';
 import { render } from '@testing-library/react';
 
-import { EducationType } from '../../../../src/features/resume/types/object/resume';
 import ResumeEducation from '../../../../src/features/resume/components/resume-education';
-import theme from '../../../../src/theme-light';
+import { EducationType } from '../../../../src/features/resume/contracts/resume.models';
+import { themeLight } from '../../../../src/theme-light';
 
 describe('features/resume/components/resume-education', () => {
   it('should render', () => {
@@ -17,7 +17,7 @@ describe('features/resume/components/resume-education', () => {
 
     // Act
     const { getByText } = render(
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeLight}>
         <ResumeEducation education={education} />
       </ThemeProvider>,
     );
@@ -30,7 +30,7 @@ describe('features/resume/components/resume-education', () => {
   it('should render without props', () => {
     // Arrange / Act
     const { getByText } = render(
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeLight}>
         <ResumeEducation education={[] as EducationType[]}/>
       </ThemeProvider>,
     );

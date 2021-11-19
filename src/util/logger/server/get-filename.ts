@@ -1,7 +1,7 @@
 import path from 'path';
 
-import env from '../../../config';
-import getCurrentDate from '../../datetime/get-current-date';
+import { env } from '../../../config/env';
+import { getCurrentDate } from '../../datetime/get-current-date';
 
 const getLogFilename = (location: string): string => {
   const date = getCurrentDate();
@@ -13,4 +13,4 @@ const getLogFilename = (location: string): string => {
   return path.resolve(`${filename}.log`);
 };
 
-export default getLogFilename;
+export { getLogFilename };
