@@ -5,7 +5,7 @@ import {
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
 
-import { useTicTacToe } from '../context/context';
+import { useTicTacToe } from '../context/context.reducer';
 import { GameTypeEnum, PlayerEnum } from '../contracts/tictactoe.enum';
 import { styles } from '../styles/player-dialog.styles';
 

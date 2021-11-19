@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 import React, { ReactNode } from 'react';
-import { TicTacToeProvider, useTicTacToe } from '../../../../src/features/tictactoe/context/context';
+import { TicTacToeProvider, useTicTacToe } from '../../../../src/features/tictactoe/context/context.reducer';
 import { reset, takeTurn } from '../../../../src/features/tictactoe/context/context.actions';
 import { PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import {

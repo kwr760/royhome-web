@@ -3,7 +3,7 @@ import { Button, Grid, Typography } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
 
-import { useTicTacToe } from '../context/context';
+import { useTicTacToe } from '../context/context.reducer';
 import { reset } from '../context/context.actions';
 import { StatusEnum } from '../contracts/tictactoe.enum';
 import { styles } from '../styles/game-footer.styles';

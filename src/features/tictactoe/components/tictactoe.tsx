@@ -3,7 +3,7 @@ import { Container } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
 
-import { TicTacToeProvider } from '../context/context';
+import { TicTacToeProvider } from '../context/context.reducer';
 import { styles } from '../styles/tictactoe.styles';
 import GameHeader from './game-header';
 import GameFooter from './game-footer';

@@ -3,7 +3,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
 
-import { useTicTacToe } from '../context/context';
+import { useTicTacToe } from '../context/context.reducer';
 import { takeTurn } from '../context/context.actions';
 import { PlayerEnum, StatusEnum } from '../contracts/tictactoe.enum';
 import { styles } from '../styles/game-square.styles';
