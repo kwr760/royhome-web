@@ -6,7 +6,7 @@ import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
 
 import { styles } from '../styles/resume-page.styles';
-import { useAuth0 } from '../../../util/auth0/auth0-context';
+import { useAuth } from '../../../util/auth0/auth0-context';
 import Resume from './resume';
 import { fetchResume } from '../store/resume.slice';
 import { getResume } from '../store/resume.selector';
@@ -15,7 +15,7 @@ import { ResumeType } from '../contracts/resume.models';
 
 type ResumeProps = WithStyles<typeof styles>;
 const ResumeComponent: FunctionComponent<ResumeProps> = ({ classes }) => {
-  const { getToken } = useAuth0();
+  const { getToken } = useAuth();
   const resume: ResumeType = useSelector(getResume);
   const dispatch = useDispatch();
   const loading = useSelector(isLoading);

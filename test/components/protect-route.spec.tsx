@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import type { Store } from 'redux';
 import { render } from '@testing-library/react';
-import { Auth0 } from '../../src/contracts/auth0.models';
+import { Auth0Context } from '../../src/contracts/auth0.models';
 
-import { Auth0Context } from '../../src/util/auth0/auth0-context';
+import { AuthContext } from '../../src/util/auth0/auth0-context';
 import { hasNeededRole } from '../../src/util/auth0/has-needed-role';
 import ProtectRoute from '../../src/components/protect-route';
 import { createStore } from '../../src/store/create-store';
@@ -14,22 +14,22 @@ jest.mock('../../src/util/auth0/has-needed-role');
 
 describe('components/protect-route', () => {
   const userRole = 'admin';
-  const getPrivateRoute = (store: Store, auth: Auth0, role?: string, path = '/') => (
+  const getPrivateRoute = (store: Store, auth: Auth0Context, role?: string, path = '/') => (
     <Router>
       <Provider store={store}>
-        <Auth0Context.Provider value={auth}>
+        <AuthContext.Provider value={auth}>
           <Routes>
             {/*<PrivateRoute element={mockComponent} userRole={role} path={path} />*/}
             <Route element={<ProtectRoute userRole={role} ><div>Protected</div></ProtectRoute>} path={path} />
           </Routes>
-        </Auth0Context.Provider>
+        </AuthContext.Provider>
       </Provider>
     </Router>
   );
 
   it('should render with authentication and role', () => {
     // Arrange
-    const auth = {} as unknown as Auth0;
+    const auth = {} as unknown as Auth0Context;
     const state = {
       session: {
         authenticated: true,
@@ -48,7 +48,7 @@ describe('components/protect-route', () => {
     // Arrange
     const auth = {
       isAuthenticated: true,
-    } as unknown as Auth0;
+    } as unknown as Auth0Context;
     const state = {
       session: {
         authenticated: true,
@@ -66,7 +66,7 @@ describe('components/protect-route', () => {
   });
   it('should render with authentication and without role', () => {
     // Arrange
-    const auth = {} as unknown as Auth0;
+    const auth = {} as unknown as Auth0Context;
     const state = {
       session: {
         authenticated: true,

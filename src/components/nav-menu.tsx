@@ -9,7 +9,7 @@ import type { WithStyles } from '@mui/styles';
 import { FiEyeOff, FiLogIn, FiLogOut, FiUser } from 'react-icons/fi';
 import { pageRoutes } from '../contracts/constants/pages.constants';
 
-import { useAuth0 } from '../util/auth0/auth0-context';
+import { useAuth } from '../util/auth0/auth0-context';
 import { isAuthenticated, getUser } from '../store/session/session.selector';
 import { displayPage } from './functions/display-page';
 import { styles } from './styles/nav-menu.styles';
@@ -24,7 +24,7 @@ const NavMenuComponent: FunctionComponent<NavMenuProps> = ( { anchor, setAnchor,
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const authenticated = useSelector(isAuthenticated);
   const handleMenuClose = () => { setAnchor(null); };
-  const { login, logout } = useAuth0();
+  const { login, logout } = useAuth();
   const user = useSelector(getUser);
   const onLogin = () => {
     login({});

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Auth0 } from '../../contracts/auth0.models';
+import { Auth0Context } from '../../contracts/auth0.models';
 import { noop } from '../noop';
 
 const initialContext = {
@@ -8,7 +8,7 @@ const initialContext = {
   getToken: noop,
 };
 
-const Auth0Context = React.createContext<Auth0>(initialContext);
-const useAuth0 = (): Auth0 => useContext(Auth0Context);
+const AuthContext = React.createContext<Auth0Context>(initialContext);
+const useAuth = (): Auth0Context => useContext(AuthContext);
 
-export { Auth0Context, useAuth0 };
+export { AuthContext, useAuth };

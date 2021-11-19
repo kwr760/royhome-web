@@ -11,7 +11,7 @@ import { SaveSessionType } from '../../contracts/store/session.store';
 import { getDarkMode } from '../../store/session/session.selector';
 import { env } from '../../config/env';
 import { TOKEN_URL } from '../../contracts/constants/role.constants';
-import { Auth0Context } from './auth0-context';
+import { AuthContext } from './auth0-context';
 import { setLoading, clearLoading, saveSession } from '../../store/session/session.slice';
 import { noop } from '../noop';
 
@@ -27,7 +27,7 @@ const initialContext = {
   getTokenSilently: noop,
 } as Auth0Client;
 
-const Auth0Provider: React.FC<Auth0Provider> = ({
+const AuthProvider: React.FC<Auth0Provider> = ({
   children,
   onRedirectCallback = DEFAULT_REDIRECT_CALLBACK,
   ...initOptions
@@ -72,7 +72,7 @@ const Auth0Provider: React.FC<Auth0Provider> = ({
       dispatch(clearLoading());
     };
     initAuth0();
-  }, [darkMode, dispatch, initOptions, onRedirectCallback]);
+  }, [darkMode]);
 
   const logout = async (...p: unknown[]) => {
     const logoutProps = {
@@ -92,7 +92,7 @@ const Auth0Provider: React.FC<Auth0Provider> = ({
   };
 
   return (
-    <Auth0Context.Provider
+    <AuthContext.Provider
       value={{
         logout,
         login,
@@ -100,8 +100,8 @@ const Auth0Provider: React.FC<Auth0Provider> = ({
       }}
     >
       {children}
-    </Auth0Context.Provider>
+    </AuthContext.Provider>
   );
 };
 
-export { Auth0Provider };
+export { AuthProvider };

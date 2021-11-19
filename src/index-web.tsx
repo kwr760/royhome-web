@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { loadableReady } from '@loadable/component';
 import type { Store } from 'redux';
 
-import { Auth0Provider } from './util/auth0/auth0-spa';
+import { AuthProvider } from './util/auth0/auth0-spa';
 import { config } from './contracts/constants/auth0.constants';
 import Theme from './Theme';
 import { createStore } from './store/create-store';
@@ -25,7 +25,7 @@ const Main: FunctionComponent<Props> = ({ store }) => {
 
   return (
     <Provider store={store}>
-      <Auth0Provider
+      <AuthProvider
         domain={config.domain}
         client_id={config.clientId}
         redirect_uri={window.location.origin}
@@ -35,7 +35,7 @@ const Main: FunctionComponent<Props> = ({ store }) => {
         <Router>
           <Theme />
         </Router>
-      </Auth0Provider>
+      </AuthProvider>
     </Provider>
   );
 };

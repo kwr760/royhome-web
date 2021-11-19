@@ -4,22 +4,22 @@ import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import createAuth0Client from '@auth0/auth0-spa-js';
 
-import { Auth0Provider } from '../../../src/util/auth0/auth0-spa';
-import { useAuth0 } from '../../../src/util/auth0/auth0-context';
+import { AuthProvider } from '../../../src/util/auth0/auth0-spa';
+import { useAuth } from '../../../src/util/auth0/auth0-context';
 
 jest.mock('@auth0/auth0-spa-js');
 jest.mock('react-redux');
 
 describe('util/auth0/react-auth0-spa', () => {
   const testProvider = (coverage = false) => (
-    <Auth0Provider
+    <AuthProvider
       domain="domain"
       client_id="clientId"
       audience="audience"
       redirect_uri="/origin"
     >
       <TestConsumer coverage={coverage} />
-    </Auth0Provider>
+    </AuthProvider>
   );
 
   const TestConsumer: React.FC<{ coverage: boolean; }> = ({ coverage = false }) => {
@@ -27,7 +27,7 @@ describe('util/auth0/react-auth0-spa', () => {
       login,
       getToken,
       logout,
-    } = useAuth0();
+    } = useAuth();
 
     if (coverage) {
       login({});

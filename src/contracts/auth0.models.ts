@@ -24,10 +24,10 @@ interface Auth0Provider {
   useRefreshTokens?: boolean;
   cacheLocation?: unknown;
 }
-interface Auth0 {
+interface Auth0Context {
   login: (props: RedirectLoginOptions) => unknown;
   logout: (...p: unknown[]) => unknown;
   getToken: ((props: GetTokenSilentlyOptions) => Promise<string>) | (() => unknown);
 }
 
-export type { Auth0, Auth0ContextData, Auth0Provider, Auth0User };
+export type { Auth0Context, Auth0ContextData, Auth0Provider, Auth0User };

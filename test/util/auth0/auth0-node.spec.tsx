@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Auth0ContextData } from '../../../src/contracts/auth0.models';
-import { Auth0Provider } from '../../../src/util/auth0/auth0-node';
-import { useAuth0 } from '../../../src/util/auth0/auth0-context';
+import { AuthProvider } from '../../../src/util/auth0/auth0-node';
+import { useAuth } from '../../../src/util/auth0/auth0-context';
 
 describe('util/auth0/react-auth0-node', () => {
   const TestConsumer = () => {
@@ -10,7 +10,7 @@ describe('util/auth0/react-auth0-node', () => {
       logout,
       login,
       getToken,
-    } = useAuth0();
+    } = useAuth();
 
     return (
       <div>
@@ -28,9 +28,9 @@ describe('util/auth0/react-auth0-node', () => {
       getToken: () => {},
     } as Auth0ContextData;
     const provider = (
-      <Auth0Provider context={context} domain='domain' client_id='client_id'>
+      <AuthProvider context={context} domain='domain' client_id='client_id'>
         <TestConsumer />
-      </Auth0Provider>
+      </AuthProvider>
     );
 
     // Act
