@@ -1,7 +1,7 @@
 import { getResumeProxy } from '../../src/proxy/get-resume.proxy';
 import { getSessionProxy } from '../../src/proxy/get-session.proxy';
-import populateState from '../../src/ssr/populate-state';
-import { DarkModes } from '../../src/store/session/session.constants';
+import { populateState } from '../../src/ssr/populate-state';
+import { DarkModes } from '../../src/contracts/constants/session.constants';
 
 jest.mock('../../src/proxy/get-resume.proxy');
 jest.mock('../../src/proxy/get-session.proxy');

@@ -1,10 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import type { Action, Store } from '@reduxjs/toolkit';
 import type { ThunkAction } from 'redux-thunk';
-
-import env from '../config';
-import { PRODUCTION } from '../config/release-environments';
-import rootReducer, { RootState } from './root.reducer';
+import { env } from '../config/env';
+import { PRODUCTION } from '../contracts/constants/environments.constants';
+import { rootReducer, RootState } from './root.reducer';
 
 const createStore = (preloadedState = {}): Store => {
   const reducer = rootReducer;
@@ -16,7 +15,7 @@ const createStore = (preloadedState = {}): Store => {
   });
 };
 
-export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>
+type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>
 
-export default createStore;
-
+export type { AppThunk };
+export { createStore } ;

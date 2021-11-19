@@ -2,8 +2,9 @@ import React, { FunctionComponent, memo } from 'react';
 import { Grid } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
+
+import { SkillGroupType } from '../contracts/resume.models';
 import { styles } from '../styles/resume-skills.styles';
-import { SkillGroupType } from '../types/object/resume';
 
 interface Props {
   skillGroups: SkillGroupType[];

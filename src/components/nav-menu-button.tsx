@@ -11,7 +11,7 @@ interface Props {
   setAnchor:Dispatch<SetStateAction<null | HTMLElement>>;
 }
 type NavMenuButtonProps = Props & WithStyles<typeof styles>;
-export const NavMenuButtonComponent: FunctionComponent<NavMenuButtonProps> = ({ setAnchor, classes }) => {
+const NavMenuButtonComponent: FunctionComponent<NavMenuButtonProps> = ({ setAnchor, classes }) => {
   const authenticated = useSelector(isAuthenticated);
   const user = useSelector(getUser);
   const { picture: userPicture = '' } = user;

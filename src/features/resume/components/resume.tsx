@@ -4,15 +4,13 @@ import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
 
 import { styles } from '../styles/resume-page.styles';
-import {
-  EducationType, ExperienceType, ResumeType, SkillGroupType, ProjectType,
-} from '../types/object/resume';
 import ResumeHeader from './resume-header';
 import ResumeSkills from './resume-skills';
 import ResumeSummary from './resume-summary';
 import ResumeExperience from './resume-experience';
 import ResumeEducation from './resume-education';
 import ResumeProject from './resume-project';
+import { EducationType, ExperienceType, ProjectType, ResumeType, SkillGroupType } from '../contracts/resume.models';
 
 interface Props {
   resume?: ResumeType;

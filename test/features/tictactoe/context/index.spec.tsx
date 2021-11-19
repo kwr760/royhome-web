@@ -1,14 +1,14 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 import React, { ReactNode } from 'react';
+import { TicTacToeProvider, useTicTacToe } from '../../../../src/features/tictactoe/context/context';
+import { reset, takeTurn } from '../../../../src/features/tictactoe/context/context.actions';
+import { PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import {
   initialGame,
   initialPlayers,
   initialStatus,
-  PlayerEnum,
-} from '../../../../src/features/tictactoe/constants/tictactoe.constant';
-import { TicTacToeProvider, useTicTacToe } from '../../../../src/features/tictactoe/context';
-import { reset, takeTurn } from '../../../../src/features/tictactoe/context/context.actions';
-import { ActionsType, StateType } from '../../../../src/features/tictactoe/types/tictactoe';
+} from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
+import { ActionsType, TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
 
 describe('feature/tictactoe/context/index', () => {
   it('should throw exception without provider', () => {
@@ -84,7 +84,7 @@ describe('feature/tictactoe/context/index', () => {
       game: 'X-X-XO--O',
       status: initialStatus,
       turn: PlayerEnum.Two,
-    } as StateType;
+    } as TicTacToeStateType;
     const expectedState = {
       players: initialPlayers,
       game: initialGame,
@@ -111,7 +111,7 @@ describe('feature/tictactoe/context/index', () => {
       game: 'X-X-XO--O',
       status: initialStatus,
       turn: PlayerEnum.Two,
-    } as StateType;
+    } as TicTacToeStateType;
     const wrapper = ({ children }: { children: ReactNode}) =>
       <TicTacToeProvider state={initialState}>{children}</TicTacToeProvider>;
     const { result } = renderHook(() => useTicTacToe(), { wrapper });

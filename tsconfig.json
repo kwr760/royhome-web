@@ -16,7 +16,7 @@
     "lib": ["es6", "dom"],
     "typeRoots" : [
       "node_modules/@types",
-      "src/type"
+      "src/contracts/types"
     ],
     "removeComments": true,
     "noImplicitReturns": true,
@@ -27,7 +27,7 @@
     "strict": true
   },
   "include": [
-    "src/type",
+    "src/contracts/types",
     "src/**/*",
     "src/**/**/*",
     "test/**/*",

@@ -1,7 +1,7 @@
 import { appendFile } from 'fs';
 import { mocked } from 'ts-jest/utils';
 
-import writeToLog from '../../../../src/util/logger/server/write-to-log';
+import { writeToLog } from '../../../../src/util/logger/server/write-to-log';
 
 jest.mock('fs');
 

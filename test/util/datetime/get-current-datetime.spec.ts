@@ -1,4 +1,4 @@
-import getCurrentDatetime from '../../../src/util/datetime/get-current-datetime';
+import { getCurrentDatetime } from '../../../src/util/datetime/get-current-datetime';
 
 describe('util/datetime/get-current-date', () => {
   it('should return string prefixed with zero', () => {

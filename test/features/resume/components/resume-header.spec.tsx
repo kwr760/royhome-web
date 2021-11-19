@@ -3,7 +3,7 @@ import { ThemeProvider } from '@mui/styles';
 import { render } from '@testing-library/react';
 
 import ResumeHeader from '../../../../src/features/resume/components/resume-header';
-import theme from '../../../../src/theme-light';
+import { themeLight } from '../../../../src/theme-light';
 
 describe('features/resume/components/resume-header', () => {
   it('should render with phone', () => {
@@ -16,7 +16,7 @@ describe('features/resume/components/resume-header', () => {
 
     // Act
     const { getByText } = render(
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeLight}>
         <ResumeHeader name={name} address={address} phone={phone} email={email} displayPhone={displayPhone}/>
       </ThemeProvider>,
     );
@@ -30,7 +30,7 @@ describe('features/resume/components/resume-header', () => {
   it('should render without props', () => {
     // Arrange // Act
     const { getByText } = render(
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeLight}>
         <ResumeHeader name={''} address={''} phone={''} email={''} displayPhone={false}/>
       </ThemeProvider>,
     );

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { NOT_FOUND } from 'http-status-codes';
 
-import notFound from '../../src/middleware/not-found';
+import { notFound } from '../../src/middleware/not-found';
 import Logger from '../../src/util/logger/server';
 
 describe('server/middleware/not-found', () => {

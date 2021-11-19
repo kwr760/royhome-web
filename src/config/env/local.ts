@@ -1,7 +1,7 @@
-import LOG_LEVELS from '../../util/logger/logger-levels';
-import { LOCAL } from '../release-environments';
+import { LOCAL } from '../../contracts/constants/environments.constants';
+import { LOG_LEVELS } from '../../contracts/constants/log-levels.constants';
 
-const env = {
+const local = {
   release: LOCAL,
   log: {
     dir: './log',
@@ -19,4 +19,4 @@ const env = {
   },
 };
 
-export default env;
+export { local };

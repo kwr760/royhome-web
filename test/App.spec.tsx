@@ -5,10 +5,10 @@ import type { Store } from 'redux';
 import { ThemeProvider } from '@mui/styles';
 import { render } from '@testing-library/react';
 
-import { Auth0Context } from '../src/util/auth0/auth0-context';
+import { AuthContext } from '../src/util/auth0/auth0-context';
 import App from '../src/App';
-import createStore from '../src/store/create-store';
-import themeLight from '../src/theme-light';
+import { createStore } from '../src/store/create-store';
+import { themeLight } from '../src/theme-light';
 
 jest.mock('@loadable/component');
 jest.mock('axios', () => ({
@@ -38,7 +38,7 @@ jest.mock('../src/components/privacy',
 jest.mock('../src/components/profile',
   () => jest.fn(() => 'Profile'),
 );
-jest.mock('../src/features/tictactoe/components',
+jest.mock('../src/features/tictactoe/components/tictactoe',
   () => jest.fn(() => 'Tic Tac Toe'),
 );
 
@@ -51,11 +51,11 @@ describe('src/App', () => {
   const getApp = (store: Store) => (
     <Provider store={store}>
       <ThemeProvider theme={themeLight}>
-        <Auth0Context.Provider value={context}>
+        <AuthContext.Provider value={context}>
           <Router>
             <App />
           </Router>
-        </Auth0Context.Provider>
+        </AuthContext.Provider>
       </ThemeProvider>
     </Provider>
   );

@@ -27,4 +27,4 @@ const themeDark = createTheme({
   },
 });
 
-export default themeDark;
+export { themeDark };

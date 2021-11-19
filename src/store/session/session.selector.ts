@@ -1,23 +1,25 @@
 import { createSelector } from 'reselect';
-import { StateType } from '../../type/state/state';
-import { DarkModes } from './session.constants';
+import { DarkModes } from '../../contracts/constants/session.constants';
+import { State } from '../../contracts/state.models';
 
-export const isAuthenticated = createSelector(
-  (state: StateType) => state.session,
+const isAuthenticated = createSelector(
+  (state: State) => state.session,
   (session): boolean => session.authenticated || false,
 );
 
-export const isLoading = createSelector(
-  (state: StateType) => state.session,
+const isLoading = createSelector(
+  (state: State) => state.session,
   (session): boolean => session.isLoading || false,
 );
 
-export const getDarkMode = createSelector(
-  (state: StateType) => state.session,
+const getDarkMode = createSelector(
+  (state: State) => state.session,
   (session): string => session.darkMode || DarkModes.CLEAR_MODE,
 );
 
-export const getUser = createSelector(
-  (state: StateType) => state.session,
+const getUser = createSelector(
+  (state: State) => state.session,
   (session) => session.user || {},
 );
+
+export { getDarkMode, getUser, isAuthenticated, isLoading };

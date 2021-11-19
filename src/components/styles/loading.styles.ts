@@ -1,7 +1,7 @@
 import { createStyles } from '@mui/styles';
 import type { StyleRules } from '@mui/styles/withStyles';
 
-export const styles = (): StyleRules =>
+const styles = (): StyleRules =>
   createStyles({
     spinner: {
       position: 'absolute',
@@ -17,3 +17,5 @@ export const styles = (): StyleRules =>
       height: '10%',
     },
   });
+
+export { styles };

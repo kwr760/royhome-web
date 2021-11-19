@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
 import { isAuthenticated, isLoading, getDarkMode, getUser } from '../../../src/store/session/session.selector';
-import { DarkModes } from '../../../src/store/session/session.constants';
+import { DarkModes } from '../../../src/contracts/constants/session.constants';
 
 jest.mock('react-redux');
 

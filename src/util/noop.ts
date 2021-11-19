@@ -1,1 +1,3 @@
-export const noop = (): void => {};
+const noop = (): void => {};
+
+export { noop };

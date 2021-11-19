@@ -7,4 +7,4 @@ const notFound = (_req: Request, res: Response): Response => {
   return res.sendStatus(NOT_FOUND);
 };
 
-export default notFound;
+export { notFound };

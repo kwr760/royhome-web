@@ -3,8 +3,8 @@ import dateFormat from 'dateformat';
 import { Grid } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
+import { EducationType } from '../contracts/resume.models';
 import { styles } from '../styles/resume-education.styles';
-import { EducationType } from '../types/object/resume';
 
 interface Props {
   education: EducationType[];

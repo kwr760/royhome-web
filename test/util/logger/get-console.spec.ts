@@ -1,5 +1,5 @@
-import LOG_LEVELS from '../../../src/util/logger/logger-levels';
-import getConsole from '../../../src/util/logger/get-console';
+import { LOG_LEVELS } from '../../../src/contracts/constants/log-levels.constants';
+import { getConsole } from '../../../src/util/logger/get-console';
 
 describe('util/logger/get-console', () => {
   test.each([LOG_LEVELS.DEBUG, LOG_LEVELS.INFO])(

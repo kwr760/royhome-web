@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider } from '@mui/styles';
 import { fireEvent, render } from '@testing-library/react';
 
-import themeLight from '../../src/theme-light';
+import { themeLight } from '../../src/theme-light';
 import Footer from '../../src/components/footer';
 
 describe('component/page/footer', () => {

@@ -15,11 +15,16 @@ import ProtectRoute from './components/protect-route';
 import Resume from './features/resume/components/resume-page';
 import { isLoading  } from './store/session/session.selector';
 
-const AboutPage = /* #__LOADABLE__ */ () => import(/* webpackPrefetch: true */ './components/about');
-const AuthorPage = /* #__LOADABLE__ */ () => import(/* webpackPrefetch: true */ './components/author');
-const PrivacyPage = /* #__LOADABLE__ */ () => import(/* webpackPrefetch: true */ './components/privacy');
-const ProfilePage = /* #__LOADABLE__ */ () => import(/* webpackPrefetch: true */ './components/profile');
-const TicTacToePage = /* #__LOADABLE__ */ () => import(/* webpackPrefetch: true */ './features/tictactoe/components');
+const AboutPage = /* #__LOADABLE__ */ () =>
+  import(/* webpackPrefetch: true */ './components/about');
+const AuthorPage = /* #__LOADABLE__ */ () =>
+  import(/* webpackPrefetch: true */ './components/author');
+const PrivacyPage = /* #__LOADABLE__ */ () =>
+  import(/* webpackPrefetch: true */ './components/privacy');
+const ProfilePage = /* #__LOADABLE__ */ () =>
+  import(/* webpackPrefetch: true */ './components/profile');
+const TicTacToePage = /* #__LOADABLE__ */ () =>
+  import(/* webpackPrefetch: true */ './features/tictactoe/components/tictactoe');
 const AboutLoadable = loadable(AboutPage, { ssr: false });
 const AuthorLoadable = loadable(AuthorPage, { ssr: false });
 const PrivacyLoadable = loadable(PrivacyPage, { ssr: false });

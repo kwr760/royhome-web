@@ -3,10 +3,10 @@ import { ThemeProvider } from '@mui/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { render, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import { Auth0Context } from '../../../../src/contracts/auth0.models';
 
-import theme from '../../../../src/theme-light';
-import { Auth0ContextType } from '../../../../src/type/auth0';
-import { Auth0Context } from '../../../../src/util/auth0/auth0-context';
+import { themeLight } from '../../../../src/theme-light';
+import { AuthContext } from '../../../../src/util/auth0/auth0-context';
 import { fetchResume } from '../../../../src/features/resume/store/resume.slice';
 import ResumePage from '../../../../src/features/resume/components/resume-page';
 
@@ -39,12 +39,12 @@ describe('features/resume/component/resume-page', () => {
   const dispatch = jest.fn();
   const defaultAuth = {
     getToken: jest.fn(() => token),
-  } as unknown as Auth0ContextType;
-  const getResume = (auth: Auth0ContextType) => (
-    <ThemeProvider theme={theme}>
-      <Auth0Context.Provider value={auth}>
+  } as unknown as Auth0Context;
+  const getResume = (auth: Auth0Context) => (
+    <ThemeProvider theme={themeLight}>
+      <AuthContext.Provider value={auth}>
         <ResumePage />
-      </Auth0Context.Provider>
+      </AuthContext.Provider>
     </ThemeProvider>
   );
 

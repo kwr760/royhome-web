@@ -8,7 +8,7 @@ import { fireEvent, render } from '@testing-library/react';
 import configureMockStore from 'redux-mock-store';
 
 import NavMenuButton from '../../src/components/nav-menu-button';
-import themeLight from '../../src/theme-light';
+import { themeLight } from '../../src/theme-light';
 
 describe('components/nav-menu-button', () => {
   const mockStore = configureMockStore([thunk]);
