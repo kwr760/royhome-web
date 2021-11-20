@@ -5,18 +5,18 @@ import type { WithStyles } from '@mui/styles';
 
 import { reset } from '../context/context.actions';
 import { useTicTacToe } from '../context/context.provider';
-import { StatusEnum } from '../contracts/tictactoe.enum';
+import { GameStateEnum } from '../contracts/tictactoe.enum';
 import { styles } from '../styles/game-footer.styles';
 
-const isActive = (state: StatusEnum) => state === StatusEnum.Active;
-const hasWinner = (state: StatusEnum) => state === StatusEnum.Win;
-const hasTie = (state: StatusEnum) => state === StatusEnum.Tie;
+const isActive = (gameState: GameStateEnum) => gameState === GameStateEnum.Active;
+const hasWinner = (gameState: GameStateEnum) => gameState === GameStateEnum.Win;
+const hasTie = (gameState: GameStateEnum) => gameState === GameStateEnum.Tie;
 
 type GameFooterProps = WithStyles<typeof styles>;
 export const GameFooterComponent: FunctionComponent<GameFooterProps> = ({classes}) => {
   const {
     state: {
-      status,
+      gameState,
     },
     dispatch,
   } = useTicTacToe();
@@ -27,17 +27,17 @@ export const GameFooterComponent: FunctionComponent<GameFooterProps> = ({classes
   return (
     <Grid justifyContent="space-between" container className={classes.footer}>
       <Grid item className={classes.status} >
-        {isActive(status) &&
+        {isActive(gameState) &&
         <Typography>
           Game is being played
         </Typography>
         }
-        {hasWinner(status) &&
+        {hasWinner(gameState) &&
         <Typography>
           There is a winner
         </Typography>
         }
-        {hasTie(status) &&
+        {hasTie(gameState) &&
         <Typography>
           Two losers
         </Typography>

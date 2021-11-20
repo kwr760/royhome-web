@@ -2,17 +2,23 @@ import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { ThemeProvider } from '@mui/styles';
 import PlayerDialog from '../../../../src/features/tictactoe/components/player-dialog';
-import { PlayerEnum, StatusEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
-import { initialGame, initialPlayers } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
+import {
+  PlayerEnum,
+  GameStateEnum,
+  TurnEnum,
+  GameTypeEnum,
+} from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { initialBoard, initialPlayers } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
 import { themeLight } from '../../../../src/theme-light';
 
 describe('feature/tictactoe/component/player-dialog', () => {
   const state = {
     players: initialPlayers,
-    game: initialGame,
-    status: StatusEnum.Active,
-    turn: PlayerEnum.Two,
+    board: initialBoard,
+    gameState: GameStateEnum.Active,
+    turn: TurnEnum.Two,
+    type: GameTypeEnum.pvp,
   };
   const reducer = jest.fn();
   const handleSubmit = jest.fn();

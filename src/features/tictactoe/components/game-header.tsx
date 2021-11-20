@@ -5,23 +5,23 @@ import type { WithStyles, ClassNameMap } from '@mui/styles';
 import { FaAngleDoubleLeft as LeftArrow, FaAngleDoubleRight as RightArrow } from 'react-icons/fa';
 import { useTicTacToe } from '../context/context.provider';
 
-import { GameTypeEnum, PlayerEnum, StatusEnum } from '../contracts/tictactoe.enum';
+import { GameStateEnum, GameTypeEnum, PlayerEnum, TurnEnum } from '../contracts/tictactoe.enum';
 import { styles } from '../styles/game-header.styles';
 import PlayerDialog from './player-dialog';
 
-const addClasses = (classes: ClassNameMap<string>, status: StatusEnum, winner: PlayerEnum, turn: PlayerEnum) => {
-  if (status === StatusEnum.Tie) {
+const addClasses = (classes: ClassNameMap<string>, gameState: GameStateEnum, winner: PlayerEnum, turn: TurnEnum) => {
+  if (gameState === GameStateEnum.Tie) {
     return [classes.loser, classes.loser];
   }
-  if (status === StatusEnum.Win) {
+  if (gameState === GameStateEnum.Win) {
     return [
       winner === PlayerEnum.One ? classes.winner : classes.loser,
       winner === PlayerEnum.Two ? classes.winner : classes.loser,
     ];
   }
   return [
-    turn === PlayerEnum.One ? classes.active : classes.inactive,
-    turn === PlayerEnum.Two ? classes.active : classes.inactive,
+    turn === TurnEnum.One ? classes.active : classes.inactive,
+    turn === TurnEnum.Two ? classes.active : classes.inactive,
   ];
 };
 
@@ -32,7 +32,7 @@ const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) =>
   const {
     state: {
       players,
-      status,
+      gameState,
       winner,
       turn,
     },
@@ -40,11 +40,11 @@ const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) =>
   const handleSubmit = (player: PlayerEnum, playerName: string, gameType: GameTypeEnum) => {
     console.log(player, playerName, gameType);
   };
-  const [playerOneClass, playerTwoClass] = addClasses(classes, status, winner || PlayerEnum.None, turn);
+  const [playerOneClass, playerTwoClass] = addClasses(classes, gameState, winner || PlayerEnum.None, turn);
   const clickPlayerOne = () => { setOpenPlayerOne(true); };
   const clickPlayerTwo = () => { setOpenPlayerTwo(true); };
   return <Grid justifyContent="space-between" container className={classes.grid}>
-    <Grid item className={classes.icon}>
+    <Grid item >
       <Button className={classes.player} onClick={clickPlayerOne}>
         <Typography className={playerOneClass}>{players[0]}</Typography>
       </Button>
@@ -56,9 +56,9 @@ const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) =>
       />
     </Grid>
     <Grid item className={classes.icon}>
-      { turn === PlayerEnum.One ? <LeftArrow className={'fa-2x'} /> : <RightArrow className={'fa-2x'} />  }
+      { turn === TurnEnum.One ? <LeftArrow className={'fa-2x'} /> : <RightArrow className={'fa-2x'} />  }
     </Grid>
-    <Grid item className={classes.icon}>
+    <Grid item >
       <Button className={classes.player} onClick={clickPlayerTwo}>
         <Typography className={playerTwoClass}>{players[1]}</Typography>
       </Button>

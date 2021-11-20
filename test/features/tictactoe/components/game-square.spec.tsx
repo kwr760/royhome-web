@@ -2,10 +2,10 @@ import React, { Reducer } from 'react';
 import { ThemeProvider } from '@mui/styles';
 import { fireEvent, render } from '@testing-library/react';
 import GameSquare from '../../../../src/features/tictactoe/components/game-square';
-import { ActionEnum, PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
-import { initialPlayers, initialStatus } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
-import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
+import { ActionEnum, PlayerEnum, TurnEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { initialTicTacToeState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
+import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
 import { themeLight } from '../../../../src/theme-light';
 
 describe('feature/tictactoe/component/game-square', () => {
@@ -22,10 +22,9 @@ describe('feature/tictactoe/component/game-square', () => {
   it('should render', () => {
     // Arrange
     const state = {
-      players: [ ...initialPlayers ],
-      game: '---------',
-      status: initialStatus,
-      turn: PlayerEnum.Two,
+      ...initialTicTacToeState,
+      board: '---------',
+      turn: TurnEnum.Two,
     };
     const expectedPayload = {
       position: 5,
@@ -45,10 +44,9 @@ describe('feature/tictactoe/component/game-square', () => {
   it('should render - O', () => {
     // Arrange
     const state = {
-      players: initialPlayers,
-      game: '-----O---',
-      status: initialStatus,
-      turn: PlayerEnum.Two,
+      ...initialTicTacToeState,
+      board: '-----O---',
+      turn: TurnEnum.Two,
     };
 
     // Act
@@ -60,10 +58,8 @@ describe('feature/tictactoe/component/game-square', () => {
   it('should render - X', () => {
     // Arrange
     const state = {
-      players: initialPlayers,
-      game: '-----X---',
-      status: initialStatus,
-      turn: PlayerEnum.One,
+      ...initialTicTacToeState,
+      board: '-----X---',
     };
 
     // Act

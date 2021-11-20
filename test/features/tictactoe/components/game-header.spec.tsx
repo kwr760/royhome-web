@@ -3,10 +3,10 @@ import { ThemeProvider } from '@mui/styles';
 import { fireEvent, render, waitForElementToBeRemoved } from '@testing-library/react';
 import { FaAngleDoubleLeft as LeftArrow, FaAngleDoubleRight as RightArrow } from 'react-icons/fa';
 import GameHeader from '../../../../src/features/tictactoe/components/game-header';
-import { PlayerEnum, StatusEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
-import { initialGame, initialPlayers } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
-import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
+import { PlayerEnum, GameStateEnum, TurnEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { initialTicTacToeState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
+import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
 import { themeLight } from '../../../../src/theme-light';
 
 jest.mock('react-icons/fa');
@@ -32,10 +32,8 @@ describe('feature/tictactoe/component/game-header', () => {
   it('should render', async () => {
     // Arrange
     const state = {
-      players: initialPlayers,
-      game: initialGame,
-      status: StatusEnum.Active,
-      turn: PlayerEnum.Two,
+      ...initialTicTacToeState,
+      turn: TurnEnum.Two,
     };
     (RightArrow as jest.Mock).mockImplementation(() => 'Right Arrow');
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
@@ -54,10 +52,7 @@ describe('feature/tictactoe/component/game-header', () => {
   it('should render as Left Arrow', async () => {
     // Arrange
     const state = {
-      players: initialPlayers,
-      game: initialGame,
-      status: StatusEnum.Active,
-      turn: PlayerEnum.One,
+      ...initialTicTacToeState,
     };
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
 
@@ -75,10 +70,8 @@ describe('feature/tictactoe/component/game-header', () => {
   it('should render as Tie', () => {
     // Arrange
     const state = {
-      players: initialPlayers,
-      game: initialGame,
-      status: StatusEnum.Tie,
-      turn: PlayerEnum.One,
+      ...initialTicTacToeState,
+      gameState: GameStateEnum.Tie,
     };
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
 
@@ -94,10 +87,8 @@ describe('feature/tictactoe/component/game-header', () => {
   it('should render One as Win', () => {
     // Arrange
     const state = {
-      players: initialPlayers,
-      game: initialGame,
-      status: StatusEnum.Win,
-      turn: PlayerEnum.One,
+      ...initialTicTacToeState,
+      gameState: GameStateEnum.Win,
       winner: PlayerEnum.One,
     };
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
@@ -114,10 +105,8 @@ describe('feature/tictactoe/component/game-header', () => {
   it('should render Two as Win', () => {
     // Arrange
     const state = {
-      players: initialPlayers,
-      game: initialGame,
-      status: StatusEnum.Win,
-      turn: PlayerEnum.One,
+      ...initialTicTacToeState,
+      gameState: GameStateEnum.Win,
       winner: PlayerEnum.Two,
     };
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
