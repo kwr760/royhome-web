@@ -3,10 +3,10 @@ import { ThemeProvider } from '@mui/styles';
 import { fireEvent, render, waitForElementToBeRemoved } from '@testing-library/react';
 import { FaAngleDoubleLeft as LeftArrow, FaAngleDoubleRight as RightArrow } from 'react-icons/fa';
 import GameHeader from '../../../../src/features/tictactoe/components/game-header';
-import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.reducer';
 import { PlayerEnum, StatusEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { initialGame, initialPlayers } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
+import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
 import { themeLight } from '../../../../src/theme-light';
 
 jest.mock('react-icons/fa');

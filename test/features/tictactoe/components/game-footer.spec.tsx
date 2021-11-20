@@ -2,11 +2,11 @@ import { ThemeProvider } from '@mui/styles';
 import React, { Reducer } from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import GameFooter from '../../../../src/features/tictactoe/components/game-footer';
-import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.reducer';
 import { ActionEnum, PlayerEnum, StatusEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
 import { themeLight } from '../../../../src/theme-light';
 import { initialGame, initialPlayers } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
+import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
 
 describe('feature/tictactoe/component/game-footer', () => {
   const emptyReducer = jest.fn();

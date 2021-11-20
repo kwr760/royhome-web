@@ -2,9 +2,9 @@ import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { ThemeProvider } from '@mui/styles';
 import PlayerDialog from '../../../../src/features/tictactoe/components/player-dialog';
-import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.reducer';
 import { PlayerEnum, StatusEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { initialGame, initialPlayers } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
+import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
 import { themeLight } from '../../../../src/theme-light';
 
 describe('feature/tictactoe/component/player-dialog', () => {

@@ -1,36 +1,9 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import { PlayerEnum } from '../contracts/tictactoe.enum';
+import { ContextType, ProviderType } from '../contracts/tictactoe.context';
 import { initialTicTacToeState } from '../contracts/tictactoe.initial';
-import { ActionsType, ContextType, ProviderType, TicTacToeStateType } from '../contracts/tictactoe.context';
-import { checkGame } from '../functions/check-game';
-import { replaceAt } from '../functions/replace-at';
+import { ticTacToeReducer } from './context.reducer';
 
 const TicTacToeContext = createContext<ContextType | undefined>(undefined);
-
-const ticTacToeReducer = (state: TicTacToeStateType, action: ActionsType) => {
-  switch (action.type) {
-    case 'takeTurn': {
-      const { position, player } = action.payload;
-      const { game } = state;
-      const newGame = replaceAt(game, position, player.toString());
-      const { status, winner } = checkGame(newGame);
-      const turn = player === PlayerEnum.One ? PlayerEnum.Two : PlayerEnum.One;
-      return {
-        ...state,
-        game: newGame,
-        status,
-        turn,
-        winner,
-      };
-    }
-    case 'reset': {
-      return {
-        ...initialTicTacToeState,
-      };
-    }
-  }
-  return state;
-};
 
 const TicTacToeProvider = (
   {state: seededState, reducer: seededReducer, children}: ProviderType,

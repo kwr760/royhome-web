@@ -2,6 +2,7 @@ enum StatusEnum {
   Active = 'ACTIVE',
   Win = 'WIN',
   Tie = 'TIE',
+  Think = 'THINK',
 }
 enum PlayerEnum {
   One = 'O',

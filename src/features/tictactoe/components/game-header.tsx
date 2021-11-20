@@ -3,8 +3,8 @@ import { Button, Grid, Typography } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles, ClassNameMap } from '@mui/styles';
 import { FaAngleDoubleLeft as LeftArrow, FaAngleDoubleRight as RightArrow } from 'react-icons/fa';
+import { useTicTacToe } from '../context/context.provider';
 
-import { useTicTacToe } from '../context/context.reducer';
 import { GameTypeEnum, PlayerEnum, StatusEnum } from '../contracts/tictactoe.enum';
 import { styles } from '../styles/game-header.styles';
 import PlayerDialog from './player-dialog';
