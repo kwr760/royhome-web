@@ -4,28 +4,22 @@ import {
 } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
-
-import { useTicTacToe } from '../context/context';
-import { GameTypeEnum, PlayerEnum } from '../contracts/tictactoe.enum';
+import { GameTypeEnum } from '../contracts/tictactoe.enum';
+import { Player } from '../contracts/tictactoe.models';
 import { styles } from '../styles/player-dialog.styles';
 
 interface Props {
-  player: PlayerEnum;
+  player: Player;
   openDialog: boolean,
   setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>;
-  handleSubmit: (player: PlayerEnum, playerName: string, gameType: GameTypeEnum) => void,
+  handleSubmit: (player: Player, playerName: string, gameType: GameTypeEnum) => void,
 }
 type PlayerDialogProps = Props & WithStyles<typeof styles>;
 const PlayerDialogComponent: FunctionComponent<PlayerDialogProps> = (
   { player, openDialog, setOpenDialog, handleSubmit, classes },
 ) => {
-  const {
-    state: {
-      players,
-    },
-  } = useTicTacToe();
-  const [ playerName, setPlayerName ] = useState((player === PlayerEnum.One) ? players[0] : players[1]);
-  const [ gameType, setGameType ] = useState(GameTypeEnum.pvp);
+  const [ playerName, setPlayerName ] = useState(player.name);
+  const [ gameType, setGameType ] = useState(GameTypeEnum.Pvp);
   const onClose = () => {
     setOpenDialog(false);
   };
@@ -68,13 +62,13 @@ const PlayerDialogComponent: FunctionComponent<PlayerDialogProps> = (
           className={classes.gameTypeGroup}
           fullWidth
         >
-          <ToggleButton value={GameTypeEnum.pvp} aria-label="left aligned">
+          <ToggleButton value={GameTypeEnum.Pvp} aria-label="left aligned">
             PvP
           </ToggleButton>
-          <ToggleButton value={GameTypeEnum.pvc} aria-label="centered">
+          <ToggleButton value={GameTypeEnum.Pvc} aria-label="centered">
             PvC
           </ToggleButton>
-          <ToggleButton value={GameTypeEnum.remote} aria-label="right aligned">
+          <ToggleButton value={GameTypeEnum.Remote} aria-label="right aligned">
             Remote
           </ToggleButton>
         </ToggleButtonGroup>

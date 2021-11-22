@@ -1,5 +1,5 @@
-import { PlayerEnum, StatusEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
-import { initialGame } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
+import { GameStateEnum, PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { initialBoard } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { GameType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
 import { checkGame } from '../../../../src/features/tictactoe/functions/check-game';
 import { findWinner } from '../../../../src/features/tictactoe/functions/find-winner';
@@ -12,10 +12,10 @@ jest
 describe('feature/tictactoe/function/check-game', () => {
   it('should determine a win', () => {
     // Arrange
-    const game: GameType = initialGame;
+    const game: GameType = initialBoard;
     (findWinner as jest.Mock).mockReturnValue(PlayerEnum.One);
     const expected = {
-      status: StatusEnum.Win,
+      gameState: GameStateEnum.Win,
       winner: PlayerEnum.One,
     };
 
@@ -27,11 +27,11 @@ describe('feature/tictactoe/function/check-game', () => {
   });
   it('should determine a tie', () => {
     // Arrange
-    const game: GameType = initialGame;
-    (findWinner as jest.Mock).mockReturnValue(PlayerEnum.None);
+    const game: GameType = initialBoard;
+    (findWinner as jest.Mock).mockReturnValue(PlayerEnum.Neither);
     (isGameOver as jest.Mock).mockReturnValue(true);
     const expected = {
-      status: StatusEnum.Tie,
+      gameState: GameStateEnum.Tie,
     };
 
     // Act
@@ -42,11 +42,11 @@ describe('feature/tictactoe/function/check-game', () => {
   });
   it('should determine that we are not done', () => {
     // Arrange
-    const game: GameType = initialGame;
-    (findWinner as jest.Mock).mockReturnValue(PlayerEnum.None);
+    const game: GameType = initialBoard;
+    (findWinner as jest.Mock).mockReturnValue(PlayerEnum.Neither);
     (isGameOver as jest.Mock).mockReturnValue(false);
     const expected = {
-      status: StatusEnum.Active,
+      gameState: GameStateEnum.Active,
     };
 
     // Act

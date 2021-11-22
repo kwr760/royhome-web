@@ -1,21 +1,33 @@
-enum StatusEnum {
+enum GameStateEnum {
   Active = 'ACTIVE',
   Win = 'WIN',
   Tie = 'TIE',
+  Think = 'THINK',
 }
-enum PlayerEnum {
-  One = 'O',
-  Two = 'X',
-  None = '-',
-}
-enum ActionEnum {
-  reset = 'reset',
-  takeTurn = 'takeTurn',
+enum PlayerStateEnum {
+  Active = 'ACTIVE',
+  Wait = 'WAIT',
+  Winner = 'WINNER',
+  Loser = 'LOSER',
 }
 enum GameTypeEnum {
-  pvp = 'pvp',
-  pvc = 'pvc',
-  remote = 'remote',
+  Pvp = 'pvp',
+  Pvc = 'pvc',
+  Remote = 'remote',
+}
+enum PlayerTypeEnum {
+  Local = 'local',
+  Computer = 'computer',
+  Remote = 'remote',
+}
+enum PlayerEnum {
+  Neither = '-',
+  One = 'X',
+  Two = 'O',
+}
+enum ActionEnum {
+  Reset = 'reset',
+  TakeTurn = 'takeTurn',
 }
 
-export { StatusEnum, PlayerEnum, ActionEnum, GameTypeEnum };
+export { PlayerStateEnum, GameStateEnum, ActionEnum, GameTypeEnum, PlayerTypeEnum, PlayerEnum };

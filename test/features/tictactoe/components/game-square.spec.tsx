@@ -2,10 +2,10 @@ import React, { Reducer } from 'react';
 import { ThemeProvider } from '@mui/styles';
 import { fireEvent, render } from '@testing-library/react';
 import GameSquare from '../../../../src/features/tictactoe/components/game-square';
-import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context';
 import { ActionEnum, PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
-import { initialPlayers, initialStatus } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
-import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
+import { initialTicTacToeState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
+import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
+import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
 import { themeLight } from '../../../../src/theme-light';
 
 describe('feature/tictactoe/component/game-square', () => {
@@ -22,9 +22,8 @@ describe('feature/tictactoe/component/game-square', () => {
   it('should render', () => {
     // Arrange
     const state = {
-      players: [ ...initialPlayers ],
-      game: '---------',
-      status: initialStatus,
+      ...initialTicTacToeState,
+      board: '---------',
       turn: PlayerEnum.Two,
     };
     const expectedPayload = {
@@ -40,14 +39,13 @@ describe('feature/tictactoe/component/game-square', () => {
     fireEvent.click(button);
 
     // Assert
-    expect(reducer).toBeCalledWith(state, { type: ActionEnum.takeTurn, payload: expectedPayload});
+    expect(reducer).toBeCalledWith(state, { type: ActionEnum.TakeTurn, payload: expectedPayload});
   });
   it('should render - O', () => {
     // Arrange
     const state = {
-      players: initialPlayers,
-      game: '-----O---',
-      status: initialStatus,
+      ...initialTicTacToeState,
+      board: '-----O---',
       turn: PlayerEnum.Two,
     };
 
@@ -60,10 +58,8 @@ describe('feature/tictactoe/component/game-square', () => {
   it('should render - X', () => {
     // Arrange
     const state = {
-      players: initialPlayers,
-      game: '-----X---',
-      status: initialStatus,
-      turn: PlayerEnum.One,
+      ...initialTicTacToeState,
+      board: '-----X---',
     };
 
     // Act

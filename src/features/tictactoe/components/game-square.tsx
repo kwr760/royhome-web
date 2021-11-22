@@ -1,16 +1,12 @@
-import React, { FunctionComponent, memo } from 'react';
 import { Box, Button, Typography } from '@mui/material';
-import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
-
-import { useTicTacToe } from '../context/context';
+import { withStyles } from '@mui/styles';
+import React, { FunctionComponent, memo } from 'react';
 import { takeTurn } from '../context/context.actions';
-import { PlayerEnum, StatusEnum } from '../contracts/tictactoe.enum';
+import { useTicTacToe } from '../context/context.provider';
+import { PlayerEnum } from '../contracts/tictactoe.enum';
+import { isSquareDisabled } from '../functions/is-square-disabled';
 import { styles } from '../styles/game-square.styles';
-
-const isSquareDisabled = (status: StatusEnum, owner: PlayerEnum) => {
-  return status !== StatusEnum.Active || owner !== PlayerEnum.None;
-};
 
 interface Props {
   position: number;
@@ -19,15 +15,15 @@ type GameSquareProps = Props & WithStyles<typeof styles>;
 export const GameSquareComponent: FunctionComponent<GameSquareProps> = ({position, classes}) => {
   const {
     state: {
-      game,
-      status,
+      board,
+      gameState,
       turn,
     },
     dispatch,
   } = useTicTacToe();
-  const owner: PlayerEnum = game[position] as PlayerEnum;
-  const disabled = isSquareDisabled(status, owner);
-  const piece = (owner === PlayerEnum.None) ? '' : owner;
+  const owner: PlayerEnum = board[position] as PlayerEnum;
+  const disabled = isSquareDisabled(gameState, owner);
+  const piece = (owner === PlayerEnum.Neither) ? '' : owner;
   const clickAction = () => {
     dispatch(takeTurn({ position, player: turn }));
   };
