@@ -2,15 +2,10 @@ import React, { FunctionComponent, memo } from 'react';
 import { Button, Grid, Typography } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
-
 import { reset } from '../context/context.actions';
 import { useTicTacToe } from '../context/context.provider';
 import { GameStateEnum } from '../contracts/tictactoe.enum';
 import { styles } from '../styles/game-footer.styles';
-
-const isActive = (gameState: GameStateEnum) => gameState === GameStateEnum.Active;
-const hasWinner = (gameState: GameStateEnum) => gameState === GameStateEnum.Win;
-const hasTie = (gameState: GameStateEnum) => gameState === GameStateEnum.Tie;
 
 type GameFooterProps = WithStyles<typeof styles>;
 export const GameFooterComponent: FunctionComponent<GameFooterProps> = ({classes}) => {
@@ -20,6 +15,18 @@ export const GameFooterComponent: FunctionComponent<GameFooterProps> = ({classes
     },
     dispatch,
   } = useTicTacToe();
+  let status = '';
+  switch (gameState) {
+    case GameStateEnum.Active:
+      status = 'Game is being played';
+      break;
+    case GameStateEnum.Win:
+      status = 'There is a winner';
+      break;
+    case GameStateEnum.Tie:
+      status = 'Two losers';
+      break;
+  }
   const clickReset = () => {
     dispatch(reset());
   };
@@ -27,21 +34,9 @@ export const GameFooterComponent: FunctionComponent<GameFooterProps> = ({classes
   return (
     <Grid justifyContent="space-between" container className={classes.footer}>
       <Grid item className={classes.status} >
-        {isActive(gameState) &&
         <Typography>
-          Game is being played
+          { status }
         </Typography>
-        }
-        {hasWinner(gameState) &&
-        <Typography>
-          There is a winner
-        </Typography>
-        }
-        {hasTie(gameState) &&
-        <Typography>
-          Two losers
-        </Typography>
-        }
       </Grid>
       <Grid item>
         <Button className={classes.button} onClick={clickReset}>

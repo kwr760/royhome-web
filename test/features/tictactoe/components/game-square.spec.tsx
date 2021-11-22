@@ -2,7 +2,7 @@ import React, { Reducer } from 'react';
 import { ThemeProvider } from '@mui/styles';
 import { fireEvent, render } from '@testing-library/react';
 import GameSquare from '../../../../src/features/tictactoe/components/game-square';
-import { ActionEnum, PlayerEnum, TurnEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { ActionEnum, PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { initialTicTacToeState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
 import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
@@ -24,7 +24,7 @@ describe('feature/tictactoe/component/game-square', () => {
     const state = {
       ...initialTicTacToeState,
       board: '---------',
-      turn: TurnEnum.Two,
+      turn: PlayerEnum.Two,
     };
     const expectedPayload = {
       position: 5,
@@ -39,14 +39,14 @@ describe('feature/tictactoe/component/game-square', () => {
     fireEvent.click(button);
 
     // Assert
-    expect(reducer).toBeCalledWith(state, { type: ActionEnum.takeTurn, payload: expectedPayload});
+    expect(reducer).toBeCalledWith(state, { type: ActionEnum.TakeTurn, payload: expectedPayload});
   });
   it('should render - O', () => {
     // Arrange
     const state = {
       ...initialTicTacToeState,
       board: '-----O---',
-      turn: TurnEnum.Two,
+      turn: PlayerEnum.Two,
     };
 
     // Act

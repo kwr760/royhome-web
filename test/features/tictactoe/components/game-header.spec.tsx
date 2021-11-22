@@ -3,15 +3,23 @@ import { ThemeProvider } from '@mui/styles';
 import { fireEvent, render, waitForElementToBeRemoved } from '@testing-library/react';
 import { FaAngleDoubleLeft as LeftArrow, FaAngleDoubleRight as RightArrow } from 'react-icons/fa';
 import GameHeader from '../../../../src/features/tictactoe/components/game-header';
-import { PlayerEnum, GameStateEnum, TurnEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
-import { initialTicTacToeState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
+import {
+  PlayerEnum,
+  GameStateEnum,
+  PlayerStateEnum,
+} from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import {
+  initialPlayerOne,
+  initialPlayerTwo,
+  initialTicTacToeState,
+} from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
 import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
 import { themeLight } from '../../../../src/theme-light';
 
 jest.mock('react-icons/fa');
 
-describe('feature/tictactoe/component/game-header', () => {
+describe('features/tictactoe/components/game-header', () => {
   const emptyReducer = jest.fn();
   const getComponent = (initialState: TicTacToeStateType, reducer: Reducer<unknown, unknown>) => {
     return (
@@ -33,7 +41,7 @@ describe('feature/tictactoe/component/game-header', () => {
     // Arrange
     const state = {
       ...initialTicTacToeState,
-      turn: TurnEnum.Two,
+      turn: PlayerEnum.Two,
     };
     (RightArrow as jest.Mock).mockImplementation(() => 'Right Arrow');
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
@@ -89,7 +97,10 @@ describe('feature/tictactoe/component/game-header', () => {
     const state = {
       ...initialTicTacToeState,
       gameState: GameStateEnum.Win,
-      winner: PlayerEnum.One,
+      playerOne: {
+        ...initialPlayerOne,
+        playerState: PlayerStateEnum.Winner,
+      },
     };
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
 
@@ -107,7 +118,10 @@ describe('feature/tictactoe/component/game-header', () => {
     const state = {
       ...initialTicTacToeState,
       gameState: GameStateEnum.Win,
-      winner: PlayerEnum.Two,
+      playerTwo: {
+        ...initialPlayerTwo,
+        playerState: PlayerStateEnum.Winner,
+      },
     };
     (LeftArrow as jest.Mock).mockImplementation(() => 'Left Arrow');
 

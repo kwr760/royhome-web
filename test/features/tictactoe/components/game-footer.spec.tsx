@@ -2,7 +2,7 @@ import { ThemeProvider } from '@mui/styles';
 import React, { Reducer } from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import GameFooter from '../../../../src/features/tictactoe/components/game-footer';
-import { ActionEnum, GameStateEnum, TurnEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { ActionEnum, GameStateEnum, PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
 import { themeLight } from '../../../../src/theme-light';
 import { initialTicTacToeState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
@@ -38,7 +38,7 @@ describe('feature/tictactoe/component/game-footer', () => {
     const state = {
       ...initialTicTacToeState,
       gameState: GameStateEnum.Win,
-      turn: TurnEnum.Two,
+      turn: PlayerEnum.Two,
     };
 
     // Act
@@ -63,6 +63,6 @@ describe('feature/tictactoe/component/game-footer', () => {
 
     // Assert
     getByText(/Two losers/);
-    expect(reducer).toBeCalledWith(state, { type: ActionEnum.reset});
+    expect(reducer).toBeCalledWith(state, { type: ActionEnum.Reset});
   });
 });

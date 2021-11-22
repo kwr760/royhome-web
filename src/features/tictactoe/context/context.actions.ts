@@ -2,10 +2,10 @@ import { ResetAction, TakeTurnAction, TakeTurnPayload } from '../contracts/ticta
 import { ActionEnum } from '../contracts/tictactoe.enum';
 
 const reset = (): ResetAction => ({
-  type: ActionEnum.reset,
+  type: ActionEnum.Reset,
 });
 const takeTurn = ({position, player} : TakeTurnPayload): TakeTurnAction => ({
-  type: ActionEnum.takeTurn,
+  type: ActionEnum.TakeTurn,
   payload: {
     position,
     player,

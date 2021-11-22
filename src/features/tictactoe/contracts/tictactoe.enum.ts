@@ -11,39 +11,23 @@ enum PlayerStateEnum {
   Loser = 'LOSER',
 }
 enum GameTypeEnum {
-  pvp = 'pvp',
-  pvc = 'pvc',
-  remote = 'remote',
+  Pvp = 'pvp',
+  Pvc = 'pvc',
+  Remote = 'remote',
 }
 enum PlayerTypeEnum {
-  local = 'local',
-  computer = 'computer',
-  remote = 'remote',
+  Local = 'local',
+  Computer = 'computer',
+  Remote = 'remote',
 }
-enum TurnEnum {
-  One,
-  Two,
-}
-enum PieceEnum {
-  one = 'X',
-  two = 'O',
+enum PlayerEnum {
+  Neither = '-',
+  One = 'X',
+  Two = 'O',
 }
 enum ActionEnum {
-  reset = 'reset',
-  takeTurn = 'takeTurn',
+  Reset = 'reset',
+  TakeTurn = 'takeTurn',
 }
 
-enum PlayerEnum {
-  One = 'O',
-  Two = 'X',
-  None = '-',
-}
-enum StatusEnum {
-  Active = 'ACTIVE',
-  Win = 'WIN',
-  Tie = 'TIE',
-  Think = 'THINK',
-}
-export { PlayerStateEnum, GameStateEnum, ActionEnum, GameTypeEnum, PlayerTypeEnum, TurnEnum, PieceEnum,
-  PlayerEnum, StatusEnum,
-};
+export { PlayerStateEnum, GameStateEnum, ActionEnum, GameTypeEnum, PlayerTypeEnum, PlayerEnum };

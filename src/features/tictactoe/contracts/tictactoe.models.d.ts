@@ -1,39 +1,19 @@
+import { GameStateEnum, GameTypeEnum, PlayerEnum, PlayerStateEnum, PlayerTypeEnum } from './tictactoe.enum';
 
 type Board = string;
-
-import {
-  GameStateEnum,
-  GameTypeEnum,
-  PlayerEnum,
-  PlayerStateEnum,
-  PlayerTypeEnum,
-  TurnEnum,
-} from './tictactoe.enum';
-
 interface Player {
   name: string,
   playerState: PlayerStateEnum,
   type: PlayerTypeEnum,
-  piece: string,
+  piece: PlayerEnum,
 }
-
-interface Game {
-  board: Board,
-  gameState: GameStateEnum,
-  type: GameTypeEnum,
-  turn: TurnEnum,
-  one: Player,
-  two: Player,
-}
-
-type PlayersType = string[];
 interface TicTacToeStateType {
   board: Board,
   gameState: GameStateEnum,
-  turn: TurnEnum,
+  turn: PlayerEnum,
   type: GameTypeEnum,
-  players: PlayersType,
-  winner?: PlayerEnum,
+  playerOne: Player,
+  playerTwo: Player,
 }
 
-export type { Game, Player, TicTacToeStateType };
+export type { Player, TicTacToeStateType };

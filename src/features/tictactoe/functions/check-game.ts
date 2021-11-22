@@ -9,7 +9,7 @@ interface CheckGameReturn {
 }
 const checkGame = (game: GameType): CheckGameReturn => {
   const winner = findWinner(game);
-  if (winner !== PlayerEnum.None) {
+  if (winner !== PlayerEnum.Neither) {
     return {
       gameState: GameStateEnum.Win,
       winner,

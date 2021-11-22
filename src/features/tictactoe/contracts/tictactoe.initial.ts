@@ -1,39 +1,31 @@
-import {
-  GameStateEnum, GameTypeEnum,
-  TurnEnum,
-} from './tictactoe.enum';
+import { GameStateEnum, GameTypeEnum, PlayerEnum, PlayerStateEnum, PlayerTypeEnum } from './tictactoe.enum';
 import { TicTacToeStateType } from './tictactoe.models';
 
-const initialPlayers = ['Player #1', 'Player #2'];
 const initialBoard = '---------';
 const initialGameState = GameStateEnum.Active;
-const initialTurn = TurnEnum.One;
-const initialType = GameTypeEnum.pvp;
+const initialTurn = PlayerEnum.One;
+const initialType = GameTypeEnum.Pvp;
+const initialPlayerOne = {
+  name: 'Player #1',
+  playerState: PlayerStateEnum.Active,
+  type: PlayerTypeEnum.Local,
+  piece: PlayerEnum.One,
+};
+const initialPlayerTwo = {
+  name: 'Player #2',
+  playerState: PlayerStateEnum.Wait,
+  type: PlayerTypeEnum.Local,
+  piece: PlayerEnum.Two,
+};
 const initialTicTacToeState: TicTacToeStateType = {
-  players: [...initialPlayers],
   board: initialBoard,
   gameState: initialGameState,
   type: initialType,
   turn: initialTurn,
+  playerOne: initialPlayerOne,
+  playerTwo: initialPlayerTwo,
 };
 
-// const initialGameState2: Game = {
-//   board: initialBoard,
-//   gameState: initialGameState,
-//   type: GameTypeEnum.pvp,
-//   turn: TurnEnum.One,
-//   one: {
-//     name: 'Player #1',
-//     state: PlayerStateEnum.Active,
-//     type: PlayerTypeEnum.local,
-//     piece: PieceEnum.one,
-//   },
-//   two: {
-//     name: 'Player #2',
-//     state: PlayerStateEnum.Wait,
-//     type: PlayerTypeEnum.local,
-//     piece: PieceEnum.one,
-//   },
-// };
-
-export { initialBoard, initialPlayers, initialTurn, initialType, initialGameState, initialTicTacToeState };
+export {
+  initialBoard, initialTurn, initialType, initialGameState, initialTicTacToeState, initialPlayerOne, initialPlayerTwo,
+};

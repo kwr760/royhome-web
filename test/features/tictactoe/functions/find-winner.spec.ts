@@ -9,27 +9,27 @@ describe('feature/tictactoe/function/find-winner', () => {
   const cases: TestTuple[] = [
     {
       game: 'X--X--X--',
-      expected: PlayerEnum.Two,
+      expected: PlayerEnum.One,
     },
     {
       game: 'OOO------',
-      expected: PlayerEnum.One,
+      expected: PlayerEnum.Two,
     },
     {
       game: 'X-XX-----',
-      expected: PlayerEnum.None,
+      expected: PlayerEnum.Neither,
     },
     {
       game: 'O---O---O',
-      expected: PlayerEnum.One,
+      expected: PlayerEnum.Two,
     },
     {
       game: '--O--O--O',
-      expected: PlayerEnum.One,
+      expected: PlayerEnum.Two,
     },
     {
       game: 'X--X----X',
-      expected: PlayerEnum.None,
+      expected: PlayerEnum.Neither,
     },
   ];
 

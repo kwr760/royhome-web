@@ -12,7 +12,7 @@ const findWinner = (game: GameType): PlayerEnum => {
     }
   }
 
-  return PlayerEnum.None;
+  return PlayerEnum.Neither;
 };
 
 export { findWinner };

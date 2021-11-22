@@ -15,11 +15,11 @@ interface TakeTurnPayload {
   player: PlayerEnum
 }
 type TakeTurnAction = {
-  type: ActionEnum.takeTurn,
+  type: ActionEnum.TakeTurn,
   payload: TakeTurnPayload,
 };
 type ResetAction = {
-  type: ActionEnum.reset,
+  type: ActionEnum.Reset,
 };
 type ActionsType = TakeTurnAction | ResetAction;
 type DispatchType = (action: ActionsType) => void;

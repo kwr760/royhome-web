@@ -28,7 +28,7 @@ describe('feature/tictactoe/function/check-game', () => {
   it('should determine a tie', () => {
     // Arrange
     const game: GameType = initialBoard;
-    (findWinner as jest.Mock).mockReturnValue(PlayerEnum.None);
+    (findWinner as jest.Mock).mockReturnValue(PlayerEnum.Neither);
     (isGameOver as jest.Mock).mockReturnValue(true);
     const expected = {
       gameState: GameStateEnum.Tie,
@@ -43,7 +43,7 @@ describe('feature/tictactoe/function/check-game', () => {
   it('should determine that we are not done', () => {
     // Arrange
     const game: GameType = initialBoard;
-    (findWinner as jest.Mock).mockReturnValue(PlayerEnum.None);
+    (findWinner as jest.Mock).mockReturnValue(PlayerEnum.Neither);
     (isGameOver as jest.Mock).mockReturnValue(false);
     const expected = {
       gameState: GameStateEnum.Active,
