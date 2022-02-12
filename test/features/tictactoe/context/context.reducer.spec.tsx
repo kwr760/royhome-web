@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 import React, { ReactNode } from 'react';
-import { reset, takeTurn } from '../../../../src/features/tictactoe/context/context.actions';
+import { resetGame, startGame, takeTurn } from '../../../../src/features/tictactoe/context/context.actions';
 import { TicTacToeProvider, useTicTacToe } from '../../../../src/features/tictactoe/context/context.provider';
 import { GameStateEnum, PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { initialTicTacToeState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
@@ -75,7 +75,29 @@ describe('feature/tictactoe/context/context.reducer', () => {
 
     act(() => {
       const { dispatch } = result.current;
-      dispatch( reset());
+      dispatch( resetGame());
+    });
+
+    // Assert
+    const { state } = result.current;
+    expect(state).toEqual(expectedState);
+  });
+  it('should call start', () => {
+    // Arrange
+    const initialState = {
+      ...initialTicTacToeState,
+    } as TicTacToeStateType;
+    const expectedState = {
+      ...initialTicTacToeState,
+      gameState: GameStateEnum.Active,
+    };
+    const wrapper = ({ children }: { children: ReactNode}) =>
+      <TicTacToeProvider state={initialState}>{children}</TicTacToeProvider>;
+    const { result } = renderHook(() => useTicTacToe(), { wrapper });
+
+    act(() => {
+      const { dispatch } = result.current;
+      dispatch( startGame());
     });
 
     // Assert

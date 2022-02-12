@@ -2,7 +2,7 @@ import { GameStateEnum, GameTypeEnum, PlayerEnum, PlayerStateEnum, PlayerTypeEnu
 import { TicTacToeStateType } from './tictactoe.models';
 
 const initialBoard = '---------';
-const initialGameState = GameStateEnum.Active;
+const initialGameState = GameStateEnum.Ready;
 const initialTurn = PlayerEnum.One;
 const initialType = GameTypeEnum.Pvp;
 const initialPlayerOne = {

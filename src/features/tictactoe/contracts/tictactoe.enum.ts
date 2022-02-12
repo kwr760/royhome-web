@@ -1,4 +1,5 @@
 enum GameStateEnum {
+  Ready = 'READY',
   Active = 'ACTIVE',
   Win = 'WIN',
   Tie = 'TIE',
@@ -28,6 +29,7 @@ enum PlayerEnum {
 enum ActionEnum {
   Reset = 'reset',
   TakeTurn = 'takeTurn',
+  Start = 'start',
 }
 
 export { PlayerStateEnum, GameStateEnum, ActionEnum, GameTypeEnum, PlayerTypeEnum, PlayerEnum };

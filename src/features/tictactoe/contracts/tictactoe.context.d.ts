@@ -18,10 +18,13 @@ type TakeTurnAction = {
   type: ActionEnum.TakeTurn,
   payload: TakeTurnPayload,
 };
-type ResetAction = {
+type ResetGameAction = {
   type: ActionEnum.Reset,
 };
-type ActionsType = TakeTurnAction | ResetAction;
+type StartGameAction = {
+  type: ActionEnum.Start,
+};
+type ActionsType = TakeTurnAction | ResetGameAction | StartGameAction;
 type DispatchType = (action: ActionsType) => void;
 type ContextType = {
   state: TicTacToeStateType,
@@ -29,5 +32,5 @@ type ContextType = {
 };
 
 export type {
-  ProviderType, ContextType, ActionsType, ResetAction, TakeTurnAction, TakeTurnPayload, GameType,
+  ProviderType, ContextType, ActionsType, ResetGameAction, TakeTurnAction, StartGameAction, TakeTurnPayload, GameType,
 };

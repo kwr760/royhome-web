@@ -2,7 +2,7 @@ import React, { Reducer } from 'react';
 import { ThemeProvider } from '@mui/styles';
 import { fireEvent, render } from '@testing-library/react';
 import GameSquare from '../../../../src/features/tictactoe/components/game-square';
-import { ActionEnum, PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { ActionEnum, GameStateEnum, PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { initialTicTacToeState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
 import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
@@ -19,12 +19,13 @@ describe('feature/tictactoe/component/game-square', () => {
       </ThemeProvider>
     );
   };
-  it('should render', () => {
+  it('should render and click as button', () => {
     // Arrange
     const state = {
       ...initialTicTacToeState,
       board: '---------',
       turn: PlayerEnum.Two,
+      gameState: GameStateEnum.Active,
     };
     const expectedPayload = {
       position: 5,
