@@ -9,37 +9,27 @@ const styles = (theme: Theme): StyleRules => {
 
   return createStyles({
     grid: {
-      padding: theme.spacing(1),
       border: `${halfBorderLength} solid ${borderColor}`,
       borderRadius: theme.spacing(1),
       backgroundColor: theme.palette.background.default,
     },
-    player: {
+    button: {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
       border: `${quarterBorderLength} solid ${borderColor}`,
-      borderRadius: theme.spacing(1),
-      backgroundColor: theme.palette.background.default,
     },
-    icon: {
-      display: 'flex',
-      flexDirection: 'column',
+    top: {
+      justifyContent: 'space-between',
+      padding: theme.spacing(.5),
+      borderBottom: `${quarterBorderLength} solid ${borderColor}`,
+      paddingRight: theme.spacing(2),
+      paddingLeft: theme.spacing(2),
+    },
+    bottom: {
+      padding: theme.spacing(1),
+      borderTop: `${quarterBorderLength} solid ${borderColor}`,
       justifyContent: 'center',
-    },
-    winner: {
-      color: theme.palette.info.dark,
-      fontWeight: theme.typography.fontWeightBold,
-    },
-    loser: {
-      color: theme.palette.warning.main,
-      fontWeight: theme.typography.fontWeightBold,
-    },
-    active: {
-      fontWeight: theme.typography.fontWeightBold,
-    },
-    inactive: {
-      fontWeight: theme.typography.fontWeightLight,
     },
   });
 };

@@ -1,7 +1,10 @@
 import { GameStateEnum, PlayerEnum } from '../contracts/tictactoe.enum';
 
 const isSquareDisabled = (gameState: GameStateEnum, owner: PlayerEnum): boolean => {
-  return gameState !== GameStateEnum.Active || owner !== PlayerEnum.Neither;
+  if (gameState !== GameStateEnum.Active) {
+    return false;
+  }
+  return owner !== PlayerEnum.Neither;
 };
 
 export { isSquareDisabled };
