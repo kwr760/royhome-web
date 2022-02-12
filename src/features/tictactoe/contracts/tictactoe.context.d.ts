@@ -32,5 +32,5 @@ type ContextType = {
 };
 
 export type {
-  ProviderType, ContextType, ActionsType, ResetGameAction, TakeTurnAction, StartGameAction, TakeTurnPayload, GameType,
+  ProviderType, ContextType, ActionsType, ResetGameAction, StartGameAction, TakeTurnAction, TakeTurnPayload, GameType,
 };
