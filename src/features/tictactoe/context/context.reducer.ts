@@ -2,7 +2,7 @@ import { ActionsType } from '../contracts/tictactoe.context';
 import { ActionEnum, GameStateEnum, PlayerEnum, PlayerStateEnum } from '../contracts/tictactoe.enum';
 import { initialTicTacToeState } from '../contracts/tictactoe.initial';
 import { TicTacToeStateType } from '../contracts/tictactoe.models';
-import { checkGame } from '../functions/check-game';
+import { evaluateGame } from '../functions/evaluate-game';
 import { replaceAt } from '../functions/replace-at';
 
 const ticTacToeReducer = (state: TicTacToeStateType, action: ActionsType): TicTacToeStateType => {
@@ -12,7 +12,7 @@ const ticTacToeReducer = (state: TicTacToeStateType, action: ActionsType): TicTa
       const { board, gameState, playerOne, playerTwo } = state;
       if (gameState === GameStateEnum.Active) {
         const newGame = replaceAt(board, position, player.toString());
-        const { gameState, winner } = checkGame(newGame);
+        const { gameState, winner } = evaluateGame(newGame);
         if (winner === PlayerEnum.One) {
           playerOne.playerState = PlayerStateEnum.Winner;
           playerTwo.playerState = PlayerStateEnum.Loser;

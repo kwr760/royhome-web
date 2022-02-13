@@ -3,13 +3,14 @@ import { Player, TicTacToeStateType } from '../contracts/tictactoe.models';
 
 const getWinner = (state: TicTacToeStateType): Player | undefined => {
   const { playerOne, playerTwo } = state;
-  if (playerOne.playerState === PlayerStateEnum.Winner) {
-    return playerOne;
+  switch (PlayerStateEnum.Winner) {
+    case playerOne.playerState:
+      return playerOne;
+    case playerTwo.playerState:
+      return playerTwo;
+    default:
+      return undefined;
   }
-  if (playerTwo.playerState === PlayerStateEnum.Winner) {
-    return playerTwo;
-  }
-  return undefined;
 };
 
 export { getWinner };
