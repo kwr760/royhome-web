@@ -55,7 +55,7 @@ const PlayerDialogComponent: FunctionComponent<PlayerDialogProps> = (
           defaultValue={playerName}
           fullWidth
         />
-        <Typography>Type of game</Typography>
+        <Typography>Player Type</Typography>
         <ToggleButtonGroup
           value={playerType}
           exclusive
@@ -70,7 +70,7 @@ const PlayerDialogComponent: FunctionComponent<PlayerDialogProps> = (
           <ToggleButton value={PlayerTypeEnum.Computer} aria-label="centered">
             {PlayerTypeEnum.Computer}
           </ToggleButton>
-          <ToggleButton value={PlayerTypeEnum.Remote} aria-label="right aligned">
+          <ToggleButton value={PlayerTypeEnum.Remote} disabled aria-label="right aligned">
             {PlayerTypeEnum.Remote}
           </ToggleButton>
         </ToggleButtonGroup>

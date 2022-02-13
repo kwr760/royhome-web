@@ -63,7 +63,7 @@ describe('features/tictactoe/components/game-header', () => {
 
     // Assert
     getByText(/Player #1/);
-    getByText(/Start Game/);
+    getByText(/Start/);
     getByText(/Player #2/);
   });
   it('should render update and cancel of player #1', async () => {
@@ -80,7 +80,7 @@ describe('features/tictactoe/components/game-header', () => {
 
     // Assert
     getByText(/Player #1/);
-    getByText(/Start Game/);
+    getByText(/Start/);
     getByText(/Player #2/);
   });
   it('should render update and cancel of player #2', async () => {
@@ -98,7 +98,7 @@ describe('features/tictactoe/components/game-header', () => {
 
     // Assert
     getByText(/X/);
-    getByText(/Start Game/);
+    getByText(/Start/);
     getByText(/O/);
   });
   it('should render as Tie', () => {
@@ -162,11 +162,11 @@ describe('features/tictactoe/components/game-header', () => {
 
     // Act // Assert
     const { getByText } = render(getComponent(state, ticTacToeReducer as Reducer<unknown, unknown>));
-    const startButton = getByText(/Start Game/);
+    const startButton = getByText(/Start/);
     fireEvent.click(startButton);
-    const resetButton = getByText(/Reset Game/);
+    const resetButton = getByText(/Reset/);
     fireEvent.click(resetButton);
-    getByText(/Start Game/);
+    getByText(/Start/);
   });
   it('should click reset game on tie', () => {
     // Arrange
@@ -177,9 +177,9 @@ describe('features/tictactoe/components/game-header', () => {
 
     // Act // Assert
     const { getByText } = render(getComponent(state, ticTacToeReducer as Reducer<unknown, unknown>));
-    const resetButton = getByText(/Reset Game/);
+    const resetButton = getByText(/Reset/);
     fireEvent.click(resetButton);
-    getByText(/Start Game/);
+    getByText(/Start/);
   });
   it('should click reset game on win', () => {
     // Arrange
@@ -190,8 +190,8 @@ describe('features/tictactoe/components/game-header', () => {
 
     // Act // Assert
     const { getByText } = render(getComponent(state, ticTacToeReducer as Reducer<unknown, unknown>));
-    const resetButton = getByText(/Reset Game/);
+    const resetButton = getByText(/Reset/);
     fireEvent.click(resetButton);
-    getByText(/Start Game/);
+    getByText(/Start/);
   });
 });
