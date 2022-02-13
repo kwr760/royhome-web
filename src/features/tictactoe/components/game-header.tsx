@@ -44,9 +44,9 @@ const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) =>
       case GameStateEnum.Win:
       case GameStateEnum.Tie:
       case GameStateEnum.Active:
-        return 'Reset Game';
+        return 'Reset';
       default:
-        return 'Start Game';
+        return 'Start';
     }
   };
   const getDisplayName = (player: Player) => {
