@@ -8,13 +8,13 @@ const initialType = GameTypeEnum.Pvp;
 const initialPlayerOne = {
   name: 'Player #1',
   playerState: PlayerStateEnum.Active,
-  type: PlayerTypeEnum.Local,
+  type: PlayerTypeEnum.Human,
   piece: PlayerEnum.One,
 };
 const initialPlayerTwo = {
   name: 'Player #2',
   playerState: PlayerStateEnum.Wait,
-  type: PlayerTypeEnum.Local,
+  type: PlayerTypeEnum.Human,
   piece: PlayerEnum.Two,
 };
 const initialTicTacToeState: TicTacToeStateType = {

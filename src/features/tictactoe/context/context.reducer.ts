@@ -9,25 +9,28 @@ const ticTacToeReducer = (state: TicTacToeStateType, action: ActionsType): TicTa
   switch (action.type) {
     case ActionEnum.TakeTurn: {
       const { position, player } = action.payload;
-      const { board, playerOne, playerTwo } = state;
-      const newGame = replaceAt(board, position, player.toString());
-      const { gameState, winner } = checkGame(newGame);
-      if (winner === PlayerEnum.One) {
-        playerOne.playerState = PlayerStateEnum.Winner;
-        playerTwo.playerState = PlayerStateEnum.Loser;
-      } else if (winner === PlayerEnum.Two) {
-        playerTwo.playerState = PlayerStateEnum.Winner;
-        playerOne.playerState = PlayerStateEnum.Loser;
+      const { board, gameState, playerOne, playerTwo } = state;
+      if (gameState === GameStateEnum.Active) {
+        const newGame = replaceAt(board, position, player.toString());
+        const { gameState, winner } = checkGame(newGame);
+        if (winner === PlayerEnum.One) {
+          playerOne.playerState = PlayerStateEnum.Winner;
+          playerTwo.playerState = PlayerStateEnum.Loser;
+        } else if (winner === PlayerEnum.Two) {
+          playerTwo.playerState = PlayerStateEnum.Winner;
+          playerOne.playerState = PlayerStateEnum.Loser;
+        }
+        const turn = player === PlayerEnum.One ? PlayerEnum.Two : PlayerEnum.One;
+        return {
+          ...state,
+          board: newGame,
+          gameState,
+          turn,
+          playerOne,
+          playerTwo,
+        };
       }
-      const turn = player === PlayerEnum.One ? PlayerEnum.Two : PlayerEnum.One;
-      return {
-        ...state,
-        board: newGame,
-        gameState,
-        turn,
-        playerOne,
-        playerTwo,
-      };
+      return { ...state };
     }
     case ActionEnum.Start: {
       return {
@@ -38,6 +41,16 @@ const ticTacToeReducer = (state: TicTacToeStateType, action: ActionsType): TicTa
     case ActionEnum.Reset: {
       return {
         ...initialTicTacToeState,
+      };
+    }
+    case ActionEnum.UpdatePlayer: {
+      const { position, player } = action.payload;
+      return position === PlayerEnum.One ? {
+        ...state,
+        playerOne: { ...player },
+      } : {
+        ...state,
+        playerTwo: { ...player },
       };
     }
   }

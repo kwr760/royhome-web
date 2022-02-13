@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
-import { GameTypeEnum } from '../contracts/tictactoe.enum';
+import { PlayerTypeEnum } from '../contracts/tictactoe.enum';
 import { Player } from '../contracts/tictactoe.models';
 import { styles } from '../styles/player-dialog.styles';
 
@@ -12,20 +12,22 @@ interface Props {
   player: Player;
   openDialog: boolean,
   setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>;
-  handleSubmit: (player: Player, playerName: string, gameType: GameTypeEnum) => void,
+  handleSubmit: (player: Player) => void,
 }
 type PlayerDialogProps = Props & WithStyles<typeof styles>;
 const PlayerDialogComponent: FunctionComponent<PlayerDialogProps> = (
   { player, openDialog, setOpenDialog, handleSubmit, classes },
 ) => {
   const [ playerName, setPlayerName ] = useState(player.name);
-  const [ gameType, setGameType ] = useState(GameTypeEnum.Pvp);
+  const [ playerType, setPlayerType ] = useState(PlayerTypeEnum.Human);
   const onClose = () => {
     setOpenDialog(false);
   };
   const onSubmit = () => {
     setOpenDialog(false);
-    handleSubmit(player, playerName, gameType);
+    player.name = playerName;
+    player.type = playerType;
+    handleSubmit(player);
   };
   const handleChangeName = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -33,11 +35,11 @@ const PlayerDialogComponent: FunctionComponent<PlayerDialogProps> = (
     const newName = event.target.value;
     setPlayerName(newName);
   };
-  const handleChangeGameType = (
+  const handleChangePlayerType = (
     _event: React.MouseEvent<HTMLElement>,
-    newGameType: GameTypeEnum,
+    newPlayerType: PlayerTypeEnum,
   ) => {
-    setGameType(newGameType);
+    setPlayerType(newPlayerType);
   };
 
   return (
@@ -55,21 +57,21 @@ const PlayerDialogComponent: FunctionComponent<PlayerDialogProps> = (
         />
         <Typography>Type of game</Typography>
         <ToggleButtonGroup
-          value={gameType}
+          value={playerType}
           exclusive
-          onChange={handleChangeGameType}
+          onChange={handleChangePlayerType}
           aria-label="text alignment"
-          className={classes.gameTypeGroup}
+          className={classes.playerTypeGroup}
           fullWidth
         >
-          <ToggleButton value={GameTypeEnum.Pvp} aria-label="left aligned">
-            PvP
+          <ToggleButton value={PlayerTypeEnum.Human} aria-label="left aligned">
+            {PlayerTypeEnum.Human}
           </ToggleButton>
-          <ToggleButton value={GameTypeEnum.Pvc} aria-label="centered">
-            PvC
+          <ToggleButton value={PlayerTypeEnum.Computer} aria-label="centered">
+            {PlayerTypeEnum.Computer}
           </ToggleButton>
-          <ToggleButton value={GameTypeEnum.Remote} aria-label="right aligned">
-            Remote
+          <ToggleButton value={PlayerTypeEnum.Remote} aria-label="right aligned">
+            {PlayerTypeEnum.Remote}
           </ToggleButton>
         </ToggleButtonGroup>
       </DialogContent>
