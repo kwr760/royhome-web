@@ -1,10 +1,10 @@
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import type { WithStyles } from '@mui/styles';
 import { withStyles } from '@mui/styles';
 import React, { FunctionComponent, memo } from 'react';
-import { resetGame, startGame } from '../context/context.actions';
+import { resetGame, startGame, updatePlayer } from '../context/context.actions';
 import { useTicTacToe } from '../context/context.provider';
-import { GameStateEnum, GameTypeEnum } from '../contracts/tictactoe.enum';
+import { GameStateEnum, PlayerEnum } from '../contracts/tictactoe.enum';
 import { Player } from '../contracts/tictactoe.models';
 import { getStateMessage } from '../functions/get-state-message';
 import { styles } from '../styles/game-header.styles';
@@ -14,13 +14,14 @@ type GameHeaderProps = WithStyles<typeof styles>;
 const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) => {
   const [openPlayerOne, setOpenPlayerOne] = React.useState(false);
   const [openPlayerTwo, setOpenPlayerTwo] = React.useState(false);
+  const isMobile = useMediaQuery(useTheme().breakpoints.down('sm'));
   const {
     state,
     dispatch,
   } = useTicTacToe();
   const { playerOne, playerTwo } = state;
-  const handleSubmit = (player: Player, playerName: string, gameType: GameTypeEnum) => {
-    console.log(JSON.stringify(player), playerName, gameType);
+  const handleSubmit = (position: PlayerEnum, player: Player) => {
+    return dispatch(updatePlayer({ position, player }));
   };
   const clickPlayerOne = () => {
     setOpenPlayerOne(true);
@@ -48,6 +49,9 @@ const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) =>
         return 'Start Game';
     }
   };
+  const getDisplayName = (player: Player) => {
+    return isMobile ? `${player.piece}` : `${player.name} - (${player.piece})`;
+  };
 
   const status = getStateMessage(state);
   return (
@@ -55,13 +59,13 @@ const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) =>
       <Grid container className={classes.top}>
         <Grid item>
           <Button className={classes.button} onClick={clickPlayerOne}>
-            <Typography>{playerOne.name} - ({playerOne.piece})</Typography>
+            <Typography>{getDisplayName(playerOne)}</Typography>
           </Button>
           <PlayerDialog
             player={playerOne}
             openDialog={openPlayerOne}
             setOpenDialog={setOpenPlayerOne}
-            handleSubmit={handleSubmit}
+            handleSubmit={(player) => { handleSubmit(PlayerEnum.One, player); }}
           />
         </Grid>
         <Grid item>
@@ -71,13 +75,13 @@ const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) =>
         </Grid>
         <Grid item >
           <Button className={classes.button} onClick={clickPlayerTwo}>
-            <Typography>{playerTwo.name} - ({playerTwo.piece})</Typography>
+            <Typography>{getDisplayName(playerTwo)}</Typography>
           </Button>
           <PlayerDialog
             player={playerTwo}
             openDialog={openPlayerTwo}
             setOpenDialog={setOpenPlayerTwo}
-            handleSubmit={handleSubmit}
+            handleSubmit={(player) => { handleSubmit(PlayerEnum.Two, player); }}
           />
         </Grid>
       </Grid>

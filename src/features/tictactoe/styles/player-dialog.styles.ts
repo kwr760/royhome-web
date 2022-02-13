@@ -8,7 +8,7 @@ const styles = (theme: Theme): StyleRules => {
       margin: theme.spacing(1),
       width: '-webkit-fill-available',
     },
-    gameTypeGroup: {
+    playerTypeGroup: {
       margin: theme.spacing(1),
       width: '-webkit-fill-available',
     },

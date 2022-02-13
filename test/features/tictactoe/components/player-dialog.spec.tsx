@@ -41,7 +41,7 @@ describe('feature/tictactoe/component/player-dialog', () => {
     // Act
     const { getByText, getByLabelText } = render(getComponent(player));
     fireEvent.change(getByLabelText(/Name/), {target: {value: 'Test Name'}});
-    fireEvent.click(getByText(/Remote/));
+    fireEvent.click(getByText(/remote/));
 
     // Assert
     getByText(/Test Name/);

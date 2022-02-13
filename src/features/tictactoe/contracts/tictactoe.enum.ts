@@ -17,7 +17,7 @@ enum GameTypeEnum {
   Remote = 'remote',
 }
 enum PlayerTypeEnum {
-  Local = 'local',
+  Human = 'human',
   Computer = 'computer',
   Remote = 'remote',
 }
@@ -30,6 +30,7 @@ enum ActionEnum {
   Reset = 'reset',
   TakeTurn = 'takeTurn',
   Start = 'start',
+  UpdatePlayer = 'updatePlayer',
 }
 
 export { PlayerStateEnum, GameStateEnum, ActionEnum, GameTypeEnum, PlayerTypeEnum, PlayerEnum };

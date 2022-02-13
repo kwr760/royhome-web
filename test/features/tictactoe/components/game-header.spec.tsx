@@ -1,3 +1,4 @@
+import mediaQuery from 'css-mediaquery';
 import React, { Reducer } from 'react';
 import { ThemeProvider } from '@mui/styles';
 import { fireEvent, render, waitForElementToBeRemoved } from '@testing-library/react';
@@ -19,6 +20,14 @@ import { ticTacToeReducer } from '../../../../src/features/tictactoe/context/con
 
 jest.mock('react-icons/fa');
 
+function createMatchMedia(width: number) {
+  return (query: string): MediaQueryList => ({
+    matches: mediaQuery.match(query, { width }),
+    addListener: () => {},
+    removeListener: () => {},
+  }) as unknown as MediaQueryList;
+}
+
 describe('features/tictactoe/components/game-header', () => {
   const emptyReducer = jest.fn();
   const getComponent = (initialState: TicTacToeStateType, reducer: Reducer<unknown, unknown>) => {
@@ -32,9 +41,11 @@ describe('features/tictactoe/components/game-header', () => {
   };
 
   beforeEach(() => {
+    window.matchMedia = createMatchMedia(1024) as (q: string) => MediaQueryList;
     global.console.log = jest.fn();
   });
   afterEach(() => {
+    window.matchMedia = createMatchMedia(400) as (q: string) => MediaQueryList;
     (global.console.log as jest.Mock).mockRestore();
   });
   it('should render update and cancel of player #1', async () => {
@@ -55,15 +66,15 @@ describe('features/tictactoe/components/game-header', () => {
     getByText(/Start Game/);
     getByText(/Player #2/);
   });
-  it('should render update and cancel of player #2', async () => {
+  it('should render update and cancel of player #1', async () => {
     // Arrange
     const state = {
       ...initialTicTacToeState,
     };
 
     // Act
-    const { getByText, getAllByText } = render(getComponent(state, emptyReducer));
-    fireEvent.click(getByText(/Player #2/));
+    const { getByText, getAllByText } = render(getComponent(state, ticTacToeReducer as Reducer<unknown, unknown>));
+    fireEvent.click(getByText(/Player #1/));
     fireEvent.click(getAllByText(/Update/)[1]);
     await waitForElementToBeRemoved(getByText(/Cancel/));
 
@@ -71,6 +82,24 @@ describe('features/tictactoe/components/game-header', () => {
     getByText(/Player #1/);
     getByText(/Start Game/);
     getByText(/Player #2/);
+  });
+  it('should render update and cancel of player #2', async () => {
+    // Arrange
+    window.matchMedia = createMatchMedia(400) as (q: string) => MediaQueryList;
+    const state = {
+      ...initialTicTacToeState,
+    };
+
+    // Act
+    const { getByText, getAllByText } = render(getComponent(state, ticTacToeReducer as Reducer<unknown, unknown>));
+    fireEvent.click(getByText(/O/));
+    fireEvent.click(getAllByText(/Update/)[1]);
+    await waitForElementToBeRemoved(getByText(/Cancel/));
+
+    // Assert
+    getByText(/X/);
+    getByText(/Start Game/);
+    getByText(/O/);
   });
   it('should render as Tie', () => {
     // Arrange
