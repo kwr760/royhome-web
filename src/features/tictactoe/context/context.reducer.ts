@@ -11,19 +11,14 @@ const ticTacToeReducer = (state: TicTacToeStateType, action: ActionsType): TicTa
       const { position, player } = action.payload;
       const { board, gameState, playerOne, playerTwo } = state;
       if (gameState === GameStateEnum.Active) {
-        const newGame = replaceAt(board, position, player.toString());
-        const { gameState, winner } = evaluateGame(newGame);
-        if (winner === PlayerEnum.One) {
-          playerOne.playerState = PlayerStateEnum.Winner;
-          playerTwo.playerState = PlayerStateEnum.Loser;
-        } else if (winner === PlayerEnum.Two) {
-          playerTwo.playerState = PlayerStateEnum.Winner;
-          playerOne.playerState = PlayerStateEnum.Loser;
-        }
+        const newBoard = replaceAt(board, position, player.toString());
+        const { gameState, winner } = evaluateGame(newBoard);
+        playerOne.playerState = (winner === PlayerEnum.One) ? PlayerStateEnum.Winner : PlayerStateEnum.Loser;
+        playerTwo.playerState = (winner === PlayerEnum.Two) ? PlayerStateEnum.Winner : PlayerStateEnum.Loser;
         const turn = player === PlayerEnum.One ? PlayerEnum.Two : PlayerEnum.One;
         return {
           ...state,
-          board: newGame,
+          board: newBoard,
           gameState,
           turn,
           playerOne,
@@ -40,7 +35,10 @@ const ticTacToeReducer = (state: TicTacToeStateType, action: ActionsType): TicTa
     }
     case ActionEnum.Reset: {
       return {
-        ...initialTicTacToeState,
+        ...state,
+        board: initialTicTacToeState.board,
+        gameState: initialTicTacToeState.gameState,
+        turn: initialTicTacToeState.turn,
       };
     }
     case ActionEnum.UpdatePlayer: {

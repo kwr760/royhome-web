@@ -4,7 +4,7 @@ import { findWinner } from '../../../../src/features/tictactoe/functions/find-wi
 
 type TestTuple = {game: GameType, expected: PlayerEnum};
 
-describe('feature/tictactoe/function/find-winner', () => {
+describe('feature/tictactoe/functions/find-winner', () => {
   // Arrange
   const cases: TestTuple[] = [
     {

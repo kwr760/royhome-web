@@ -11,11 +11,6 @@ enum PlayerStateEnum {
   Winner = 'WINNER',
   Loser = 'LOSER',
 }
-enum GameTypeEnum {
-  Pvp = 'pvp',
-  Pvc = 'pvc',
-  Remote = 'remote',
-}
 enum PlayerTypeEnum {
   Human = 'human',
   Computer = 'computer',
@@ -33,4 +28,4 @@ enum ActionEnum {
   UpdatePlayer = 'updatePlayer',
 }
 
-export { PlayerStateEnum, GameStateEnum, ActionEnum, GameTypeEnum, PlayerTypeEnum, PlayerEnum };
+export { PlayerStateEnum, GameStateEnum, ActionEnum, PlayerTypeEnum, PlayerEnum };

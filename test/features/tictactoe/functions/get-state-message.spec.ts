@@ -2,6 +2,7 @@ import {
   GameStateEnum,
   PlayerEnum,
   PlayerStateEnum,
+  PlayerTypeEnum,
 } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import {
   initialPlayerOne,
@@ -46,6 +47,29 @@ describe('feature/tictactoe/functions/get-state-message', () => {
         turn: PlayerEnum.Neither,
       },
       expected: 'undefined take your turn',
+    },
+    {
+      state: {
+        ...initialTicTacToeState,
+        gameState: GameStateEnum.Active,
+        playerOne: {
+          ...initialPlayerOne,
+          type: PlayerTypeEnum.Computer,
+        },
+      },
+      expected: 'Player #1 is thinking',
+    },
+    {
+      state: {
+        ...initialTicTacToeState,
+        gameState: GameStateEnum.Active,
+        turn: PlayerEnum.Two,
+        playerTwo: {
+          ...initialPlayerTwo,
+          type: PlayerTypeEnum.Computer,
+        },
+      },
+      expected: 'Player #2 is thinking',
     },
     {
       state: {

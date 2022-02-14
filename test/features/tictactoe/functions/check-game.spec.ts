@@ -9,7 +9,7 @@ jest
   .mock('../../../../src/features/tictactoe/functions/find-winner')
   .mock('../../../../src/features/tictactoe/functions/is-game-over');
 
-describe('feature/tictactoe/function/check-game', () => {
+describe('feature/tictactoe/functions/check-game', () => {
   it('should determine a win', () => {
     // Arrange
     const game: GameType = initialBoard;

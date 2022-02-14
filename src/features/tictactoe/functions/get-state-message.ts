@@ -1,4 +1,4 @@
-import { GameStateEnum } from '../contracts/tictactoe.enum';
+import { GameStateEnum, PlayerTypeEnum } from '../contracts/tictactoe.enum';
 import { TicTacToeStateType } from '../contracts/tictactoe.models';
 import { getActivePlayer } from './get-active-player';
 import { getWinner } from './get-winner';
@@ -13,7 +13,11 @@ const getStateMessage = (state: TicTacToeStateType): string => {
     case GameStateEnum.Active:
       {
         const player = getActivePlayer(state);
-        stateMessage = `${player?.name} take your turn`;
+        if (player?.type === PlayerTypeEnum.Computer) {
+          stateMessage = `${player.name} is thinking`;
+        } else {
+          stateMessage = `${player?.name} take your turn`;
+        }
       }
       break;
     case GameStateEnum.Win:

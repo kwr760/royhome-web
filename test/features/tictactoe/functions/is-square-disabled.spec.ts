@@ -7,7 +7,7 @@ type TestTuple = {
   expected: boolean,
 };
 
-describe('feature/tictactoe/function/is-game-over', () => {
+describe('feature/tictactoe/functions/is-game-over', () => {
   // Arrange
   const cases = [
     {

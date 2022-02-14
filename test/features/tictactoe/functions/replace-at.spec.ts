@@ -7,7 +7,7 @@ type TestTuple = {
   expected: string,
 };
 
-describe('feature/tictactoe/function/replace-at', () => {
+describe('feature/tictactoe/functions/replace-at', () => {
   // Arrange
   const cases = [
     {
