@@ -1,10 +1,9 @@
-import { GameStateEnum, GameTypeEnum, PlayerEnum, PlayerStateEnum, PlayerTypeEnum } from './tictactoe.enum';
+import { GameStateEnum, PlayerEnum, PlayerStateEnum, PlayerTypeEnum } from './tictactoe.enum';
 import { TicTacToeStateType } from './tictactoe.models';
 
 const initialBoard = '---------';
 const initialGameState = GameStateEnum.Ready;
 const initialTurn = PlayerEnum.One;
-const initialType = GameTypeEnum.Pvp;
 const initialPlayerOne = {
   name: 'Player #1',
   playerState: PlayerStateEnum.Active,
@@ -20,12 +19,11 @@ const initialPlayerTwo = {
 const initialTicTacToeState: TicTacToeStateType = {
   board: initialBoard,
   gameState: initialGameState,
-  type: initialType,
   turn: initialTurn,
   playerOne: initialPlayerOne,
   playerTwo: initialPlayerTwo,
 };
 
 export {
-  initialBoard, initialTurn, initialType, initialGameState, initialTicTacToeState, initialPlayerOne, initialPlayerTwo,
+  initialBoard, initialTurn, initialGameState, initialTicTacToeState, initialPlayerOne, initialPlayerTwo,
 };

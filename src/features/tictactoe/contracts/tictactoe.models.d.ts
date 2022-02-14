@@ -1,4 +1,4 @@
-import { GameStateEnum, GameTypeEnum, PlayerEnum, PlayerStateEnum, PlayerTypeEnum } from './tictactoe.enum';
+import { GameStateEnum, PlayerEnum, PlayerStateEnum, PlayerTypeEnum } from './tictactoe.enum';
 
 type Board = string;
 interface Player {
@@ -11,7 +11,6 @@ interface TicTacToeStateType {
   board: Board,
   gameState: GameStateEnum,
   turn: PlayerEnum,
-  type: GameTypeEnum,
   playerOne: Player,
   playerTwo: Player,
 }

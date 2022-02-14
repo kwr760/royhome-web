@@ -5,7 +5,7 @@ type TestTuple = {
   gameState: GameStateEnum,
   expected: boolean,
 };
-describe('feature/tictactoe/function/is-game-active', () => {
+describe('feature/tictactoe/functions/is-game-active', () => {
   // Arrange
   const cases = [
     {

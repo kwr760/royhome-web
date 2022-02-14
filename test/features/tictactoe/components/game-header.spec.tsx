@@ -18,8 +18,6 @@ import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts
 import { themeLight } from '../../../../src/theme-light';
 import { ticTacToeReducer } from '../../../../src/features/tictactoe/context/context.reducer';
 
-jest.mock('react-icons/fa');
-
 function createMatchMedia(width: number) {
   return (query: string): MediaQueryList => ({
     matches: mediaQuery.match(query, { width }),

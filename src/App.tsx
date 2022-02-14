@@ -36,7 +36,8 @@ const AppComponent: FunctionComponent<AppProps> = ({classes}) => {
   const loading = useSelector(isLoading);
 
   return (
-    <React.StrictMode>
+    <>
+      {/*<React.StrictMode>*/}
       { loading ? <Loading /> : null }
       <div id="app" className={classes.app}>
         <a href="#main"><div className="sr-only">Skip to main</div></a>
@@ -54,7 +55,7 @@ const AppComponent: FunctionComponent<AppProps> = ({classes}) => {
         <Footer />
         <CookieBanner />
       </div>
-    </React.StrictMode>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
 import { GameStateEnum, PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { initialBoard } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { GameType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
-import { checkGame } from '../../../../src/features/tictactoe/functions/check-game';
+import { evaluateGame } from '../../../../src/features/tictactoe/functions/evaluate-game';
 import { findWinner } from '../../../../src/features/tictactoe/functions/find-winner';
 import { isGameOver } from '../../../../src/features/tictactoe/functions/is-game-over';
 
@@ -9,7 +9,7 @@ jest
   .mock('../../../../src/features/tictactoe/functions/find-winner')
   .mock('../../../../src/features/tictactoe/functions/is-game-over');
 
-describe('feature/tictactoe/function/check-game', () => {
+describe('feature/tictactoe/functions/check-game', () => {
   it('should determine a win', () => {
     // Arrange
     const game: GameType = initialBoard;
@@ -20,7 +20,7 @@ describe('feature/tictactoe/function/check-game', () => {
     };
 
     // Act
-    const winner = checkGame(game);
+    const winner = evaluateGame(game);
 
     // Assert
     expect(winner).toEqual(expected);
@@ -35,7 +35,7 @@ describe('feature/tictactoe/function/check-game', () => {
     };
 
     // Act
-    const winner = checkGame(game);
+    const winner = evaluateGame(game);
 
     // Assert
     expect(winner).toEqual(expected);
@@ -50,7 +50,7 @@ describe('feature/tictactoe/function/check-game', () => {
     };
 
     // Act
-    const winner = checkGame(game);
+    const winner = evaluateGame(game);
 
     // Assert
     expect(winner).toEqual(expected);
