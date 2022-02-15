@@ -1,4 +1,4 @@
-import { wins } from '../contracts/tictactoe.constant';
+import { orderOne, orderThree, orderTwo, wins } from '../contracts/tictactoe.constant';
 import { PlayerEnum } from '../contracts/tictactoe.enum';
 import { Board } from '../contracts/tictactoe.models';
 import { NextMove } from '../contracts/tictacttoe.functions';
@@ -36,6 +36,52 @@ const findPlayer = (positions: Position[], player: PlayerEnum): Position[] => {
   return positions.filter((e) => e.player === player);
 };
 
+/** Terminal */
+class OrderThreeMove extends AbstractAnalyzer {
+  public process(next: NextMove): number {
+    const { board } = next;
+
+    const positions = mapPositions(board, orderThree);
+    const openPositions = findPlayer(positions, PlayerEnum.Neither);
+    const possibleMoves = openPositions.map((e) => e.index);
+
+    const unique = [...new Set(possibleMoves)];
+    const index = getRandomNumber(unique.length);
+    return unique[index];
+  }
+}
+class OrderTwoMove extends AbstractAnalyzer {
+  public process(next: NextMove): number {
+    const { board } = next;
+
+    const positions = mapPositions(board, orderTwo);
+    const openPositions = findPlayer(positions, PlayerEnum.Neither);
+    const possibleMoves = openPositions.map((e) => e.index);
+
+    if (possibleMoves.length) {
+      const unique = [...new Set(possibleMoves)];
+      const index = getRandomNumber(unique.length);
+      return unique[index];
+    }
+    return super.process(next);
+  }
+}
+class OrderOneMove extends AbstractAnalyzer {
+  public process(next: NextMove): number {
+    const { board } = next;
+
+    const positions = mapPositions(board, orderOne);
+    const openPositions = findPlayer(positions, PlayerEnum.Neither);
+    const possibleMoves = openPositions.map((e) => e.index);
+
+    if (possibleMoves.length) {
+      const unique = [...new Set(possibleMoves)];
+      const index = getRandomNumber(unique.length);
+      return unique[index];
+    }
+    return super.process(next);
+  }
+}
 class BlockingMove extends AbstractAnalyzer {
   public process(next: NextMove): number {
     const { board, player } = next;
@@ -85,18 +131,17 @@ class WinningMove extends AbstractAnalyzer {
     return super.process(next);
   }
 }
-class GuessTerminal extends AbstractAnalyzer {
-  public process(next: NextMove): number {
-    const possibleMoves = findPositions({ str: next.board, include: PlayerEnum.Neither });
-    const index = getRandomNumber(possibleMoves.length);
-    return possibleMoves[index];
-  }
-}
 
-const getRandomMove = new GuessTerminal();
+const bestMove = new OrderOneMove();
+const secondBestMove = new OrderTwoMove();
+const thirdBestMove = new OrderThreeMove();
 const blockTheEnemy = new BlockingMove();
 const findTheBestMove = new WinningMove();
-findTheBestMove.setNext(blockTheEnemy).setNext(getRandomMove);
+findTheBestMove
+  .setNext(blockTheEnemy)
+  .setNext(bestMove)
+  .setNext(secondBestMove)
+  .setNext(thirdBestMove);
 
 const evaluateNextMove = (next: NextMove): number=> {
   return findTheBestMove.process(next);

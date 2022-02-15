@@ -103,8 +103,8 @@ describe('feature/tictactoe/functions/evaluate-next-move', () => {
     },
     {
       nextMove: {
-        board: '----X--X-',
-        player: PlayerEnum.Two,
+        board: '----O--O-',
+        player: PlayerEnum.One,
       },
       expected: [1],
     },
@@ -128,6 +128,27 @@ describe('feature/tictactoe/functions/evaluate-next-move', () => {
         player: PlayerEnum.Two,
       },
       expected: [2],
+    },
+    {
+      nextMove: {
+        board: '---------',
+        player: PlayerEnum.Two,
+      },
+      expected: [4],
+    },
+    {
+      nextMove: {
+        board: '----X----',
+        player: PlayerEnum.Two,
+      },
+      expected: [0, 2, 6, 8],
+    },
+    {
+      nextMove: {
+        board: '?-?-?-?-?',
+        player: PlayerEnum.Two,
+      },
+      expected: [1, 3, 5, 7],
     },
   ];
 
