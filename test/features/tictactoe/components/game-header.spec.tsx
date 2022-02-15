@@ -11,10 +11,10 @@ import {
 import {
   initialPlayerOne,
   initialPlayerTwo,
-  initialTicTacToeState,
+  initialState,
 } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
-import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
+import { StateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
 import { themeLight } from '../../../../src/theme-light';
 import { ticTacToeReducer } from '../../../../src/features/tictactoe/context/context.reducer';
 
@@ -28,10 +28,10 @@ function createMatchMedia(width: number) {
 
 describe('features/tictactoe/components/game-header', () => {
   const emptyReducer = jest.fn();
-  const getComponent = (initialState: TicTacToeStateType, reducer: Reducer<unknown, unknown>) => {
+  const getComponent = (testState: StateType, reducer: Reducer<unknown, unknown>) => {
     return (
       <ThemeProvider theme={themeLight}>
-        <TicTacToeProvider state={initialState} reducer={reducer}>
+        <TicTacToeProvider state={testState} reducer={reducer}>
           <GameHeader />
         </TicTacToeProvider>
       </ThemeProvider>
@@ -49,7 +49,7 @@ describe('features/tictactoe/components/game-header', () => {
   it('should render update and cancel of player #1', async () => {
     // Arrange
     const state = {
-      ...initialTicTacToeState,
+      ...initialState,
       turn: PlayerEnum.Two,
     };
 
@@ -67,7 +67,7 @@ describe('features/tictactoe/components/game-header', () => {
   it('should render update and cancel of player #1', async () => {
     // Arrange
     const state = {
-      ...initialTicTacToeState,
+      ...initialState,
     };
 
     // Act
@@ -85,7 +85,7 @@ describe('features/tictactoe/components/game-header', () => {
     // Arrange
     window.matchMedia = createMatchMedia(400) as (q: string) => MediaQueryList;
     const state = {
-      ...initialTicTacToeState,
+      ...initialState,
     };
 
     // Act
@@ -102,7 +102,7 @@ describe('features/tictactoe/components/game-header', () => {
   it('should render as Tie', () => {
     // Arrange
     const state = {
-      ...initialTicTacToeState,
+      ...initialState,
       gameState: GameStateEnum.Tie,
     };
 
@@ -117,7 +117,7 @@ describe('features/tictactoe/components/game-header', () => {
   it('should render One as Win', () => {
     // Arrange
     const state = {
-      ...initialTicTacToeState,
+      ...initialState,
       gameState: GameStateEnum.Win,
       playerOne: {
         ...initialPlayerOne,
@@ -136,7 +136,7 @@ describe('features/tictactoe/components/game-header', () => {
   it('should render Two as Win', () => {
     // Arrange
     const state = {
-      ...initialTicTacToeState,
+      ...initialState,
       gameState: GameStateEnum.Win,
       playerTwo: {
         ...initialPlayerTwo,
@@ -155,7 +155,7 @@ describe('features/tictactoe/components/game-header', () => {
   it('should click start game', () => {
     // Arrange
     const state = {
-      ...initialTicTacToeState,
+      ...initialState,
     };
 
     // Act // Assert
@@ -169,7 +169,7 @@ describe('features/tictactoe/components/game-header', () => {
   it('should click reset game on tie', () => {
     // Arrange
     const state = {
-      ...initialTicTacToeState,
+      ...initialState,
       gameState: GameStateEnum.Tie,
     };
 
@@ -182,7 +182,7 @@ describe('features/tictactoe/components/game-header', () => {
   it('should click reset game on win', () => {
     // Arrange
     const state = {
-      ...initialTicTacToeState,
+      ...initialState,
       gameState: GameStateEnum.Win,
     };
 

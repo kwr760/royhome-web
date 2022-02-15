@@ -5,7 +5,7 @@ import PlayerDialog from '../../../../src/features/tictactoe/components/player-d
 import { PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import {
   initialPlayerOne,
-  initialTicTacToeState,
+  initialState,
 } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
 import { Player } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
@@ -13,7 +13,7 @@ import { themeLight } from '../../../../src/theme-light';
 
 describe('feature/tictactoe/component/player-dialog', () => {
   const state = {
-    ...initialTicTacToeState,
+    ...initialState,
     turn: PlayerEnum.Two,
   };
   const reducer = jest.fn();

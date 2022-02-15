@@ -1,5 +1,5 @@
+import { BoardType } from '../contracts/tictactoe.context';
 import { GameStateEnum, PlayerEnum } from '../contracts/tictactoe.enum';
-import { GameType } from '../contracts/tictactoe.context';
 import { findWinner } from './find-winner';
 import { isGameOver } from './is-game-over';
 
@@ -30,31 +30,31 @@ abstract class AbstractEvaluator<Param, Return> implements IEvaluator<Param, Ret
   }
 }
 
-class WinEvaluator extends AbstractEvaluator<GameType, GameEvaluationReturn> {
-  public evaluate(game: GameType): GameEvaluationReturn {
-    const winner = findWinner(game);
+class WinEvaluator extends AbstractEvaluator<BoardType, GameEvaluationReturn> {
+  public evaluate(board: BoardType): GameEvaluationReturn {
+    const winner = findWinner(board);
     if (winner !== PlayerEnum.Neither) {
       return {
         gameState: GameStateEnum.Win,
         winner,
       };
     }
-    return super.evaluate(game);
+    return super.evaluate(board);
   }
 }
 
-class TieEvaluator extends AbstractEvaluator<GameType, GameEvaluationReturn> {
-  public evaluate(game: GameType): GameEvaluationReturn {
-    if (isGameOver(game)) {
+class TieEvaluator extends AbstractEvaluator<BoardType, GameEvaluationReturn> {
+  public evaluate(board: BoardType): GameEvaluationReturn {
+    if (isGameOver(board)) {
       return {
         gameState: GameStateEnum.Tie,
       };
     }
-    return super.evaluate(game);
+    return super.evaluate(board);
   }
 }
 
-class ActiveTerminal extends AbstractEvaluator<GameType, GameEvaluationReturn> {
+class ActiveTerminal extends AbstractEvaluator<BoardType, GameEvaluationReturn> {
   public evaluate(): GameEvaluationReturn {
     return {
       gameState: GameStateEnum.Active,
@@ -67,8 +67,8 @@ const checkForTie = new TieEvaluator();
 const checkForWin = new WinEvaluator();
 checkForWin.setNext(checkForTie).setNext(returnActive);
 
-const evaluateGame = (game: GameType): GameEvaluationReturn => {
-  return checkForWin.evaluate(game);
+const evaluateGame = (board: BoardType): GameEvaluationReturn => {
+  return checkForWin.evaluate(board);
 };
 
 export { evaluateGame };

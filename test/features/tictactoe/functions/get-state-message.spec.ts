@@ -7,13 +7,13 @@ import {
 import {
   initialPlayerOne,
   initialPlayerTwo,
-  initialTicTacToeState,
+  initialState,
 } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
-import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
+import { StateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
 import { getStateMessage } from '../../../../src/features/tictactoe/functions/get-state-message';
 
 type TestTuple = {
-  state: TicTacToeStateType,
+  state: StateType,
   expected: string,
 };
 describe('feature/tictactoe/functions/get-state-message', () => {
@@ -21,20 +21,20 @@ describe('feature/tictactoe/functions/get-state-message', () => {
   const cases = [
     {
       state: {
-        ...initialTicTacToeState,
+        ...initialState,
       },
       expected: 'The game is ready to be played',
     },
     {
       state: {
-        ...initialTicTacToeState,
+        ...initialState,
         gameState: GameStateEnum.Active,
       },
       expected: 'Player #1 take your turn',
     },
     {
       state: {
-        ...initialTicTacToeState,
+        ...initialState,
         gameState: GameStateEnum.Active,
         turn: PlayerEnum.Two,
       },
@@ -42,7 +42,7 @@ describe('feature/tictactoe/functions/get-state-message', () => {
     },
     {
       state: {
-        ...initialTicTacToeState,
+        ...initialState,
         gameState: GameStateEnum.Active,
         turn: PlayerEnum.Neither,
       },
@@ -50,7 +50,7 @@ describe('feature/tictactoe/functions/get-state-message', () => {
     },
     {
       state: {
-        ...initialTicTacToeState,
+        ...initialState,
         gameState: GameStateEnum.Active,
         playerOne: {
           ...initialPlayerOne,
@@ -61,7 +61,7 @@ describe('feature/tictactoe/functions/get-state-message', () => {
     },
     {
       state: {
-        ...initialTicTacToeState,
+        ...initialState,
         gameState: GameStateEnum.Active,
         turn: PlayerEnum.Two,
         playerTwo: {
@@ -73,7 +73,7 @@ describe('feature/tictactoe/functions/get-state-message', () => {
     },
     {
       state: {
-        ...initialTicTacToeState,
+        ...initialState,
         gameState: GameStateEnum.Win,
         playerOne: {
           ...initialPlayerOne,
@@ -84,7 +84,7 @@ describe('feature/tictactoe/functions/get-state-message', () => {
     },
     {
       state: {
-        ...initialTicTacToeState,
+        ...initialState,
         gameState: GameStateEnum.Win,
         playerTwo: {
           ...initialPlayerTwo,
@@ -95,7 +95,7 @@ describe('feature/tictactoe/functions/get-state-message', () => {
     },
     {
       state: {
-        ...initialTicTacToeState,
+        ...initialState,
         gameState: GameStateEnum.Win,
         turn: PlayerEnum.Neither,
         playerOne: {
@@ -106,7 +106,7 @@ describe('feature/tictactoe/functions/get-state-message', () => {
     },
     {
       state: {
-        ...initialTicTacToeState,
+        ...initialState,
         gameState: GameStateEnum.Tie,
       },
       expected: 'The game is a tie, there was no winner',

@@ -7,7 +7,7 @@ interface Player {
   type: PlayerTypeEnum,
   piece: PlayerEnum,
 }
-interface TicTacToeStateType {
+interface StateType {
   board: Board,
   gameState: GameStateEnum,
   turn: PlayerEnum,
@@ -15,4 +15,4 @@ interface TicTacToeStateType {
   playerTwo: Player,
 }
 
-export type { Player, TicTacToeStateType };
+export type { Player, StateType };

@@ -1,9 +1,9 @@
 import { GameStateEnum, PlayerTypeEnum } from '../contracts/tictactoe.enum';
-import { TicTacToeStateType } from '../contracts/tictactoe.models';
+import { StateType } from '../contracts/tictactoe.models';
 import { getActivePlayer } from './get-active-player';
 import { getWinner } from './get-winner';
 
-const getStateMessage = (state: TicTacToeStateType): string => {
+const getStateMessage = (state: StateType): string => {
   let stateMessage = '';
 
   switch (state.gameState) {

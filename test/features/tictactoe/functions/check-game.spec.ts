@@ -1,6 +1,6 @@
 import { GameStateEnum, PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
-import { initialBoard } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
-import { GameType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
+import { initialState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
+import { BoardType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
 import { evaluateGame } from '../../../../src/features/tictactoe/functions/evaluate-game';
 import { findWinner } from '../../../../src/features/tictactoe/functions/find-winner';
 import { isGameOver } from '../../../../src/features/tictactoe/functions/is-game-over';
@@ -12,7 +12,7 @@ jest
 describe('feature/tictactoe/functions/check-game', () => {
   it('should determine a win', () => {
     // Arrange
-    const game: GameType = initialBoard;
+    const board: BoardType = initialState.board;
     (findWinner as jest.Mock).mockReturnValue(PlayerEnum.One);
     const expected = {
       gameState: GameStateEnum.Win,
@@ -20,14 +20,14 @@ describe('feature/tictactoe/functions/check-game', () => {
     };
 
     // Act
-    const winner = evaluateGame(game);
+    const winner = evaluateGame(board);
 
     // Assert
     expect(winner).toEqual(expected);
   });
   it('should determine a tie', () => {
     // Arrange
-    const game: GameType = initialBoard;
+    const board: BoardType = initialState.board;
     (findWinner as jest.Mock).mockReturnValue(PlayerEnum.Neither);
     (isGameOver as jest.Mock).mockReturnValue(true);
     const expected = {
@@ -35,14 +35,14 @@ describe('feature/tictactoe/functions/check-game', () => {
     };
 
     // Act
-    const winner = evaluateGame(game);
+    const winner = evaluateGame(board);
 
     // Assert
     expect(winner).toEqual(expected);
   });
   it('should determine that we are not done', () => {
     // Arrange
-    const game: GameType = initialBoard;
+    const board: BoardType = initialState.board;
     (findWinner as jest.Mock).mockReturnValue(PlayerEnum.Neither);
     (isGameOver as jest.Mock).mockReturnValue(false);
     const expected = {
@@ -50,7 +50,7 @@ describe('feature/tictactoe/functions/check-game', () => {
     };
 
     // Act
-    const winner = evaluateGame(game);
+    const winner = evaluateGame(board);
 
     // Assert
     expect(winner).toEqual(expected);

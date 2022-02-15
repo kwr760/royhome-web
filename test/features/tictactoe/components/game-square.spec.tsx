@@ -3,17 +3,17 @@ import { ThemeProvider } from '@mui/styles';
 import { fireEvent, render } from '@testing-library/react';
 import GameSquare from '../../../../src/features/tictactoe/components/game-square';
 import { ActionEnum, GameStateEnum, PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
-import { initialTicTacToeState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
+import { initialState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
-import { TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
+import { StateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
 import { themeLight } from '../../../../src/theme-light';
 
 describe('feature/tictactoe/component/game-square', () => {
   const emptyReducer = jest.fn();
-  const getComponent = (initialState: TicTacToeStateType, reducer: Reducer<unknown, unknown>) => {
+  const getComponent = (testState: StateType, reducer: Reducer<unknown, unknown>) => {
     return (
       <ThemeProvider theme={themeLight}>
-        <TicTacToeProvider state={initialState} reducer={reducer}>
+        <TicTacToeProvider state={testState} reducer={reducer}>
           <GameSquare position={5} />
         </TicTacToeProvider>
       </ThemeProvider>
@@ -22,7 +22,7 @@ describe('feature/tictactoe/component/game-square', () => {
   it('should render and click as button', () => {
     // Arrange
     const state = {
-      ...initialTicTacToeState,
+      ...initialState,
       board: '---------',
       turn: PlayerEnum.Two,
       gameState: GameStateEnum.Active,
@@ -45,7 +45,7 @@ describe('feature/tictactoe/component/game-square', () => {
   it('should render - O', () => {
     // Arrange
     const state = {
-      ...initialTicTacToeState,
+      ...initialState,
       board: '-----O---',
       turn: PlayerEnum.Two,
     };
@@ -59,7 +59,7 @@ describe('feature/tictactoe/component/game-square', () => {
   it('should render - X', () => {
     // Arrange
     const state = {
-      ...initialTicTacToeState,
+      ...initialState,
       board: '-----X---',
     };
 
