@@ -1,12 +1,9 @@
 import { BoardType } from '../contracts/tictactoe.context';
 import { GameStateEnum, PlayerEnum } from '../contracts/tictactoe.enum';
+import { GameEvaluationReturn } from '../contracts/tictacttoe.functions';
 import { findWinner } from './find-winner';
 import { isGameOver } from './is-game-over';
 
-interface GameEvaluationReturn {
-  gameState: GameStateEnum;
-  winner?: PlayerEnum;
-}
 interface IEvaluator<Param, Return> {
   setNext(evaluator: IEvaluator<Param, Return>): IEvaluator<Param, Return>;
   evaluate(param?: Param): Return;

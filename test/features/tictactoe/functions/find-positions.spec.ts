@@ -1,12 +1,9 @@
 import { PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { SearchString } from '../../../../src/features/tictactoe/contracts/tictacttoe.functions';
 import { findPositions } from '../../../../src/features/tictactoe/functions/find-positions';
 
-type searchString = {
-  str: string;
-  include: PlayerEnum;
-}
 type TestTuple = {
-  search: searchString,
+  search: SearchString,
   expected: number[],
 };
 
