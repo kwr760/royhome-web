@@ -1,20 +1,18 @@
 import { ReactNode, Reducer } from 'react';
 import { ActionEnum, PlayerEnum } from './tictactoe.enum';
-import { Player, TicTacToeStateType } from './tictactoe.models';
+import { Player, StateType } from './tictactoe.models';
 
-type GameType = string;
-
+type BoardType = string;
 type ProviderType = {
-  state?: TicTacToeStateType,
+  state?: StateType,
   reducer?: Reducer<unknown, unknown>,
   children: ReactNode,
 }
-
-interface TakeTurnPayload {
+type TakeTurnPayload = {
   position: number,
   player: PlayerEnum
 }
-interface UpdatePlayerPayload {
+type UpdatePlayerPayload = {
   position: PlayerEnum,
   player: Player,
 }
@@ -35,7 +33,7 @@ type StartGameAction = {
 type ActionsType = TakeTurnAction | ResetGameAction | StartGameAction | UpdatePlayerAction;
 type DispatchType = (action: ActionsType) => void;
 type ContextType = {
-  state: TicTacToeStateType,
+  state: StateType,
   dispatch: DispatchType,
 };
 
@@ -49,5 +47,5 @@ export type {
   UpdatePlayerAction,
   TakeTurnPayload,
   UpdatePlayerPayload,
-  GameType,
+  BoardType,
 };

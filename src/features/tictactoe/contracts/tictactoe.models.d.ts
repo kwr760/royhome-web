@@ -1,13 +1,13 @@
 import { GameStateEnum, PlayerEnum, PlayerStateEnum, PlayerTypeEnum } from './tictactoe.enum';
 
 type Board = string;
-interface Player {
+type Player = {
   name: string,
   playerState: PlayerStateEnum,
   type: PlayerTypeEnum,
   piece: PlayerEnum,
 }
-interface TicTacToeStateType {
+type StateType = {
   board: Board,
   gameState: GameStateEnum,
   turn: PlayerEnum,
@@ -15,4 +15,4 @@ interface TicTacToeStateType {
   playerTwo: Player,
 }
 
-export type { Player, TicTacToeStateType };
+export type { Board, Player, StateType };

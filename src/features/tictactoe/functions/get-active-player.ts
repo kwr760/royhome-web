@@ -1,6 +1,6 @@
-import { Player, TicTacToeStateType } from '../contracts/tictactoe.models';
+import { Player, StateType } from '../contracts/tictactoe.models';
 
-const getActivePlayer = (state: TicTacToeStateType): Player | undefined => {
+const getActivePlayer = (state: StateType): Player | undefined => {
   const { playerOne, playerTwo, turn } = state;
   switch (turn) {
     case playerOne.piece:

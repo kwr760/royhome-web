@@ -11,7 +11,7 @@ import {
 import {
   initialPlayerOne,
   initialPlayerTwo,
-  initialTicTacToeState,
+  initialState,
 } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { themeLight } from '../../../../src/theme-light';
 import { useTicTacToe } from '../../../../src/features/tictactoe/context/context.provider';
@@ -37,7 +37,7 @@ describe('feature/tictactoe/component/game-board', () => {
   it('should render', () => {
     // Arrange/Act
     const state = {
-      ...initialTicTacToeState,
+      ...initialState,
     };
     (useTicTacToe as jest.Mock).mockReturnValue({
       state,
@@ -52,7 +52,7 @@ describe('feature/tictactoe/component/game-board', () => {
   it('should render after computer one', async () => {
     // Arrange/Act
     const state = {
-      ...initialTicTacToeState,
+      ...initialState,
       gameState: GameStateEnum.Active,
       playerOne: {
         ...initialPlayerOne,
@@ -80,7 +80,7 @@ describe('feature/tictactoe/component/game-board', () => {
   it('should render after computer two', async () => {
     // Arrange/Act
     const state = {
-      ...initialTicTacToeState,
+      ...initialState,
       gameState: GameStateEnum.Active,
       turn: PlayerEnum.Two,
       playerTwo: {

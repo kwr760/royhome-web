@@ -3,11 +3,11 @@ import { Grid } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
 
-import { SkillGroupType } from '../contracts/resume.models';
+import { SkillGroup } from '../contracts/resume.models';
 import { styles } from '../styles/resume-skills.styles';
 
 interface Props {
-  skillGroups: SkillGroupType[];
+  skillGroups: SkillGroup[];
 }
 type SkillsProps = Props & WithStyles<typeof styles>;
 const ResumeSkillsComponent: FunctionComponent<SkillsProps> = ({ skillGroups, classes }) => {

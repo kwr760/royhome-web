@@ -3,7 +3,7 @@ import { ThemeProvider } from '@mui/styles';
 import { render } from '@testing-library/react';
 
 import ResumeExperience from '../../../../src/features/resume/components/resume-experience';
-import { ExperienceType } from '../../../../src/features/resume/contracts/resume.models';
+import { Experience } from '../../../../src/features/resume/contracts/resume.models';
 import { themeLight } from '../../../../src/theme-light';
 
 describe('features/resume/components/resume-experience', () => {
@@ -42,7 +42,7 @@ describe('features/resume/components/resume-experience', () => {
         }, {
           name: 'tech #2',
         }]},
-    }] as ExperienceType[];
+    }] as Experience[];
 
     // Act
     const { getByText } = render(
@@ -67,7 +67,7 @@ describe('features/resume/components/resume-experience', () => {
     // Arrange / Act
     const { getByText } = render(
       <ThemeProvider theme={themeLight}>
-        <ResumeExperience experience={[] as ExperienceType[]}/>
+        <ResumeExperience experience={[] as Experience[]}/>
       </ThemeProvider>,
     );
 

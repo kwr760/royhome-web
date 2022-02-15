@@ -1,7 +1,7 @@
 import { PlayerStateEnum } from '../contracts/tictactoe.enum';
-import { Player, TicTacToeStateType } from '../contracts/tictactoe.models';
+import { Player, StateType } from '../contracts/tictactoe.models';
 
-const getWinner = (state: TicTacToeStateType): Player | undefined => {
+const getWinner = (state: StateType): Player | undefined => {
   const { playerOne, playerTwo } = state;
   switch (PlayerStateEnum.Winner) {
     case playerOne.playerState:

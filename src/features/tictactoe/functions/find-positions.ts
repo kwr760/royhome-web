@@ -1,9 +1,6 @@
-interface searchString {
-  str: string;
-  include: string;
-}
+import { SearchString } from '../contracts/tictacttoe.functions';
 
-const findPositions = (search: searchString): number[] => {
+const findPositions = (search: SearchString): number[] => {
   const positions: number[] = [];
   search.str.split('').forEach((element, index) => {
     if (element === search.include) {

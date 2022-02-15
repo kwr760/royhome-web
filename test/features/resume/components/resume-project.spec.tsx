@@ -3,7 +3,7 @@ import { ThemeProvider } from '@mui/styles';
 import { render } from '@testing-library/react';
 
 import ResumeProject from '../../../../src/features/resume/components/resume-project';
-import { ProjectType } from '../../../../src/features/resume/contracts/resume.models';
+import { Project } from '../../../../src/features/resume/contracts/resume.models';
 import { themeLight } from '../../../../src/theme-light';
 
 describe('features/resume/components/resume-project', () => {
@@ -43,7 +43,7 @@ describe('features/resume/components/resume-project', () => {
     // Arrange / Act
     const { getByText } = render(
       <ThemeProvider theme={themeLight}>
-        <ResumeProject project={[] as ProjectType[]}/>
+        <ResumeProject project={[] as Project[]}/>
       </ThemeProvider>,
     );
 

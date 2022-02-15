@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 import React, { ReactNode } from 'react';
 import { TicTacToeProvider, useTicTacToe } from '../../../../src/features/tictactoe/context/context.provider';
-import { initialTicTacToeState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
+import { initialState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 
 describe('feature/tictactoe/context/context.provider', () => {
   it('should throw exception without provider', () => {
@@ -17,7 +17,7 @@ describe('feature/tictactoe/context/context.provider', () => {
   it('should set context with default state', () => {
     // Arrange
     const expectedState = {
-      ...initialTicTacToeState,
+      ...initialState,
     };
     const wrapper = ({ children }: { children: ReactNode}) => <TicTacToeProvider>{children}</TicTacToeProvider>;
 

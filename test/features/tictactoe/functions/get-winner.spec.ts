@@ -2,13 +2,13 @@ import { PlayerStateEnum } from '../../../../src/features/tictactoe/contracts/ti
 import {
   initialPlayerOne,
   initialPlayerTwo,
-  initialTicTacToeState,
+  initialState,
 } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
-import { Player, TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
+import { Player, StateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
 import { getWinner } from '../../../../src/features/tictactoe/functions/get-winner';
 
 type TestTuple = {
-  state: TicTacToeStateType,
+  state: StateType,
   expected: Player | undefined,
 };
 describe('feature/tictactoe/functions/get-winner', () => {
@@ -16,7 +16,7 @@ describe('feature/tictactoe/functions/get-winner', () => {
   const cases = [
     {
       state: {
-        ...initialTicTacToeState,
+        ...initialState,
         playerOne: {
           ...initialPlayerOne,
           playerState: PlayerStateEnum.Winner,
@@ -29,7 +29,7 @@ describe('feature/tictactoe/functions/get-winner', () => {
     },
     {
       state: {
-        ...initialTicTacToeState,
+        ...initialState,
         playerTwo: {
           ...initialPlayerTwo,
           playerState: PlayerStateEnum.Winner,
@@ -41,7 +41,7 @@ describe('feature/tictactoe/functions/get-winner', () => {
       },
     },
     {
-      state: { ...initialTicTacToeState },
+      state: { ...initialState },
       expected: undefined,
     },
   ];

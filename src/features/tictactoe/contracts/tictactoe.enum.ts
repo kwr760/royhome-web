@@ -1,15 +1,15 @@
 enum GameStateEnum {
-  Ready = 'READY',
-  Active = 'ACTIVE',
-  Win = 'WIN',
-  Tie = 'TIE',
-  Think = 'THINK',
+  Ready = 'ready',
+  Active = 'active',
+  Win = 'win',
+  Tie = 'tie',
+  Think = 'think',
 }
 enum PlayerStateEnum {
-  Active = 'ACTIVE',
-  Wait = 'WAIT',
-  Winner = 'WINNER',
-  Loser = 'LOSER',
+  Active = 'active',
+  Wait = 'wait',
+  Winner = 'winner',
+  Loser = 'loser',
 }
 enum PlayerTypeEnum {
   Human = 'human',

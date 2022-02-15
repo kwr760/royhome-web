@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import { ContextType, ProviderType } from '../contracts/tictactoe.context';
-import { initialTicTacToeState } from '../contracts/tictactoe.initial';
+import { initialState } from '../contracts/tictactoe.initial';
 import { ticTacToeReducer } from './context.reducer';
 
 const TicTacToeContext = createContext<ContextType | undefined>(undefined);
@@ -9,7 +9,7 @@ const TicTacToeProvider = (
   {state: seededState, reducer: seededReducer, children}: ProviderType,
 ): JSX.Element => {
   const startState = seededState || {
-    ...initialTicTacToeState,
+    ...initialState,
   };
   const startReducer = seededReducer || ticTacToeReducer;
   const [state, dispatch] = useReducer(startReducer, startState);

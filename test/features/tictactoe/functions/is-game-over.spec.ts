@@ -1,7 +1,8 @@
+import { BoardType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
 import { isGameOver } from '../../../../src/features/tictactoe/functions/is-game-over';
 
 type TestTuple = {
-  game: string,
+  board: BoardType,
   expected: boolean,
 };
 
@@ -9,22 +10,22 @@ describe('feature/tictactoe/functions/is-game-over', () => {
   // Arrange
   const cases = [
     {
-      game: '---------',
+      board: '---------',
       expected: false,
     },
     {
-      game: '-XOXOXXOX',
+      board: '-XOXOXXOX',
       expected: false,
     },
     {
-      game: 'XXXXXXXXX',
+      board: 'XXXXXXXXX',
       expected: true,
     },
   ];
 
-  cases.forEach(({ game, expected }: TestTuple) => {
-    it(`should determine if game is over - ${game} : ${expected}`, () => {
-      expect(isGameOver(game)).toBe(expected);
+  cases.forEach(({ board, expected }: TestTuple) => {
+    it(`should determine if game is over - ${board} : ${expected}`, () => {
+      expect(isGameOver(board)).toBe(expected);
     });
   });
 });

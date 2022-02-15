@@ -2,13 +2,13 @@ import { PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictact
 import {
   initialPlayerOne,
   initialPlayerTwo,
-  initialTicTacToeState,
+  initialState,
 } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
-import { Player, TicTacToeStateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
+import { Player, StateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
 import { getActivePlayer } from '../../../../src/features/tictactoe/functions/get-active-player';
 
 type TestTuple = {
-  state: TicTacToeStateType,
+  state: StateType,
   expected: Player | undefined,
 };
 describe('feature/tictactoe/functions/get-active-player', () => {
@@ -16,21 +16,21 @@ describe('feature/tictactoe/functions/get-active-player', () => {
   const cases = [
     {
       state: {
-        ...initialTicTacToeState,
+        ...initialState,
         turn: PlayerEnum.One,
       },
       expected: initialPlayerOne,
     },
     {
       state: {
-        ...initialTicTacToeState,
+        ...initialState,
         turn: PlayerEnum.Two,
       },
       expected: initialPlayerTwo,
     },
     {
       state: {
-        ...initialTicTacToeState,
+        ...initialState,
         turn: PlayerEnum.Neither,
       },
       expected: undefined,

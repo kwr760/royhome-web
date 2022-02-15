@@ -3,7 +3,7 @@ import { ThemeProvider } from '@mui/styles';
 import { render } from '@testing-library/react';
 
 import ResumeSkills from '../../../../src/features/resume/components/resume-skills';
-import { SkillGroupType } from '../../../../src/features/resume/contracts/resume.models';
+import { SkillGroup } from '../../../../src/features/resume/contracts/resume.models';
 import { themeLight } from '../../../../src/theme-light';
 
 describe('features/resume/components/resume-skills', () => {
@@ -41,7 +41,7 @@ describe('features/resume/components/resume-skills', () => {
   });
   it('should render without props', () => {
     // Arrange
-    const skills: SkillGroupType[] = [];
+    const skills: SkillGroup[] = [];
 
     // Act
     const { getByText } = render(

@@ -4,11 +4,11 @@ import { Grid, Link } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
 
-import { ProjectType } from '../contracts/resume.models';
+import { Project } from '../contracts/resume.models';
 import { styles } from '../styles/resume-project.styles';
 
 interface Props {
-  project: ProjectType[];
+  project: Project[];
 }
 type ProjectProps = Props & WithStyles<typeof styles>;
 const ResumeProjectComponent: FunctionComponent<ProjectProps> = ({ project, classes }) => {
