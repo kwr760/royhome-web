@@ -3,7 +3,7 @@ import { ThemeProvider } from '@mui/styles';
 import { render } from '@testing-library/react';
 
 import ResumeEducation from '../../../../src/features/resume/components/resume-education';
-import { EducationType } from '../../../../src/features/resume/contracts/resume.models';
+import { Education } from '../../../../src/features/resume/contracts/resume.models';
 import { themeLight } from '../../../../src/theme-light';
 
 describe('features/resume/components/resume-education', () => {
@@ -31,7 +31,7 @@ describe('features/resume/components/resume-education', () => {
     // Arrange / Act
     const { getByText } = render(
       <ThemeProvider theme={themeLight}>
-        <ResumeEducation education={[] as EducationType[]}/>
+        <ResumeEducation education={[] as Education[]}/>
       </ThemeProvider>,
     );
 

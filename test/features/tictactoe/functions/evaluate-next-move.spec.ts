@@ -1,13 +1,13 @@
 import { PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { Board } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
 import { evaluateNextMove } from '../../../../src/features/tictactoe/functions/evaluate-next-move';
 
-type Board = string;
-interface NextMoveType {
+type NextMove = {
   board: Board;
   player: PlayerEnum;
 }
 type TestTuple = {
-  nextMove: NextMoveType,
+  nextMove: NextMove,
   expected: number[],
 };
 

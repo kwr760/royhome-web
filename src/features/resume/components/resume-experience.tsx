@@ -4,11 +4,11 @@ import dateFormat from 'dateformat';
 import { Grid } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
-import { ExperienceType } from '../contracts/resume.models';
+import { Experience } from '../contracts/resume.models';
 import { styles } from '../styles/resume-experience.styles';
 
 interface Props {
-  experience: ExperienceType[];
+  experience: Experience[];
 }
 type ExperienceProps = Props & WithStyles<typeof styles>;
 const ResumeExperienceComponent: FunctionComponent<ExperienceProps> = ({ experience, classes }) => {

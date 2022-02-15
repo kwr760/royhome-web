@@ -1,7 +1,7 @@
 import { PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { findPositions } from '../../../../src/features/tictactoe/functions/find-positions';
 
-interface searchString {
+type searchString = {
   str: string;
   include: PlayerEnum;
 }

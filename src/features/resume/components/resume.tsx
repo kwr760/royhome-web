@@ -10,13 +10,13 @@ import ResumeSummary from './resume-summary';
 import ResumeExperience from './resume-experience';
 import ResumeEducation from './resume-education';
 import ResumeProject from './resume-project';
-import { EducationType, ExperienceType, ProjectType, ResumeType, SkillGroupType } from '../contracts/resume.models';
+import { Education, Experience, Project, Resume, SkillGroup } from '../contracts/resume.models';
 
 interface Props {
-  resume?: ResumeType;
+  resume?: Resume;
 }
 type PageProps = Props & WithStyles<typeof styles>;
-const ResumePageComponent: FunctionComponent<PageProps> = ({ resume = {} as ResumeType, classes}) => {
+const ResumePageComponent: FunctionComponent<PageProps> = ({ resume = {} as Resume, classes}) => {
   const {
     name = '',
     address = '',
@@ -24,10 +24,10 @@ const ResumePageComponent: FunctionComponent<PageProps> = ({ resume = {} as Resu
     email = '',
     phone = '',
     displayPhone = false,
-    skillGroups = [] as SkillGroupType[],
-    experience = [] as ExperienceType[],
-    education = [] as EducationType[],
-    project = [] as ProjectType[],
+    skillGroups = [] as SkillGroup[],
+    experience = [] as Experience[],
+    education = [] as Education[],
+    project = [] as Project[],
   } = resume;
 
   return (

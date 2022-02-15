@@ -1,9 +1,9 @@
-import { ResumeType } from './resume.models';
+import { Resume } from './resume.models';
 
 interface ResumeStateType {
   email: string,
   resumes: {
-    [key: string]: ResumeType,
+    [key: string]: Resume,
   },
   error?: string,
 }

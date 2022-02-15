@@ -2,8 +2,8 @@ import React from 'react';
 import { ThemeProvider } from '@mui/styles';
 import { render } from '@testing-library/react';
 
-import Resume from '../../../../src/features/resume/components/resume';
-import { ResumeType } from '../../../../src/features/resume/contracts/resume.models';
+import ResumePageComponent from '../../../../src/features/resume/components/resume';
+import { Resume } from '../../../../src/features/resume/contracts/resume.models';
 import { themeLight } from '../../../../src/theme-light';
 
 describe('features/resume/components/resume-page', () => {
@@ -15,12 +15,12 @@ describe('features/resume/components/resume-page', () => {
       displayPhone: false,
       address: 'address',
       name: 'name',
-    } as ResumeType;
+    } as Resume;
 
     // Act
     const { getByText } = render(
       <ThemeProvider theme={themeLight}>
-        <Resume resume={resume} />
+        <ResumePageComponent resume={resume} />
       </ThemeProvider>,
     );
 
@@ -39,7 +39,7 @@ describe('features/resume/components/resume-page', () => {
     // Act
     const { getByText } = render(
       <ThemeProvider theme={themeLight}>
-        <Resume resume={resume}/>
+        <ResumePageComponent resume={resume}/>
       </ThemeProvider>,
     );
 

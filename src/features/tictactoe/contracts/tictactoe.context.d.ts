@@ -3,18 +3,16 @@ import { ActionEnum, PlayerEnum } from './tictactoe.enum';
 import { Player, StateType } from './tictactoe.models';
 
 type BoardType = string;
-
 type ProviderType = {
   state?: StateType,
   reducer?: Reducer<unknown, unknown>,
   children: ReactNode,
 }
-
-interface TakeTurnPayload {
+type TakeTurnPayload = {
   position: number,
   player: PlayerEnum
 }
-interface UpdatePlayerPayload {
+type UpdatePlayerPayload = {
   position: PlayerEnum,
   player: Player,
 }

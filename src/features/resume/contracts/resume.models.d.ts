@@ -1,52 +1,46 @@
-interface SkillType {
+type Skill = {
   name: string;
 }
-
-interface SkillGroupType {
+type SkillGroup = {
   name: string;
-  skills: SkillType[];
+  skills: Skill[];
 }
-
-interface ExperienceItemType {
+type ExperienceItem = {
   id: string;
   name: string;
 }
-
-interface ExperienceType {
+type Experience = {
   title: string;
   company: string;
   startDate: string;
   endDate: string;
-  description: ExperienceItemType[];
-  bullets: ExperienceItemType[];
-  tech: SkillGroupType;
+  description: ExperienceItem[];
+  bullets: ExperienceItem[];
+  tech: SkillGroup;
 }
-
-interface EducationType {
+type Education = {
   degree: string;
   school: string;
   graduation: string;
 }
-
-interface ProjectType {
+type Project = {
   name: string;
   url: string;
   description: string;
   startDate: string;
   endDate: string;
 }
-
-interface ResumeType {
+type Resume = {
   name: string;
   address: string;
   email: string;
   phone: string;
   displayPhone: boolean;
   summary: string;
-  skillGroups: SkillGroupType[];
-  experience: ExperienceType[];
-  education: EducationType[];
-  project: ProjectType[];
+  skillGroups: SkillGroup[];
+  experience: Experience[];
+  education: Education[];
+  project: Project[];
 }
 
-export type { SkillGroupType, ExperienceType, EducationType, ProjectType, ResumeType };
+export type { SkillGroup, Experience, Education, Project, Resume };

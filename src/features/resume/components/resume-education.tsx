@@ -3,11 +3,11 @@ import dateFormat from 'dateformat';
 import { Grid } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
-import { EducationType } from '../contracts/resume.models';
+import { Education } from '../contracts/resume.models';
 import { styles } from '../styles/resume-education.styles';
 
 interface Props {
-  education: EducationType[];
+  education: Education[];
 }
 type EducationProps = Props & WithStyles<typeof styles>;
 const ResumeEducationComponent: FunctionComponent<EducationProps> = ({ education, classes }) => {
