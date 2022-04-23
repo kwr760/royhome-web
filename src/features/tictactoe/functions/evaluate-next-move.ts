@@ -1,7 +1,7 @@
 import { orderOne, orderThree, orderTwo, wins } from '../contracts/tictactoe.constant';
 import { PlayerEnum } from '../contracts/tictactoe.enum';
 import { Board } from '../contracts/tictactoe.models';
-import { NextMove } from '../contracts/tictacttoe.functions';
+import { NextMove } from '../contracts/tictactoe.functions';
 import { getRandomNumber } from './get-random-number';
 
 interface IAnalyzer {

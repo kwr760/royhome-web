@@ -1,4 +1,4 @@
-import { SearchString } from '../contracts/tictacttoe.functions';
+import { SearchString } from '../contracts/tictactoe.functions';
 
 const findPositions = (search: SearchString): number[] => {
   const positions: number[] = [];

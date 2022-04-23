@@ -4,6 +4,7 @@ import { initialState } from '../contracts/tictactoe.initial';
 import { StateType } from '../contracts/tictactoe.models';
 import { evaluateGame } from '../functions/evaluate-game';
 import { replaceAt } from '../functions/replace-at';
+import { connectStomp } from './context.stomp';
 
 const ticTacToeReducer = (state: StateType, action: ActionsType): StateType => {
   switch (action.type) {
@@ -49,6 +50,25 @@ const ticTacToeReducer = (state: StateType, action: ActionsType): StateType => {
       } : {
         ...state,
         playerTwo: { ...player },
+      };
+    }
+    case ActionEnum.InitializeWebSocket: {
+      let { client } = action.payload;
+      if (client === null) {
+        const { destination, callback } = action.payload;
+        client = connectStomp(destination, callback);
+      }
+
+      return {
+        ...state,
+        client,
+      };
+    }
+    case ActionEnum.Remote: {
+      const { message } = action.payload;
+      return {
+        ...state,
+        message,
       };
     }
   }

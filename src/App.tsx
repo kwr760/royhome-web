@@ -13,7 +13,7 @@ import CookieBanner from './components/cookie-banner';
 import Loading from './components/loading';
 import ProtectRoute from './components/protect-route';
 import Resume from './features/resume/components/resume-page';
-import { isLoading  } from './store/session/session.selector';
+import { getSessionId, isLoading } from './store/session/session.selector';
 
 const AboutPage = /* #__LOADABLE__ */ () =>
   import(/* webpackPrefetch: true */ './components/about');
@@ -34,6 +34,7 @@ const TicTacToeLoadable = loadable(TicTacToePage, { ssr: true });
 type AppProps = WithStyles<typeof styles>;
 const AppComponent: FunctionComponent<AppProps> = ({classes}) => {
   const loading = useSelector(isLoading);
+  const sessionId = useSelector(getSessionId);
 
   return (
     <>
@@ -48,7 +49,9 @@ const AppComponent: FunctionComponent<AppProps> = ({classes}) => {
             <Route path="about" element={<AboutLoadable />} />
             <Route path="author" element={<AuthorLoadable />} />
             <Route path="privacy" element={<PrivacyLoadable />} />
-            <Route path="tictactoe" element={<ProtectRoute><TicTacToeLoadable /></ProtectRoute>} />
+            <Route path="tictactoe" element={<ProtectRoute>
+              <TicTacToeLoadable sessionId={sessionId} />
+            </ProtectRoute>} />
             <Route path="profile" element={<ProtectRoute><ProfileLoadable /></ProtectRoute>} />
           </Routes>
         </Container>

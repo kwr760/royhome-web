@@ -9,9 +9,11 @@ import { Player } from '../contracts/tictactoe.models';
 import { getStateMessage } from '../functions/get-state-message';
 import { styles } from '../styles/game-header.styles';
 import PlayerDialog from './player-dialog';
+import RemoteDialog from './remote-dialog';
 
 type GameHeaderProps = WithStyles<typeof styles>;
 const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) => {
+  const [openRemote, setOpenRemote] = React.useState(false);
   const [openPlayerOne, setOpenPlayerOne] = React.useState(false);
   const [openPlayerTwo, setOpenPlayerTwo] = React.useState(false);
   const isMobile = useMediaQuery(useTheme().breakpoints.down('sm'));
@@ -28,6 +30,9 @@ const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) =>
   };
   const clickPlayerTwo = () => {
     setOpenPlayerTwo(true);
+  };
+  const clickRemote = () => {
+    setOpenRemote(true);
   };
   const clickGameAction = () => {
     switch (state.gameState) {
@@ -66,6 +71,15 @@ const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) =>
             openDialog={openPlayerOne}
             setOpenDialog={setOpenPlayerOne}
             handleSubmit={(player) => { handleSubmit(PlayerEnum.One, player); }}
+          />
+        </Grid>
+        <Grid item>
+          <Button className={classes.button} onClick={clickRemote}>
+            <Typography>Remote Button</Typography>
+          </Button>
+          <RemoteDialog
+            openDialog={openRemote}
+            setOpenDialog={setOpenRemote}
           />
         </Grid>
         <Grid item>

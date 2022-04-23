@@ -1,6 +1,8 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 import React, { ReactNode } from 'react';
 import {
+  initWebSocket,
+  remote,
   resetGame,
   startGame,
   takeTurn,
@@ -15,6 +17,8 @@ import {
   initialState,
 } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { StateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
+
+jest.mock('../../../../src/features/tictactoe/context/context.stomp.ts');
 
 describe('feature/tictactoe/context/context.reducer', () => {
   it('should call takeTurn as One', () => {
@@ -186,6 +190,54 @@ describe('feature/tictactoe/context/context.reducer', () => {
     act(() => {
       const { dispatch } = result.current;
       dispatch( updatePlayer({ position: PlayerEnum.Two, player: newPlayer }));
+    });
+
+    // Assert
+    const { state } = result.current;
+    expect(state).toEqual(expectedState);
+  });
+  it('should call initWebSocket', () => {
+    // Arrange
+    const callback = jest.fn();
+    const destination = 'game/session-id';
+    const testState = {
+      ...initialState,
+    } as StateType;
+    const expectedState = {
+      ...initialState,
+      client: undefined,
+    };
+    const wrapper = ({ children }: { children: ReactNode}) =>
+      <TicTacToeProvider state={testState}>{children}</TicTacToeProvider>;
+    const { result } = renderHook(() => useTicTacToe(), { wrapper });
+
+    act(() => {
+      const { dispatch } = result.current;
+      dispatch( initWebSocket({ client: null, destination, callback } ));
+    });
+
+    // Assert
+    const { state } = result.current;
+    expect(state).toEqual(expectedState);
+    // expect(client).toBeCalledWith(destination);
+  });
+  it('should call remote', () => {
+    // Arrange
+    const message = 'This is a message';
+    const testState = {
+      ...initialState,
+    } as StateType;
+    const expectedState = {
+      ...initialState,
+      message,
+    };
+    const wrapper = ({ children }: { children: ReactNode}) =>
+      <TicTacToeProvider state={testState}>{children}</TicTacToeProvider>;
+    const { result } = renderHook(() => useTicTacToe(), { wrapper });
+
+    act(() => {
+      const { dispatch } = result.current;
+      dispatch( remote({ message }));
     });
 
     // Assert

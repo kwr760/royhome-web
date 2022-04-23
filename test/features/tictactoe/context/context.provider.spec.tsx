@@ -18,8 +18,10 @@ describe('feature/tictactoe/context/context.provider', () => {
     // Arrange
     const expectedState = {
       ...initialState,
+      sessionId: 'session-id',
     };
-    const wrapper = ({ children }: { children: ReactNode}) => <TicTacToeProvider>{children}</TicTacToeProvider>;
+    const wrapper = ({ children }: { children: ReactNode}) =>
+      <TicTacToeProvider sessionId="session-id">{children}</TicTacToeProvider>;
 
     // Act
     const { result } = renderHook(() => useTicTacToe(), { wrapper });

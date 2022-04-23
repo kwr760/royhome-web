@@ -12,6 +12,11 @@ const isLoading = createSelector(
   (session): boolean => session.isLoading || false,
 );
 
+const getSessionId = createSelector(
+  (state: State) => state.session,
+  (session): string => session.sessionId || '',
+);
+
 const getDarkMode = createSelector(
   (state: State) => state.session,
   (session): string => session.darkMode || DarkModes.CLEAR_MODE,
@@ -22,4 +27,4 @@ const getUser = createSelector(
   (session) => session.user || {},
 );
 
-export { getDarkMode, getUser, isAuthenticated, isLoading };
+export { getDarkMode, getUser, isAuthenticated, isLoading, getSessionId };

@@ -1,5 +1,5 @@
 import { PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
-import { NextMove } from '../../../../src/features/tictactoe/contracts/tictacttoe.functions';
+import { NextMove } from '../../../../src/features/tictactoe/contracts/tictactoe.functions';
 import { evaluateNextMove } from '../../../../src/features/tictactoe/functions/evaluate-next-move';
 
 type TestTuple = {

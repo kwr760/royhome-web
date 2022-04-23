@@ -25,6 +25,9 @@ function createMatchMedia(width: number) {
     removeListener: () => {},
   }) as unknown as MediaQueryList;
 }
+jest.mock( '../../../../src/features/tictactoe/components/remote-dialog',
+  () => jest.fn(() => <div>Remote Dialog</div>),
+);
 
 describe('features/tictactoe/components/game-header', () => {
   const emptyReducer = jest.fn();
@@ -57,6 +60,7 @@ describe('features/tictactoe/components/game-header', () => {
     const { getByText } = render(getComponent(state, emptyReducer));
     fireEvent.click(getByText(/Player #1/));
     fireEvent.click(getByText(/Cancel/));
+    fireEvent.click(getByText(/Remote Button/));
     await waitForElementToBeRemoved(getByText(/Cancel/));
 
     // Assert

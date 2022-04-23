@@ -1,15 +1,21 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import { ContextType, ProviderType } from '../contracts/tictactoe.context';
 import { initialState } from '../contracts/tictactoe.initial';
+import { StateType } from '../contracts/tictactoe.models';
 import { ticTacToeReducer } from './context.reducer';
 
 const TicTacToeContext = createContext<ContextType | undefined>(undefined);
 
-const TicTacToeProvider = (
-  {state: seededState, reducer: seededReducer, children}: ProviderType,
+const TicTacToeProvider = ({
+  sessionId,
+  state: seededState,
+  reducer: seededReducer,
+  children,
+}: ProviderType,
 ): JSX.Element => {
-  const startState = seededState || {
+  const startState: StateType = seededState || {
     ...initialState,
+    sessionId,
   };
   const startReducer = seededReducer || ticTacToeReducer;
   const [state, dispatch] = useReducer(startReducer, startState);

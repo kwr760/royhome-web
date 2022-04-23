@@ -1,5 +1,5 @@
 import { PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
-import { SearchString } from '../../../../src/features/tictactoe/contracts/tictacttoe.functions';
+import { SearchString } from '../../../../src/features/tictactoe/contracts/tictactoe.functions';
 import { findPositions } from '../../../../src/features/tictactoe/functions/find-positions';
 
 type TestTuple = {
