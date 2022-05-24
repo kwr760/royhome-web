@@ -1,9 +1,11 @@
+import { Client } from '@stomp/stompjs';
 import { ReactNode, Reducer } from 'react';
 import { ActionEnum, PlayerEnum } from './tictactoe.enum';
 import { Player, StateType } from './tictactoe.models';
 
 type BoardType = string;
 type ProviderType = {
+  sessionId?: string,
   state?: StateType,
   reducer?: Reducer<unknown, unknown>,
   children: ReactNode,
@@ -15,6 +17,14 @@ type TakeTurnPayload = {
 type UpdatePlayerPayload = {
   position: PlayerEnum,
   player: Player,
+}
+type MessagePayload = {
+  message: string,
+}
+type InitWebSocketPayload = {
+  client: Client | null,
+  destination: string,
+  callback: (msg: { body: string; }) => void,
 }
 type TakeTurnAction = {
   type: ActionEnum.TakeTurn,
@@ -30,7 +40,16 @@ type ResetGameAction = {
 type StartGameAction = {
   type: ActionEnum.Start,
 };
-type ActionsType = TakeTurnAction | ResetGameAction | StartGameAction | UpdatePlayerAction;
+type RemoteAction = {
+  type: ActionEnum.Remote,
+  payload: MessagePayload,
+};
+type InitWebSocketAction = {
+  type: ActionEnum.InitializeWebSocket,
+  payload: InitWebSocketPayload,
+};
+type ActionsType = TakeTurnAction | ResetGameAction | StartGameAction | UpdatePlayerAction |
+  RemoteAction | InitWebSocketAction;
 type DispatchType = (action: ActionsType) => void;
 type ContextType = {
   state: StateType,
@@ -45,7 +64,12 @@ export type {
   StartGameAction,
   TakeTurnAction,
   UpdatePlayerAction,
+  RemoteAction,
+  InitWebSocketAction,
+  DispatchType,
   TakeTurnPayload,
   UpdatePlayerPayload,
+  MessagePayload,
+  InitWebSocketPayload,
   BoardType,
 };

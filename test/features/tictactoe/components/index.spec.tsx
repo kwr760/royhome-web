@@ -12,7 +12,7 @@ jest.mock( '../../../../src/features/tictactoe/components/game-header',
 describe('features/tictactoe/components', () => {
   it('should render', () => {
     // Arrange/Act
-    const { getByText } = render(<TicTacToe />);
+    const { getByText } = render(<TicTacToe sessionId="session-id" />);
 
     // Assert - fake test - test nothing
     getByText(/Game Board/);

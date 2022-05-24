@@ -35,10 +35,28 @@ app.use(helmet({
   contentSecurityPolicy: {
     useDefaults: true,
     directives: {
-      'script-src': ['\'self\'', '\'unsafe-inline\'', '*.royk.us', '*.royhome.net'],
-      'connect-src': ['\'self\'', '*.royk.us', '*.royhome.net', 'royk.auth0.com', 'localhost:5000'],
-      'frame-src': ['\'self\'', 'royk.auth0.com'],
-      'img-src': ['\'self\'', 'data:', 'avatars.githubusercontent.com'],
+      'script-src': [
+        '\'self\'',
+        '\'unsafe-inline\'',
+        '*.royk.us',
+        '*.royhome.net',
+      ],
+      'connect-src': [
+        '\'self\'',
+        'wss:',
+        '*.royk.us',
+        '*.royhome.net',
+        'royk.auth0.com',
+      ],
+      'frame-src': [
+        '\'self\'',
+        'royk.auth0.com',
+      ],
+      'img-src': [
+        '\'self\'',
+        'data:',
+        'avatars.githubusercontent.com',
+      ],
     },
   },
 }));

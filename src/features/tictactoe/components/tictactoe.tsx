@@ -7,10 +7,13 @@ import { styles } from '../styles/tictactoe.styles';
 import GameHeader from './game-header';
 import GameBoard from './game-board';
 
-type TicTacToeProps = WithStyles<typeof styles>;
-const TicTacToeComponent: FunctionComponent<TicTacToeProps> = ({classes}) => {
+interface Props {
+  sessionId: string;
+}
+type TicTacToeProps = Props & WithStyles<typeof styles>;
+const TicTacToeComponent: FunctionComponent<TicTacToeProps> = ({sessionId, classes}) => {
   return (
-    <TicTacToeProvider>
+    <TicTacToeProvider sessionId={sessionId}>
       <Container className={classes.container}>
         <GameHeader />
         <GameBoard />

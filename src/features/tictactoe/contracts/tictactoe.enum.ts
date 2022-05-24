@@ -26,6 +26,8 @@ enum ActionEnum {
   TakeTurn = 'takeTurn',
   Start = 'start',
   UpdatePlayer = 'updatePlayer',
+  Remote = 'remote',
+  InitializeWebSocket = 'initWebSocket',
 }
 
 export { PlayerStateEnum, GameStateEnum, ActionEnum, PlayerTypeEnum, PlayerEnum };

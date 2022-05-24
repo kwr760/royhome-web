@@ -10,6 +10,8 @@ import { local } from './env/local';
 let mergedConfig;
 
 const release = process.env['NODE_ENV'] || PRODUCTION;
+const isBrowser = typeof(window) != 'undefined';
+
 switch (release) {
   case DEVELOPMENT:
     mergedConfig = merge({}, base, dev);
@@ -25,7 +27,7 @@ switch (release) {
     break;
 }
 
-const env = mergedConfig;
+const env = { ...mergedConfig, isBrowser };
 
 export { env };
 

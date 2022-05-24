@@ -25,6 +25,9 @@ function createMatchMedia(width: number) {
     removeListener: () => {},
   }) as unknown as MediaQueryList;
 }
+jest.mock( '../../../../src/features/tictactoe/components/remote-dialog',
+  () => jest.fn(() => <div>Remote Dialog</div>),
+);
 
 describe('features/tictactoe/components/game-header', () => {
   const emptyReducer = jest.fn();

@@ -14,6 +14,8 @@ const initialPlayerTwo = {
   piece: PlayerEnum.Two,
 };
 const initialState: StateType = {
+  sessionId: '',
+  client: null,
   board: '---------',
   gameState: GameStateEnum.Ready,
   turn: PlayerEnum.One,

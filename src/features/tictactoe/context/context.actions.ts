@@ -3,8 +3,12 @@ import {
   StartGameAction,
   TakeTurnAction,
   UpdatePlayerAction,
+  RemoteAction,
+  InitWebSocketAction,
   TakeTurnPayload,
   UpdatePlayerPayload,
+  MessagePayload,
+  InitWebSocketPayload,
 } from '../contracts/tictactoe.context';
 import { ActionEnum } from '../contracts/tictactoe.enum';
 
@@ -28,5 +32,19 @@ const updatePlayer = ({position, player} : UpdatePlayerPayload): UpdatePlayerAct
     player,
   },
 });
+const remote = ({message} : MessagePayload): RemoteAction => ({
+  type: ActionEnum.Remote,
+  payload: {
+    message,
+  },
+});
+const initWebSocket = ({ client, destination, callback } : InitWebSocketPayload): InitWebSocketAction => ({
+  type: ActionEnum.InitializeWebSocket,
+  payload: {
+    client,
+    destination,
+    callback,
+  },
+});
 
-export { resetGame, startGame, takeTurn, updatePlayer };
+export { resetGame, startGame, takeTurn, updatePlayer, remote, initWebSocket };

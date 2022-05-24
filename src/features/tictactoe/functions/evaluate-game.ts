@@ -1,6 +1,6 @@
 import { BoardType } from '../contracts/tictactoe.context';
 import { GameStateEnum, PlayerEnum } from '../contracts/tictactoe.enum';
-import { GameEvaluationReturn } from '../contracts/tictacttoe.functions';
+import { GameEvaluationReturn } from '../contracts/tictactoe.functions';
 import { findWinner } from './find-winner';
 import { isGameOver } from './is-game-over';
 

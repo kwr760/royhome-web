@@ -24,6 +24,7 @@ const env = (host: string) => ({
     clientId: 'J5Mu7fSFraTWgQBz1WJgikpnuRnKRkaL',
     callbackUrl: `${host}`,
   },
+  websocketUrl: 'wss://api.royk.us/tictactoe',
 });
 
 const base = env(currentHost);
