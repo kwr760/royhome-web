@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
-import React, { FunctionComponent, memo } from 'react';
+import React, { FunctionComponent, memo, useEffect } from 'react';
 import { takeTurn } from '../context/context.actions';
 import { useTicTacToe } from '../context/context.provider';
 import { GameStateEnum, PlayerEnum, PlayerTypeEnum } from '../contracts/tictactoe.enum';
@@ -13,17 +13,19 @@ import { styles } from '../styles/game-board.styles';
 type GameBoardProps = WithStyles<typeof styles>;
 const GameBoardComponent: FunctionComponent<GameBoardProps> = ({ classes }) => {
   const { state, dispatch } = useTicTacToe();
-  const { turn, gameState } = state;
+  const { turn, board, playerOne, playerTwo, gameState } = state;
   const gridClasses = [ classes.grid ];
   if (!isGameActive(gameState)) {
     gridClasses.push(classes.gridDisabled);
   }
 
-  const player = turn === PlayerEnum.One ? state.playerOne : state.playerTwo;
-  if (gameState === GameStateEnum.Active && player.type === PlayerTypeEnum.Computer) {
-    const position = evaluateNextMove({ board: state.board, player: player.piece });
-    dispatch(takeTurn({ position, player: player.piece }));
-  }
+  const player = turn === PlayerEnum.One ? playerOne : playerTwo;
+  useEffect(() => {
+    if (gameState === GameStateEnum.Active && player.type === PlayerTypeEnum.Computer) {
+      const position = evaluateNextMove({ board: board, player: player.piece });
+      dispatch(takeTurn({ position, player: player.piece }));
+    }
+  }, [board, dispatch, gameState, player.piece, player.type, turn]);
 
   return (
     <Grid container className={`${gridClasses.join(' ')}`}>

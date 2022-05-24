@@ -19,24 +19,28 @@ const RemoteDialogComponent: FunctionComponent<RemoteDialogProps> = (
   const { state, dispatch } = useTicTacToe();
   const { client, sessionId, message } = state;
   const [msg, setMsg] = useState('initial message');
+  const [initiated, setInitiated] = useState(false);
   useEffect(() => {
     if (message) {
       setMsg(message);
     }
   }, [message]);
   useEffect(() => {
-    const destination = `/game/${sessionId}`;
-    const callback = (msg: { body: string; }) => {
-      dispatch(remote({
-        message: msg.body,
+    if (!initiated) {
+      const destination = `/game/${sessionId}`;
+      const callback = (msg: { body: string; }) => {
+        dispatch(remote({
+          message: msg.body,
+        }));
+      };
+      dispatch(initWebSocket({
+        client,
+        destination,
+        callback,
       }));
-    };
-    dispatch(initWebSocket({
-      client,
-      destination,
-      callback,
-    }));
-  }, [client, dispatch, sessionId]);
+      setInitiated(true);
+    }
+  }, [client, dispatch, sessionId, initiated, setInitiated]);
   const onClose = () => {
     setOpenDialog(false);
   };

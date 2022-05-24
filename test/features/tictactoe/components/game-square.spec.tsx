@@ -13,12 +13,18 @@ describe('feature/tictactoe/component/game-square', () => {
   const getComponent = (testState: StateType, reducer: Reducer<unknown, unknown>) => {
     return (
       <ThemeProvider theme={themeLight}>
-        <TicTacToeProvider state={testState} reducer={reducer}>
+        <TicTacToeProvider sessionId="" state={testState} reducer={reducer}>
           <GameSquare position={5} />
         </TicTacToeProvider>
       </ThemeProvider>
     );
   };
+  beforeEach(() => {
+    global.console.log = jest.fn();
+  });
+  afterEach(() => {
+    (global.console.log as jest.Mock).mockRestore();
+  });
   it('should render and click as button', () => {
     // Arrange
     const state = {

@@ -60,7 +60,6 @@ describe('features/tictactoe/components/game-header', () => {
     const { getByText } = render(getComponent(state, emptyReducer));
     fireEvent.click(getByText(/Player #1/));
     fireEvent.click(getByText(/Cancel/));
-    fireEvent.click(getByText(/Remote Button/));
     await waitForElementToBeRemoved(getByText(/Cancel/));
 
     // Assert

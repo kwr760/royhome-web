@@ -5,9 +5,7 @@ export const connectStomp = (destination: string, callback: (msg: { body: string
   const client = new Stomp.Client({
     brokerURL: env.websocketUrl,
     reconnectDelay: 3000,
-    // debug: (msg) => {
-    //   console.log(msg);
-    // },
+    // debug: (msg) => { console.debug(msg); },
   });
   client.onConnect = () => {
     client.subscribe(destination, callback);
