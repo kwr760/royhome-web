@@ -9,6 +9,7 @@ import { Player } from '../contracts/tictactoe.models';
 import { getStateMessage } from '../functions/get-state-message';
 import { styles } from '../styles/game-header.styles';
 import PlayerDialog from './player-dialog';
+import PlayerIcon from './player-icon';
 
 type GameHeaderProps = WithStyles<typeof styles>;
 const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) => {
@@ -50,7 +51,7 @@ const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) =>
     }
   };
   const getDisplayName = (player: Player) => {
-    return isMobile ? `${player.piece}` : `${player.name} - (${player.piece})`;
+    return isMobile ? `${player.piece}` : ` ${player.name}`;
   };
 
   const status = getStateMessage(state);
@@ -59,7 +60,7 @@ const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) =>
       <Grid container className={classes.top}>
         <Grid item>
           <Button className={classes.button} onClick={clickPlayerOne}>
-            <Typography>{getDisplayName(playerOne)}</Typography>
+            <Typography><PlayerIcon type={playerOne.type} />{getDisplayName(playerOne)}</Typography>
           </Button>
           <PlayerDialog
             player={playerOne}
@@ -75,7 +76,8 @@ const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) =>
         </Grid>
         <Grid item >
           <Button className={classes.button} onClick={clickPlayerTwo}>
-            <Typography>{getDisplayName(playerTwo)}</Typography>
+
+            <Typography><PlayerIcon type={playerTwo.type} />{getDisplayName(playerTwo)}</Typography>
           </Button>
           <PlayerDialog
             player={playerTwo}

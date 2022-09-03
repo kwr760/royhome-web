@@ -1,9 +1,15 @@
-import React, { FunctionComponent, memo, useState } from 'react';
 import {
-  Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, ToggleButton, ToggleButtonGroup, Typography,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  TextField,
+  ToggleButton,
+  ToggleButtonGroup,
 } from '@mui/material';
-import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
+import { withStyles } from '@mui/styles';
+import React, { FunctionComponent, memo, useState } from 'react';
 import { PlayerTypeEnum } from '../contracts/tictactoe.enum';
 import { Player } from '../contracts/tictactoe.models';
 import { styles } from '../styles/player-dialog.styles';
@@ -21,6 +27,9 @@ const PlayerDialogComponent: FunctionComponent<PlayerDialogProps> = (
   const [ playerName, setPlayerName ] = useState(player.name);
   const [ playerType, setPlayerType ] = useState(PlayerTypeEnum.Human);
   const onClose = () => {
+    setOpenDialog(false);
+  };
+  const onJoin = () => {
     setOpenDialog(false);
   };
   const onSubmit = () => {
@@ -44,7 +53,6 @@ const PlayerDialogComponent: FunctionComponent<PlayerDialogProps> = (
 
   return (
     <Dialog open={openDialog} onClose={onClose} >
-      <DialogTitle>Update {playerName}</DialogTitle>
       <DialogContent>
         <TextField
           id="player-name"
@@ -55,7 +63,6 @@ const PlayerDialogComponent: FunctionComponent<PlayerDialogProps> = (
           defaultValue={playerName}
           fullWidth
         />
-        <Typography>Player Type</Typography>
         <ToggleButtonGroup
           value={playerType}
           exclusive
@@ -70,12 +77,10 @@ const PlayerDialogComponent: FunctionComponent<PlayerDialogProps> = (
           <ToggleButton value={PlayerTypeEnum.Computer} aria-label="centered">
             {PlayerTypeEnum.Computer}
           </ToggleButton>
-          <ToggleButton value={PlayerTypeEnum.Remote} disabled aria-label="right aligned">
-            {PlayerTypeEnum.Remote}
-          </ToggleButton>
         </ToggleButtonGroup>
       </DialogContent>
       <DialogActions>
+        <Button onClick={onJoin}>Join Game</Button>
         <Button onClick={onClose}>Cancel</Button>
         <Button onClick={onSubmit}>Update</Button>
       </DialogActions>

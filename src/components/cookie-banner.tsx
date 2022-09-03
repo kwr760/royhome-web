@@ -29,6 +29,7 @@ const CookieBannerComponent: FunctionComponent<CookieBannerProps> = ({classes}) 
         <Button
           variant="contained"
           onClick={closeDrawer}
+          className={classes.button}
         >
           Proceed
         </Button>

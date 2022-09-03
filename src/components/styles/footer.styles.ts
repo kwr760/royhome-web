@@ -13,16 +13,16 @@ const styles = (theme: Theme): StyleRules =>
       },
     },
     banner: {
-      boxShadow: theme.custom.boxShadow,
-      background: theme.custom.backgroundGradient,
+      boxShadow: theme.color.banner.boxShadow,
+      background: theme.color.banner.background.bottom,
       zIndex: 1,
       padding: '1rem',
       textAlign: 'center',
     },
     icon: {
-      color: theme.palette.secondary.main,
+      color: theme.color.banner.control.base,
       '&:hover, &:focus': {
-        color: emphasize(theme.palette.secondary.main, .5),
+        color: emphasize(theme.color.banner.control.base, .5),
       },
     },
     typography: {
@@ -30,20 +30,16 @@ const styles = (theme: Theme): StyleRules =>
     },
     popover: {
       '& .MuiPaper-root': {
-        backgroundColor: emphasize(theme.palette.primary.dark, .2),
+        backgroundColor: emphasize(theme.color.banner.control.background, .2),
       },
-    },
-    popoverRoot: {
-      backgroundColor: 'red',
-      borderRadius: '16px',
     },
     popoverContainer: {
       display: 'flex',
-      background: emphasize(theme.palette.primary.dark, .2),
-      color: emphasize(theme.palette.secondary.main, .5),
+      background: emphasize(theme.color.banner.control.background, .2),
+      color: emphasize(theme.color.banner.control.base, .5),
     },
     link: {
-      color: theme.palette.secondary.main,
+      color: theme.color.banner.control.base,
     },
     box: {
       display: 'flex',
