@@ -9,19 +9,15 @@ describe('feature/tictactoe/functions/is-game-active', () => {
   // Arrange
   const cases = [
     {
-      gameState: GameStateEnum.Win,
+      gameState: GameStateEnum.Completed,
       expected: false,
     },
     {
-      gameState: GameStateEnum.Tie,
+      gameState: GameStateEnum.Wait,
       expected: false,
     },
     {
-      gameState: GameStateEnum.Think,
-      expected: false,
-    },
-    {
-      gameState: GameStateEnum.Ready,
+      gameState: GameStateEnum.Setup,
       expected: false,
     },
     {

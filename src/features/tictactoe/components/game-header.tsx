@@ -32,8 +32,7 @@ const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) =>
   };
   const clickGameAction = () => {
     switch (state.gameState) {
-      case GameStateEnum.Win:
-      case GameStateEnum.Tie:
+      case GameStateEnum.Completed:
       case GameStateEnum.Active:
         return dispatch(resetGame());
       default:
@@ -42,8 +41,7 @@ const GameHeaderComponent: FunctionComponent<GameHeaderProps> = ({ classes }) =>
   };
   const gameActionButton = () => {
     switch (state.gameState) {
-      case GameStateEnum.Win:
-      case GameStateEnum.Tie:
+      case GameStateEnum.Completed:
       case GameStateEnum.Active:
         return 'Reset';
       default:

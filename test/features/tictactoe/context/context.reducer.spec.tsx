@@ -6,6 +6,7 @@ import {
   resetGame,
   startGame,
   takeTurn,
+  updateGameState,
   updatePlayer,
 } from '../../../../src/features/tictactoe/context/context.actions';
 import { TicTacToeProvider, useTicTacToe } from '../../../../src/features/tictactoe/context/context.provider';
@@ -44,7 +45,7 @@ describe('feature/tictactoe/context/context.reducer', () => {
       ...initialState,
       board: 'O-O-XOXXX',
       turn: PlayerEnum.Two,
-      gameState: GameStateEnum.Win,
+      gameState: GameStateEnum.Completed,
     };
     const wrapper = createWrapper(testState);
     const { result } = renderHook(() => useTicTacToe(), { wrapper });
@@ -69,7 +70,7 @@ describe('feature/tictactoe/context/context.reducer', () => {
     const expectedState = {
       ...initialState,
       board: 'O-OOOOXOX',
-      gameState: GameStateEnum.Win,
+      gameState: GameStateEnum.Completed,
     };
     const wrapper = createWrapper(testState);
     const { result } = renderHook(() => useTicTacToe(), { wrapper });
@@ -89,7 +90,7 @@ describe('feature/tictactoe/context/context.reducer', () => {
       ...initialState,
       board: 'O-OO-OXOX',
       turn: PlayerEnum.Two,
-      gameState: GameStateEnum.Ready,
+      gameState: GameStateEnum.Setup,
     } as StateType;
     const wrapper = createWrapper(testState);
     const { result } = renderHook(() => useTicTacToe(), { wrapper });
@@ -264,5 +265,26 @@ describe('feature/tictactoe/context/context.reducer', () => {
     // Assert
     const { state } = result.current;
     expect(state).toEqual(testState);
+  });
+  it('should call updateGameState', () => {
+    // Arrange
+    const testState = {
+      ...initialState,
+    } as StateType;
+    const expectedState = {
+      ...initialState,
+      gameState: GameStateEnum.Message,
+    };
+    const wrapper = createWrapper(testState);
+    const { result } = renderHook(() => useTicTacToe(), { wrapper });
+
+    act(() => {
+      const { dispatch } = result.current;
+      dispatch( updateGameState(GameStateEnum.Message));
+    });
+
+    // Assert
+    const { state } = result.current;
+    expect(state).toEqual(expectedState);
   });
 });

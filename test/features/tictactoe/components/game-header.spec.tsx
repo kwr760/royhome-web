@@ -76,7 +76,7 @@ describe('features/tictactoe/components/game-header', () => {
     // Act
     const { getByText, getAllByText } = render(getComponent(state, ticTacToeReducer as Reducer<unknown, unknown>));
     fireEvent.click(getByText(/Player #1/));
-    fireEvent.click(getAllByText(/Update/)[1]);
+    fireEvent.click(getAllByText(/Update/)[0]);
     await waitForElementToBeRemoved(getByText(/Cancel/));
 
     // Assert
@@ -94,7 +94,7 @@ describe('features/tictactoe/components/game-header', () => {
     // Act
     const { getByText, getAllByText } = render(getComponent(state, ticTacToeReducer as Reducer<unknown, unknown>));
     fireEvent.click(getByText(/O/));
-    fireEvent.click(getAllByText(/Update/)[1]);
+    fireEvent.click(getAllByText(/Update/)[0]);
     await waitForElementToBeRemoved(getByText(/Cancel/));
 
     // Assert
@@ -106,7 +106,7 @@ describe('features/tictactoe/components/game-header', () => {
     // Arrange
     const state = {
       ...initialState,
-      gameState: GameStateEnum.Tie,
+      gameState: GameStateEnum.Completed,
     };
 
     // Act
@@ -117,11 +117,11 @@ describe('features/tictactoe/components/game-header', () => {
     getByText(/Player #2/);
     getByText(/The game is a tie, there was no winner/);
   });
-  it('should render One as Win', () => {
+  it('should render One as Completed', () => {
     // Arrange
     const state = {
       ...initialState,
-      gameState: GameStateEnum.Win,
+      gameState: GameStateEnum.Completed,
       playerOne: {
         ...initialPlayerOne,
         playerState: PlayerStateEnum.Winner,
@@ -132,15 +132,15 @@ describe('features/tictactoe/components/game-header', () => {
     const { getByText } = render(getComponent(state, emptyReducer));
 
     // Assert
-    getByText(/Player #1 - \(X\)/);
-    getByText(/Player #2 - \(O\)/);
+    // getByText(/Player #1 - \(X\)/);
+    getByText(/Player #2/);
     getByText(/Player #1 won the game/);
   });
-  it('should render Two as Win', () => {
+  it('should render Two as Completed', () => {
     // Arrange
     const state = {
       ...initialState,
-      gameState: GameStateEnum.Win,
+      gameState: GameStateEnum.Completed,
       playerTwo: {
         ...initialPlayerTwo,
         playerState: PlayerStateEnum.Winner,
@@ -151,8 +151,8 @@ describe('features/tictactoe/components/game-header', () => {
     const { getByText } = render(getComponent(state, emptyReducer));
 
     // Assert
-    getByText(/Player #1 - \(X\)/);
-    getByText(/Player #2 - \(O\)/);
+    getByText(/Player #1/);
+    // getByText(/Player #2/);
     getByText(/Player #2 won the game/);
   });
   it('should click start game', () => {
@@ -173,7 +173,7 @@ describe('features/tictactoe/components/game-header', () => {
     // Arrange
     const state = {
       ...initialState,
-      gameState: GameStateEnum.Tie,
+      gameState: GameStateEnum.Completed,
     };
 
     // Act // Assert
@@ -182,11 +182,11 @@ describe('features/tictactoe/components/game-header', () => {
     fireEvent.click(resetButton);
     getByText(/Start/);
   });
-  it('should click reset game on win', () => {
+  it('should click reset game on completed', () => {
     // Arrange
     const state = {
       ...initialState,
-      gameState: GameStateEnum.Win,
+      gameState: GameStateEnum.Completed,
     };
 
     // Act // Assert

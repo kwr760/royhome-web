@@ -11,22 +11,22 @@ describe('feature/tictactoe/functions/is-game-over', () => {
   // Arrange
   const cases = [
     {
-      gameState: GameStateEnum.Win,
+      gameState: GameStateEnum.Completed,
       owner: PlayerEnum.Neither,
       expected: false,
     },
     {
-      gameState: GameStateEnum.Tie,
+      gameState: GameStateEnum.Completed,
       owner: PlayerEnum.Neither,
       expected: false,
     },
     {
-      gameState: GameStateEnum.Think,
+      gameState: GameStateEnum.Wait,
       owner: PlayerEnum.Neither,
       expected: false,
     },
     {
-      gameState: GameStateEnum.Ready,
+      gameState: GameStateEnum.Setup,
       owner: PlayerEnum.Neither,
       expected: false,
     },

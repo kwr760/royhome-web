@@ -44,7 +44,7 @@ describe('feature/tictactoe/component/player-dialog', () => {
     fireEvent.click(getByText(/computer/));
 
     // Assert
-    getByText(/Test Name/);
+    // getByText(/Test Name/);
     expect(openDialog).toBe(true);
   });
   it('should render player #2', () => {
@@ -53,11 +53,12 @@ describe('feature/tictactoe/component/player-dialog', () => {
 
     // Act
     const { getByText, getAllByText } = render(getComponent(player));
+    fireEvent.click(getByText(/Join Game/));
     fireEvent.click(getByText(/Cancel/));
-    fireEvent.click(getAllByText(/Update/)[1]);
+    fireEvent.click(getAllByText(/Update/)[0]);
 
     // Assert
-    getByText(/Player #1/);
+    // getByText(/Player #1/);
     expect(openDialog).toBe(false);
     expect(handleSubmit).toBeCalled();
   });

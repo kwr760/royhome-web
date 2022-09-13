@@ -42,6 +42,13 @@ const ticTacToeReducer = (state: StateType, action: ActionsType): StateType => {
         turn: initialState.turn,
       };
     }
+    case ActionEnum.UpdateGameState: {
+      const { gameState } = action.payload;
+      return {
+        ...state,
+        gameState,
+      };
+    }
     case ActionEnum.UpdatePlayer: {
       const { position, player } = action.payload;
       return position === PlayerEnum.One ? {

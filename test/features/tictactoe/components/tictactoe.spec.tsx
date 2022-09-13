@@ -16,6 +16,5 @@ describe('features/tictactoe/components', () => {
 
     // Assert - fake test - test nothing
     getByText(/Game Board/);
-    getByText(/Game Header/);
   });
 });
