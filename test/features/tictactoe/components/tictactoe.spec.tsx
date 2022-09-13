@@ -5,9 +5,6 @@ import TicTacToe from '../../../../src/features/tictactoe/components/tictactoe';
 jest.mock('../../../../src/features/tictactoe/components/game-board',
   () => jest.fn(() => 'Game Board'),
 );
-jest.mock( '../../../../src/features/tictactoe/components/game-header',
-  () => jest.fn(() => 'Game Header'),
-);
 
 describe('features/tictactoe/components', () => {
   it('should render', () => {
