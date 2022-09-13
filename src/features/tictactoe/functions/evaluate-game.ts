@@ -32,7 +32,7 @@ class WinEvaluator extends AbstractEvaluator<BoardType, GameEvaluationReturn> {
     const winner = findWinner(board);
     if (winner !== PlayerEnum.Neither) {
       return {
-        gameState: GameStateEnum.Win,
+        gameState: GameStateEnum.Completed,
         winner,
       };
     }
@@ -44,7 +44,7 @@ class TieEvaluator extends AbstractEvaluator<BoardType, GameEvaluationReturn> {
   public evaluate(board: BoardType): GameEvaluationReturn {
     if (isGameOver(board)) {
       return {
-        gameState: GameStateEnum.Tie,
+        gameState: GameStateEnum.Completed,
       };
     }
     return super.evaluate(board);

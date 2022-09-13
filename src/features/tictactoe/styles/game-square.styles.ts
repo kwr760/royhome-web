@@ -3,7 +3,7 @@ import { createStyles } from '@mui/styles';
 import type { StyleRules } from '@mui/styles/withStyles';
 
 const styles = (theme: Theme): StyleRules => {
-  const borderColor = theme.palette.primary.dark;
+  const borderColor = theme.color.foreground.base;
   const borderLength = theme.spacing(1);
 
   return createStyles({
@@ -16,7 +16,7 @@ const styles = (theme: Theme): StyleRules => {
       boxShadow: 'none',
     },
     label: {
-      color: theme.palette.primary.dark,
+      color: theme.color.foreground.base,
       position: 'absolute',
       left: '50%',
       top: '50%',

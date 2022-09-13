@@ -17,8 +17,8 @@ const styles = (theme: Theme): StyleRules =>
       marginRight: theme.spacing(3),
     },
     banner: {
-      boxShadow: theme.custom.boxShadow,
-      background: theme.custom.backgroundGradient,
+      boxShadow: theme.color.banner.boxShadow,
+      background: theme.color.banner.background.top,
       zIndex: 1,
     },
     grow: {

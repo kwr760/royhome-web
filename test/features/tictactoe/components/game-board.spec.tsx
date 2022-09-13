@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from '@mui/styles';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import GameBoard from '../../../../src/features/tictactoe/components/game-board';
 import {
   ActionEnum,
@@ -105,5 +105,36 @@ describe('feature/tictactoe/component/game-board', () => {
     const squares = getAllByText(/Game Square/);
     expect(squares.length).toBe(9);
     expect(dispatch).toBeCalledWith(expectedDispatch);
+  });
+  it('should render disabled and click to display setup', async () => {
+    // Arrange/Act
+    const state = {
+      ...initialState,
+      gameState: GameStateEnum.Exit,
+    };
+    (useTicTacToe as jest.Mock).mockReturnValue({
+      state,
+      dispatch,
+    });
+    const { getByText, getAllByText } = await render(getComponent());
+    fireEvent.click(getAllByText('Game Square')[0]);
+
+    // Assert
+    getByText(/Play Game/);
+  });
+  it('should render the message', async () => {
+    // Arrange/Act
+    const state = {
+      ...initialState,
+      gameState: GameStateEnum.Message,
+    };
+    (useTicTacToe as jest.Mock).mockReturnValue({
+      state,
+      dispatch,
+    });
+    const { getByText } = await render(getComponent());
+
+    // Assert
+    getByText(/The game has yet to begin/);
   });
 });

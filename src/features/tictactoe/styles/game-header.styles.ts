@@ -3,7 +3,7 @@ import { createStyles } from '@mui/styles';
 import type { StyleRules } from '@mui/styles/withStyles';
 
 const styles = (theme: Theme): StyleRules => {
-  const borderColor = theme.palette.primary.dark;
+  const borderColor = theme.color.foreground.base;
   const halfBorderLength = theme.spacing(.5);
   const quarterBorderLength = theme.spacing(.25);
 
@@ -11,7 +11,7 @@ const styles = (theme: Theme): StyleRules => {
     grid: {
       border: `${halfBorderLength} solid ${borderColor}`,
       borderRadius: theme.spacing(1),
-      backgroundColor: theme.palette.background.default,
+      backgroundColor: theme.color.background.base,
     },
     button: {
       display: 'flex',

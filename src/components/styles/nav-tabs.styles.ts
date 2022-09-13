@@ -6,19 +6,19 @@ import type { StyleRules } from '@mui/styles/withStyles';
 const styles = (theme: Theme): StyleRules =>
   createStyles({
     tab: {
-      color: theme.palette.secondary.main,
+      color: theme.color.banner.control.base,
       '&:hover, &:focus&:hover': {
-        color: emphasize(theme.palette.secondary.main, 0.4),
-        background: emphasize(theme.palette.primary.dark, 0.2),
+        color: emphasize(theme.color.banner.control.base, 0.2),
+        background: emphasize(theme.color.banner.control.background, 0.2),
         borderRadius: '.25em',
       },
       '&.Mui-selected': {
-        color: emphasize(theme.palette.secondary.main, 0.6),
+        color: emphasize(theme.color.banner.control.base, 0.4),
       },
     },
     tabs: {
       '& .MuiTabs-indicator': {
-        backgroundColor: emphasize(theme.palette.secondary.main, 0.6),
+        backgroundColor: emphasize(theme.color.banner.control.base, 0.4),
       },
     },
   });

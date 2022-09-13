@@ -8,7 +8,6 @@ const styles = (theme: Theme): StyleRules =>
       padding: theme.spacing(3),
     },
     grid: {
-      color: theme.palette.primary.dark,
       alignItems: 'center',
       textAlign: 'center',
       [theme.breakpoints.up('sm')]: {
@@ -16,11 +15,11 @@ const styles = (theme: Theme): StyleRules =>
       },
     },
     picture: {
-      boxShadow: theme.custom.boxShadow,
+      boxShadow: theme.color.banner.boxShadow,
       borderRadius: '50%',
     },
     email: {
-      color: theme.palette.primary.dark,
+      color: theme.color.foreground.base,
       margin: '1px',
       marginLeft: 0,
       [theme.breakpoints.up('sm')]: {
@@ -49,10 +48,9 @@ const styles = (theme: Theme): StyleRules =>
     pre: {
       borderRadius: '0.25rem',
       width: '100%',
-      backgroundColor: theme.palette.background.default,
+      backgroundColor: theme.color.background.base,
       padding: '1rem',
-      boxShadow: theme.custom.boxShadow,
-      color: theme.palette.primary.dark,
+      boxShadow: theme.color.banner.boxShadow,
     },
   });
 

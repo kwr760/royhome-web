@@ -52,13 +52,11 @@ describe('component/page/dark-mode', () => {
     (FiSun as jest.Mock).mockImplementation(() => 'FiSun');
 
     // Act
-    const { getByText, getByRole } = render(getComponent(store));
+    const { getByRole } = render(getComponent(store));
     const actions = store.getActions();
-    await fireEvent.click(getByRole('button'));
+    await fireEvent.click(getByRole('checkbox'));
 
     // Assert
-    getByText(/FiSun/);
-
     expect(actions.length).toEqual(1);
     expect(actions[0].type).toEqual(actionType);
     expect(actions[0].payload).toEqual(expectedPayload);
@@ -89,12 +87,11 @@ describe('component/page/dark-mode', () => {
     (FiMoon as jest.Mock).mockImplementation(() => 'FiMoon');
 
     // Act
-    const { getByText, getByRole } = render(getComponent(store));
+    const { getByRole } = render(getComponent(store));
     const actions = store.getActions();
-    await fireEvent.click(getByRole('button'));
+    await fireEvent.click(getByRole('checkbox'));
 
     // Assert
-    getByText(/FiMoon/);
     expect(actions.length).toEqual(1);
     expect(actions[0].type).toEqual(actionType);
     expect(actions[0].payload).toEqual(expectedPayload);
