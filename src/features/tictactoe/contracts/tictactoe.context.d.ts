@@ -1,13 +1,17 @@
+import type { Action } from '@reduxjs/toolkit';
 import { Client } from '@stomp/stompjs';
 import { ReactNode, Reducer } from 'react';
 import { ActionEnum, GameStateEnum, PlayerEnum } from './tictactoe.enum';
 import { Player, StateType } from './tictactoe.models';
 
 type BoardType = string;
+type MiddleWareFunction = (action: Action | undefined, state: StateType) => StateType;
 type ProviderType = {
   sessionId?: string,
   state?: StateType,
   reducer?: Reducer<unknown, unknown>,
+  beforeware?: MiddleWareFunction[],
+  afterware?: MiddleWareFunction[],
   children: ReactNode,
 }
 type TakeTurnPayload = {
@@ -63,8 +67,10 @@ type ContextType = {
   dispatch: DispatchType,
 };
 
+
 export type {
   ProviderType,
+  MiddleWareFunction,
   ContextType,
   ActionsType,
   ResetGameAction,
