@@ -41,14 +41,14 @@ const GameBoardComponent: FunctionComponent<GameBoardProps> = ({ classes }) => {
         setOpenControl(true);
         break;
       case GameStateEnum.Message:
+      case GameStateEnum.Completed:
         setOpenStatus(true);
         break;
       default: {
-        gridClasses.push(classes.gridDisabled);
         break;
       }
     }
-  }, [automatedTurn, classes.gridDisabled, gameState, gridClasses, player.type]);
+  }, [automatedTurn, gameState, player.type]);
 
   return (
     <>

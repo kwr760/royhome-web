@@ -4,7 +4,8 @@ import { withStyles } from '@mui/styles';
 import React, { FunctionComponent, memo } from 'react';
 import { updateGameState } from '../context/context.actions';
 import { useTicTacToe } from '../context/context.provider';
-import { GameStateEnum } from '../contracts/tictactoe.enum';
+import { GameStateEnum, PlayerStateEnum } from '../contracts/tictactoe.enum';
+import { StateType } from '../contracts/tictactoe.models';
 import { styles } from '../styles/game-status.styles';
 
 interface Props {
@@ -16,6 +17,7 @@ const PlayerStatusComponent: FunctionComponent<PlayerStatusProps> = (
   { openStatus, setOpenStatus, classes },
 ) => {
   const {
+    state,
     dispatch,
   } = useTicTacToe();
   const handleClose = () => {
@@ -26,6 +28,33 @@ const PlayerStatusComponent: FunctionComponent<PlayerStatusProps> = (
     dispatch(updateGameState(GameStateEnum.Setup));
     setOpenStatus(false);
   };
+  const getStatusMessage = (state: StateType) => {
+    const { gameState, playerOne, playerTwo } = state;
+    switch (gameState) {
+      case GameStateEnum.Message:
+        return <span>
+          The game has yet to begin.
+          Press &lsquo;<i><b>Setup</b></i>&rsquo; to play the game or
+          &lsquo;<i><b>Exit</b></i>&rsquo; to switch something else.
+        </span>;
+      case GameStateEnum.Completed: {
+        let winner;
+        if (playerOne.playerState === PlayerStateEnum.Winner) {
+          winner = playerOne;
+        } else if (playerTwo.playerState === PlayerStateEnum.Winner) {
+          winner = playerTwo;
+        }
+        if (winner) {
+          return `${winner.name} is a winner.`;
+        } else {
+          return 'The game ended in a tie.';
+        }
+      }
+      default:
+        return 'Unknown state';
+    }
+  };
+
   return (
     <Dialog
       open={openStatus}
@@ -34,9 +63,7 @@ const PlayerStatusComponent: FunctionComponent<PlayerStatusProps> = (
     >
       <DialogContent>
         <Typography className={classes.message}>
-          The game has yet to begin.
-          Press &lsquo;<i><b>Setup</b></i>&rsquo; to play the game or
-          &lsquo;<i><b>Exit</b></i>&rsquo; to switch something else.
+          {getStatusMessage(state)}
         </Typography>
       </DialogContent>
       <DialogActions className={classes.buttonBar}>
