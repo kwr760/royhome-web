@@ -1,5 +1,3 @@
-/* eslint-disable no-template-curly-in-string */
-
 function isWebTarget(caller) {
   return Boolean(caller && caller.target === 'web');
 }
@@ -43,12 +41,7 @@ module.exports = (api) => {
           'regenerator': true,
         },
       ],
-      [
-        '@babel/plugin-proposal-class-properties',
-        {
-          loose: true,
-        },
-      ],
+      '@babel/plugin-proposal-class-properties',
       [
         'module-resolver',
       ],

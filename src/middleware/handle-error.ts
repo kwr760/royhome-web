@@ -7,4 +7,4 @@ const handleError = (err: Error, _req: Request, res: Response): Response => {
   return res.sendStatus(INTERNAL_SERVER_ERROR);
 };
 
-export default handleError;
+export { handleError };

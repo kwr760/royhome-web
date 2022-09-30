@@ -46,13 +46,11 @@ module.exports = {
     indent: ['error', 2, { 'SwitchCase': 1 }],
     'linebreak-style': ['error', 'unix'],
     quotes: ['warn', 'single'],
-    'no-unused-vars': [
-      'warn',
-      { vars: 'all', args: 'none', ignoreRestSiblings: false },
-    ],
     '@typescript-eslint/no-empty-function': [0],
     'max-len': ['warn', { code: 120, tabWidth: 2 }],
     'no-throw-literal': 0,
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
     'import/extensions': [
       'error',
       'ignorePackages',

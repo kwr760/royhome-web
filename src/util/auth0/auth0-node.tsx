@@ -1,12 +1,12 @@
 import React from 'react';
-import { Auth0Context } from './auth0-context';
-import { Auth0ProviderType } from '../../types/auth0';
+import { Auth0Provider } from '../../contracts/auth0.models';
+import { AuthContext } from './auth0-context';
 import { noop } from '../noop';
 
-const Auth0Provider: React.FC<Auth0ProviderType> = ({
+const AuthProvider: React.FC<Auth0Provider> = ({
   children,
 }) => (
-  <Auth0Context.Provider
+  <AuthContext.Provider
     value={{
       logout: noop,
       login: noop,
@@ -14,7 +14,7 @@ const Auth0Provider: React.FC<Auth0ProviderType> = ({
     }}
   >
     {children}
-  </Auth0Context.Provider>
+  </AuthContext.Provider>
 );
 
-export default Auth0Provider;
+export { AuthProvider };

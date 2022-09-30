@@ -1,59 +1,59 @@
-import React, { FunctionComponent } from 'react';
-import { Route, Switch, RouteComponentProps } from 'react-router-dom';
-import { Container } from '@material-ui/core';
+import React, { FunctionComponent, memo } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Container } from '@mui/material';
+import { withStyles } from '@mui/styles';
+import type { WithStyles } from '@mui/styles';
 import loadable from '@loadable/component';
 
-import NavBar from './components/app-bar';
+import { styles } from './App.styles';
+import Nav from './components/nav';
 import Footer from './components/footer';
 import CookieBanner from './components/cookie-banner';
 import Loading from './components/loading';
-import PrivateRoute from './components/private-route';
-import ResumePage from './resume/components';
-import { isLoading  } from './store/session/session.selector';
-import { useStyles } from './App.styles';
+import ProtectRoute from './components/protect-route';
+import Resume from './features/resume/components/resume-page';
+import { getSessionId, isLoading } from './store/session/session.selector';
 
-const AboutPage = /* #__LOADABLE__ */ () => import(/* webpackPrefetch: true */ './components/about');
-const AuthorPage = /* #__LOADABLE__ */ () => import(/* webpackPrefetch: true */ './components/author');
-const PrivacyPage = /* #__LOADABLE__ */ () => import(/* webpackPrefetch: true */ './components/privacy');
-const ProfilePage = /* #__LOADABLE__ */ () => import(/* webpackPrefetch: true */ './components/profile');
-const TicTacToePage = /* #__LOADABLE__ */ () => import(/* webpackPrefetch: true */ './tictactoe/components');
-const AboutLoadable = loadable(AboutPage, { ssr: true });
-const AuthorLoadable = loadable(AuthorPage, { ssr: true });
-const PrivacyLoadable = loadable(PrivacyPage, { ssr: true });
+const AboutPage = /* #__LOADABLE__ */ () =>
+  import(/* webpackPrefetch: true */ './components/about');
+const AuthorPage = /* #__LOADABLE__ */ () =>
+  import(/* webpackPrefetch: true */ './components/author');
+const PrivacyPage = /* #__LOADABLE__ */ () =>
+  import(/* webpackPrefetch: true */ './components/privacy');
+const ProfilePage = /* #__LOADABLE__ */ () =>
+  import(/* webpackPrefetch: true */ './components/profile');
+const TicTacToePage = /* #__LOADABLE__ */ () =>
+  import(/* webpackPrefetch: true */ './features/tictactoe/components/tictactoe');
+const AboutLoadable = loadable(AboutPage, { ssr: false });
+const AuthorLoadable = loadable(AuthorPage, { ssr: false });
+const PrivacyLoadable = loadable(PrivacyPage, { ssr: false });
 const ProfileLoadable = loadable(ProfilePage, { ssr: true });
 const TicTacToeLoadable = loadable(TicTacToePage, { ssr: true });
 
-/**
- * @return {string}
- */
-const App: FunctionComponent<RouteComponentProps> = () => {
-  const classes = useStyles();
+type AppProps = WithStyles<typeof styles>;
+const AppComponent: FunctionComponent<AppProps> = ({classes}) => {
   const loading = useSelector(isLoading);
+  const sessionId = useSelector(getSessionId);
 
   return (
     <>
+      {/*<React.StrictMode>*/}
       { loading ? <Loading /> : null }
       <div id="app" className={classes.app}>
         <a href="#main"><div className="sr-only">Skip to main</div></a>
-        <NavBar />
+        <Nav />
         <Container id="main" className={classes.paper}>
-          <Switch>
-            <Route
-              path="/"
-              exact
-              component={ResumePage}
-            />
-            <Route path="/about" component={AboutLoadable} />
-            <Route path="/author" component={AuthorLoadable} />
-            <Route path="/privacy" component={PrivacyLoadable} />
-            <PrivateRoute
-              path="/tictactoe"
-              component={TicTacToeLoadable}
-              userRole="engineer"
-            />
-            <PrivateRoute path="/profile" component={ProfileLoadable} />
-          </Switch>
+          <Routes>
+            <Route path="/" element={<Resume />} />
+            <Route path="about" element={<AboutLoadable />} />
+            <Route path="author" element={<AuthorLoadable />} />
+            <Route path="privacy" element={<PrivacyLoadable />} />
+            <Route path="tictactoe" element={<ProtectRoute>
+              <TicTacToeLoadable sessionId={sessionId} />
+            </ProtectRoute>} />
+            <Route path="profile" element={<ProtectRoute><ProfileLoadable /></ProtectRoute>} />
+          </Routes>
         </Container>
         <Footer />
         <CookieBanner />
@@ -62,4 +62,4 @@ const App: FunctionComponent<RouteComponentProps> = () => {
   );
 };
 
-export default App;
+export default memo(withStyles(styles)(AppComponent));

@@ -1,9 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import { UNAUTHORIZED } from 'http-status-codes';
-import { TokenRequest } from '../types/token';
-
-import hasNeededRole from '../util/auth0/has-needed-role';
-import { TOKEN_URL } from '../util/auth0/role.constants';
+import { TokenRequest } from '../contracts/token.models';
+import { hasNeededRole } from '../util/auth0/has-needed-role';
+import { TOKEN_URL } from '../contracts/constants/role.constants';
 
 const checkRole = (neededRole: string) => (req: Request, res: Response, next: NextFunction): Response | void => {
   const { user: token = { [TOKEN_URL]: { role: '' } } } = req as TokenRequest;
@@ -16,4 +15,4 @@ const checkRole = (neededRole: string) => (req: Request, res: Response, next: Ne
   return res.sendStatus(UNAUTHORIZED);
 };
 
-export default checkRole;
+export { checkRole };

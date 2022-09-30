@@ -1,8 +1,8 @@
-import { LogMsgType } from '../../../types/logger';
-import env from '../../../config';
+import { env } from '../../../config/env';
+import { LogMsgType } from '../../../contracts/logger.models';
 
-import getConsole from '../get-console';
-import writeToServer from './write-to-server';
+import { getConsole } from '../get-console';
+import { writeToServer } from './write-to-server';
 
 const log = ({ logType, msg }: LogMsgType): void => {
   const {
@@ -20,4 +20,4 @@ const log = ({ logType, msg }: LogMsgType): void => {
   }
 };
 
-export default log;
+export { log };

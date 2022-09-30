@@ -1,23 +1,16 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SessionStateType } from '../../types/state/session';
-import { UserStateType } from '../../types/state/user';
-import { UpdateSessionType, SaveSessionType } from '../../types/store/session';
-import { DarkModes } from './session.constants';
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { Auth0User } from '../../contracts/auth0.models';
+import { ApiConfigs } from '../../contracts/constants/api.constants';
+import { initialSessionState } from '../../contracts/initial/session.initial';
+import { SaveSessionType, UpdateSessionType } from '../../contracts/store/session.store';
 import { AppThunk } from '../create-store';
 import { callApi } from '../../util/api/call-api';
-import { ApiConfigs } from '../../config/api';
 import logger from '../../util/logger/browser';
-
-const initialState: SessionStateType = {
-  authenticated: false,
-  expiration: 0,
-  isLoading: false,
-  darkMode: DarkModes.CLEAR_MODE,
-} as SessionStateType;
 
 const sessionSlice = createSlice({
   name: 'session',
-  initialState,
+  initialState: initialSessionState,
   reducers: {
     updateAuthentication: (
       state,
@@ -35,9 +28,6 @@ const sessionSlice = createSlice({
     updateLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
-    // updateDarkMode: (state, action: PayloadAction<string>) => {
-    //   state.darkMode = action.payload;
-    // },
     updateSession: (state, action: PayloadAction<UpdateSessionType>) => {
       const user = action.payload.user || state.user;
       Object.assign(state, {
@@ -48,7 +38,7 @@ const sessionSlice = createSlice({
   },
 });
 
-export const updateDarkMode = (darkMode: string): AppThunk => async dispatch => {
+const updateDarkMode = (darkMode: string): AppThunk => async dispatch => {
   const {updateSession} = sessionSlice.actions;
   try {
     const { data } = await callApi(ApiConfigs.SAVE_SESSION, {
@@ -65,10 +55,11 @@ export const updateDarkMode = (darkMode: string): AppThunk => async dispatch => 
     };
     dispatch(updateSession(payload));
   } catch (err) {
-    logger.error(err.toString());
+    const errorMsg = (err as Error).toString();
+    logger.error(errorMsg);
   }
 };
-export const saveSession = (claim: SaveSessionType, user: UserStateType): AppThunk => async dispatch => {
+const saveSession = (claim: SaveSessionType, user: Auth0User): AppThunk => async dispatch => {
   const {updateSession} = sessionSlice.actions;
   try {
     const { data } = await callApi(ApiConfigs.SAVE_SESSION, {
@@ -86,9 +77,12 @@ export const saveSession = (claim: SaveSessionType, user: UserStateType): AppThu
     };
     dispatch(updateSession(payload));
   } catch (err) {
-    logger.error(err.toString());
+    const errorMsg = (err as Error).toString();
+    logger.error(errorMsg);
   }
 };
 
-export const {updateAuthentication, updateLoading, setLoading, clearLoading} = sessionSlice.actions;
-export default sessionSlice.reducer;
+const { updateAuthentication, updateLoading, setLoading, clearLoading } = sessionSlice.actions;
+const sessionReducer = sessionSlice.reducer;
+
+export { sessionReducer, clearLoading, saveSession, setLoading, updateAuthentication, updateDarkMode, updateLoading };
