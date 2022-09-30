@@ -1,12 +1,11 @@
 import axios, { AxiosResponse } from 'axios';
 import { isEmpty } from 'lodash';
-
 import { ERROR_CODE } from '../error-codes';
 import { getParsedUrl } from './get-parsed-url';
 import { getApiUrl } from './get-api-url';
-import { ApiDetailsType, ApiConfigType } from '../../type/api/api';
+import { ApiDetailsType, ApiConfigType } from '../../contracts/api/api';
 
-export const callApi = async (
+const callApi = async (
   api: ApiConfigType,
   details: ApiDetailsType,
 ): Promise<AxiosResponse> => {
@@ -32,3 +31,5 @@ export const callApi = async (
     },
   );
 };
+
+export { callApi };

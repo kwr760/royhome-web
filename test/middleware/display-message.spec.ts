@@ -1,4 +1,4 @@
-import displayMessage from '../../src/middleware/display-message';
+import { displayMessage } from '../../src/middleware/display-message';
 import Logger from '../../src/util/logger/server';
 
 describe('server/middleware/display-message', () => {

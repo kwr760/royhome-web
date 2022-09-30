@@ -1,12 +1,13 @@
-import { createStyles, Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import type { Theme } from '@mui/material';
+import { createStyles } from '@mui/styles';
+import type { StyleRules } from '@mui/styles/withStyles';
 
-export const useStyles = makeStyles((theme: Theme) =>
+export const styles = (theme: Theme): StyleRules =>
   createStyles({
     paper: {
-      color: theme.palette.primary.dark,
-      background: theme.palette.background.paper,
-      boxShadow: theme.custom.boxShadow,
+      color: theme.color.foreground.base,
+      background: theme.color.background.paper,
+      boxShadow: theme.color.banner.boxShadow,
       padding: 0,
       flexGrow: 1,
       overflow: 'auto',
@@ -22,6 +23,6 @@ export const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       height: '100vh',
+      background: theme.color.background.base,
     },
-  }),
-);
+  });

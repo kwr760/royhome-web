@@ -1,5 +1,5 @@
-import formatMessage from '../../../src/util/logger/format-message';
-import LOG_LEVELS from '../../../src/util/logger/logger-levels';
+import { LOG_LEVELS } from '../../../src/contracts/constants/log-levels.constants';
+import { formatMessage } from '../../../src/util/logger/format-message';
 
 describe('util/logger/format-message', () => {
   it('should format a message', () => {

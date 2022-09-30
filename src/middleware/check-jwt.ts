@@ -1,7 +1,7 @@
 import jwt from 'express-jwt';
 import jwtRsa from 'jwks-rsa';
 
-import env from '../config';
+import { env } from '../config/env';
 
 const checkJwt = jwt({
   secret: jwtRsa.expressJwtSecret({
@@ -17,4 +17,4 @@ const checkJwt = jwt({
   algorithms: ['RS256'],
 });
 
-export default checkJwt;
+export { checkJwt };

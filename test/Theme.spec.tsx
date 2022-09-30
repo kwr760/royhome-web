@@ -1,23 +1,20 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { RouteComponentProps } from 'react-router-dom';
+import type { Store } from 'redux';
 import { render } from '@testing-library/react';
-import { Store } from 'redux';
-
-import createStore from '../src/store/create-store';
-import App from '../src/App';
-import { DarkModes } from '../src/store/session/session.constants';
+import { createStore } from '../src/store/create-store';
+import { DarkModes } from '../src/contracts/constants/session.constants';
 import Theme from '../src/Theme';
 
-jest.mock('../src/App');
+jest.mock('../src/App', () => jest.fn(() => <div>App</div>));
 
 describe('src/client/Theme', () => {
-  const getApp = (store: Store, props: RouteComponentProps) => (
+  const getApp = (store: Store, props: JSX.IntrinsicAttributes & { children?: React.ReactNode; }) => (
     <Provider store={store}>
       <Theme {...props} />
     </Provider>
   );
-  const props = {} as unknown as RouteComponentProps;
+  const props = {};
 
   it('renders about page in light mode', () => {
     // Arrange
@@ -27,7 +24,6 @@ describe('src/client/Theme', () => {
       },
     };
     const store = createStore(state);
-    (App as jest.Mock).mockImplementation(() => <div>App</div>);
 
     // Act
     const { getByText } = render(getApp(store, props));
@@ -43,7 +39,6 @@ describe('src/client/Theme', () => {
       },
     };
     const store = createStore(state);
-    (App as jest.Mock).mockImplementation(() => <div>App</div>);
 
     // Act
     const { getByText } = render(getApp(store, props));
