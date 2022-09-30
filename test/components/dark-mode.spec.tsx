@@ -1,17 +1,17 @@
 import { ThemeProvider } from '@mui/styles';
+import { fireEvent, render } from '@testing-library/react';
 import { AxiosResponse } from 'axios';
 import React from 'react';
+import { FiMoon, FiSun } from 'react-icons/fi';
 import { Provider } from 'react-redux';
 import type { Store } from 'redux';
-import { FiSun, FiMoon } from 'react-icons/fi';
-import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import { fireEvent, render } from '@testing-library/react';
+import thunk from 'redux-thunk';
+import DarkMode from '../../src/components/dark-mode';
+import { DarkModes } from '../../src/contracts/constants/session.constants';
 
 import { themeLight } from '../../src/theme-light';
 import { callApi } from '../../src/util/api/call-api';
-import DarkMode from '../../src/components/dark-mode';
-import { DarkModes } from '../../src/contracts/constants/session.constants';
 
 jest.mock('react-icons/fi');
 jest.mock('../../src/util/api/call-api');
@@ -52,13 +52,11 @@ describe('component/page/dark-mode', () => {
     (FiSun as jest.Mock).mockImplementation(() => 'FiSun');
 
     // Act
-    const { getByText, getByRole } = render(getComponent(store));
+    const { getByRole } = render(getComponent(store));
     const actions = store.getActions();
-    await fireEvent.click(getByRole('button'));
+    await fireEvent.click(getByRole('checkbox'));
 
     // Assert
-    getByText(/FiSun/);
-
     expect(actions.length).toEqual(1);
     expect(actions[0].type).toEqual(actionType);
     expect(actions[0].payload).toEqual(expectedPayload);
@@ -89,12 +87,11 @@ describe('component/page/dark-mode', () => {
     (FiMoon as jest.Mock).mockImplementation(() => 'FiMoon');
 
     // Act
-    const { getByText, getByRole } = render(getComponent(store));
+    const { getByRole } = render(getComponent(store));
     const actions = store.getActions();
-    await fireEvent.click(getByRole('button'));
+    await fireEvent.click(getByRole('checkbox'));
 
     // Assert
-    getByText(/FiMoon/);
     expect(actions.length).toEqual(1);
     expect(actions[0].type).toEqual(actionType);
     expect(actions[0].payload).toEqual(expectedPayload);

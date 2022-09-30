@@ -1,6 +1,6 @@
+import { BoardType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
 import { GameStateEnum, PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { initialState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
-import { BoardType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
 import { evaluateGame } from '../../../../src/features/tictactoe/functions/evaluate-game';
 import { findWinner } from '../../../../src/features/tictactoe/functions/find-winner';
 import { isGameOver } from '../../../../src/features/tictactoe/functions/is-game-over';
@@ -10,12 +10,12 @@ jest
   .mock('../../../../src/features/tictactoe/functions/is-game-over');
 
 describe('feature/tictactoe/functions/check-game', () => {
-  it('should determine a win', () => {
+  it('should determine a completed', () => {
     // Arrange
     const board: BoardType = initialState.board;
     (findWinner as jest.Mock).mockReturnValue(PlayerEnum.One);
     const expected = {
-      gameState: GameStateEnum.Win,
+      gameState: GameStateEnum.Completed,
       winner: PlayerEnum.One,
     };
 
@@ -31,7 +31,7 @@ describe('feature/tictactoe/functions/check-game', () => {
     (findWinner as jest.Mock).mockReturnValue(PlayerEnum.Neither);
     (isGameOver as jest.Mock).mockReturnValue(true);
     const expected = {
-      gameState: GameStateEnum.Tie,
+      gameState: GameStateEnum.Completed,
     };
 
     // Act

@@ -1,16 +1,18 @@
-import { emphasize } from '@mui/material';
 import type { Theme } from '@mui/material';
+import { emphasize } from '@mui/material';
 import { createStyles } from '@mui/styles';
 import type { StyleRules } from '@mui/styles/withStyles';
 
 const styles = (theme: Theme): StyleRules =>
   createStyles({
     iconButton: {
-      color: theme.palette.primary.dark,
+      color: theme.color.banner.control.base,
       borderRadius: '.25em',
+      margin: theme.spacing(.5),
+      padding: theme.spacing(.5),
       '&:hover, &:focus&:hover': {
-        color: emphasize(theme.palette.secondary.main, 0.5),
-        background: emphasize(theme.palette.primary.dark, 0.2),
+        color: emphasize(theme.color.banner.control.base, 0.2),
+        background: emphasize(theme.color.banner.control.background, 0.2),
       },
     },
     large: {

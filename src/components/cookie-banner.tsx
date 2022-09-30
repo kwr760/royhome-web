@@ -1,7 +1,7 @@
-import React, { FunctionComponent, memo } from 'react';
-import { Box, Typography, Button, Link, Drawer } from '@mui/material';
-import { withStyles } from '@mui/styles';
+import { Box, Button, Drawer, Link, Typography } from '@mui/material';
 import type { WithStyles } from '@mui/styles';
+import { withStyles } from '@mui/styles';
+import React, { FunctionComponent, memo } from 'react';
 import { ACKNOWLEDGED_COOKIE_USE_COOKIE, getCookie, setCookie } from '../util/cookies';
 import { styles } from './styles/cookie-banner.styles';
 
@@ -29,6 +29,7 @@ const CookieBannerComponent: FunctionComponent<CookieBannerProps> = ({classes}) 
         <Button
           variant="contained"
           onClick={closeDrawer}
+          className={classes.button}
         >
           Proceed
         </Button>

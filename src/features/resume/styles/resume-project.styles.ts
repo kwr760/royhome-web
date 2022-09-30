@@ -1,4 +1,3 @@
-import { darken } from '@mui/material';
 import type { Theme } from '@mui/material';
 import { createStyles } from '@mui/styles';
 import type { StyleRules } from '@mui/styles/withStyles';
@@ -41,10 +40,6 @@ const styles = (theme: Theme): StyleRules =>
       },
     },
     link: {
-      color: darken(theme.palette.secondary.main, 0.4),
-      '&:visited, :visited *': {
-        color: theme.palette.secondary.main,
-      },
     },
   });
 

@@ -74,7 +74,7 @@ describe('feature/tictactoe/functions/get-state-message', () => {
     {
       state: {
         ...initialState,
-        gameState: GameStateEnum.Win,
+        gameState: GameStateEnum.Completed,
         playerOne: {
           ...initialPlayerOne,
           playerState: PlayerStateEnum.Winner,
@@ -85,7 +85,7 @@ describe('feature/tictactoe/functions/get-state-message', () => {
     {
       state: {
         ...initialState,
-        gameState: GameStateEnum.Win,
+        gameState: GameStateEnum.Completed,
         playerTwo: {
           ...initialPlayerTwo,
           playerState: PlayerStateEnum.Winner,
@@ -96,18 +96,7 @@ describe('feature/tictactoe/functions/get-state-message', () => {
     {
       state: {
         ...initialState,
-        gameState: GameStateEnum.Win,
-        turn: PlayerEnum.Neither,
-        playerOne: {
-          ...initialPlayerOne,
-        },
-      },
-      expected: 'undefined won the game',
-    },
-    {
-      state: {
-        ...initialState,
-        gameState: GameStateEnum.Tie,
+        gameState: GameStateEnum.Completed,
       },
       expected: 'The game is a tie, there was no winner',
     },

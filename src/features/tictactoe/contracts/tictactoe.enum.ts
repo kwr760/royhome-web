@@ -1,9 +1,10 @@
 enum GameStateEnum {
-  Ready = 'ready',
+  Setup = 'setup',
   Active = 'active',
-  Win = 'win',
-  Tie = 'tie',
-  Think = 'think',
+  Completed = 'completed',
+  Message = 'message',
+  Wait = 'wait',
+  Exit = 'exit',
 }
 enum PlayerStateEnum {
   Active = 'active',
@@ -25,6 +26,7 @@ enum ActionEnum {
   Reset = 'reset',
   TakeTurn = 'takeTurn',
   Start = 'start',
+  UpdateGameState = 'updateGameStatus',
   UpdatePlayer = 'updatePlayer',
   Remote = 'remote',
   InitializeWebSocket = 'initWebSocket',

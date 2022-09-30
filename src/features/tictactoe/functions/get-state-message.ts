@@ -7,7 +7,7 @@ const getStateMessage = (state: StateType): string => {
   let stateMessage = '';
 
   switch (state.gameState) {
-    case GameStateEnum.Ready:
+    case GameStateEnum.Setup:
       stateMessage = 'The game is ready to be played';
       break;
     case GameStateEnum.Active:
@@ -20,14 +20,15 @@ const getStateMessage = (state: StateType): string => {
         }
       }
       break;
-    case GameStateEnum.Win:
+    case GameStateEnum.Completed:
       {
         const player = getWinner(state);
-        stateMessage = `${player?.name} won the game`;
+        if (player) {
+          stateMessage = `${player.name} won the game`;
+        } else {
+          stateMessage = 'The game is a tie, there was no winner';
+        }
       }
-      break;
-    case GameStateEnum.Tie:
-      stateMessage = 'The game is a tie, there was no winner';
       break;
   }
 

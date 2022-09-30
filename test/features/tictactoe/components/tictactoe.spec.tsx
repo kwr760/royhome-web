@@ -1,12 +1,9 @@
-import React from 'react';
 import { render } from '@testing-library/react';
+import React from 'react';
 import TicTacToe from '../../../../src/features/tictactoe/components/tictactoe';
 
 jest.mock('../../../../src/features/tictactoe/components/game-board',
   () => jest.fn(() => 'Game Board'),
-);
-jest.mock( '../../../../src/features/tictactoe/components/game-header',
-  () => jest.fn(() => 'Game Header'),
 );
 
 describe('features/tictactoe/components', () => {
@@ -16,6 +13,5 @@ describe('features/tictactoe/components', () => {
 
     // Assert - fake test - test nothing
     getByText(/Game Board/);
-    getByText(/Game Header/);
   });
 });

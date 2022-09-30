@@ -1,13 +1,17 @@
+import type { Action } from '@reduxjs/toolkit';
 import { Client } from '@stomp/stompjs';
 import { ReactNode, Reducer } from 'react';
-import { ActionEnum, PlayerEnum } from './tictactoe.enum';
+import { ActionEnum, GameStateEnum, PlayerEnum } from './tictactoe.enum';
 import { Player, StateType } from './tictactoe.models';
 
 type BoardType = string;
+type MiddleWareFunction = (action: Action | undefined, state: StateType) => StateType;
 type ProviderType = {
   sessionId?: string,
   state?: StateType,
   reducer?: Reducer<unknown, unknown>,
+  beforeware?: MiddleWareFunction[],
+  afterware?: MiddleWareFunction[],
   children: ReactNode,
 }
 type TakeTurnPayload = {
@@ -21,6 +25,9 @@ type UpdatePlayerPayload = {
 type MessagePayload = {
   message: string,
 }
+type UpdateGameStatePayload = {
+  gameState: GameStateEnum,
+}
 type InitWebSocketPayload = {
   client: Client | null,
   destination: string,
@@ -29,6 +36,10 @@ type InitWebSocketPayload = {
 type TakeTurnAction = {
   type: ActionEnum.TakeTurn,
   payload: TakeTurnPayload,
+};
+type UpdateGameStateAction = {
+  type: ActionEnum.UpdateGameState,
+  payload: UpdateGameStatePayload,
 };
 type UpdatePlayerAction = {
   type: ActionEnum.UpdatePlayer,
@@ -48,26 +59,30 @@ type InitWebSocketAction = {
   type: ActionEnum.InitializeWebSocket,
   payload: InitWebSocketPayload,
 };
-type ActionsType = TakeTurnAction | ResetGameAction | StartGameAction | UpdatePlayerAction |
-  RemoteAction | InitWebSocketAction;
+type ActionsType = TakeTurnAction | ResetGameAction | StartGameAction | UpdateGameStateAction |
+  UpdatePlayerAction | RemoteAction | InitWebSocketAction;
 type DispatchType = (action: ActionsType) => void;
 type ContextType = {
   state: StateType,
   dispatch: DispatchType,
 };
 
+
 export type {
   ProviderType,
+  MiddleWareFunction,
   ContextType,
   ActionsType,
   ResetGameAction,
   StartGameAction,
   TakeTurnAction,
+  UpdateGameStateAction,
   UpdatePlayerAction,
   RemoteAction,
   InitWebSocketAction,
   DispatchType,
   TakeTurnPayload,
+  UpdateGameStatePayload,
   UpdatePlayerPayload,
   MessagePayload,
   InitWebSocketPayload,
