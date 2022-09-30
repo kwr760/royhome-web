@@ -12,4 +12,4 @@ const writeToLog = (file: string, msg: string): void => {
   });
 };
 
-export default writeToLog;
+export { writeToLog };

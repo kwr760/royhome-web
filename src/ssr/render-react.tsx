@@ -3,20 +3,26 @@ import fs from 'fs';
 import parseUrl from 'parseurl';
 import { Request, Response } from 'express';
 import { ChunkExtractor } from '@loadable/server';
-import React  from 'react';
+import React, { ComponentType } from 'react';
 import { renderToString } from 'react-dom/server';
-import { ServerStyleSheets } from '@material-ui/core/styles';
-
-import env from '../config';
-import populateState from './populate-state';
-import displayMessage from '../middleware/display-message';
-import createStore from '../store/create-store';
+import { ServerStyleSheets } from '@mui/styles';
+import type { Store } from 'redux';
+import { env } from '../config/env';
+import { populateState } from './populate-state';
+import { displayMessage } from '../middleware/display-message';
+import { createStore } from '../store/create-store';
 import { getCookies } from './cookies/get-cookies';
 import { generateCookieIds } from './cookies/generate-cookie-ids';
 import { BROWSER_ID, SESSION_ID } from './cookies/cookie.constants';
 import { generateCookieOptions } from './cookies/generate-cookie-options';
-import { MainType } from '../type/server/ssr';
 
+interface Props {
+  url: string,
+  store: Store,
+}
+interface MainType {
+  default: ComponentType<Props>,
+}
 const renderReact = async (req: Request, res: Response): Promise<void> => {
   displayMessage(`Server render:  ${req.url}`);
 
@@ -42,7 +48,7 @@ const renderReact = async (req: Request, res: Response): Promise<void> => {
   const css = sheets.toString();
 
   // Extract the creation of the html to a separate file
-  const indexFile = path.resolve('./src/asset/index.html');
+  const indexFile = path.resolve('./src/assets/index.html');
   const contents = fs.readFileSync(indexFile, 'utf8');
   const preloadedState = JSON.stringify(store.getState()).replace(/</g, '\\u003c');
   const responseHtml = contents
@@ -60,4 +66,4 @@ const renderReact = async (req: Request, res: Response): Promise<void> => {
   res.send(responseHtml);
 };
 
-export default renderReact;
+export { renderReact };

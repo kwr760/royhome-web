@@ -1,7 +1,7 @@
-/* eslint-disable global-require */
 /* eslint-disable @typescript-eslint/no-var-requires */
-import LOG_LEVELS from '../../src/util/logger/logger-levels';
-import { DEVELOPMENT, DOCKER, PRODUCTION } from '../../src/config/release-environments';
+
+import { DEVELOPMENT, DOCKER, LOCAL, PRODUCTION } from '../../src/contracts/constants/environments.constants';
+import { LOG_LEVELS } from '../../src/contracts/constants/log-levels.constants';
 
 describe('config/index', () => {
   const { NODE_ENV } = process.env;
@@ -19,7 +19,7 @@ describe('config/index', () => {
     it('should load prod as expected', () => {
       // Arrange
       const expected = {
-        default: {
+        env: {
           appName: 'royhome',
           auth0: {
             callbackUrl: 'http://localhost',
@@ -42,12 +42,15 @@ describe('config/index', () => {
               key: '/var/cert/royhome/privkey.pem',
             },
             enableHttps: true,
+            deriveApiUrl: true,
           },
+          isBrowser: true,
+          websocketUrl: 'wss://api.royk.us/tictactoe',
         },
       };
 
       // Act
-      const prod = require('../../src/config');
+      const prod = require('../../src/config/env');
 
       // Assert
       expect(prod).toEqual(expected);
@@ -67,7 +70,7 @@ describe('config/index', () => {
     it('should load dev as expected', async () => {
       // Arrange
       const expected = {
-        default: {
+        env: {
           appName: 'royhome',
           auth0: {
             callbackUrl: 'http://localhost',
@@ -90,12 +93,15 @@ describe('config/index', () => {
               key: expect.stringContaining('privkey.pem'),
             },
             enableHttps: true,
+            deriveApiUrl: true,
           },
+          isBrowser: true,
+          websocketUrl: 'wss://api.royk.us/tictactoe',
         },
       };
 
       // Act
-      const dev = require('../../src/config');
+      const dev = require('../../src/config/env');
 
       // Assert
       expect(dev).toEqual(expected);
@@ -115,7 +121,7 @@ describe('config/index', () => {
     it('should load docker as expected', async () => {
       // Arrange
       const expected = {
-        default: {
+        env: {
           appName: 'royhome',
           auth0: {
             callbackUrl: 'http://localhost',
@@ -129,7 +135,7 @@ describe('config/index', () => {
             dir: './log',
             level: LOG_LEVELS.INFO,
             stdout: true,
-            includePidFilename: false,
+            includePidFilename: true,
           },
           server: {
             apiUrl: 'http://host.docker.internal:5000',
@@ -138,12 +144,66 @@ describe('config/index', () => {
               key: '/var/cert/royhome/privkey.pem',
             },
             enableHttps: false,
+            deriveApiUrl: true,
           },
+          isBrowser: true,
+          websocketUrl: 'wss://api.royk.us/tictactoe',
         },
       };
 
       // Act
-      const dev = require('../../src/config');
+      const dev = require('../../src/config/env');
+
+      // Assert
+      expect(dev).toEqual(expected);
+    });
+  });
+
+  describe('local', () => {
+    beforeEach(() => {
+      jest.resetModules();
+      process.env.NODE_ENV = LOCAL;
+    });
+
+    afterEach(() => {
+      process.env.NODE_ENV = NODE_ENV;
+    });
+
+    it('should load local as expected', async () => {
+      // Arrange
+      const expected = {
+        env: {
+          appName: 'royhome',
+          auth0: {
+            callbackUrl: 'http://localhost',
+            clientId: 'J5Mu7fSFraTWgQBz1WJgikpnuRnKRkaL',
+            domain: 'royk.auth0.com',
+          },
+          host: 'http://localhost',
+          release: LOCAL,
+          root: expect.stringContaining('web'),
+          log: {
+            dir: './log',
+            level: LOG_LEVELS.DEBUG,
+            stdout: true,
+            includePidFilename: false,
+          },
+          server: {
+            apiUrl: 'https://localhost:5000',
+            cert: {
+              cert: './cert/localhost.crt',
+              key: './cert/localhost.key',
+            },
+            enableHttps: true,
+            deriveApiUrl: false,
+          },
+          isBrowser: true,
+          websocketUrl: 'wss://api.royk.us/tictactoe',
+        },
+      };
+
+      // Act
+      const dev = require('../../src/config/env');
 
       // Assert
       expect(dev).toEqual(expected);
@@ -163,7 +223,7 @@ describe('config/index', () => {
     it('should load prod if unknown', () => {
     // Arrange
       const expected = {
-        default: {
+        env: {
           appName: 'royhome',
           auth0: {
             callbackUrl: 'https://royk.us',
@@ -186,13 +246,16 @@ describe('config/index', () => {
               key: '/var/cert/royhome/privkey.pem',
             },
             enableHttps: true,
+            deriveApiUrl: true,
           },
+          isBrowser: true,
+          websocketUrl: 'wss://api.royk.us/tictactoe',
         },
       };
       global.origin = '';
 
       // Act
-      const prod = require('../../src/config');
+      const prod = require('../../src/config/env');
 
       // Assert
       expect(prod).toEqual(expected);

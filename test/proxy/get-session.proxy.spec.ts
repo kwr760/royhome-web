@@ -43,6 +43,23 @@ describe('web/server/proxy/get-session.proxy', () => {
     // Assert
     expect(axios.get).toBeCalledWith('https://api.royk.us/session/session-id');
   });
+  it('should throw error without response', async () => {
+    // Arrange
+    const sessionId = 'session-id';
+    const expectedError = {
+      message: 'Internal Server Error',
+    };
+    (axios.get as jest.Mock).mockRejectedValue(expectedError);
+
+    // Act
+    try {
+      await getSessionProxy(sessionId);
+    } catch (e) {
+      expect(e).toBe(expectedError);
+    }
+    // Assert
+    expect(axios.get).toBeCalledWith('https://api.royk.us/session/session-id');
+  });
   it('should throw not found error when there is no session', async () => {
     // Arrange
     const sessionId = 'session-id';

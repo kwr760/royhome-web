@@ -5,7 +5,7 @@ const CODES = {
   API_UNAUTHENTICATED: 'API_UNAUTHENTICATED',
 };
 
-export const ERROR_CODE = {
+const ERROR_CODE = {
   [CODES.DB_UNEXPECTED_RESULT]: {
     code: CODES.DB_UNEXPECTED_RESULT,
     msg: 'Received unexpected data from the data source',
@@ -23,3 +23,5 @@ export const ERROR_CODE = {
     msg: 'Not authenticated to make the api call',
   },
 };
+
+export { ERROR_CODE };

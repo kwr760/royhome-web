@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import { removeJssStyle } from '../../src/util/remove-jss-style';
 
 describe('src/client/util/remove-jss-style', () => {

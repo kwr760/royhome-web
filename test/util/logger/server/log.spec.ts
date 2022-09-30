@@ -1,12 +1,10 @@
-import env from '../../../../src/config';
-
-import LOG_LEVELS from '../../../../src/util/logger/logger-levels';
-import formatMessage from '../../../../src/util/logger/format-message';
-import getConsole from '../../../../src/util/logger/get-console';
-
-import log from '../../../../src/util/logger/server/log';
-import writeToLog from '../../../../src/util/logger/server/write-to-log';
-import getLogFilename from '../../../../src/util/logger/server/get-filename';
+import { env } from '../../../../src/config/env';
+import { LOG_LEVELS } from '../../../../src/contracts/constants/log-levels.constants';
+import { formatMessage } from '../../../../src/util/logger/format-message';
+import { getConsole } from '../../../../src/util/logger/get-console';
+import { log } from '../../../../src/util/logger/server/log';
+import { writeToLog } from '../../../../src/util/logger/server/write-to-log';
+import { getLogFilename } from '../../../../src/util/logger/server/get-filename';
 
 jest.mock('../../../../src/util/logger/format-message');
 jest.mock('../../../../src/util/logger/server/get-filename');

@@ -1,9 +1,9 @@
-import env from '../../../config';
-import { LogMsgType } from '../../../type/logger';
-import getConsole from '../get-console';
-import formatMessage from '../format-message';
-import getLogFilename from './get-filename';
-import writeToLog from './write-to-log';
+import { env } from '../../../config/env';
+import { LogMsgType } from '../../../contracts/logger.models';
+import { getConsole } from '../get-console';
+import { formatMessage } from '../format-message';
+import { getLogFilename } from './get-filename';
+import { writeToLog } from './write-to-log';
 
 const log = ({ logType, msg }: LogMsgType): void => {
   const {
@@ -25,4 +25,4 @@ const log = ({ logType, msg }: LogMsgType): void => {
   }
 };
 
-export default log;
+export { log };

@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import express from 'express';
 import cors from 'cors';
@@ -8,11 +7,11 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import httpContext from 'express-http-context';
 
-import handleError from '../src/middleware/handle-error';
-import notFound from '../src/middleware/not-found';
-import renderReact from '../src/ssr/render-react';
-import startHttpsServer from '../src/middleware/start-https';
-import startHttpServer from '../src/middleware/start-http';
+import { handleError } from '../src/middleware/handle-error';
+import { notFound } from '../src/middleware/not-found';
+import { renderReact } from '../src/ssr/render-react';
+import { startHttpsServer } from '../src/middleware/start-https';
+import { startHttpServer } from '../src/middleware/start-http';
 
 jest.mock('express');
 jest.mock('cors');
@@ -26,6 +25,9 @@ jest.mock('cookie-parser');
 jest.mock('express-http-context');
 jest.mock('../src/middleware/start-https');
 jest.mock('../src/middleware/start-http');
+jest.mock('../src/middleware/handle-error');
+jest.mock('../src/middleware/not-found');
+jest.mock('../src/ssr/render-react');
 
 describe('server/index', () => {
   const mockExpress = {
@@ -41,6 +43,9 @@ describe('server/index', () => {
   const bodyParserJsonCb = jest.fn();
   const bodyParserUrlencodedCb = jest.fn();
   const cookieParserCb = jest.fn();
+  const handleErrorCb = jest.fn();
+  const notFoundCb = jest.fn();
+  const renderReactCb = jest.fn();
 
   beforeEach(() => {
     (express as unknown as jest.Mock).mockReturnValue(mockExpress);
@@ -50,6 +55,9 @@ describe('server/index', () => {
     (bodyParser.json as jest.Mock).mockReturnValue(bodyParserJsonCb);
     (bodyParser.urlencoded as jest.Mock).mockReturnValue(bodyParserUrlencodedCb);
     (cookieParser as unknown as jest.Mock).mockReturnValue(cookieParserCb);
+    (handleError as unknown as jest.Mock).mockReturnValue(handleErrorCb);
+    (notFound as unknown as jest.Mock).mockReturnValue(notFoundCb);
+    (renderReact as unknown as jest.Mock).mockReturnValue(renderReactCb);
   });
   afterEach(() => {
     jest.clearAllMocks();
@@ -59,6 +67,23 @@ describe('server/index', () => {
     jest.isolateModules(() => {
       // Arrange/Act
       require('../src/server');
+      const expectedHelmet = {
+        contentSecurityPolicy: {
+          directives: {
+            'connect-src': [
+              '\'self\'',
+              'wss:',
+              '*.royk.us',
+              '*.royhome.net',
+              'royk.auth0.com',
+            ],
+            'frame-src': ['\'self\'', 'royk.auth0.com'],
+            'script-src': ['\'self\'', '\'unsafe-inline\'', '*.royk.us', '*.royhome.net'],
+            'img-src': ['\'self\'', 'data:', 'avatars.githubusercontent.com'],
+          },
+          useDefaults: true,
+        },
+      };
 
       // Assert
       expect(mockExpress.set).toHaveBeenCalledWith('json spaces', 2);
@@ -69,7 +94,7 @@ describe('server/index', () => {
       expect(mockExpress.use).toHaveBeenCalledTimes(10);
       expect(cors).toHaveBeenCalledWith();
       expect(mockExpress.use).toHaveBeenCalledWith(corsCb);
-      expect(helmet).toHaveBeenCalledWith();
+      expect(helmet).toHaveBeenCalledWith(expectedHelmet);
       expect(mockExpress.use).toHaveBeenCalledWith(helmetCb);
       expect(compression).toHaveBeenCalledWith();
       expect(mockExpress.use).toHaveBeenCalledWith(compressionCb);
@@ -92,8 +117,8 @@ describe('server/index', () => {
   it('should start dev server', () => {
     // Arrange
     jest.isolateModules(() => {
-      const { default: env } = require('../src/config');
-      const { default: dev } = require('../src/config/env/dev');
+      const { env } = require('../src/config/env');
+      const { dev } = require('../src/config/env/dev');
       env.mode = dev.mode;
 
       // Act
@@ -108,8 +133,8 @@ describe('server/index', () => {
   it('should start prod server', () => {
     // Arrange
     jest.isolateModules(() => {
-      const { default: env } = require('../src/config');
-      const { default: prod } = require('../src/config/env/prod');
+      const { env } = require('../src/config/env');
+      const { prod } = require('../src/config/env/prod');
       env.mode = prod.mode;
       process.env.SERVER_PORT = '';
 
@@ -126,8 +151,8 @@ describe('server/index', () => {
   it('should start docker server', () => {
     // Arrange
     jest.isolateModules(() => {
-      const { default: env } = require('../src/config');
-      const { default: docker } = require('../src/config/env/docker');
+      const { env } = require('../src/config/env');
+      const { docker } = require('../src/config/env/docker');
       env.mode = docker.mode;
       env.server = docker.server;
       process.env.SERVER_PORT = '';
