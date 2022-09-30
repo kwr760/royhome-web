@@ -1,5 +1,4 @@
 import path from 'path';
-import WebpackMd5Hash from 'webpack-md5-hash';
 import nodeExternals from 'webpack-node-externals';
 
 export const getServerConfig = () => {
@@ -39,9 +38,6 @@ export const getServerConfig = () => {
     node: {
       __dirname: true,
     },
-    plugins: [
-      new WebpackMd5Hash(),
-    ],
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
       alias: {

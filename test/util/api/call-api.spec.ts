@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { ApiDetailsType } from '../../../src/type/api/api';
-
+import { ApiConfigs } from '../../../src/contracts/constants/api.constants';
+import { ApiDetailsType } from '../../../src/contracts/api/api';
 import { callApi } from '../../../src/util/api/call-api';
-import { ApiConfigs } from '../../../src/config/api';
 
 jest.mock('axios');
 

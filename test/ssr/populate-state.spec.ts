@@ -1,7 +1,7 @@
 import { getResumeProxy } from '../../src/proxy/get-resume.proxy';
 import { getSessionProxy } from '../../src/proxy/get-session.proxy';
-import populateState from '../../src/ssr/populate-state';
-import { DarkModes } from '../../src/store/session/session.constants';
+import { populateState } from '../../src/ssr/populate-state';
+import { DarkModes } from '../../src/contracts/constants/session.constants';
 
 jest.mock('../../src/proxy/get-resume.proxy');
 jest.mock('../../src/proxy/get-session.proxy');
@@ -11,7 +11,6 @@ describe('server/rendering/populate-state', () => {
   const resume = {
     owner: 'owner',
   };
-  const initialGame = [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]];
   it('should return an state from session', async () => {
     // Arrange
     const url = '/';
@@ -47,14 +46,6 @@ describe('server/rendering/populate-state', () => {
           [email]: resume,
         },
       },
-      tictactoe: {
-        game: initialGame,
-        playerTurn: 0,
-        players: [
-          'Player #1',
-          'Player #2',
-        ],
-      },
     };
 
     // Act
@@ -87,14 +78,6 @@ describe('server/rendering/populate-state', () => {
         email: '',
         resumes: {},
       },
-      tictactoe: {
-        game: initialGame,
-        playerTurn: 0,
-        players: [
-          'Player #1',
-          'Player #2',
-        ],
-      },
     };
 
     // Act
@@ -120,14 +103,6 @@ describe('server/rendering/populate-state', () => {
         resumes: {
           [email]: resume,
         },
-      },
-      tictactoe: {
-        game: initialGame,
-        playerTurn: 0,
-        players: [
-          'Player #1',
-          'Player #2',
-        ],
       },
     };
 

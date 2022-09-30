@@ -4,6 +4,7 @@ import { getServerConfig } from './webpack.server';
 let config;
 switch (process.env.NODE_ENV) {
   case 'development':
+  case 'local':
   case 'docker': {
     const browserConfig = getClientConfig('web');
     const ssrConfig = getClientConfig('node');

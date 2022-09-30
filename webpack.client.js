@@ -2,7 +2,6 @@ import path from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import LoadablePlugin from '@loadable/webpack-plugin';
-import WebpackMd5Hash from 'webpack-md5-hash';
 import CopyPlugin from 'copy-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
@@ -11,7 +10,7 @@ import { EnvironmentPlugin, DefinePlugin } from 'webpack';
 
 const shouldAnalyze = !process.env.NODE_ENV || ['development'].includes(process.env.NODE_ENV);
 const shouldStartDevServer = !process.env.NODE_ENV || ['development'].includes(process.env.NODE_ENV);
-const isDevMode = !process.env.NODE_ENV || ['development', 'docker'].includes(process.env.NODE_ENV);
+const isDevMode = !process.env.NODE_ENV || ['development', 'local', 'docker'].includes(process.env.NODE_ENV);
 
 export const getClientConfig = (target) => {
   let additionalPlugins = [];
@@ -52,6 +51,9 @@ export const getClientConfig = (target) => {
     target,
     devtool: 'source-map',
     entry: `./src/index-${target}.tsx`,
+    node: {
+      __dirname: true,
+    },
     module: {
       rules: [
         {
@@ -122,32 +124,43 @@ export const getClientConfig = (target) => {
     ] : undefined,
     output: {
       path: path.resolve(__dirname, 'dist', target === 'web' ? 'browser' : 'ssr'),
-      filename: isDevMode ? '[name].js' : '[name].[chunkhash:8].js',
+      filename: isDevMode ? '[name].js' : '[name].[contenthash].js',
       publicPath: '/dist/browser/',
       libraryTarget: target === 'node' ? 'commonjs2' : undefined,
     },
     plugins: [
       new LoadablePlugin(),
       new MiniCssExtractPlugin({
-        filename: isDevMode ? '[name].css' : '[name].[chunkhash:8].css',
-        chunkFilename: isDevMode ? '[id].css' : '[id].[chunkhash:8].css',
+        filename: isDevMode ? '[name].css' : '[name].[contenthash].css',
+        chunkFilename: isDevMode ? '[id].css' : '[id].[contenthash].css',
       }),
-      new WebpackMd5Hash(),
       new CopyPlugin({
         patterns: [
-          { from: 'src/asset/favicon.ico', to: './favicon.ico' },
-          { from: 'src/asset/images/gold-on-blue.png', to: './favicon.png' },
+          {from: 'src/assets/favicon.ico', to: './favicon.ico'},
+          {from: 'src/assets/images/gold-on-blue.png', to: './favicon.png'},
         ],
       }),
       new LodashModuleReplacementPlugin(),
       new EnvironmentPlugin(['NODE_ENV']),
-      new DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
+      new DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}),
       ...additionalPlugins,
     ],
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
       alias: {
         '@src': path.resolve(__dirname, 'src/'),
+      },
+      fallback: {
+        'fs': false,
+        'tls': false,
+        'net': false,
+        'path': require.resolve('path-browserify'),
+        'zlib': false,
+        'http': false,
+        'https': false,
+        'stream': false,
+        'crypto': false,
+        'crypto-browserify': false,
       },
     },
     optimization: {
@@ -160,21 +173,23 @@ export const getClientConfig = (target) => {
             test: /[\\/]node_modules[\\/]/,
             name(module) {
               const splitMap = [
-                { name: 'core-js', packages: ['core-js'] },
-                { name: 'react', packages: [
-                  'react',
-                  'react-router',
-                  'react-router-dom',
-                  'react-redux',
-                  'redux',
-                  'react-dom',
-                  'react-transition-group',
-                ]},
-                { name: 'axios', packages: ['axios'] },
-                { name: 'lodash', packages: ['lodash'] },
-                { name: 'auth0-spa', packages: ['auth0'] },
-                { name: 'react-icons', packages: ['react-icons'] },
-                { name: 'markdown', packages: ['react-markdown', 'remark-parse'] },
+                {name: 'core-js', packages: ['core-js']},
+                {
+                  name: 'react', packages: [
+                    'react',
+                    'react-router',
+                    'react-router-dom',
+                    'react-redux',
+                    'redux',
+                    'react-dom',
+                    'react-transition-group',
+                  ],
+                },
+                {name: 'axios', packages: ['axios']},
+                {name: 'lodash', packages: ['lodash']},
+                {name: 'auth0-spa', packages: ['auth0']},
+                {name: 'react-icons', packages: ['react-icons']},
+                {name: 'markdown', packages: ['react-markdown', 'remark-parse']},
               ];
               const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1].replace('@', '');
               const splitPackage = splitMap.filter((e) => e.packages.includes(packageName));

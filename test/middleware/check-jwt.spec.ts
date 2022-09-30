@@ -1,7 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import jwt from 'express-jwt';
-
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-import checkJwt from '../../src/middleware/check-jwt';
+import { checkJwt } from '../../src/middleware/check-jwt';
 
 jest.mock('express-jwt');
 

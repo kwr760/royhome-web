@@ -1,21 +1,20 @@
 import React, { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
-import { RouteComponentProps } from 'react-router-dom';
-import { ThemeProvider } from '@material-ui/core/styles';
-import { CssBaseline } from '@material-ui/core';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
-import { DarkModes } from './store/session/session.constants';
+import { DarkModes } from './contracts/constants/session.constants';
 import { getDarkMode } from './store/session/session.selector';
-import lightTheme from './theme-light';
-import darkTheme from './theme-dark';
+import { themeLight } from './theme-light';
+import { themeDark } from './theme-dark';
 import App from './App';
 
 /**
  * @return {string}
  */
-const Theme: FunctionComponent<RouteComponentProps> = (props) => {
+const Theme: FunctionComponent = (props) => {
   const darkMode = useSelector(getDarkMode);
-  const theme = (darkMode === DarkModes.DARK_MODE) ? darkTheme : lightTheme;
+  const theme = (darkMode === DarkModes.DARK_MODE) ? themeDark : themeLight;
 
   return (
     <ThemeProvider theme={theme}>

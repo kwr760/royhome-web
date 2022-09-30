@@ -4,38 +4,22 @@ import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import createAuth0Client from '@auth0/auth0-spa-js';
 
-import Auth0Provider from '../../../src/util/auth0/auth0-spa';
-import { useAuth0 } from '../../../src/util/auth0/auth0-context';
-import { Auth0ContextType } from '../../../src/type/auth0';
+import { AuthProvider } from '../../../src/util/auth0/auth0-spa';
+import { useAuth } from '../../../src/util/auth0/auth0-context';
 
 jest.mock('@auth0/auth0-spa-js');
 jest.mock('react-redux');
 
 describe('util/auth0/react-auth0-spa', () => {
-  const testContext = {
-    login: () => {},
-    logout: () => {},
-    getToken: () => {},
-    jwt: {
-      expiresAt: 0,
-      user: {
-        name: '',
-      },
-      data: {
-        key: '',
-      },
-    },
-  };
-  const testProvider = (context: Auth0ContextType, coverage = false) => (
-    <Auth0Provider
+  const testProvider = (coverage = false) => (
+    <AuthProvider
       domain="domain"
       client_id="clientId"
       audience="audience"
       redirect_uri="/origin"
-      context={context}
     >
       <TestConsumer coverage={coverage} />
-    </Auth0Provider>
+    </AuthProvider>
   );
 
   const TestConsumer: React.FC<{ coverage: boolean; }> = ({ coverage = false }) => {
@@ -43,7 +27,7 @@ describe('util/auth0/react-auth0-spa', () => {
       login,
       getToken,
       logout,
-    } = useAuth0();
+    } = useAuth();
 
     if (coverage) {
       login({});
@@ -58,6 +42,10 @@ describe('util/auth0/react-auth0-spa', () => {
       </div>
     );
   };
+  beforeEach(() => {
+    jest.clearAllMocks();
+    jest.resetAllMocks();
+  });
   afterEach(() => {
     jest.restoreAllMocks();
   });
@@ -75,7 +63,7 @@ describe('util/auth0/react-auth0-spa', () => {
     const expectedLoadingOff = { payload: undefined, type: 'session/clearLoading' };
 
     // Act
-    const { getByText } = render(testProvider(testContext));
+    const { getByText } = render(testProvider());
     await waitFor(() => {});
     fireEvent.click(getByText(/Logout/));
     await waitFor(() => {});
@@ -99,7 +87,7 @@ describe('util/auth0/react-auth0-spa', () => {
     const expectedLoadingOff = { payload: undefined, type: 'session/clearLoading' };
 
     // Act
-    render(testProvider(testContext));
+    render(testProvider());
     await waitFor(() => {});
 
     // Assert
@@ -131,7 +119,7 @@ describe('util/auth0/react-auth0-spa', () => {
     const expectedLoadingOff = { payload: undefined, type: 'session/clearLoading' };
 
     // Act
-    render(testProvider(testContext, true));
+    render(testProvider(true));
     await waitFor(() => {});
 
     // Assert

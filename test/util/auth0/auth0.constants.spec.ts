@@ -1,6 +1,6 @@
 import {
   COOKIE_JWT_PAYLOAD,
-} from '../../../src/util/auth0/auth0.constants';
+} from '../../../src/contracts/constants/auth0.constants';
 
 describe('util/auth0/constants', () => {
   it('should provide constants', () => {

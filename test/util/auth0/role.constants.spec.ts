@@ -1,6 +1,6 @@
 import {
   OWNER, TOKEN_URL, ROLES,
-} from '../../../src/util/auth0/role.constants';
+} from '../../../src/contracts/constants/role.constants';
 
 describe('util/auth0/constants', () => {
   it('should provide constants', () => {

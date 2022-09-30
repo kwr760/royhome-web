@@ -1,11 +1,21 @@
-import { ResumeFetchType, RouteFetchType } from '../type/server/fetch-routes';
 import { getResumeProxy } from '../proxy/get-resume.proxy';
 
-export const fetchRoutes: RouteFetchType[] = [
+type ResumeFetch = {
+  resume: {
+    email: string;
+    [email: string]: unknown;
+  }
+}
+type RouteFetch = {
+  path: string;
+  exact: boolean;
+  fetchData: () => Promise<ResumeFetch>;
+}
+const fetchRoutes: RouteFetch[] = [
   {
     path: '/',
     exact: true,
-    fetchData: async (): Promise<ResumeFetchType> => {
+    fetchData: async (): Promise<ResumeFetch> => {
       const email = 'kroy760@gmail.com';
       const resume = await getResumeProxy(email);
       return {
@@ -19,3 +29,5 @@ export const fetchRoutes: RouteFetchType[] = [
     },
   },
 ];
+
+export { fetchRoutes };

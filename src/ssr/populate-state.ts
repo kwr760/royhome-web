@@ -1,15 +1,14 @@
-import { matchPath } from 'react-router-dom';
-import { SessionStateType } from '../type/state/session';
-import { StateType } from '../type/state/state';
-
-import { fetchRoutes } from './fetch-routes';
-import { DarkModes } from '../store/session/session.constants';
+import { matchPath } from 'react-router';
+import { Session } from '../contracts/session.models';
+import { State } from '../contracts/state.models';
 import { getSessionProxy } from '../proxy/get-session.proxy';
+import { DarkModes } from '../contracts/constants/session.constants';
+import { fetchRoutes } from './fetch-routes';
 
-const populateState = async (path: string, sessionId?: string): Promise<StateType> => {
-  const activeRoute = fetchRoutes.find((route) => matchPath(path, route));
+const populateState = async (path: string, sessionId?: string): Promise<State> => {
+  const activeRoute = fetchRoutes.find((route) => matchPath(path, route.path));
   const data = (activeRoute && activeRoute.fetchData) ? await activeRoute.fetchData() : {};
-  let session: SessionStateType;
+  let session: Session;
   if (sessionId) {
     const currentSession = await getSessionProxy(sessionId);
     const {
@@ -48,17 +47,8 @@ const populateState = async (path: string, sessionId?: string): Promise<StateTyp
       email: '',
       resumes: {},
     },
-    tictactoe: {
-      playerTurn: 0,
-      players: ['Player #1', 'Player #2'],
-      game: [
-        [-1, -1, -1],
-        [-1, -1, -1],
-        [-1, -1, -1],
-      ],
-    },
     ...data,
   };
 };
 
-export default populateState;
+export { populateState };

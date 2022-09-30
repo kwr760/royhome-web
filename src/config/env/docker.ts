@@ -1,7 +1,7 @@
-import LOG_LEVELS from '../../util/logger/logger-levels';
-import { DOCKER } from '../release-environments';
+import { DOCKER } from '../../contracts/constants/environments.constants';
+import { LOG_LEVELS } from '../../contracts/constants/log-levels.constants';
 
-const env = {
+const docker = {
   release: DOCKER,
   server: {
     enableHttps: false,
@@ -11,8 +11,8 @@ const env = {
     dir: './log',
     level: LOG_LEVELS.INFO,
     stdout: true,
-    includePidFilename: false,
+    includePidFilename: true,
   },
 };
 
-export default env;
+export { docker };

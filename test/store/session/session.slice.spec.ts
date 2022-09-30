@@ -1,31 +1,31 @@
 import { AxiosResponse } from 'axios';
-import { AnyAction } from 'redux';
+import type { AnyAction } from 'redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { SessionStateType } from '../../../src/type/state/session';
 import { callApi } from '../../../src/util/api/call-api';
-import { DarkModes } from '../../../src/store/session/session.constants';
-import sessionReducer, {
+import { DarkModes } from '../../../src/contracts/constants/session.constants';
+import {
   updateAuthentication,
   updateDarkMode,
   updateLoading,
   setLoading,
   clearLoading,
-  saveSession,
+  saveSession, sessionReducer,
 } from '../../../src/store/session/session.slice';
 import logger from '../../../src/util/logger/browser';
+import { Session } from '../../../src/contracts/session.models';
 
 jest.mock('../../../src/util/api/call-api');
 jest.mock('../../../src/util/logger/browser');
 
 describe('store/session/session.slice', () => {
   const mockStore = configureMockStore([thunk]);
-  const initialState: SessionStateType = {
+  const initialState: Session = {
     authenticated: false,
     expiration: 0,
     isLoading: false,
     darkMode: DarkModes.CLEAR_MODE,
-  } as SessionStateType;
+  } as Session;
 
   it('should call updateAuthentication', () => {
     // Arrange
@@ -83,7 +83,7 @@ describe('store/session/session.slice', () => {
     // Act
     await store.dispatch(updateDarkMode(darkMode) as unknown as AnyAction);
     const actions = store.getActions();
-    const newState = sessionReducer(store.getState() as SessionStateType, actions[0]);
+    const newState = sessionReducer(store.getState() as Session, actions[0]);
 
     // Assert
     expect(actions[0].type).toEqual('session/updateSession');
@@ -167,7 +167,7 @@ describe('store/session/session.slice', () => {
     // Act
     await store.dispatch(saveSession(claim, user) as unknown as AnyAction);
     const actions = store.getActions();
-    const newState = sessionReducer(store.getState() as SessionStateType, actions[0]);
+    const newState = sessionReducer(store.getState() as Session, actions[0]);
 
     // Assert
     expect(actions[0].type).toEqual('session/updateSession');

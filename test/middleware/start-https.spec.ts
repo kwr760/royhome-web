@@ -1,8 +1,8 @@
 import { Application } from 'express';
 import fs from 'fs';
 import spdy from 'spdy';
-import startHttpsServer from '../../src/middleware/start-https';
-import displayMessage from '../../src/middleware/display-message';
+import { startHttpsServer } from '../../src/middleware/start-https';
+import { displayMessage } from '../../src/middleware/display-message';
 
 jest.mock('fs');
 jest.mock('spdy');

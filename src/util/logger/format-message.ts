@@ -1,5 +1,5 @@
-import getCurrentDatetime from '../datetime/get-current-datetime';
-import { LogType } from '../../type/logger';
+import { LogType } from '../../contracts/logger.models';
+import { getCurrentDatetime } from '../datetime/get-current-datetime';
 
 const formatMessage = (logType: LogType, msg: string): string => {
   const datetime = getCurrentDatetime();
@@ -8,4 +8,4 @@ const formatMessage = (logType: LogType, msg: string): string => {
   return `${datetime}:${pid}:${logType.name}:${logMsg}`;
 };
 
-export default formatMessage;
+export { formatMessage };

@@ -2,8 +2,8 @@ import spdy from 'spdy';
 import { Application } from 'express';
 import fs from 'fs';
 
-import env from '../config';
-import displayMessage from './display-message';
+import { env } from '../config/env';
+import { displayMessage } from './display-message';
 
 const throwError = (err: NodeJS.ErrnoException | null) => { if (err) throw err; };
 
@@ -25,4 +25,4 @@ const startHttpsServer = (app: Application, port: number): void => {
   );
 };
 
-export default startHttpsServer;
+export { startHttpsServer };

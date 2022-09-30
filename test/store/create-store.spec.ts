@@ -1,8 +1,7 @@
-import createStore from '../../src/store/create-store';
-import { DarkModes } from '../../src/store/session/session.constants';
+import { createStore } from '../../src/store/create-store';
+import { DarkModes } from '../../src/contracts/constants/session.constants';
 
 describe('store/configure', () => {
-  const initialGame = [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]];
   it('should configure the store without initialState', () => {
     // Arrange
     const expectedState = {
@@ -15,14 +14,6 @@ describe('store/configure', () => {
       resume: {
         email: 'kroy760@gmail.com',
         resumes: {},
-      },
-      tictactoe: {
-        game: initialGame,
-        playerTurn: 0,
-        players: [
-          'Player #1',
-          'Player #2',
-        ],
       },
     };
 
@@ -45,14 +36,6 @@ describe('store/configure', () => {
       },
       resume: {
         email: 'kroy760@gmail.com',
-      },
-      tictactoe: {
-        game: initialGame,
-        playerTurn: 0,
-        players: [
-          'Player #1',
-          'Player #2',
-        ],
       },
     };
 
