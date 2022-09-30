@@ -13,7 +13,7 @@ import type { WithStyles } from '@mui/styles';
 import { withStyles } from '@mui/styles';
 import React, { FunctionComponent, memo } from 'react';
 import { FiGlobe } from 'react-icons/fi';
-import { startGame, updateGameState, updatePlayer } from '../context/context.actions';
+import { resetGame, startGame, updateGameState, updatePlayer } from '../context/context.actions';
 import { useTicTacToe } from '../context/context.provider';
 import { GameStateEnum, PlayerEnum, PlayerTypeEnum } from '../contracts/tictactoe.enum';
 import { styles } from '../styles/game-control.styles';
@@ -36,6 +36,7 @@ const PlayerControlComponent: FunctionComponent<PlayerControlProps> = (
     setOpenDialog(false);
   };
   const onPlayGame = () => {
+    dispatch(resetGame());
     dispatch(startGame());
     setOpenDialog(false);
   };
@@ -77,7 +78,7 @@ const PlayerControlComponent: FunctionComponent<PlayerControlProps> = (
               data-testid="player-one-type"
               className={classes.playerType}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChangeType(PlayerEnum.One, event)}
-              defaultChecked
+              checked={playerOne.type === PlayerTypeEnum.Human}
             />}
             label=""
           />
@@ -105,7 +106,7 @@ const PlayerControlComponent: FunctionComponent<PlayerControlProps> = (
               data-testid="player-two-type"
               className={classes.playerType}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChangeType(PlayerEnum.Two, event)}
-              defaultChecked
+              checked={playerTwo.type === PlayerTypeEnum.Human}
             />}
             label=""
           />

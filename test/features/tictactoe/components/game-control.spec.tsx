@@ -1,14 +1,14 @@
-import React from 'react';
 import { ThemeProvider } from '@mui/styles';
 import { fireEvent, render } from '@testing-library/react';
-
-import { GameStateEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import React from 'react';
 import GameControl from '../../../../src/features/tictactoe/components/game-control';
-import { updateGameState, startGame, updatePlayer } from '../../../../src/features/tictactoe/context/context.actions';
+import { startGame, updateGameState, updatePlayer } from '../../../../src/features/tictactoe/context/context.actions';
 import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
-import { initialState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
-import { themeLight } from '../../../../src/theme-light';
+
+import { GameStateEnum, PlayerTypeEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { initialPlayerTwo, initialState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { StateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
+import { themeLight } from '../../../../src/theme-light';
 
 jest.mock('../../../../src/features/tictactoe/context/context.actions');
 
@@ -129,6 +129,10 @@ describe('feature/tictactoe/component/game-control', () => {
     // Arrange
     const state = {
       ...initialState,
+      playerTwo: {
+        ...initialPlayerTwo,
+        type: PlayerTypeEnum.Computer,
+      },
     };
     const reducer = jest.fn(() => (state));
     const expectTypeOChange = {
@@ -144,9 +148,8 @@ describe('feature/tictactoe/component/game-control', () => {
     // Act
     const { getByTestId } = render(getComponent(state, reducer));
     fireEvent.click(getByTestId(/player-two-type/));
-    fireEvent.click(getByTestId(/player-two-type/));
 
     // Assert
-    expect(updatePlayer).toHaveBeenNthCalledWith(2, expectTypeOChange);
+    expect(updatePlayer).toHaveBeenCalledWith(expectTypeOChange);
   });
 });

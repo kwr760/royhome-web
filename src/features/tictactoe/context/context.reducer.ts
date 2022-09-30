@@ -13,14 +13,14 @@ const ticTacToeReducer = (state: StateType, action: ActionsType): StateType => {
       const { board, gameState, playerOne, playerTwo } = state;
       if (gameState === GameStateEnum.Active) {
         const newBoard = replaceAt(board, position, player.toString());
-        const { gameState, winner } = evaluateGame(newBoard);
-        playerOne.playerState = (winner === PlayerEnum.One) ? PlayerStateEnum.Winner : PlayerStateEnum.Loser;
-        playerTwo.playerState = (winner === PlayerEnum.Two) ? PlayerStateEnum.Winner : PlayerStateEnum.Loser;
+        const newGame = evaluateGame(newBoard);
+        playerOne.playerState = (newGame.winner === PlayerEnum.One) ? PlayerStateEnum.Winner : PlayerStateEnum.Loser;
+        playerTwo.playerState = (newGame.winner === PlayerEnum.Two) ? PlayerStateEnum.Winner : PlayerStateEnum.Loser;
         const turn = player === PlayerEnum.One ? PlayerEnum.Two : PlayerEnum.One;
         return {
           ...state,
           board: newBoard,
-          gameState,
+          gameState: newGame.gameState,
           turn,
           playerOne,
           playerTwo,
