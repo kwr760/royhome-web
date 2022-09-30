@@ -1,11 +1,12 @@
-import { Custom, CustomOptions } from '../theme.models';
+import { Icon, Color } from '../theme.models';
 
 declare module '@mui/material/styles/createTheme' {
-
   interface ThemeOptions {
-    custom?: CustomOptions;
+    color: Color;
+    icon: Icon;
   }
   interface Theme {
-    custom: Custom;
+    color: Color;
+    icon: Icon;
   }
 }

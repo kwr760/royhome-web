@@ -1,9 +1,12 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 import React, { ReactNode } from 'react';
 import {
+  initWebSocket,
+  remote,
   resetGame,
   startGame,
   takeTurn,
+  updateGameState,
   updatePlayer,
 } from '../../../../src/features/tictactoe/context/context.actions';
 import { TicTacToeProvider, useTicTacToe } from '../../../../src/features/tictactoe/context/context.provider';
@@ -16,7 +19,20 @@ import {
 } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { StateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
 
+jest.mock('../../../../src/features/tictactoe/context/context.stomp.ts');
+
 describe('feature/tictactoe/context/context.reducer', () => {
+  const createWrapper = (testState: StateType | undefined) => {
+    // eslint-disable-next-line react/display-name
+    return ({ children }: { children: ReactNode }) =>
+      <TicTacToeProvider sessionId="" state={testState}>{children}</TicTacToeProvider>;
+  };
+  beforeEach(() => {
+    global.console.log = jest.fn();
+  });
+  afterEach(() => {
+    (global.console.log as jest.Mock).mockRestore();
+  });
   it('should call takeTurn as One', () => {
     // Arrange
     const testState = {
@@ -29,10 +45,9 @@ describe('feature/tictactoe/context/context.reducer', () => {
       ...initialState,
       board: 'O-O-XOXXX',
       turn: PlayerEnum.Two,
-      gameState: GameStateEnum.Win,
+      gameState: GameStateEnum.Completed,
     };
-    const wrapper = ({ children }: { children: ReactNode }) =>
-      <TicTacToeProvider state={testState}>{children}</TicTacToeProvider>;
+    const wrapper = createWrapper(testState);
     const { result } = renderHook(() => useTicTacToe(), { wrapper });
 
     act(() => {
@@ -55,10 +70,9 @@ describe('feature/tictactoe/context/context.reducer', () => {
     const expectedState = {
       ...initialState,
       board: 'O-OOOOXOX',
-      gameState: GameStateEnum.Win,
+      gameState: GameStateEnum.Completed,
     };
-    const wrapper = ({ children }: { children: ReactNode }) =>
-      <TicTacToeProvider state={testState}>{children}</TicTacToeProvider>;
+    const wrapper = createWrapper(testState);
     const { result } = renderHook(() => useTicTacToe(), { wrapper });
 
     act(() => {
@@ -76,10 +90,9 @@ describe('feature/tictactoe/context/context.reducer', () => {
       ...initialState,
       board: 'O-OO-OXOX',
       turn: PlayerEnum.Two,
-      gameState: GameStateEnum.Ready,
+      gameState: GameStateEnum.Setup,
     } as StateType;
-    const wrapper = ({ children }: { children: ReactNode }) =>
-      <TicTacToeProvider state={testState}>{children}</TicTacToeProvider>;
+    const wrapper = createWrapper(testState);
     const { result } = renderHook(() => useTicTacToe(), { wrapper });
 
     act(() => {
@@ -101,8 +114,7 @@ describe('feature/tictactoe/context/context.reducer', () => {
     const expectedState = {
       ...initialState,
     };
-    const wrapper = ({ children }: { children: ReactNode}) =>
-      <TicTacToeProvider state={testState}>{children}</TicTacToeProvider>;
+    const wrapper = createWrapper(testState);
     const { result } = renderHook(() => useTicTacToe(), { wrapper });
 
     act(() => {
@@ -123,8 +135,7 @@ describe('feature/tictactoe/context/context.reducer', () => {
       ...initialState,
       gameState: GameStateEnum.Active,
     };
-    const wrapper = ({ children }: { children: ReactNode}) =>
-      <TicTacToeProvider state={testState}>{children}</TicTacToeProvider>;
+    const wrapper = createWrapper(testState);
     const { result } = renderHook(() => useTicTacToe(), { wrapper });
 
     act(() => {
@@ -151,8 +162,7 @@ describe('feature/tictactoe/context/context.reducer', () => {
       gameState: GameStateEnum.Active,
       playerOne: newPlayer,
     };
-    const wrapper = ({ children }: { children: ReactNode}) =>
-      <TicTacToeProvider state={testState}>{children}</TicTacToeProvider>;
+    const wrapper = createWrapper(testState);
     const { result } = renderHook(() => useTicTacToe(), { wrapper });
 
     act(() => {
@@ -179,13 +189,58 @@ describe('feature/tictactoe/context/context.reducer', () => {
       gameState: GameStateEnum.Active,
       playerTwo: newPlayer,
     };
-    const wrapper = ({ children }: { children: ReactNode}) =>
-      <TicTacToeProvider state={testState}>{children}</TicTacToeProvider>;
+    const wrapper = createWrapper(testState);
     const { result } = renderHook(() => useTicTacToe(), { wrapper });
 
     act(() => {
       const { dispatch } = result.current;
       dispatch( updatePlayer({ position: PlayerEnum.Two, player: newPlayer }));
+    });
+
+    // Assert
+    const { state } = result.current;
+    expect(state).toEqual(expectedState);
+  });
+  it('should call initWebSocket', () => {
+    // Arrange
+    const callback = jest.fn();
+    const destination = 'game/session-id';
+    const testState = {
+      ...initialState,
+    } as StateType;
+    const expectedState = {
+      ...initialState,
+      client: undefined,
+    };
+    const wrapper = createWrapper(testState);
+    const { result } = renderHook(() => useTicTacToe(), { wrapper });
+
+    act(() => {
+      const { dispatch } = result.current;
+      dispatch( initWebSocket({ client: null, destination, callback } ));
+    });
+
+    // Assert
+    const { state } = result.current;
+    expect(state).toEqual(expectedState);
+    // expect(client).toBeCalledWith(destination);
+  });
+  it('should call remote', () => {
+    // Arrange
+    const message = 'This is a message';
+    const testState = {
+      ...initialState,
+    } as StateType;
+    const expectedState = {
+      ...initialState,
+      message,
+    };
+    const wrapper = createWrapper(testState);
+    const { result } = renderHook(() => useTicTacToe(), { wrapper });
+
+    act(() => {
+      const { dispatch } = result.current;
+      dispatch( remote({ message }));
     });
 
     // Assert
@@ -199,8 +254,7 @@ describe('feature/tictactoe/context/context.reducer', () => {
       board: 'X-X-XO--O',
       turn: PlayerEnum.Two,
     } as StateType;
-    const wrapper = ({ children }: { children: ReactNode}) =>
-      <TicTacToeProvider state={testState}>{children}</TicTacToeProvider>;
+    const wrapper = createWrapper(testState);
     const { result } = renderHook(() => useTicTacToe(), { wrapper });
 
     act(() => {
@@ -211,5 +265,26 @@ describe('feature/tictactoe/context/context.reducer', () => {
     // Assert
     const { state } = result.current;
     expect(state).toEqual(testState);
+  });
+  it('should call updateGameState', () => {
+    // Arrange
+    const testState = {
+      ...initialState,
+    } as StateType;
+    const expectedState = {
+      ...initialState,
+      gameState: GameStateEnum.Message,
+    };
+    const wrapper = createWrapper(testState);
+    const { result } = renderHook(() => useTicTacToe(), { wrapper });
+
+    act(() => {
+      const { dispatch } = result.current;
+      dispatch( updateGameState(GameStateEnum.Message));
+    });
+
+    // Assert
+    const { state } = result.current;
+    expect(state).toEqual(expectedState);
   });
 });

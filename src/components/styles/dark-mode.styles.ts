@@ -5,29 +5,47 @@ import type { StyleRules } from '@mui/styles/withStyles';
 
 const styles = (theme: Theme): StyleRules =>
   createStyles({
-    button: {
-      margin: theme.spacing(3),
-      border: theme.spacing(0),
-      lineHeight: '1.2',
-      borderRadius: '1rem',
-      paddingRight: '0.5rem',
-      paddingLeft: '0.5rem',
-      minWidth: 0,
-      color: theme.palette.secondary.main,
-      outline: 'none',
-      '&:hover, &:focus&:hover': {
-        color: emphasize(theme.palette.secondary.main, 0.4),
-        background: emphasize(theme.palette.primary.dark, 0.2),
-        borderRadius: '1rem',
-        outline: 'none',
+    darkness: {
+      width: 62,
+      height: 34,
+      padding: 7,
+      margin: theme.spacing(1),
+      '& .MuiSwitch-switchBase': {
+        margin: 1,
+        padding: 0,
+        transform: 'translateX(6px)',
+        '&.Mui-checked': {
+          transform: 'translateX(22px)',
+          '& .MuiSwitch-thumb:before': {
+            backgroundImage: `url('data:image/svg+xml;utf8,${theme.icon.moon}')`,
+          },
+          '& + .MuiSwitch-track': {
+            opacity: 1,
+            backgroundColor: emphasize(theme.color.banner.control.background, 0.4),
+          },
+        },
       },
-      '&:focus': {
-        borderRadius: '1rem',
-        outline: 'none',
+      '& .MuiSwitch-thumb': {
+        backgroundColor: emphasize(theme.color.banner.control.background, 0.2),
+        width: theme.spacing(4),
+        height: theme.spacing(4),
+        '&:before': {
+          content: '\'\'',
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          left: 0,
+          top: 0,
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundImage: `url('data:image/svg+xml;utf8,${theme.icon.sun}')`,
+        },
       },
-    },
-    moonFix: {
-      marginBottom: '0.125rem',
+      '& .MuiSwitch-track': {
+        opacity: 1,
+        backgroundColor: emphasize(theme.color.banner.control.background, 0.4),
+        borderRadius: 20 / 2,
+      },
     },
   });
 

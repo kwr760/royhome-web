@@ -44,6 +44,8 @@ describe('config/index', () => {
             enableHttps: true,
             deriveApiUrl: true,
           },
+          isBrowser: true,
+          websocketUrl: 'wss://api.royk.us/tictactoe',
         },
       };
 
@@ -93,6 +95,8 @@ describe('config/index', () => {
             enableHttps: true,
             deriveApiUrl: true,
           },
+          isBrowser: true,
+          websocketUrl: 'wss://api.royk.us/tictactoe',
         },
       };
 
@@ -142,6 +146,8 @@ describe('config/index', () => {
             enableHttps: false,
             deriveApiUrl: true,
           },
+          isBrowser: true,
+          websocketUrl: 'wss://api.royk.us/tictactoe',
         },
       };
 
@@ -191,6 +197,8 @@ describe('config/index', () => {
             enableHttps: true,
             deriveApiUrl: false,
           },
+          isBrowser: true,
+          websocketUrl: 'wss://api.royk.us/tictactoe',
         },
       };
 
@@ -240,6 +248,8 @@ describe('config/index', () => {
             enableHttps: true,
             deriveApiUrl: true,
           },
+          isBrowser: true,
+          websocketUrl: 'wss://api.royk.us/tictactoe',
         },
       };
       global.origin = '';

@@ -5,20 +5,20 @@ import type { StyleRules } from '@mui/styles/withStyles';
 const styles = (theme: Theme): StyleRules =>
   createStyles({
     paper: {
-      color: theme.palette.primary.dark,
-      borderColor: theme.palette.primary.dark,
+      backgroundColor: theme.color.background.paper,
+      borderColor: theme.color.foreground.base,
       border: '1px solid',
     },
     list: {
-      color: theme.palette.primary.dark,
+      color: theme.color.foreground.base,
       paddingTop: 0,
       paddingBottom: 0,
     },
     icon: {
-      color: theme.palette.primary.dark,
+      color: theme.color.foreground.base,
     },
     divider: {
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.color.foreground.base,
     },
     profile: {
       paddingRight: theme.spacing(2),

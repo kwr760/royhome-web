@@ -1,6 +1,6 @@
 import { BoardType } from '../contracts/tictactoe.context';
 import { GameStateEnum, PlayerEnum } from '../contracts/tictactoe.enum';
-import { GameEvaluationReturn } from '../contracts/tictacttoe.functions';
+import { GameEvaluationReturn } from '../contracts/tictactoe.functions';
 import { findWinner } from './find-winner';
 import { isGameOver } from './is-game-over';
 
@@ -32,7 +32,7 @@ class WinEvaluator extends AbstractEvaluator<BoardType, GameEvaluationReturn> {
     const winner = findWinner(board);
     if (winner !== PlayerEnum.Neither) {
       return {
-        gameState: GameStateEnum.Win,
+        gameState: GameStateEnum.Completed,
         winner,
       };
     }
@@ -44,7 +44,7 @@ class TieEvaluator extends AbstractEvaluator<BoardType, GameEvaluationReturn> {
   public evaluate(board: BoardType): GameEvaluationReturn {
     if (isGameOver(board)) {
       return {
-        gameState: GameStateEnum.Tie,
+        gameState: GameStateEnum.Completed,
       };
     }
     return super.evaluate(board);

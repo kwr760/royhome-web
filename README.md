@@ -76,13 +76,13 @@ Since I have two url, I can develop with `royk.us`, while still see the released
 
 ### nginx
 
-I using ngnix to direct my request to the correct server.  `<royk.us|royhome.net>` goes to the web server, for production I run a 
+I am using ngnix to direct my request to the correct server.  `<royk.us|royhome.net>` goes to the web server, for production I run a 
 blue/green environment mainly to limit the downtime when releasing.  The downtime currently is the time to bounce
 the ngnix server, very quick.  `api.<royk.us|royhome.net>` directs the requests to the API server.
 
 ## Production
 
-I using the linux systemd to start the web server as a service, so that reboot will handle the restart of the web
+I am using the linux systemd to start the web server as a service, so that reboot will handle the restart of the web
 server.
 
 I used `pm2` for a while, I had no complaints. I stopped using it as it adds a layer without benefit to me.  My linode

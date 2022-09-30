@@ -70,7 +70,13 @@ describe('server/index', () => {
       const expectedHelmet = {
         contentSecurityPolicy: {
           directives: {
-            'connect-src': ['\'self\'', '*.royk.us', '*.royhome.net', 'royk.auth0.com', 'localhost:5000'],
+            'connect-src': [
+              '\'self\'',
+              'wss:',
+              '*.royk.us',
+              '*.royhome.net',
+              'royk.auth0.com',
+            ],
             'frame-src': ['\'self\'', 'royk.auth0.com'],
             'script-src': ['\'self\'', '\'unsafe-inline\'', '*.royk.us', '*.royhome.net'],
             'img-src': ['\'self\'', 'data:', 'avatars.githubusercontent.com'],
