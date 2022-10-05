@@ -1,123 +1,58 @@
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  FormControlLabel,
-  Switch,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, } from '@mui/material';
 import type { WithStyles } from '@mui/styles';
 import { withStyles } from '@mui/styles';
-import React, { FunctionComponent, memo } from 'react';
-import { FiGlobe } from 'react-icons/fi';
-import { resetGame, startGame, updateGameState, updatePlayer } from '../context/context.actions';
+import React, { FunctionComponent, memo, useEffect, useState } from 'react';
+import { resetGame, startGame, updateGameState } from '../context/context.actions';
 import { useTicTacToe } from '../context/context.provider';
-import { GameStateEnum, PlayerEnum, PlayerTypeEnum } from '../contracts/tictactoe.enum';
+import { GameStateEnum } from '../contracts/tictactoe.enum';
 import { styles } from '../styles/game-control.styles';
+import PlayerControl from './player-control';
 
-interface Props {
-  openDialog: boolean,
-  setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>;
-}
-type PlayerControlProps = Props & WithStyles<typeof styles>;
-const PlayerControlComponent: FunctionComponent<PlayerControlProps> = (
-  { openDialog, setOpenDialog, classes },
+type PlayerControlProps = WithStyles<typeof styles>;
+const GameControl: FunctionComponent<PlayerControlProps> = (
+  { classes },
 ) => {
+  const [openDialog, setOpenDialog] = useState(true);
   const {
     state,
     dispatch,
   } = useTicTacToe();
-  const { playerOne, playerTwo } = state;
+  const { gameState, client, sessionId, playerOne, playerTwo } = state;
   const onCloseControl = () => {
     dispatch(updateGameState(GameStateEnum.Message));
     setOpenDialog(false);
   };
   const onPlayGame = () => {
+    if (client) {
+      client.publish({
+        destination: '/start',
+        body: sessionId,
+      });
+    }
     dispatch(resetGame());
     dispatch(startGame());
     setOpenDialog(false);
   };
-  const onChangeName = (position: PlayerEnum, event: React.ChangeEvent<HTMLInputElement>) => {
-    const player = position === PlayerEnum.One ? playerOne : playerTwo;
-    const name = event.target.value;
-    dispatch(updatePlayer({ position, player: {
-      ...player,
-      name,
-    } }));
-  };
-  const onChangeType = (position: PlayerEnum, event: React.ChangeEvent<HTMLInputElement>) => {
-    const player = position === PlayerEnum.One ? playerOne : playerTwo;
-    const type = event.target.checked ? PlayerTypeEnum.Human : PlayerTypeEnum.Computer;
-    dispatch(updatePlayer({ position, player: {
-      ...player,
-      type,
-    } }));
-  };
+
+  useEffect(() => {
+    switch (gameState) {
+      case GameStateEnum.Setup:
+        setOpenDialog(true);
+        break;
+      default: {
+        break;
+      }
+    }
+  }, [gameState]);
+
   return (
     <Dialog
       open={openDialog}
       className={classes.dialog}
     >
       <DialogContent>
-        <TextField
-          id="player-name-one"
-          label="Player X"
-          variant="outlined"
-          className={classes.nameInput}
-          defaultValue={playerOne.name}
-          onBlur={(event: React.FocusEvent<HTMLInputElement>) => onChangeName(PlayerEnum.One, event)}
-        />
-        <Box
-          className={classes.playerTypeGroup}
-        >
-          <FormControlLabel
-            control={<Switch
-              data-testid="player-one-type"
-              className={classes.playerType}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChangeType(PlayerEnum.One, event)}
-              checked={playerOne.type === PlayerTypeEnum.Human}
-            />}
-            label=""
-          />
-          <FormControlLabel
-            sx={{ lineHeight: '32px' }}
-            control={<Switch className={classes.remote} />}
-            label={<Typography sx={{ lineHeight: '1' }}>
-              <FiGlobe size="1.5em" className={classes.icon} />
-            </Typography>}
-          />
-        </Box>
-        <TextField
-          id="player-name-two"
-          label="Player O"
-          variant="outlined"
-          className={classes.nameInput}
-          defaultValue={playerTwo.name}
-          onBlur={(event: React.FocusEvent<HTMLInputElement>) => onChangeName(PlayerEnum.Two, event)}
-        />
-        <Box
-          className={classes.playerTypeGroup}
-        >
-          <FormControlLabel
-            control={<Switch
-              data-testid="player-two-type"
-              className={classes.playerType}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChangeType(PlayerEnum.Two, event)}
-              checked={playerTwo.type === PlayerTypeEnum.Human}
-            />}
-            label=""
-          />
-          <FormControlLabel
-            sx={{ lineHeight: '32px' }}
-            control={<Switch className={classes.remote} />}
-            label={<Typography sx={{ lineHeight: '1' }} aria-label="kroy" >
-              <FiGlobe size="1.5em" className={classes.icon} />
-            </Typography>}
-          />
-        </Box>
+        <PlayerControl player={playerOne} />
+        <PlayerControl player={playerTwo} />
       </DialogContent>
       <DialogActions className={classes.buttonBar}>
         <Button className={classes.button} onClick={onCloseControl}>Close</Button>
@@ -127,4 +62,4 @@ const PlayerControlComponent: FunctionComponent<PlayerControlProps> = (
   );
 };
 
-export default memo(withStyles(styles)(PlayerControlComponent));
+export default memo(withStyles(styles)(GameControl));
