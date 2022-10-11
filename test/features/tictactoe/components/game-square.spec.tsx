@@ -1,24 +1,10 @@
-import React, { Reducer } from 'react';
-import { ThemeProvider } from '@mui/styles';
-import { fireEvent, render } from '@testing-library/react';
+import React from 'react';
 import GameSquare from '../../../../src/features/tictactoe/components/game-square';
 import { ActionEnum, GameStateEnum, PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { initialState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
-import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
-import { StateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
-import { themeLight } from '../../../../src/theme-light';
+import { fireEvent, render, screen } from '../utils/testing-library';
 
 describe('feature/tictactoe/component/game-square', () => {
-  const emptyReducer = jest.fn();
-  const getComponent = (testState: StateType, reducer: Reducer<unknown, unknown>) => {
-    return (
-      <ThemeProvider theme={themeLight}>
-        <TicTacToeProvider sessionId="" state={testState} reducer={reducer}>
-          <GameSquare position={5} />
-        </TicTacToeProvider>
-      </ThemeProvider>
-    );
-  };
   beforeEach(() => {
     global.console.log = jest.fn();
   });
@@ -32,6 +18,7 @@ describe('feature/tictactoe/component/game-square', () => {
       board: '---------',
       turn: PlayerEnum.Two,
       gameState: GameStateEnum.Active,
+      sessionId: 'session-id',
     };
     const expectedPayload = {
       position: 5,
@@ -40,9 +27,12 @@ describe('feature/tictactoe/component/game-square', () => {
     const reducer = jest.fn(() => (state));
 
     // Act
-    const { getByRole } = render(getComponent(state, reducer));
-    const button = getByRole(/button/);
-    getByRole(/heading/);
+    render(<GameSquare position={5} />, {
+      state,
+      reducer,
+    });
+    const button = screen.getByRole(/button/);
+    screen.getByRole(/heading/);
     fireEvent.click(button);
 
     // Assert
@@ -57,10 +47,12 @@ describe('feature/tictactoe/component/game-square', () => {
     };
 
     // Act
-    const { getByText } = render(getComponent(state, emptyReducer));
+    render(<GameSquare position={5} />, {
+      state,
+    });
 
     // Assert
-    getByText(/O/);
+    screen.getByText(/O/);
   });
   it('should render - X', () => {
     // Arrange
@@ -70,9 +62,11 @@ describe('feature/tictactoe/component/game-square', () => {
     };
 
     // Act
-    const { getByText } = render(getComponent(state, emptyReducer));
+    render(<GameSquare position={5} />, {
+      state,
+    });
 
     // Assert
-    getByText(/X/);
+    screen.getByText(/X/);
   });
 });

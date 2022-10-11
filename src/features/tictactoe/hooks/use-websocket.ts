@@ -1,25 +1,20 @@
 import { useEffect, useState } from 'react';
-import { initWebSocket, remote } from '../context/context.actions';
+import { initWebSocket } from '../context/context.actions';
 import { useTicTacToe } from '../context/context.provider';
+import { websocketCallback } from '../functions/websocket-callback';
 
-export const useWebsocket = () => {
+export const useWebsocket = (): void => {
   const { state, dispatch } = useTicTacToe();
   const [initiated, setInitiated] = useState(false);
   const { client, sessionId  } = state;
 
   useEffect(() => {
-    const callback = (msg: { body: string; }) => {
-      dispatch(remote({
-        message: msg.body,
-      }));
-    };
-
     if (!initiated) {
       const destination = `/session/${sessionId}`;
       dispatch(initWebSocket({
         client,
         destination,
-        callback,
+        callback: websocketCallback(dispatch),
       }));
       setInitiated(true);
     }

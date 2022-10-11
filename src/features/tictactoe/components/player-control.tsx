@@ -1,4 +1,4 @@
-import { Box, } from '@mui/material';
+import { Box } from '@mui/material';
 import type { WithStyles } from '@mui/styles';
 import { withStyles } from '@mui/styles';
 import React, { FunctionComponent, memo } from 'react';

@@ -36,8 +36,8 @@ const PlayerStatusComponent: FunctionComponent<PlayerStatusProps> = (
         </span>;
       case GameStateEnum.Completed: {
         const winner = getWinner(state);
-        if (winner) {
-          return <span>${winner} is a winner.</span>;
+        if (winner?.name) {
+          return <span>${winner.name} is the winner.</span>;
         } else {
           return <span>The game ended in a tie.</span>;
         }

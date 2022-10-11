@@ -4,15 +4,15 @@ import { useTicTacToe } from '../context/context.provider';
 import { GameStateEnum, PlayerEnum, PlayerTypeEnum } from '../contracts/tictactoe.enum';
 import { evaluateNextMove } from '../functions/evaluate-next-move';
 
-export const useAI = () => {
+export const useAI = (): void => {
   const { state, dispatch } = useTicTacToe();
   const { turn, board, playerOne, playerTwo, gameState } = state;
 
   useEffect(() => {
     const player = turn === PlayerEnum.One ? playerOne : playerTwo;
     const automatedTurn = () => {
-      const position = evaluateNextMove({ board: board, player: player.piece });
-      dispatch(takeTurn({ position, player: player.piece }));
+      const position = evaluateNextMove({ board: board, player: turn });
+      dispatch(takeTurn({ position, player: turn }));
     };
 
     switch (gameState) {

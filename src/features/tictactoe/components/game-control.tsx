@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActions, DialogContent, } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent } from '@mui/material';
 import type { WithStyles } from '@mui/styles';
 import { withStyles } from '@mui/styles';
 import React, { FunctionComponent, memo, useEffect, useState } from 'react';
@@ -12,7 +12,7 @@ type PlayerControlProps = WithStyles<typeof styles>;
 const GameControl: FunctionComponent<PlayerControlProps> = (
   { classes },
 ) => {
-  const [openDialog, setOpenDialog] = useState(true);
+  const [openDialog, setOpenDialog] = useState(false);
   const {
     state,
     dispatch,

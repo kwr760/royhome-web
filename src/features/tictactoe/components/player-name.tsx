@@ -1,4 +1,4 @@
-import { TextField, } from '@mui/material';
+import { TextField } from '@mui/material';
 import type { WithStyles } from '@mui/styles';
 import { withStyles } from '@mui/styles';
 import React, { FunctionComponent, memo } from 'react';
