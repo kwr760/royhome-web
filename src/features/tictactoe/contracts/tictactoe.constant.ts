@@ -26,4 +26,33 @@ const orderThree = [
   1, 3, 5, 7,
 ];
 
-export { wins, orderOne, orderTwo, orderThree };
+const randomNames = [
+  'Matt',
+  'Jasmine',
+  'David',
+  'Vince',
+  'Candyce',
+  'Rob',
+  'Tanu',
+  'Shinu',
+  'Tuan',
+  'Aditya',
+  'Sandeep',
+  'Bob',
+  'Bill',
+  'Steve',
+  'Bart',
+  'Larry',
+  'Jim',
+  'Trupti',
+  'Ron',
+  'Roberto',
+  'Chris',
+  'Jeff',
+  'Jaya',
+  'Salma',
+  'Frank',
+  'Jay',
+];
+
+export { wins, orderOne, orderTwo, orderThree, randomNames };

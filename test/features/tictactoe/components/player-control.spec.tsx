@@ -26,6 +26,7 @@ describe('features/tictactoe/components/player-control', () => {
       playerState: PlayerStateEnum.Active,
       type: PlayerTypeEnum.Human,
       piece: PlayerEnum.One,
+      remote: false,
     };
 
     // Act

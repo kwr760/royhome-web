@@ -1,6 +1,6 @@
 import React from 'react';
 import GameControl from '../../../../src/features/tictactoe/components/game-control';
-import { startGame, updateGameState } from '../../../../src/features/tictactoe/context/context.actions';
+import * as mockActions from '../../../../src/features/tictactoe/context/context.actions';
 import { GameStateEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { initialState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { StateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
@@ -10,7 +10,6 @@ jest
   .mock('../../../../src/features/tictactoe/components/player-control',
     () => jest.fn(() => 'Player Control' ),
   );
-jest.mock('../../../../src/features/tictactoe/context/context.actions');
 
 describe('feature/tictactoe/component/game-control', () => {
   beforeEach(() => {
@@ -50,13 +49,14 @@ describe('feature/tictactoe/component/game-control', () => {
       ...initialState,
     };
     const reducer = jest.fn(() => ( state ));
+    jest.spyOn(mockActions, 'updateGameState');
 
     // Act
     render(<GameControl />, { state, reducer });
     fireEvent.click(screen.getByRole('button', { name: 'Close'}));
 
     // Assert
-    expect(updateGameState).toBeCalledWith(GameStateEnum.Message);
+    expect(mockActions.updateGameState).toBeCalledWith(GameStateEnum.Message);
   });
   it('should dispatch startGame on Play Game', () => {
     // Arrange
@@ -64,13 +64,14 @@ describe('feature/tictactoe/component/game-control', () => {
       ...initialState,
     };
     const reducer = jest.fn(() => ( state ));
+    jest.spyOn(mockActions, 'startGame');
 
     // Act
     render(<GameControl />, { state, reducer });
     fireEvent.click(screen.getByRole('button', { name: 'Play Game'}));
 
     // Assert
-    expect(startGame).toBeCalled();
+    expect(mockActions.startGame).toBeCalled();
   });
   it('should publish on on Play Game', () => {
     // Arrange
@@ -83,8 +84,8 @@ describe('feature/tictactoe/component/game-control', () => {
     } as unknown as StateType;
     const reducer = jest.fn(() => ( state ));
     const expectedPublish = {
-      body: 'session-id',
       destination: '/start',
+      payload: '{"sessionId":"session-id","name":"Player #1"}',
     };
 
     // Act
@@ -92,7 +93,6 @@ describe('feature/tictactoe/component/game-control', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Play Game'}));
 
     // Assert
-    expect(startGame).toBeCalled();
     expect(mockPublish).toBeCalledWith(expectedPublish);
   });
 });

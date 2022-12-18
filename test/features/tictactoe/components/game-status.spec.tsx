@@ -2,11 +2,7 @@ import React from 'react';
 import GameStatus from '../../../../src/features/tictactoe/components/game-status';
 import { updateGameState } from '../../../../src/features/tictactoe/context/context.actions';
 import { GameStateEnum, PlayerStateEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
-import {
-  initialPlayerOne,
-  initialPlayerTwo,
-  initialState,
-} from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
+import { initialPlayerOne, initialState, } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { fireEvent, render, screen } from '../utils/testing-library';
 
 jest.mock('../../../../src/features/tictactoe/context/context.actions');
@@ -86,27 +82,6 @@ describe('feature/tictactoe/component/game-status', () => {
 
     // Assert
     screen.getByText(/Player #1 is the winner./);
-  });
-  it('should render winner #2', () => {
-    // Arrange
-    const mockState = {
-      ...initialState,
-      gameState: GameStateEnum.Completed,
-      playerTwo: {
-        ...initialPlayerTwo,
-        playerState: PlayerStateEnum.Winner,
-      },
-    };
-    const reducer = jest.fn(() => ( mockState ));
-
-    // Act
-    render(<GameStatus />, {
-      state: mockState,
-      reducer,
-    });
-
-    // Assert
-    screen.getByText(/Player #2 is the winner./);
   });
   it('should dispatch updateGameState on Exit', () => {
     // Arrange

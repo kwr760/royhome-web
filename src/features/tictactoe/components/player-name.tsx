@@ -4,7 +4,7 @@ import { withStyles } from '@mui/styles';
 import React, { FunctionComponent, memo } from 'react';
 import { updatePlayer } from '../context/context.actions';
 import { useTicTacToe } from '../context/context.provider';
-import { PlayerEnum } from '../contracts/tictactoe.enum';
+import { PlayerEnum, PlayerTypeEnum } from '../contracts/tictactoe.enum';
 import { Player } from '../contracts/tictactoe.models';
 import { styles } from '../styles/player-name.styles';
 
@@ -25,6 +25,7 @@ const PlayerName: FunctionComponent<PlayerNameProps> = (
       name,
     } }));
   };
+  const disabled = player.type === PlayerTypeEnum.Remote;
   return (
     <TextField
       id={`player-name-${player.piece}`}
@@ -32,6 +33,7 @@ const PlayerName: FunctionComponent<PlayerNameProps> = (
       variant="outlined"
       className={classes.nameInput}
       defaultValue={player.name}
+      disabled={disabled}
       onBlur={(event: React.FocusEvent<HTMLInputElement>) => onChangeName(player.piece, event)}
     />
   );

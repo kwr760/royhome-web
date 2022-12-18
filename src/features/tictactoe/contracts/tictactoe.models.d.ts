@@ -8,9 +8,10 @@ type Player = {
   playerState: PlayerStateEnum,
   type: PlayerTypeEnum,
   piece: PlayerEnum,
+  remote: boolean,
 }
 type StateType = {
-  sessionId: string | undefined,
+  sessionId: string,
   client: Client | null,
   board: Board,
   gameState: GameStateEnum,

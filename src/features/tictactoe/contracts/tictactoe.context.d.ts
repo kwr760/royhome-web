@@ -1,13 +1,15 @@
 import type { Action } from '@reduxjs/toolkit';
 import { Client } from '@stomp/stompjs';
 import { ReactNode, Reducer } from 'react';
-import { ActionEnum, GameStateEnum, PlayerEnum } from './tictactoe.enum';
+import { Auth0User } from '../../../contracts/auth0.models';
+import { ActionEnum, GameStateEnum, PlayerEnum, PublishEnum } from './tictactoe.enum';
 import { Player, StateType } from './tictactoe.models';
 
 type BoardType = string;
 type MiddleWareFunction = (action: Action | undefined, state: StateType) => StateType;
 type ProviderType = {
-  sessionId?: string,
+  sessionId: string,
+  user: Auth0User,
   state?: StateType,
   reducer?: Reducer<unknown, unknown>,
   beforeware?: MiddleWareFunction[],
@@ -66,7 +68,14 @@ type ContextType = {
   state: StateType,
   dispatch: DispatchType,
 };
-
+type StartActionPayload = {
+  sessionId: string,
+  playerName: string,
+}
+type PublishAction = {
+  destination: PublishEnum.Start,
+  payload: string,
+};
 
 export type {
   ProviderType,
@@ -87,4 +96,6 @@ export type {
   MessagePayload,
   InitWebSocketPayload,
   BoardType,
+  StartActionPayload,
+  PublishAction,
 };

@@ -21,6 +21,7 @@ describe('features/tictactoe/components/player-type', () => {
       playerState: PlayerStateEnum.Active,
       type: PlayerTypeEnum.Human,
       piece: PlayerEnum.One,
+      remote: false,
     };
     const expectedChange = {
       player: {
@@ -28,6 +29,7 @@ describe('features/tictactoe/components/player-type', () => {
         piece: 'X',
         playerState: 'active',
         type: 'computer',
+        remote: false,
       },
       position: 'X',
     };
@@ -46,6 +48,7 @@ describe('features/tictactoe/components/player-type', () => {
       playerState: PlayerStateEnum.Active,
       type: PlayerTypeEnum.Computer,
       piece: PlayerEnum.One,
+      remote: false,
     };
     const expectedChange = {
       player: {
@@ -53,6 +56,7 @@ describe('features/tictactoe/components/player-type', () => {
         piece: PlayerEnum.One,
         playerState: PlayerStateEnum.Active,
         type: PlayerTypeEnum.Human,
+        remote: false,
       },
       position: PlayerEnum.One,
     };

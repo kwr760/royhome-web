@@ -3,6 +3,7 @@ import type { RenderOptions, RenderResult } from '@testing-library/react';
 import { render as baseRender } from '@testing-library/react';
 import type { Reducer } from 'react';
 import React, { FC, ReactElement } from 'react';
+import { Auth0User } from '../../../../src/contracts/auth0.models';
 import { TicTacToeProvider as Provider } from '../../../../src/features/tictactoe/context/context.provider';
 import { initialState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { StateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
@@ -12,6 +13,7 @@ const noop = () => {};
 
 type CustomRender = {
   sessionId?: string,
+  user?: Auth0User,
   state?: StateType,
   reducer?: Reducer<unknown, unknown>
 };
@@ -22,6 +24,7 @@ const customRender = (
 ): RenderResult => {
   const {
     sessionId = 'session-id',
+    user = {},
     state = initialState,
     reducer = noop,
     ...renderOptions
@@ -31,6 +34,7 @@ const customRender = (
       <ThemeProvider theme={themeLight}>
         <Provider
           sessionId={sessionId}
+          user={user}
           state={state}
           reducer={reducer}
         >

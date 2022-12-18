@@ -2,7 +2,7 @@ import { Button, Dialog, DialogActions, DialogContent } from '@mui/material';
 import type { WithStyles } from '@mui/styles';
 import { withStyles } from '@mui/styles';
 import React, { FunctionComponent, memo, useEffect, useState } from 'react';
-import { resetGame, startGame, updateGameState } from '../context/context.actions';
+import { resetGame, startAction, startGame, updateGameState } from '../context/context.actions';
 import { useTicTacToe } from '../context/context.provider';
 import { GameStateEnum } from '../contracts/tictactoe.enum';
 import { styles } from '../styles/game-control.styles';
@@ -24,10 +24,11 @@ const GameControl: FunctionComponent<PlayerControlProps> = (
   };
   const onPlayGame = () => {
     if (client) {
-      client.publish({
-        destination: '/start',
-        body: sessionId,
+      const action = startAction({
+        sessionId,
+        playerName: playerOne.name,
       });
+      client.publish(action);
     }
     dispatch(resetGame());
     dispatch(startGame());

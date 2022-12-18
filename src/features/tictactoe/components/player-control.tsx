@@ -22,7 +22,7 @@ const PlayerControl: FunctionComponent<PlayerControlProps> = (
         className={classes.playerTypeGroup}
       >
         <PlayerType player={player} />
-        <PlayerRemote />
+        <PlayerRemote player={player} />
       </Box>
     </>
   );

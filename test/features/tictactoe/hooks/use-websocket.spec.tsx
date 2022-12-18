@@ -13,7 +13,7 @@ describe('feature/tictactoe/hooks/use-websocket', () => {
   const createWrapper = (testState: StateType | undefined) => {
     // eslint-disable-next-line react/display-name
     return ({ children }: { children: ReactNode }) =>
-      <TicTacToeProvider sessionId="" state={testState}>{children}</TicTacToeProvider>;
+      <TicTacToeProvider sessionId="" user={{}} state={testState}>{children}</TicTacToeProvider>;
   };
 
   it('should determine a completed', () => {

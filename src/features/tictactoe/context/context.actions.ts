@@ -1,16 +1,19 @@
 import {
+  InitWebSocketAction,
+  InitWebSocketPayload,
+  MessagePayload,
+  PublishAction,
+  RemoteAction,
   ResetGameAction,
+  StartActionPayload,
   StartGameAction,
   TakeTurnAction,
-  UpdatePlayerAction,
-  RemoteAction,
-  InitWebSocketAction,
   TakeTurnPayload,
+  UpdateGameStateAction,
+  UpdatePlayerAction,
   UpdatePlayerPayload,
-  MessagePayload,
-  InitWebSocketPayload, UpdateGameStateAction,
 } from '../contracts/tictactoe.context';
-import { ActionEnum, GameStateEnum } from '../contracts/tictactoe.enum';
+import { ActionEnum, GameStateEnum, PublishEnum } from '../contracts/tictactoe.enum';
 
 const resetGame = (): ResetGameAction => ({
   type: ActionEnum.Reset,
@@ -53,5 +56,12 @@ const initWebSocket = ({ client, destination, callback } : InitWebSocketPayload)
     callback,
   },
 });
+const startAction = ({ sessionId, playerName } : StartActionPayload ): PublishAction => ({
+  destination: PublishEnum.Start,
+  payload: JSON.stringify({
+    sessionId,
+    name: playerName,
+  }),
+});
 
-export { resetGame, startGame, takeTurn, updateGameState, updatePlayer, remote, initWebSocket };
+export { resetGame, startGame, takeTurn, updateGameState, updatePlayer, remote, initWebSocket, startAction };

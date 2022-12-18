@@ -31,6 +31,9 @@ enum ActionEnum {
   Remote = 'remote',
   InitializeWebSocket = 'initWebSocket',
 }
+enum PublishEnum {
+  Start = '/start',
+}
 enum MessageTypeEnum {
   Unknown = 'unknown',
   Setup = 'setup',
@@ -38,4 +41,4 @@ enum MessageTypeEnum {
   Tie = 'tie',
 }
 
-export { PlayerStateEnum, GameStateEnum, ActionEnum, PlayerTypeEnum, PlayerEnum, MessageTypeEnum };
+export { PlayerStateEnum, GameStateEnum, ActionEnum, PlayerTypeEnum, PlayerEnum, MessageTypeEnum, PublishEnum };

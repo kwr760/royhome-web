@@ -25,6 +25,7 @@ const PlayerType: FunctionComponent<PlayerControlProps> = (
       type,
     } }));
   };
+  const disabled = player.type === PlayerTypeEnum.Remote;
   return (
     <FormControlLabel
       control={<Switch
@@ -32,6 +33,7 @@ const PlayerType: FunctionComponent<PlayerControlProps> = (
         className={classes.playerType}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChangeType(player.piece, event)}
         checked={player.type === PlayerTypeEnum.Human}
+        disabled={disabled}
       />}
       label=""
     />

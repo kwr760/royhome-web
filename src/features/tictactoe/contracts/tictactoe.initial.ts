@@ -6,12 +6,14 @@ const initialPlayerOne = {
   playerState: PlayerStateEnum.Active,
   type: PlayerTypeEnum.Human,
   piece: PlayerEnum.One,
+  remote: false,
 };
 const initialPlayerTwo = {
   name: 'Player #2',
   playerState: PlayerStateEnum.Wait,
   type: PlayerTypeEnum.Human,
   piece: PlayerEnum.Two,
+  remote: false,
 };
 const initialState: StateType = {
   sessionId: '',

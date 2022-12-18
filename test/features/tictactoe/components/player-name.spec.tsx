@@ -21,6 +21,7 @@ describe('features/tictactoe/components/player-name', () => {
       playerState: PlayerStateEnum.Active,
       type: PlayerTypeEnum.Human,
       piece: PlayerEnum.One,
+      remote: false,
     };
     const expectedChange = {
       player: {
@@ -28,6 +29,7 @@ describe('features/tictactoe/components/player-name', () => {
         piece: PlayerEnum.One,
         playerState: PlayerStateEnum.Active,
         type: PlayerTypeEnum.Human,
+        remote: false,
       },
       position: PlayerEnum.One,
     };
