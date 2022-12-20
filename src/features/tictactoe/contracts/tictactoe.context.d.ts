@@ -24,6 +24,9 @@ type UpdatePlayerPayload = {
   position: PlayerEnum,
   player: Player,
 }
+type UpdateRemoteGamePayload = {
+  remote: boolean,
+}
 type MessagePayload = {
   message: string,
 }
@@ -47,6 +50,10 @@ type UpdatePlayerAction = {
   type: ActionEnum.UpdatePlayer,
   payload: UpdatePlayerPayload,
 };
+type UpdateRemoteGameAction = {
+  type: ActionEnum.UpdateRemoteGame,
+  payload: UpdateRemoteGamePayload,
+};
 type ResetGameAction = {
   type: ActionEnum.Reset,
 };
@@ -62,7 +69,7 @@ type InitWebSocketAction = {
   payload: InitWebSocketPayload,
 };
 type ActionsType = TakeTurnAction | ResetGameAction | StartGameAction | UpdateGameStateAction |
-  UpdatePlayerAction | RemoteAction | InitWebSocketAction;
+  UpdateRemoteGameAction | UpdatePlayerAction | RemoteAction | InitWebSocketAction;
 type DispatchType = (action: ActionsType) => void;
 type ContextType = {
   state: StateType,
@@ -87,12 +94,14 @@ export type {
   TakeTurnAction,
   UpdateGameStateAction,
   UpdatePlayerAction,
+  UpdateRemoteGameAction,
   RemoteAction,
   InitWebSocketAction,
   DispatchType,
   TakeTurnPayload,
   UpdateGameStatePayload,
   UpdatePlayerPayload,
+  UpdateRemoteGamePayload,
   MessagePayload,
   InitWebSocketPayload,
   BoardType,

@@ -1,6 +1,6 @@
 import React from 'react';
 import PlayerRemote from '../../../../src/features/tictactoe/components/player-remote';
-import { updatePlayer } from '../../../../src/features/tictactoe/context/context.actions';
+import { updateRemoteGame } from '../../../../src/features/tictactoe/context/context.actions';
 import {
   PlayerEnum,
   PlayerStateEnum,
@@ -21,14 +21,6 @@ describe('features/tictactoe/components/player-remote', () => {
       playerState: PlayerStateEnum.Active,
       type: PlayerTypeEnum.Human,
       piece: PlayerEnum.One,
-      remote: false,
-    };
-    const expectedChange = {
-      player: {
-        ...player,
-        remote: true,
-      },
-      position: PlayerEnum.One,
     };
 
     // Act
@@ -36,6 +28,6 @@ describe('features/tictactoe/components/player-remote', () => {
     fireEvent.click(screen.getByRole(/checkbox/));
 
     // Assert
-    expect(updatePlayer).toBeCalledWith(expectedChange);
+    expect(updateRemoteGame).toBeCalledWith(true);
   });
 });

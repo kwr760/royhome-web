@@ -12,6 +12,7 @@ import {
   UpdateGameStateAction,
   UpdatePlayerAction,
   UpdatePlayerPayload,
+  UpdateRemoteGameAction,
 } from '../contracts/tictactoe.context';
 import { ActionEnum, GameStateEnum, PublishEnum } from '../contracts/tictactoe.enum';
 
@@ -42,6 +43,12 @@ const updatePlayer = ({position, player} : UpdatePlayerPayload): UpdatePlayerAct
     player,
   },
 });
+const updateRemoteGame = (remote : boolean): UpdateRemoteGameAction => ({
+  type: ActionEnum.UpdateRemoteGame,
+  payload: {
+    remote,
+  },
+});
 const remote = ({message} : MessagePayload): RemoteAction => ({
   type: ActionEnum.Remote,
   payload: {
@@ -64,4 +71,14 @@ const startAction = ({ sessionId, playerName } : StartActionPayload ): PublishAc
   }),
 });
 
-export { resetGame, startGame, takeTurn, updateGameState, updatePlayer, remote, initWebSocket, startAction };
+export {
+  resetGame,
+  startGame,
+  takeTurn,
+  updateGameState,
+  updatePlayer,
+  remote,
+  initWebSocket,
+  startAction,
+  updateRemoteGame,
+};

@@ -28,6 +28,7 @@ enum ActionEnum {
   Start = 'start',
   UpdateGameState = 'updateGameStatus',
   UpdatePlayer = 'updatePlayer',
+  UpdateRemoteGame = 'updateRemoteGame',
   Remote = 'remote',
   InitializeWebSocket = 'initWebSocket',
 }

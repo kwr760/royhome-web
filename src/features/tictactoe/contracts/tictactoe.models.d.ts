@@ -8,7 +8,6 @@ type Player = {
   playerState: PlayerStateEnum,
   type: PlayerTypeEnum,
   piece: PlayerEnum,
-  remote: boolean,
 }
 type StateType = {
   sessionId: string,
@@ -18,6 +17,7 @@ type StateType = {
   turn: PlayerEnum,
   playerOne: Player,
   playerTwo: Player,
+  remote: boolean,
   message?: Message,
 }
 

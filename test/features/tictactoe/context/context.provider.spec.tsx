@@ -94,18 +94,17 @@ describe('feature/tictactoe/context/context.provider', () => {
           name: 'Player #1',
           piece: 'X',
           playerState: 'active',
-          remote: false,
           type: 'human',
         },
         playerTwo: {
           name: expect.any(String),
           piece: 'O',
           playerState: 'wait',
-          remote: false,
           type: 'human',
         },
         sessionId: 'session-id',
         turn: 'X',
+        remote: false,
       },
     };
     const log1 = {
