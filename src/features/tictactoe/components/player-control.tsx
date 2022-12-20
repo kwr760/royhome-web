@@ -5,16 +5,14 @@ import React, { FunctionComponent, memo } from 'react';
 import { Player } from '../contracts/tictactoe.models';
 import { styles } from '../styles/player-control.styles';
 import PlayerName from './player-name';
-import PlayerRemote from './player-remote';
 import PlayerType from './player-type';
 
 interface Props {
   player: Player;
-  displayRemote?: boolean;
 }
 type PlayerControlProps = Props & WithStyles<typeof styles>;
 const PlayerControl: FunctionComponent<PlayerControlProps> = (
-  { player, displayRemote= false, classes },
+  { player, classes },
 ) => {
   return (
     <>
@@ -23,7 +21,6 @@ const PlayerControl: FunctionComponent<PlayerControlProps> = (
         className={classes.playerTypeGroup}
       >
         <PlayerType player={player} />
-        { displayRemote && <PlayerRemote player={player} /> }
       </Box>
     </>
   );

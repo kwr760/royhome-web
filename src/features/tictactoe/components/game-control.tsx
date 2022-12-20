@@ -7,6 +7,7 @@ import { useTicTacToe } from '../context/context.provider';
 import { GameStateEnum } from '../contracts/tictactoe.enum';
 import { styles } from '../styles/game-control.styles';
 import PlayerControl from './player-control';
+import PlayerRemote from './player-remote';
 
 type PlayerControlProps = WithStyles<typeof styles>;
 const GameControl: FunctionComponent<PlayerControlProps> = (
@@ -17,7 +18,7 @@ const GameControl: FunctionComponent<PlayerControlProps> = (
     state,
     dispatch,
   } = useTicTacToe();
-  const { gameState, client, sessionId, playerOne, playerTwo } = state;
+  const { gameState, client, sessionId, playerOne, playerTwo, remote } = state;
   const onCloseControl = () => {
     dispatch(updateGameState(GameStateEnum.Message));
     setOpenDialog(false);
@@ -51,11 +52,14 @@ const GameControl: FunctionComponent<PlayerControlProps> = (
       open={openDialog}
       className={classes.dialog}
     >
-      <DialogContent>
-        <PlayerControl player={playerOne} displayRemote />
-        <PlayerControl player={playerTwo} />
+      <DialogContent
+        className={classes.informationDialog}
+      >
+        <PlayerControl player={playerOne} />
+        { !remote && <PlayerControl player={playerTwo} /> }
+        <PlayerRemote />
       </DialogContent>
-      <DialogActions className={classes.buttonBar}>
+      <DialogActions className={classes.actionDialog}>
         <Button className={classes.button} onClick={onCloseControl}>Close</Button>
         <Button className={classes.button} onClick={onPlayGame}>Play Game</Button>
       </DialogActions>

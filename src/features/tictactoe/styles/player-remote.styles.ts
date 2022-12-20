@@ -6,7 +6,13 @@ import type { StyleRules } from '@mui/styles/withStyles';
 const styles = (theme: Theme): StyleRules => {
   return createStyles({
     remote: {
-      padding: 8,
+      marginTop: theme.spacing(4),
+      marginRight: theme.spacing(1),
+      display: 'flex',
+      justifyContent: 'right',
+    },
+    switch: {
+      padding: theme.spacing(1),
       '& .MuiSwitch-track': {
         opacity: 1,
         backgroundColor: emphasize(theme.color.control.base, 0.6),
@@ -42,6 +48,7 @@ const styles = (theme: Theme): StyleRules => {
     },
     icon: {
       color: theme.color.foreground.base,
+      marginTop: theme.spacing(1),
     },
   });
 };
