@@ -30,11 +30,29 @@ describe('features/tictactoe/components/player-control', () => {
     };
 
     // Act
-    render(<PlayerControl player={player}/>);
+    render(<PlayerControl player={player} displayRemote />);
 
     // Assert - fake test - test nothing
     screen.getByText(/Player Name/);
     screen.getByText(/Player Type/);
     screen.getByText(/Remote/);
+  });
+  it('should render without remote', () => {
+    // Arrange
+    const player = {
+      name: 'Player #1',
+      playerState: PlayerStateEnum.Active,
+      type: PlayerTypeEnum.Human,
+      piece: PlayerEnum.One,
+      remote: false,
+    };
+
+    // Act
+    render(<PlayerControl player={player} />);
+
+    // Assert - fake test - test nothing
+    screen.getByText(/Player Name/);
+    screen.getByText(/Player Type/);
+    expect(screen.queryByText(/Remote/)).toBeFalsy();
   });
 });

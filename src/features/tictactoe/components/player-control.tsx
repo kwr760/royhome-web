@@ -10,10 +10,11 @@ import PlayerType from './player-type';
 
 interface Props {
   player: Player;
+  displayRemote?: boolean;
 }
 type PlayerControlProps = Props & WithStyles<typeof styles>;
 const PlayerControl: FunctionComponent<PlayerControlProps> = (
-  { player, classes },
+  { player, displayRemote= false, classes },
 ) => {
   return (
     <>
@@ -22,7 +23,7 @@ const PlayerControl: FunctionComponent<PlayerControlProps> = (
         className={classes.playerTypeGroup}
       >
         <PlayerType player={player} />
-        <PlayerRemote player={player} />
+        { displayRemote && <PlayerRemote player={player} /> }
       </Box>
     </>
   );

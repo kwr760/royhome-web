@@ -52,7 +52,7 @@ const GameControl: FunctionComponent<PlayerControlProps> = (
       className={classes.dialog}
     >
       <DialogContent>
-        <PlayerControl player={playerOne} />
+        <PlayerControl player={playerOne} displayRemote />
         <PlayerControl player={playerTwo} />
       </DialogContent>
       <DialogActions className={classes.buttonBar}>
