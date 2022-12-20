@@ -65,7 +65,7 @@ const initWebSocket = ({ client, destination, callback } : InitWebSocketPayload)
 });
 const startAction = ({ sessionId, playerName } : StartActionPayload ): PublishAction => ({
   destination: PublishEnum.Start,
-  payload: JSON.stringify({
+  body: JSON.stringify({
     sessionId,
     name: playerName,
   }),

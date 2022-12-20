@@ -81,7 +81,7 @@ type StartActionPayload = {
 }
 type PublishAction = {
   destination: PublishEnum.Start,
-  payload: string,
+  body: string,
 };
 
 export type {

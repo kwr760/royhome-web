@@ -78,6 +78,7 @@ describe('feature/tictactoe/component/game-control', () => {
     const mockPublish = jest.fn();
     const state = {
       ...initialState,
+      remote: true,
       client: {
         publish: mockPublish,
       },
@@ -85,7 +86,7 @@ describe('feature/tictactoe/component/game-control', () => {
     const reducer = jest.fn(() => ( state ));
     const expectedPublish = {
       destination: '/start',
-      payload: '{"sessionId":"session-id","name":"Player #1"}',
+      body: '{"sessionId":"session-id","name":"Player #1"}',
     };
 
     // Act

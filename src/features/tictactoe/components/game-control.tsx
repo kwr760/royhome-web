@@ -24,7 +24,7 @@ const GameControl: FunctionComponent<PlayerControlProps> = (
     setOpenDialog(false);
   };
   const onPlayGame = () => {
-    if (client) {
+    if (remote && client) {
       const action = startAction({
         sessionId,
         playerName: playerOne.name,
