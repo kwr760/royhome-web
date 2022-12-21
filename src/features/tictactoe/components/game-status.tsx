@@ -1,35 +1,32 @@
 import { Button, Dialog, DialogActions, DialogContent, Typography } from '@mui/material';
 import type { WithStyles } from '@mui/styles';
 import { withStyles } from '@mui/styles';
-import React, { FunctionComponent, memo } from 'react';
+import React, { FunctionComponent, memo, useEffect, useState } from 'react';
 import { updateGameState } from '../context/context.actions';
 import { useTicTacToe } from '../context/context.provider';
-import { GameStateEnum, PlayerStateEnum } from '../contracts/tictactoe.enum';
-import { StateType } from '../contracts/tictactoe.models';
+import { GameStateEnum } from '../contracts/tictactoe.enum';
+import { getWinner } from '../functions/get-winner';
 import { styles } from '../styles/game-status.styles';
 
-interface Props {
-  openStatus: boolean,
-  setOpenStatus: React.Dispatch<React.SetStateAction<boolean>>;
-}
-type PlayerStatusProps = Props & WithStyles<typeof styles>;
+type PlayerStatusProps = WithStyles<typeof styles>;
 const PlayerStatusComponent: FunctionComponent<PlayerStatusProps> = (
-  { openStatus, setOpenStatus, classes },
+  { classes },
 ) => {
+  const [openDialog, setOpenDialog] = useState(false);
   const {
     state,
     dispatch,
   } = useTicTacToe();
+  const { gameState } = state;
   const handleClose = () => {
     dispatch(updateGameState(GameStateEnum.Exit));
-    setOpenStatus(false);
+    setOpenDialog(false);
   };
   const handleSetup = () => {
     dispatch(updateGameState(GameStateEnum.Setup));
-    setOpenStatus(false);
+    setOpenDialog(false);
   };
-  const getStatusMessage = (state: StateType) => {
-    const { gameState, playerOne, playerTwo } = state;
+  const renderMessage = () => {
     switch (gameState) {
       case GameStateEnum.Message:
         return <span>
@@ -38,32 +35,36 @@ const PlayerStatusComponent: FunctionComponent<PlayerStatusProps> = (
           &lsquo;<i><b>Exit</b></i>&rsquo; to switch something else.
         </span>;
       case GameStateEnum.Completed: {
-        let winner;
-        if (playerOne.playerState === PlayerStateEnum.Winner) {
-          winner = playerOne;
-        } else if (playerTwo.playerState === PlayerStateEnum.Winner) {
-          winner = playerTwo;
-        }
-        if (winner) {
-          return `${winner.name} is a winner.`;
+        const winner = getWinner(state);
+        if (winner?.name) {
+          return <span>{winner.name} is the winner.</span>;
         } else {
-          return 'The game ended in a tie.';
+          return <span>The game ended in a tie.</span>;
         }
       }
       default:
-        return 'Unknown state';
+        return <span>Unknown state</span>;
     }
   };
 
+  useEffect(() => {
+    switch (gameState) {
+      case GameStateEnum.Message:
+      case GameStateEnum.Completed:
+        setOpenDialog(true);
+        break;
+    }
+  }, [gameState]);
+
   return (
     <Dialog
-      open={openStatus}
+      open={openDialog}
       onClose={handleClose}
       className={classes.dialog}
     >
       <DialogContent>
         <Typography className={classes.message}>
-          {getStatusMessage(state)}
+          {renderMessage()}
         </Typography>
       </DialogContent>
       <DialogActions className={classes.buttonBar}>

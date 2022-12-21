@@ -4,13 +4,11 @@ import type { StyleRules } from '@mui/styles/withStyles';
 
 const styles = (theme: Theme): StyleRules => {
   return createStyles({
-    nameInput: {
-      margin: theme.spacing(1),
-      width: '-webkit-fill-available',
-    },
     playerTypeGroup: {
       margin: theme.spacing(1),
       width: '-webkit-fill-available',
+      justifyContent: 'space-between',
+      display: 'flex',
     },
   });
 };

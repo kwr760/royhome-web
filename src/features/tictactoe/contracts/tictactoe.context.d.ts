@@ -1,13 +1,15 @@
 import type { Action } from '@reduxjs/toolkit';
 import { Client } from '@stomp/stompjs';
 import { ReactNode, Reducer } from 'react';
-import { ActionEnum, GameStateEnum, PlayerEnum } from './tictactoe.enum';
+import { Auth0User } from '../../../contracts/auth0.models';
+import { ActionEnum, GameStateEnum, PlayerEnum, PublishEnum } from './tictactoe.enum';
 import { Player, StateType } from './tictactoe.models';
 
 type BoardType = string;
 type MiddleWareFunction = (action: Action | undefined, state: StateType) => StateType;
 type ProviderType = {
-  sessionId?: string,
+  sessionId: string,
+  user: Auth0User,
   state?: StateType,
   reducer?: Reducer<unknown, unknown>,
   beforeware?: MiddleWareFunction[],
@@ -21,6 +23,9 @@ type TakeTurnPayload = {
 type UpdatePlayerPayload = {
   position: PlayerEnum,
   player: Player,
+}
+type UpdateRemoteGamePayload = {
+  remote: boolean,
 }
 type MessagePayload = {
   message: string,
@@ -45,6 +50,10 @@ type UpdatePlayerAction = {
   type: ActionEnum.UpdatePlayer,
   payload: UpdatePlayerPayload,
 };
+type UpdateRemoteGameAction = {
+  type: ActionEnum.UpdateRemoteGame,
+  payload: UpdateRemoteGamePayload,
+};
 type ResetGameAction = {
   type: ActionEnum.Reset,
 };
@@ -60,13 +69,20 @@ type InitWebSocketAction = {
   payload: InitWebSocketPayload,
 };
 type ActionsType = TakeTurnAction | ResetGameAction | StartGameAction | UpdateGameStateAction |
-  UpdatePlayerAction | RemoteAction | InitWebSocketAction;
+  UpdateRemoteGameAction | UpdatePlayerAction | RemoteAction | InitWebSocketAction;
 type DispatchType = (action: ActionsType) => void;
 type ContextType = {
   state: StateType,
   dispatch: DispatchType,
 };
-
+type StartActionPayload = {
+  sessionId: string,
+  playerName: string,
+}
+type PublishAction = {
+  destination: PublishEnum.Start,
+  body: string,
+};
 
 export type {
   ProviderType,
@@ -78,13 +94,17 @@ export type {
   TakeTurnAction,
   UpdateGameStateAction,
   UpdatePlayerAction,
+  UpdateRemoteGameAction,
   RemoteAction,
   InitWebSocketAction,
   DispatchType,
   TakeTurnPayload,
   UpdateGameStatePayload,
   UpdatePlayerPayload,
+  UpdateRemoteGamePayload,
   MessagePayload,
   InitWebSocketPayload,
   BoardType,
+  StartActionPayload,
+  PublishAction,
 };

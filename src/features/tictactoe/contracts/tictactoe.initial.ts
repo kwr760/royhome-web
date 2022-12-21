@@ -21,6 +21,7 @@ const initialState: StateType = {
   turn: PlayerEnum.One,
   playerOne: initialPlayerOne,
   playerTwo: initialPlayerTwo,
+  remote: false,
 };
 
 export {

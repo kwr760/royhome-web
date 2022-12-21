@@ -49,6 +49,13 @@ const ticTacToeReducer = (state: StateType, action: ActionsType): StateType => {
         gameState,
       };
     }
+    case ActionEnum.UpdateRemoteGame: {
+      const { remote } = action.payload;
+      return {
+        ...state,
+        remote,
+      };
+    }
     case ActionEnum.UpdatePlayer: {
       const { position, player } = action.payload;
       return position === PlayerEnum.One ? {

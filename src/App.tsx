@@ -1,19 +1,19 @@
-import React, { FunctionComponent, memo } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { Container } from '@mui/material';
-import { withStyles } from '@mui/styles';
-import type { WithStyles } from '@mui/styles';
 import loadable from '@loadable/component';
+import { Container } from '@mui/material';
+import type { WithStyles } from '@mui/styles';
+import { withStyles } from '@mui/styles';
+import React, { FunctionComponent, memo } from 'react';
+import { useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
 
 import { styles } from './App.styles';
-import Nav from './components/nav';
-import Footer from './components/footer';
 import CookieBanner from './components/cookie-banner';
+import Footer from './components/footer';
 import Loading from './components/loading';
+import Nav from './components/nav';
 import ProtectRoute from './components/protect-route';
 import Resume from './features/resume/components/resume-page';
-import { getSessionId, isLoading } from './store/session/session.selector';
+import { getSessionId, getUser, isLoading } from './store/session/session.selector';
 
 const AboutPage = /* #__LOADABLE__ */ () =>
   import(/* webpackPrefetch: true */ './components/about');
@@ -35,6 +35,7 @@ type AppProps = WithStyles<typeof styles>;
 const AppComponent: FunctionComponent<AppProps> = ({classes}) => {
   const loading = useSelector(isLoading);
   const sessionId = useSelector(getSessionId);
+  const user = useSelector(getUser);
 
   return (
     <>
@@ -50,7 +51,7 @@ const AppComponent: FunctionComponent<AppProps> = ({classes}) => {
             <Route path="author" element={<AuthorLoadable />} />
             <Route path="privacy" element={<PrivacyLoadable />} />
             <Route path="tictactoe" element={<ProtectRoute>
-              <TicTacToeLoadable sessionId={sessionId} />
+              <TicTacToeLoadable sessionId={sessionId} user={user} />
             </ProtectRoute>} />
             <Route path="profile" element={<ProtectRoute><ProfileLoadable /></ProtectRoute>} />
           </Routes>

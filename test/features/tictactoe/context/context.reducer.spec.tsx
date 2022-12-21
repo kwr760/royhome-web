@@ -8,6 +8,7 @@ import {
   takeTurn,
   updateGameState,
   updatePlayer,
+  updateRemoteGame,
 } from '../../../../src/features/tictactoe/context/context.actions';
 import { TicTacToeProvider, useTicTacToe } from '../../../../src/features/tictactoe/context/context.provider';
 import { ActionsType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
@@ -25,7 +26,7 @@ describe('feature/tictactoe/context/context.reducer', () => {
   const createWrapper = (testState: StateType | undefined) => {
     // eslint-disable-next-line react/display-name
     return ({ children }: { children: ReactNode }) =>
-      <TicTacToeProvider sessionId="" state={testState}>{children}</TicTacToeProvider>;
+      <TicTacToeProvider sessionId="" user={{}} state={testState}>{children}</TicTacToeProvider>;
   };
   beforeEach(() => {
     global.console.log = jest.fn();
@@ -280,7 +281,28 @@ describe('feature/tictactoe/context/context.reducer', () => {
 
     act(() => {
       const { dispatch } = result.current;
-      dispatch( updateGameState(GameStateEnum.Message));
+      dispatch(updateGameState(GameStateEnum.Message));
+    });
+
+    // Assert
+    const { state } = result.current;
+    expect(state).toEqual(expectedState);
+  });
+  it('should call updateRemoteGame', () => {
+    // Arrange
+    const testState = {
+      ...initialState,
+    } as StateType;
+    const expectedState = {
+      ...initialState,
+      remote: true,
+    };
+    const wrapper = createWrapper(testState);
+    const { result } = renderHook(() => useTicTacToe(), { wrapper });
+
+    act(() => {
+      const { dispatch } = result.current;
+      dispatch(updateRemoteGame(true));
     });
 
     // Assert

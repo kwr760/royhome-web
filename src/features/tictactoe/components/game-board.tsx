@@ -1,67 +1,21 @@
 import { Box, Grid } from '@mui/material';
 import type { WithStyles } from '@mui/styles';
 import { withStyles } from '@mui/styles';
-import React, { FunctionComponent, memo, useCallback, useEffect, useMemo } from 'react';
-import { takeTurn } from '../context/context.actions';
-import { useTicTacToe } from '../context/context.provider';
-import { GameStateEnum, PlayerEnum, PlayerTypeEnum } from '../contracts/tictactoe.enum';
-import { evaluateNextMove } from '../functions/evaluate-next-move';
+import React, { FunctionComponent, memo } from 'react';
+import { useAI } from '../hooks/use-ai';
+import { useWebsocket } from '../hooks/use-websocket';
 import { styles } from '../styles/game-board.styles';
-import GameControl from './game-control';
 import GameSquare from './game-square';
-import GameStatus from './game-status';
 
 type GameBoardProps = WithStyles<typeof styles>;
 const GameBoardComponent: FunctionComponent<GameBoardProps> = ({ classes }) => {
-  const [openControl, setOpenControl] = React.useState(true);
-  const [openStatus, setOpenStatus] = React.useState(false);
-  const { state, dispatch } = useTicTacToe();
-  const { turn, board, playerOne, playerTwo, gameState } = state;
-  const gridClasses = useMemo(() => [ classes.grid ], [classes.grid]);
-  const player = turn === PlayerEnum.One ? playerOne : playerTwo;
-  const automatedTurn = useCallback(() => {
-    const position = evaluateNextMove({ board: board, player: player.piece });
-    dispatch(takeTurn({ position, player: player.piece }));
-  }, [board, dispatch, player.piece]);
-  const displayControl = () => {
-    if (gameState !== GameStateEnum.Active) {
-      setOpenControl(true);
-    }
-  };
-
-  useEffect(() => {
-    switch (gameState) {
-      case GameStateEnum.Active: {
-        if (player.type === PlayerTypeEnum.Computer) {
-          automatedTurn();
-        }
-        break;
-      }
-      case GameStateEnum.Setup:
-        setOpenControl(true);
-        break;
-      case GameStateEnum.Message:
-      case GameStateEnum.Completed:
-        setOpenStatus(true);
-        break;
-      default: {
-        break;
-      }
-    }
-  }, [automatedTurn, gameState, player.type]);
+  useWebsocket();
+  useAI();
 
   return (
     <>
-      <GameControl
-        openDialog={openControl}
-        setOpenDialog={setOpenControl}
-      />
-      <GameStatus
-        openStatus={openStatus}
-        setOpenStatus={setOpenStatus}
-      />
-      <Box onClick={displayControl}>
-        <Grid container className={`${gridClasses.join(' ')}`} >
+      <Box>
+        <Grid container className={classes.grid} >
           {
             [...Array(3).keys()].map((row) => {
               return (

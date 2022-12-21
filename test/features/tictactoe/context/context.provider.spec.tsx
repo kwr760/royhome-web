@@ -1,20 +1,17 @@
+import { ThemeProvider } from '@mui/styles';
 import { fireEvent, render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import React, { ReactNode } from 'react';
+import GameStatus from '../../../../src/features/tictactoe/components/game-status';
 import { logger } from '../../../../src/features/tictactoe/context/context.middleware';
 import { TicTacToeProvider, useTicTacToe } from '../../../../src/features/tictactoe/context/context.provider';
 import { MiddleWareFunction } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
+import { GameStateEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { initialState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { StateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
-import { ThemeProvider } from '@mui/styles';
-import GameStatus from '../../../../src/features/tictactoe/components/game-status';
 import { themeLight } from '../../../../src/theme-light';
 
 describe('feature/tictactoe/context/context.provider', () => {
-  let openStatus = true;
-  const setOpenStatus = jest.fn(open => {
-    openStatus = open;
-  });
   const getComponent = (
     state: StateType,
     reducer: React.Reducer<unknown, unknown>,
@@ -25,15 +22,13 @@ describe('feature/tictactoe/context/context.provider', () => {
       <ThemeProvider theme={themeLight}>
         <TicTacToeProvider
           sessionId={'session-id'}
+          user={{}}
           state={state}
           reducer={reducer}
           beforeware={beforeWare}
           afterware={afterWare}
         >
-          <GameStatus
-            openStatus={openStatus}
-            setOpenStatus={setOpenStatus}
-          />
+          <GameStatus />
         </TicTacToeProvider>
       </ThemeProvider>
     );
@@ -63,6 +58,7 @@ describe('feature/tictactoe/context/context.provider', () => {
     const wrapper = ({ children }: { children: ReactNode}) =>
       <TicTacToeProvider
         sessionId="session-id"
+        user={{}}
         afterware={[logger()]}
       >
         {children}
@@ -80,19 +76,20 @@ describe('feature/tictactoe/context/context.provider', () => {
     const afterLogger = logger('after');
     const mockState = {
       ...initialState,
+      gameState: GameStateEnum.Message,
     };
     const reducer = jest.fn(() => ( mockState ));
     const log = {
       payload: {
         payload: {
-          gameState: 'exit',
+          gameState: GameStateEnum.Exit,
         },
         type: 'updateGameStatus',
       },
       state: {
         board: '---------',
         client: null,
-        gameState: 'setup',
+        gameState: GameStateEnum.Message,
         playerOne: {
           name: 'Player #1',
           piece: 'X',
@@ -100,13 +97,14 @@ describe('feature/tictactoe/context/context.provider', () => {
           type: 'human',
         },
         playerTwo: {
-          name: 'Player #2',
+          name: expect.any(String),
           piece: 'O',
           playerState: 'wait',
           type: 'human',
         },
         sessionId: 'session-id',
         turn: 'X',
+        remote: false,
       },
     };
     const log1 = {

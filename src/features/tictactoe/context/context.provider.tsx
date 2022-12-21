@@ -1,4 +1,5 @@
 import React, { createContext, useContext } from 'react';
+import { randomNames } from '../contracts/tictactoe.constant';
 import { ContextType, ProviderType } from '../contracts/tictactoe.context';
 import { initialState } from '../contracts/tictactoe.initial';
 import { StateType } from '../contracts/tictactoe.models';
@@ -9,6 +10,7 @@ const TicTacToeContext = createContext<ContextType | undefined>(undefined);
 
 const TicTacToeProvider = ({
   sessionId,
+  user,
   state: seededState,
   reducer: seededReducer,
   beforeware,
@@ -17,9 +19,14 @@ const TicTacToeProvider = ({
 }: ProviderType,
 ): JSX.Element => {
   let newState: StateType = seededState || initialState;
+  const { playerOne, playerTwo } = newState;
+  playerOne.name = user.name || playerOne.name;
+  playerTwo.name = randomNames[Math.floor(Math.random()*randomNames.length)];
   newState = {
     ...newState,
     sessionId,
+    playerOne,
+    playerTwo,
   };
   const startReducer = seededReducer || ticTacToeReducer;
 

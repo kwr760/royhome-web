@@ -1,37 +1,19 @@
 import React from 'react';
-import { ThemeProvider } from '@mui/styles';
-import { fireEvent, render } from '@testing-library/react';
-
-import { GameStateEnum, PlayerTypeEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import GameControl from '../../../../src/features/tictactoe/components/game-control';
-import { updateGameState, startGame, updatePlayer } from '../../../../src/features/tictactoe/context/context.actions';
-import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
-import { initialPlayerTwo, initialState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
-import { themeLight } from '../../../../src/theme-light';
+import * as mockActions from '../../../../src/features/tictactoe/context/context.actions';
+import { GameStateEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { initialState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { StateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
+import { fireEvent, render, screen } from '../utils/testing-library';
 
-jest.mock('../../../../src/features/tictactoe/context/context.actions');
+jest
+  .mock('../../../../src/features/tictactoe/components/player-control',
+    () => jest.fn(() => 'Player Control' ),
+  );
 
 describe('feature/tictactoe/component/game-control', () => {
-  let openDialog = true;
-  const setOpenDialog = jest.fn(open => {
-    openDialog = open;
-  });
-  const getComponent = (state: StateType, reducer: React.Reducer<unknown, unknown>) => {
-    return (
-      <ThemeProvider theme={themeLight}>
-        <TicTacToeProvider state={state} reducer={reducer}>
-          <GameControl
-            openDialog={openDialog}
-            setOpenDialog={setOpenDialog}
-          />
-        </TicTacToeProvider>
-      </ThemeProvider>
-    );
-  };
-
   beforeEach(() => {
-    jest.resetAllMocks();
+    jest.restoreAllMocks();
     global.console.log = jest.fn();
   });
   it('should render', () => {
@@ -42,12 +24,24 @@ describe('feature/tictactoe/component/game-control', () => {
     const reducer = jest.fn(() => ( state ));
 
     // Act
-    const { getByLabelText } = render(getComponent(state, reducer));
+    render(<GameControl />, { state, reducer });
 
     // Assert
-    getByLabelText(/Player X/);
-    getByLabelText(/Player O/);
-    expect(openDialog).toBe(true);
+    screen.getByText(/Player Control/);
+  });
+  it('should not render', () => {
+    // Arrange
+    const state = {
+      ...initialState,
+      gameState: GameStateEnum.Active,
+    };
+    const reducer = jest.fn(() => ( state ));
+
+    // Act
+    const { container } = render(<GameControl />, { state, reducer });
+
+    // Assert
+    expect(container.firstChild).toBeNull();
   });
   it('should dispatch updateGameState on Close', () => {
     // Arrange
@@ -55,101 +49,51 @@ describe('feature/tictactoe/component/game-control', () => {
       ...initialState,
     };
     const reducer = jest.fn(() => ( state ));
+    jest.spyOn(mockActions, 'updateGameState');
 
     // Act
-    const { getByRole } = render(getComponent(state, reducer));
-    fireEvent.click(getByRole('button', { name: 'Close'}));
+    render(<GameControl />, { state, reducer });
+    fireEvent.click(screen.getByRole('button', { name: 'Close'}));
 
     // Assert
-    expect(updateGameState).toBeCalledWith(GameStateEnum.Message);
-    expect(setOpenDialog).toBeCalledWith(false);
+    expect(mockActions.updateGameState).toBeCalledWith(GameStateEnum.Message);
   });
-  it('should dispatch updateGame on Play Game', () => {
+  it('should dispatch startGame on Play Game', () => {
     // Arrange
     const state = {
       ...initialState,
     };
     const reducer = jest.fn(() => ( state ));
-    const expectNameXChange = {
-      player: {
-        name: 'First',
-        piece: 'X',
-        playerState: 'active',
-        type: 'human',
-      },
-      position: 'X',
-    };
-    const expectNameOChange = {
-      player: {
-        name: 'Second',
-        piece: 'O',
-        playerState: 'wait',
-        type: 'human',
-      },
-      position: 'O',
-    };
+    jest.spyOn(mockActions, 'startGame');
 
     // Act
-    const { getByLabelText, getByRole, rerender } = render(getComponent(state, reducer));
-    fireEvent.blur(getByLabelText(/Player X/), {target: {value: 'First'}});
-    fireEvent.blur(getByLabelText(/Player O/), {target: {value: 'Second'}});
-    fireEvent.click(getByRole('button', { name: 'Play Game'}));
-    rerender(getComponent(state, reducer));
+    render(<GameControl />, { state, reducer });
+    fireEvent.click(screen.getByRole('button', { name: 'Play Game'}));
 
     // Assert
-    expect(startGame).toBeCalled();
-    expect(setOpenDialog).toBeCalledWith(false);
-    expect(updatePlayer).toHaveBeenNthCalledWith(1, expectNameXChange);
-    expect(updatePlayer).toHaveBeenNthCalledWith(2, expectNameOChange);
+    expect(mockActions.startGame).toBeCalled();
   });
-  it('should dispatch updateGame on Change player one type', () => {
+  it('should publish on on Play Game', () => {
     // Arrange
+    const mockPublish = jest.fn();
     const state = {
       ...initialState,
-    };
-    const reducer = jest.fn(() => (state));
-    const expectTypeXChange = {
-      player: {
-        name: 'Player #1',
-        piece: 'X',
-        playerState: 'active',
-        type: 'computer',
+      remote: true,
+      client: {
+        publish: mockPublish,
       },
-      position: 'X',
+    } as unknown as StateType;
+    const reducer = jest.fn(() => ( state ));
+    const expectedPublish = {
+      destination: '/start',
+      body: '{"sessionId":"session-id","name":"Player #1"}',
     };
 
     // Act
-    const { getByTestId } = render(getComponent(state, reducer));
-    fireEvent.click(getByTestId(/player-one-type/));
+    render(<GameControl />, { state, reducer });
+    fireEvent.click(screen.getByRole('button', { name: 'Play Game'}));
 
     // Assert
-    expect(updatePlayer).toHaveBeenNthCalledWith(1, expectTypeXChange);
-  });
-  it('should dispatch updateGame on Change player two type', () => {
-    // Arrange
-    const state = {
-      ...initialState,
-      playerTwo: {
-        ...initialPlayerTwo,
-        type: PlayerTypeEnum.Computer,
-      },
-    };
-    const reducer = jest.fn(() => (state));
-    const expectTypeOChange = {
-      player: {
-        name: 'Player #2',
-        piece: 'O',
-        playerState: 'wait',
-        type: 'human',
-      },
-      position: 'O',
-    };
-
-    // Act
-    const { getByTestId } = render(getComponent(state, reducer));
-    fireEvent.click(getByTestId(/player-two-type/));
-
-    // Assert
-    expect(updatePlayer).toHaveBeenCalledWith(expectTypeOChange);
+    expect(mockPublish).toBeCalledWith(expectedPublish);
   });
 });

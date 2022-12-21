@@ -10,13 +10,14 @@ type Player = {
   piece: PlayerEnum,
 }
 type StateType = {
-  sessionId: string | undefined,
+  sessionId: string,
   client: Client | null,
   board: Board,
   gameState: GameStateEnum,
   turn: PlayerEnum,
   playerOne: Player,
   playerTwo: Player,
+  remote: boolean,
   message?: Message,
 }
 
