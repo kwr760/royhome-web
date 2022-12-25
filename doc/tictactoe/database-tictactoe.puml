@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/ie-diagram
+
+hide circle
+
+entity game {
+  *game_id : UUID <<generated>>
+  --
+  *state : number << Open(0) | Closed(1) >>
+}
+
+entity player {
+  *session_id : UUID
+  *game_id : UUID
+  --
+  *name : text
+}
+
+game ||..|{ player
+
+@enduml

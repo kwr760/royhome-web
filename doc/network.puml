@@ -1,6 +1,9 @@
 @startuml
+'https://plantuml.com/nwdiag'
+
 nwdiag {
-  group {
+  group df {
+    description = "linode\ncpu: 1\nMHz: 2900\nRAM: 2M\nHard: 32G (11G)"
     color = "lightgrey"
     router;
     web;

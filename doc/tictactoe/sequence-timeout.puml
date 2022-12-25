@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor A
+boundary ws
+actor B
+
+A -> ws : **start** game
+activate ws
+ws -> A : **wait**
+deactivate ws
+
+B -> ws : **start** game
+activate ws
+alt A plays first (flip if B plays first)
+ws -> B : **start** game << 0 >>
+ws -> A : **taketurn** << X | <<board>> >>
+deactivate ws
+
+alt B does not respond
+A -> ws : **taketurn** <<new board>>
+activate ws
+ws -> B : **taketurn** <<new board>>
+deactivate ws
+== Changed Flow ==
+A -> ws : **end** game state <<Timeout>>
+activate ws
+ws -> B : **end** game state <<Timeout>>
+deactivate ws
+end
+end
+deactivate ws
+
+@enduml
