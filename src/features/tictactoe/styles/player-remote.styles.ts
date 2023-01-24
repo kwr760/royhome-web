@@ -5,6 +5,10 @@ import type { StyleRules } from '@mui/styles/withStyles';
 
 const styles = (theme: Theme): StyleRules => {
   return createStyles({
+    tooltip: {
+      color: theme.color.foreground.base,
+      backgroundColor: theme.color.background.paper,
+    },
     remote: {
       marginTop: theme.spacing(4),
       marginRight: theme.spacing(1),

@@ -2,7 +2,7 @@ import { Button, Dialog, DialogActions, DialogContent } from '@mui/material';
 import type { WithStyles } from '@mui/styles';
 import { withStyles } from '@mui/styles';
 import React, { FunctionComponent, memo, useEffect, useState } from 'react';
-import { resetGame, startAction, startGame, updateGameState } from '../context/context.actions';
+import { resetGame, startGame, updateGameState } from '../context/context.actions';
 import { useTicTacToe } from '../context/context.provider';
 import { GameStateEnum } from '../contracts/tictactoe.enum';
 import { styles } from '../styles/game-control.styles';
@@ -18,19 +18,12 @@ const GameControl: FunctionComponent<PlayerControlProps> = (
     state,
     dispatch,
   } = useTicTacToe();
-  const { gameState, client, sessionId, playerOne, playerTwo, remote } = state;
+  const { gameState, playerOne, playerTwo, remote } = state;
   const onCloseControl = () => {
     dispatch(updateGameState(GameStateEnum.Message));
     setOpenDialog(false);
   };
   const onPlayGame = () => {
-    if (remote && client) {
-      const action = startAction({
-        sessionId,
-        playerName: playerOne.name,
-      });
-      client.publish(action);
-    }
     dispatch(resetGame());
     dispatch(startGame());
     setOpenDialog(false);
@@ -40,6 +33,9 @@ const GameControl: FunctionComponent<PlayerControlProps> = (
     switch (gameState) {
       case GameStateEnum.Setup:
         setOpenDialog(true);
+        break;
+      case GameStateEnum.Active:
+        setOpenDialog(false);
         break;
       default: {
         break;

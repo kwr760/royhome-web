@@ -1,20 +1,19 @@
 import { Client } from '@stomp/stompjs';
-import { GameStateEnum, PlayerEnum, PlayerStateEnum, PlayerTypeEnum } from './tictactoe.enum';
+import { GameStateEnum, PieceEnum, PlayerTypeEnum } from './tictactoe.enum';
 
 type Board = string;
 type Message = string;
 type Player = {
   name: string,
-  playerState: PlayerStateEnum,
   type: PlayerTypeEnum,
-  piece: PlayerEnum,
+  piece: PieceEnum,
+  sessionId?: string,
 }
 type StateType = {
-  sessionId: string,
+  sessionId?: string,
   client: Client | null,
   board: Board,
   gameState: GameStateEnum,
-  turn: PlayerEnum,
   playerOne: Player,
   playerTwo: Player,
   remote: boolean,

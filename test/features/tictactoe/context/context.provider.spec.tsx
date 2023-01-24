@@ -3,7 +3,7 @@ import { fireEvent, render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import React, { ReactNode } from 'react';
 import GameStatus from '../../../../src/features/tictactoe/components/game-status';
-import { logger } from '../../../../src/features/tictactoe/context/context.middleware';
+import { logger } from '../../../../src/features/tictactoe/middleware/logger.middleware';
 import { TicTacToeProvider, useTicTacToe } from '../../../../src/features/tictactoe/context/context.provider';
 import { MiddleWareFunction } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
 import { GameStateEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';

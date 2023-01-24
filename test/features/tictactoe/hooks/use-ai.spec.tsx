@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import React, { ReactNode } from 'react';
 import { takeTurn } from '../../../../src/features/tictactoe/context/context.actions';
 import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
-import { GameStateEnum, PlayerEnum, PlayerTypeEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { GameStateEnum, PieceEnum, PlayerTypeEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import {
   initialPlayerOne,
   initialPlayerTwo,
@@ -29,14 +29,14 @@ describe('feature/tictactoe/hooks/use-ai', () => {
     const state = {
       ...initialState,
       gameState: GameStateEnum.Active,
-      turn: PlayerEnum.One,
+      turn: PieceEnum.X,
       playerOne: {
         ...initialPlayerOne,
         type: PlayerTypeEnum.Computer,
       },
     };
     const expectedTakeTurn = {
-      player: PlayerEnum.One,
+      player: PieceEnum.X,
       position: 4,
     };
 
@@ -52,14 +52,14 @@ describe('feature/tictactoe/hooks/use-ai', () => {
     const state = {
       ...initialState,
       gameState: GameStateEnum.Active,
-      turn: PlayerEnum.Two,
+      turn: PieceEnum.O,
       playerTwo: {
         ...initialPlayerTwo,
         type: PlayerTypeEnum.Computer,
       },
     };
     const expectedTakeTurn = {
-      player: PlayerEnum.Two,
+      player: PieceEnum.O,
       position: 4,
     };
 

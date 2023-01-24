@@ -1,9 +1,9 @@
-import { GameStateEnum, PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { GameStateEnum, PieceEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { isSquareDisabled } from '../../../../src/features/tictactoe/functions/is-square-disabled';
 
 type TestTuple = {
   gameState: GameStateEnum,
-  owner: PlayerEnum,
+  owner: PieceEnum,
   expected: boolean,
 };
 
@@ -12,37 +12,37 @@ describe('feature/tictactoe/functions/is-game-over', () => {
   const cases = [
     {
       gameState: GameStateEnum.Completed,
-      owner: PlayerEnum.Neither,
+      owner: PieceEnum.Neither,
       expected: false,
     },
     {
       gameState: GameStateEnum.Completed,
-      owner: PlayerEnum.Neither,
+      owner: PieceEnum.Neither,
       expected: false,
     },
     {
       gameState: GameStateEnum.Wait,
-      owner: PlayerEnum.Neither,
+      owner: PieceEnum.Neither,
       expected: false,
     },
     {
       gameState: GameStateEnum.Setup,
-      owner: PlayerEnum.Neither,
+      owner: PieceEnum.Neither,
       expected: false,
     },
     {
       gameState: GameStateEnum.Active,
-      owner: PlayerEnum.Neither,
+      owner: PieceEnum.Neither,
       expected: false,
     },
     {
       gameState: GameStateEnum.Active,
-      owner: PlayerEnum.One,
+      owner: PieceEnum.X,
       expected: true,
     },
     {
       gameState: GameStateEnum.Active,
-      owner: PlayerEnum.Two,
+      owner: PieceEnum.O,
       expected: true,
     },
   ];

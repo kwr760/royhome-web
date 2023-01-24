@@ -1,37 +1,27 @@
-import { ActionsType } from '../contracts/tictactoe.context';
-import { ActionEnum, GameStateEnum, PlayerEnum, PlayerStateEnum } from '../contracts/tictactoe.enum';
+import { ActionTypes } from '../contracts/tictactoe.context';
+import { ActionEnum, GameStateEnum, PieceEnum } from '../contracts/tictactoe.enum';
 import { initialState } from '../contracts/tictactoe.initial';
 import { StateType } from '../contracts/tictactoe.models';
-import { evaluateGame } from '../functions/evaluate-game';
 import { replaceAt } from '../functions/replace-at';
 import { connectStomp } from './context.stomp';
+import { messageReducer } from './message.reducer';
 
-const ticTacToeReducer = (state: StateType, action: ActionsType): StateType => {
+const contextReducer = (state: StateType, action: ActionTypes): StateType => {
   switch (action.type) {
     case ActionEnum.TakeTurn: {
       const { position, player } = action.payload;
-      const { board, gameState, playerOne, playerTwo } = state;
-      if (gameState === GameStateEnum.Active) {
-        const newBoard = replaceAt(board, position, player.toString());
-        const newGame = evaluateGame(newBoard);
-        playerOne.playerState = (newGame.winner === PlayerEnum.One) ? PlayerStateEnum.Winner : PlayerStateEnum.Loser;
-        playerTwo.playerState = (newGame.winner === PlayerEnum.Two) ? PlayerStateEnum.Winner : PlayerStateEnum.Loser;
-        const turn = player === PlayerEnum.One ? PlayerEnum.Two : PlayerEnum.One;
-        return {
-          ...state,
-          board: newBoard,
-          gameState: newGame.gameState,
-          turn,
-          playerOne,
-          playerTwo,
-        };
-      }
-      return { ...state };
-    }
-    case ActionEnum.Start: {
+      const { board = initialState.board } = action.payload;
+      const newBoard = replaceAt(board, position, player.toString());
       return {
         ...state,
-        gameState: GameStateEnum.Active,
+        board: newBoard,
+      };
+    }
+    case ActionEnum.Start: {
+      const { gameState = GameStateEnum.Active } = action.payload  || {};
+      return {
+        ...state,
+        gameState,
       };
     }
     case ActionEnum.Reset: {
@@ -39,7 +29,6 @@ const ticTacToeReducer = (state: StateType, action: ActionsType): StateType => {
         ...state,
         board: initialState.board,
         gameState: initialState.gameState,
-        turn: initialState.turn,
       };
     }
     case ActionEnum.UpdateGameState: {
@@ -58,7 +47,7 @@ const ticTacToeReducer = (state: StateType, action: ActionsType): StateType => {
     }
     case ActionEnum.UpdatePlayer: {
       const { position, player } = action.payload;
-      return position === PlayerEnum.One ? {
+      return position === PieceEnum.X ? {
         ...state,
         playerOne: { ...player },
       } : {
@@ -79,14 +68,10 @@ const ticTacToeReducer = (state: StateType, action: ActionsType): StateType => {
       };
     }
     case ActionEnum.Remote: {
-      const { message } = action.payload;
-      return {
-        ...state,
-        message,
-      };
+      return messageReducer(state, action);
     }
   }
   return state;
 };
 
-export { ticTacToeReducer };
+export { contextReducer };

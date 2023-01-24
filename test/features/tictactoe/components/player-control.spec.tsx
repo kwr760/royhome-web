@@ -1,7 +1,7 @@
 import React from 'react';
 import PlayerControl from '../../../../src/features/tictactoe/components/player-control';
 import {
-  PlayerEnum,
+  PieceEnum,
   PlayerStateEnum,
   PlayerTypeEnum,
 } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
@@ -25,7 +25,7 @@ describe('features/tictactoe/components/player-control', () => {
       name: 'Player #1',
       playerState: PlayerStateEnum.Active,
       type: PlayerTypeEnum.Human,
-      piece: PlayerEnum.One,
+      piece: PieceEnum.X,
     };
 
     // Act

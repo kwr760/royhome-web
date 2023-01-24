@@ -1,12 +1,11 @@
-import type { Action } from '@reduxjs/toolkit';
 import { Client } from '@stomp/stompjs';
 import { ReactNode, Reducer } from 'react';
 import { Auth0User } from '../../../contracts/auth0.models';
-import { ActionEnum, GameStateEnum, PlayerEnum, PublishEnum } from './tictactoe.enum';
+import { ActionEnum, GameStateEnum, PieceEnum, PublishEnum } from './tictactoe.enum';
 import { Player, StateType } from './tictactoe.models';
 
 type BoardType = string;
-type MiddleWareFunction = (action: Action | undefined, state: StateType) => StateType;
+type MiddleWareFunction = (action: ActionTypes, state: StateType) => StateType;
 type ProviderType = {
   sessionId: string,
   user: Auth0User,
@@ -16,12 +15,14 @@ type ProviderType = {
   afterware?: MiddleWareFunction[],
   children: ReactNode,
 }
+
 type TakeTurnPayload = {
   position: number,
-  player: PlayerEnum
+  player: PieceEnum,
+  board?: string,
 }
 type UpdatePlayerPayload = {
-  position: PlayerEnum,
+  position: PieceEnum,
   player: Player,
 }
 type UpdateRemoteGamePayload = {
@@ -30,7 +31,7 @@ type UpdateRemoteGamePayload = {
 type MessagePayload = {
   message: string,
 }
-type UpdateGameStatePayload = {
+type GameStatePayload = {
   gameState: GameStateEnum,
 }
 type InitWebSocketPayload = {
@@ -38,13 +39,15 @@ type InitWebSocketPayload = {
   destination: string,
   callback: (msg: { body: string; }) => void,
 }
+type EmptyPayload = Record<string, never>
+
 type TakeTurnAction = {
   type: ActionEnum.TakeTurn,
   payload: TakeTurnPayload,
 };
 type UpdateGameStateAction = {
   type: ActionEnum.UpdateGameState,
-  payload: UpdateGameStatePayload,
+  payload: GameStatePayload,
 };
 type UpdatePlayerAction = {
   type: ActionEnum.UpdatePlayer,
@@ -56,9 +59,11 @@ type UpdateRemoteGameAction = {
 };
 type ResetGameAction = {
   type: ActionEnum.Reset,
+  payload: EmptyPayload,
 };
 type StartGameAction = {
   type: ActionEnum.Start,
+  payload: GameStatePayload,
 };
 type RemoteAction = {
   type: ActionEnum.Remote,
@@ -68,43 +73,55 @@ type InitWebSocketAction = {
   type: ActionEnum.InitializeWebSocket,
   payload: InitWebSocketPayload,
 };
-type ActionsType = TakeTurnAction | ResetGameAction | StartGameAction | UpdateGameStateAction |
+
+type ActionTypes = TakeTurnAction | ResetGameAction | StartGameAction | UpdateGameStateAction |
   UpdateRemoteGameAction | UpdatePlayerAction | RemoteAction | InitWebSocketAction;
-type DispatchType = (action: ActionsType) => void;
+type DispatchType = (action: ActionTypes) => void;
+
 type ContextType = {
   state: StateType,
   dispatch: DispatchType,
 };
-type StartActionPayload = {
+type PublishStartPayload = {
   sessionId: string,
   playerName: string,
 }
+type PublishTurnPayload = {
+  sessionId: string,
+  board: string,
+}
+type PublishEndPayload = {
+  sessionId: string,
+  reason: string,
+}
 type PublishAction = {
-  destination: PublishEnum.Start,
+  destination: PublishEnum.Start | PublishEnum.Turn | PublishEnum.End,
   body: string,
 };
 
 export type {
-  ProviderType,
+  BoardType,
   MiddleWareFunction,
-  ContextType,
-  ActionsType,
-  ResetGameAction,
-  StartGameAction,
+  ProviderType,
+  TakeTurnPayload,
+  UpdatePlayerPayload,
+  UpdateRemoteGamePayload,
+  MessagePayload,
+  GameStatePayload,
+  InitWebSocketPayload,
   TakeTurnAction,
   UpdateGameStateAction,
   UpdatePlayerAction,
   UpdateRemoteGameAction,
+  ResetGameAction,
+  StartGameAction,
   RemoteAction,
   InitWebSocketAction,
+  ActionTypes,
   DispatchType,
-  TakeTurnPayload,
-  UpdateGameStatePayload,
-  UpdatePlayerPayload,
-  UpdateRemoteGamePayload,
-  MessagePayload,
-  InitWebSocketPayload,
-  BoardType,
-  StartActionPayload,
+  ContextType,
+  PublishStartPayload,
+  PublishTurnPayload,
+  PublishEndPayload,
   PublishAction,
 };

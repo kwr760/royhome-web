@@ -1,4 +1,3 @@
-import { PlayerStateEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import {
   initialPlayerOne,
   initialPlayerTwo,
@@ -17,27 +16,25 @@ describe('feature/tictactoe/functions/get-winner', () => {
     {
       state: {
         ...initialState,
+        board: 'XXX------',
         playerOne: {
           ...initialPlayerOne,
-          playerState: PlayerStateEnum.Winner,
         },
       },
       expected: {
         ...initialPlayerOne,
-        playerState: PlayerStateEnum.Winner,
       },
     },
     {
       state: {
         ...initialState,
+        board: 'XX-OOO---',
         playerTwo: {
           ...initialPlayerTwo,
-          playerState: PlayerStateEnum.Winner,
         },
       },
       expected: {
         ...initialPlayerTwo,
-        playerState: PlayerStateEnum.Winner,
       },
     },
     {

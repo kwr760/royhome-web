@@ -1,35 +1,35 @@
-import { PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { PieceEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { BoardType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
 import { findWinner } from '../../../../src/features/tictactoe/functions/find-winner';
 
-type TestTuple = {board: BoardType, expected: PlayerEnum};
+type TestTuple = {board: BoardType, expected: PieceEnum};
 
 describe('feature/tictactoe/functions/find-winner', () => {
   // Arrange
   const cases: TestTuple[] = [
     {
       board: 'X--X--X--',
-      expected: PlayerEnum.One,
+      expected: PieceEnum.X,
     },
     {
       board: 'OOO------',
-      expected: PlayerEnum.Two,
+      expected: PieceEnum.O,
     },
     {
       board: 'X-XX-----',
-      expected: PlayerEnum.Neither,
+      expected: PieceEnum.Neither,
     },
     {
       board: 'O---O---O',
-      expected: PlayerEnum.Two,
+      expected: PieceEnum.O,
     },
     {
       board: '--O--O--O',
-      expected: PlayerEnum.Two,
+      expected: PieceEnum.O,
     },
     {
       board: 'X--X----X',
-      expected: PlayerEnum.Neither,
+      expected: PieceEnum.Neither,
     },
   ];
 

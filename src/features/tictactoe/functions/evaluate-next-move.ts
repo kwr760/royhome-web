@@ -1,5 +1,5 @@
 import { orderOne, orderThree, orderTwo, wins } from '../contracts/tictactoe.constant';
-import { PlayerEnum } from '../contracts/tictactoe.enum';
+import { PieceEnum } from '../contracts/tictactoe.enum';
 import { Board } from '../contracts/tictactoe.models';
 import { NextMove } from '../contracts/tictactoe.functions';
 import { getRandomNumber } from './get-random-number';
@@ -24,14 +24,14 @@ abstract class AbstractAnalyzer implements IAnalyzer
 
 type Position = {
   index: number;
-  player: PlayerEnum;
+  player: PieceEnum;
 };
 const mapPositions = (board: Board, possibleWin: number[]): Position[] => {
   return possibleWin.map((index: number) => {
     return { index, player: board[index] } as Position;
   });
 };
-const findPlayer = (positions: Position[], player: PlayerEnum): Position[] => {
+const findPlayer = (positions: Position[], player: PieceEnum): Position[] => {
   return positions.filter((e) => e.player === player);
 };
 
@@ -41,7 +41,7 @@ class OrderThreeMove extends AbstractAnalyzer {
     const { board } = next;
 
     const positions = mapPositions(board, orderThree);
-    const openPositions = findPlayer(positions, PlayerEnum.Neither);
+    const openPositions = findPlayer(positions, PieceEnum.Neither);
     const possibleMoves = openPositions.map((e) => e.index);
 
     const unique = [...new Set(possibleMoves)];
@@ -54,7 +54,7 @@ class OrderTwoMove extends AbstractAnalyzer {
     const { board } = next;
 
     const positions = mapPositions(board, orderTwo);
-    const openPositions = findPlayer(positions, PlayerEnum.Neither);
+    const openPositions = findPlayer(positions, PieceEnum.Neither);
     const possibleMoves = openPositions.map((e) => e.index);
 
     if (possibleMoves.length) {
@@ -70,7 +70,7 @@ class OrderOneMove extends AbstractAnalyzer {
     const { board } = next;
 
     const positions = mapPositions(board, orderOne);
-    const openPositions = findPlayer(positions, PlayerEnum.Neither);
+    const openPositions = findPlayer(positions, PieceEnum.Neither);
     const possibleMoves = openPositions.map((e) => e.index);
 
     if (possibleMoves.length) {
@@ -84,14 +84,14 @@ class OrderOneMove extends AbstractAnalyzer {
 class BlockingMove extends AbstractAnalyzer {
   public process(next: NextMove): number {
     const { board, player } = next;
-    const opponent = player === PlayerEnum.One ? PlayerEnum.Two : PlayerEnum.One;
+    const opponent = player === PieceEnum.X ? PieceEnum.O : PieceEnum.X;
     const possibleMoves: number[] = [];
 
     wins.forEach((possibleWin: number[]) => {
       const positions = mapPositions(board, possibleWin);
       const opponentPositions = findPlayer(positions, opponent);
       if (opponentPositions.length === 2) {
-        const openPosition = findPlayer(positions, PlayerEnum.Neither);
+        const openPosition = findPlayer(positions, PieceEnum.Neither);
         if (openPosition.length) {
           possibleMoves.push(openPosition[0].index);
         }
@@ -115,7 +115,7 @@ class WinningMove extends AbstractAnalyzer {
       const positions = mapPositions(board, possibleWin);
       const myPositions = findPlayer(positions, player);
       if (myPositions.length === 2) {
-        const openPosition = findPlayer(positions, PlayerEnum.Neither);
+        const openPosition = findPlayer(positions, PieceEnum.Neither);
         if (openPosition.length) {
           possibleMoves.push(openPosition[0].index);
         }

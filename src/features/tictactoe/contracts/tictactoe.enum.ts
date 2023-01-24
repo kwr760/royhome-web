@@ -17,10 +17,10 @@ enum PlayerTypeEnum {
   Computer = 'computer',
   Remote = 'remote',
 }
-enum PlayerEnum {
+enum PieceEnum {
   Neither = '-',
-  One = 'X',
-  Two = 'O',
+  X = 'X',
+  O = 'O',
 }
 enum ActionEnum {
   Reset = 'reset',
@@ -32,14 +32,28 @@ enum ActionEnum {
   Remote = 'remote',
   InitializeWebSocket = 'initWebSocket',
 }
+enum MessageActionEnum {
+  SetPlayers = 'SetPlayers',
+  TakeTurn = 'TakeTurn',
+  EndGame = 'EndGame',
+}
 enum PublishEnum {
   Start = '/start',
+  Turn = '/turn',
+  End = '/end',
 }
-enum MessageTypeEnum {
-  Unknown = 'unknown',
-  Setup = 'setup',
-  Winner = 'winner',
-  Tie = 'tie',
+enum EndGameReasonEnum {
+  Completed = 'Completed',
+  Mismatch = 'Mismatch',
 }
 
-export { PlayerStateEnum, GameStateEnum, ActionEnum, PlayerTypeEnum, PlayerEnum, MessageTypeEnum, PublishEnum };
+export {
+  PlayerStateEnum,
+  GameStateEnum,
+  ActionEnum,
+  MessageActionEnum,
+  PlayerTypeEnum,
+  PieceEnum,
+  PublishEnum,
+  EndGameReasonEnum,
+};

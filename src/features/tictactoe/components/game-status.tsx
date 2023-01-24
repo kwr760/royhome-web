@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActions, DialogContent, Typography } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, Tooltip, Typography } from '@mui/material';
 import type { WithStyles } from '@mui/styles';
 import { withStyles } from '@mui/styles';
 import React, { FunctionComponent, memo, useEffect, useState } from 'react';
@@ -8,8 +8,8 @@ import { GameStateEnum } from '../contracts/tictactoe.enum';
 import { getWinner } from '../functions/get-winner';
 import { styles } from '../styles/game-status.styles';
 
-type PlayerStatusProps = WithStyles<typeof styles>;
-const PlayerStatusComponent: FunctionComponent<PlayerStatusProps> = (
+type GameStatusProps = WithStyles<typeof styles>;
+const GameStatusComponent: FunctionComponent<GameStatusProps> = (
   { classes },
 ) => {
   const [openDialog, setOpenDialog] = useState(false);
@@ -28,12 +28,10 @@ const PlayerStatusComponent: FunctionComponent<PlayerStatusProps> = (
   };
   const renderMessage = () => {
     switch (gameState) {
+      case GameStateEnum.Wait:
+        return <span>Waiting for your opponent.</span>;
       case GameStateEnum.Message:
-        return <span>
-          The game has yet to begin.
-          Press &lsquo;<i><b>Setup</b></i>&rsquo; to play the game or
-          &lsquo;<i><b>Exit</b></i>&rsquo; to switch something else.
-        </span>;
+        return <span>The game has yet to begin.</span>;
       case GameStateEnum.Completed: {
         const winner = getWinner(state);
         if (winner?.name) {
@@ -43,15 +41,19 @@ const PlayerStatusComponent: FunctionComponent<PlayerStatusProps> = (
         }
       }
       default:
-        return <span>Unknown state</span>;
+        return <span>Unknown state.</span>;
     }
   };
 
   useEffect(() => {
     switch (gameState) {
+      case GameStateEnum.Wait:
       case GameStateEnum.Message:
       case GameStateEnum.Completed:
         setOpenDialog(true);
+        break;
+      default:
+        setOpenDialog(false);
         break;
     }
   }, [gameState]);
@@ -68,11 +70,15 @@ const PlayerStatusComponent: FunctionComponent<PlayerStatusProps> = (
         </Typography>
       </DialogContent>
       <DialogActions className={classes.buttonBar}>
-        <Button className={classes.button} onClick={handleClose}>Exit</Button>
-        <Button className={classes.button} onClick={handleSetup}>Setup</Button>
+        <Tooltip title="Exit dialog to switch to different tab" classes={{ tooltip: classes.tooltip }}>
+          <Button className={classes.button} onClick={handleClose}>Exit</Button>
+        </Tooltip>
+        <Tooltip title="Start new game by going to the Setup" classes={{ tooltip: classes.tooltip }} >
+          <Button className={classes.button} onClick={handleSetup}>Setup</Button>
+        </Tooltip>
       </DialogActions>
     </Dialog>
   );
 };
 
-export default memo(withStyles(styles)(PlayerStatusComponent));
+export default memo(withStyles(styles)(GameStatusComponent));

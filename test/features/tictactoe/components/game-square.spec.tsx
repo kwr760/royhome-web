@@ -1,6 +1,6 @@
 import React from 'react';
 import GameSquare from '../../../../src/features/tictactoe/components/game-square';
-import { ActionEnum, GameStateEnum, PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { ActionEnum, GameStateEnum, PieceEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { initialState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { fireEvent, render, screen } from '../utils/testing-library';
 
@@ -16,13 +16,12 @@ describe('feature/tictactoe/component/game-square', () => {
     const state = {
       ...initialState,
       board: '---------',
-      turn: PlayerEnum.Two,
       gameState: GameStateEnum.Active,
       sessionId: 'session-id',
     };
     const expectedPayload = {
       position: 5,
-      player: PlayerEnum.Two,
+      player: PieceEnum.X,
     };
     const reducer = jest.fn(() => (state));
 
@@ -43,7 +42,6 @@ describe('feature/tictactoe/component/game-square', () => {
     const state = {
       ...initialState,
       board: '-----O---',
-      turn: PlayerEnum.Two,
     };
 
     // Act

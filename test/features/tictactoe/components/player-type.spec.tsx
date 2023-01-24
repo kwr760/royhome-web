@@ -2,7 +2,7 @@ import React from 'react';
 import PlayerType from '../../../../src/features/tictactoe/components/player-type';
 import { updatePlayer } from '../../../../src/features/tictactoe/context/context.actions';
 import {
-  PlayerEnum,
+  PieceEnum,
   PlayerStateEnum,
   PlayerTypeEnum,
 } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
@@ -20,7 +20,7 @@ describe('features/tictactoe/components/player-type', () => {
       name: 'Player #1',
       playerState: PlayerStateEnum.Active,
       type: PlayerTypeEnum.Human,
-      piece: PlayerEnum.One,
+      piece: PieceEnum.X,
       remote: false,
     };
     const expectedChange = {
@@ -47,18 +47,18 @@ describe('features/tictactoe/components/player-type', () => {
       name: 'Player #1',
       playerState: PlayerStateEnum.Active,
       type: PlayerTypeEnum.Computer,
-      piece: PlayerEnum.One,
+      piece: PieceEnum.X,
       remote: false,
     };
     const expectedChange = {
       player: {
         name: 'Player #1',
-        piece: PlayerEnum.One,
+        piece: PieceEnum.X,
         playerState: PlayerStateEnum.Active,
         type: PlayerTypeEnum.Human,
         remote: false,
       },
-      position: PlayerEnum.One,
+      position: PieceEnum.X,
     };
 
     // Act

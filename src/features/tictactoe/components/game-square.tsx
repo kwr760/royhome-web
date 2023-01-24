@@ -4,7 +4,8 @@ import { withStyles } from '@mui/styles';
 import React, { FunctionComponent, memo } from 'react';
 import { takeTurn } from '../context/context.actions';
 import { useTicTacToe } from '../context/context.provider';
-import { PlayerEnum } from '../contracts/tictactoe.enum';
+import { PieceEnum } from '../contracts/tictactoe.enum';
+import { getCurrentTurn } from '../functions/get-current-turn';
 import { isSquareDisabled } from '../functions/is-square-disabled';
 import { styles } from '../styles/game-square.styles';
 
@@ -13,18 +14,16 @@ interface Props {
 }
 type GameSquareProps = Props & WithStyles<typeof styles>;
 export const GameSquareComponent: FunctionComponent<GameSquareProps> = ({position, classes}) => {
+  const { state, dispatch } = useTicTacToe();
   const {
-    state: {
-      board,
-      gameState,
-      turn,
-    },
-    dispatch,
-  } = useTicTacToe();
-  const owner: PlayerEnum = board[position] as PlayerEnum;
+    board,
+    gameState,
+  } = state;
+  const owner: PieceEnum = board[position] as PieceEnum;
   const disabled = isSquareDisabled(gameState, owner);
-  const piece = (owner === PlayerEnum.Neither) ? '' : owner;
+  const piece = (owner === PieceEnum.Neither) ? '' : owner;
   const clickAction = () => {
+    const turn = getCurrentTurn(board);
     dispatch(takeTurn({ position, player: turn }));
   };
 
