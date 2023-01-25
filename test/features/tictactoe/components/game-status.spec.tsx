@@ -1,7 +1,7 @@
 import React from 'react';
 import GameStatus from '../../../../src/features/tictactoe/components/game-status';
 import { updateGameState } from '../../../../src/features/tictactoe/context/context.actions';
-import { GameStateEnum, PlayerStateEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { GameStateEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { initialPlayerOne, initialState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { fireEvent, render, screen } from '../utils/testing-library';
 
