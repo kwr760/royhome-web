@@ -22,6 +22,10 @@ const styles = (theme: Theme): StyleRules => {
       color: theme.color.foreground.base,
       fontStyle: 'italic',
     },
+    tooltip: {
+      color: theme.color.foreground.base,
+      backgroundColor: theme.color.background.paper,
+    },
   });
 };
 

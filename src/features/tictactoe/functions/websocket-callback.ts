@@ -1,7 +1,7 @@
 import { remote } from '../context/context.actions';
-import { ActionsType } from '../contracts/tictactoe.context';
+import { ActionTypes } from '../contracts/tictactoe.context';
 
-const websocketCallback = (dispatch: (action: ActionsType) => void) => (msg: { body: string; }): void => {
+const websocketCallback = (dispatch: (action: ActionTypes) => void) => (msg: { body: string; }): void => {
   dispatch(remote({
     message: msg.body,
   }));

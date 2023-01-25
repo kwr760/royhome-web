@@ -11,8 +11,9 @@ import {
   updateRemoteGame,
 } from '../../../../src/features/tictactoe/context/context.actions';
 import { TicTacToeProvider, useTicTacToe } from '../../../../src/features/tictactoe/context/context.provider';
-import { ActionsType } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
-import { GameStateEnum, PlayerEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { messageReducer } from '../../../../src/features/tictactoe/context/message.reducer';
+import { ActionTypes } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
+import { GameStateEnum, PieceEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import {
   initialPlayerOne,
   initialPlayerTwo,
@@ -20,7 +21,10 @@ import {
 } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { StateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
 
-jest.mock('../../../../src/features/tictactoe/context/context.stomp.ts');
+jest
+  .mock('../../../../src/features/tictactoe/context/context.stomp.ts')
+  .mock('../../../../src/features/tictactoe/context/message.reducer.ts')
+;
 
 describe('feature/tictactoe/context/context.reducer', () => {
   const createWrapper = (testState: StateType | undefined) => {
@@ -39,21 +43,19 @@ describe('feature/tictactoe/context/context.reducer', () => {
     const testState = {
       ...initialState,
       board: 'O-O-XOX-X',
-      turn: PlayerEnum.One,
       gameState: GameStateEnum.Active,
     } as StateType;
     const expectedState = {
       ...initialState,
-      board: 'O-O-XOXXX',
-      turn: PlayerEnum.Two,
-      gameState: GameStateEnum.Completed,
+      board: '-------X-',
+      gameState: GameStateEnum.Active,
     };
     const wrapper = createWrapper(testState);
     const { result } = renderHook(() => useTicTacToe(), { wrapper });
 
     act(() => {
       const {dispatch} = result.current;
-      dispatch(takeTurn({position: 7, player: PlayerEnum.One}));
+      dispatch(takeTurn({position: 7, player: PieceEnum.X}));
     });
 
     // Assert
@@ -65,20 +67,19 @@ describe('feature/tictactoe/context/context.reducer', () => {
     const testState = {
       ...initialState,
       board: 'O-OO-OXOX',
-      turn: PlayerEnum.Two,
       gameState: GameStateEnum.Active,
     } as StateType;
     const expectedState = {
       ...initialState,
-      board: 'O-OOOOXOX',
-      gameState: GameStateEnum.Completed,
+      board: '----O----',
+      gameState: GameStateEnum.Active,
     };
     const wrapper = createWrapper(testState);
     const { result } = renderHook(() => useTicTacToe(), { wrapper });
 
     act(() => {
       const {dispatch} = result.current;
-      dispatch(takeTurn({position: 4, player: PlayerEnum.Two}));
+      dispatch(takeTurn({position: 4, player: PieceEnum.O}));
     });
 
     // Assert
@@ -89,8 +90,7 @@ describe('feature/tictactoe/context/context.reducer', () => {
     // Arrange
     const testState = {
       ...initialState,
-      board: 'O-OO-OXOX',
-      turn: PlayerEnum.Two,
+      board: '----O----',
       gameState: GameStateEnum.Setup,
     } as StateType;
     const wrapper = createWrapper(testState);
@@ -98,7 +98,7 @@ describe('feature/tictactoe/context/context.reducer', () => {
 
     act(() => {
       const {dispatch} = result.current;
-      dispatch(takeTurn({position: 4, player: PlayerEnum.Two}));
+      dispatch(takeTurn({position: 4, player: PieceEnum.O}));
     });
 
     // Assert
@@ -110,7 +110,6 @@ describe('feature/tictactoe/context/context.reducer', () => {
     const testState = {
       ...initialState,
       board: 'X-X-XO--O',
-      turn: PlayerEnum.Two,
     } as StateType;
     const expectedState = {
       ...initialState,
@@ -134,7 +133,7 @@ describe('feature/tictactoe/context/context.reducer', () => {
     } as StateType;
     const expectedState = {
       ...initialState,
-      gameState: GameStateEnum.Active,
+      gameState: GameStateEnum.Wait,
     };
     const wrapper = createWrapper(testState);
     const { result } = renderHook(() => useTicTacToe(), { wrapper });
@@ -168,7 +167,7 @@ describe('feature/tictactoe/context/context.reducer', () => {
 
     act(() => {
       const { dispatch } = result.current;
-      dispatch( updatePlayer({ position: PlayerEnum.One, player: newPlayer }));
+      dispatch( updatePlayer({ position: PieceEnum.X, player: newPlayer }));
     });
 
     // Assert
@@ -195,7 +194,7 @@ describe('feature/tictactoe/context/context.reducer', () => {
 
     act(() => {
       const { dispatch } = result.current;
-      dispatch( updatePlayer({ position: PlayerEnum.Two, player: newPlayer }));
+      dispatch( updatePlayer({ position: PieceEnum.O, player: newPlayer }));
     });
 
     // Assert
@@ -236,6 +235,7 @@ describe('feature/tictactoe/context/context.reducer', () => {
       ...initialState,
       message,
     };
+    (messageReducer as jest.Mock).mockReturnValue(expectedState);
     const wrapper = createWrapper(testState);
     const { result } = renderHook(() => useTicTacToe(), { wrapper });
 
@@ -253,14 +253,13 @@ describe('feature/tictactoe/context/context.reducer', () => {
     const testState = {
       ...initialState,
       board: 'X-X-XO--O',
-      turn: PlayerEnum.Two,
     } as StateType;
     const wrapper = createWrapper(testState);
     const { result } = renderHook(() => useTicTacToe(), { wrapper });
 
     act(() => {
       const { dispatch } = result.current;
-      dispatch( {type: 'unknown'} as unknown as ActionsType);
+      dispatch( {type: 'unknown'} as unknown as ActionTypes);
     });
 
     // Assert

@@ -1,7 +1,7 @@
-import { GameStateEnum, PlayerEnum } from '../contracts/tictactoe.enum';
+import { GameStateEnum, PieceEnum } from '../contracts/tictactoe.enum';
 
-const isSquareDisabled = (gameState: GameStateEnum, owner: PlayerEnum): boolean => {
-  return gameState === GameStateEnum.Active && owner !== PlayerEnum.Neither;
+const isSquareDisabled = (gameState: GameStateEnum, owner: PieceEnum): boolean => {
+  return gameState === GameStateEnum.Active && owner !== PieceEnum.Neither;
 };
 
 export { isSquareDisabled };

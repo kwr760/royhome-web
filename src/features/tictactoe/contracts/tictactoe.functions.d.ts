@@ -1,17 +1,13 @@
-import { GameStateEnum, PlayerEnum } from './tictactoe.enum';
+import { GameStateEnum, PieceEnum } from './tictactoe.enum';
 import { Board } from './tictactoe.models';
 
-type SearchString = {
-  str: string;
-  include: string;
-}
 type NextMove = {
   board: Board;
-  player: PlayerEnum;
+  player: PieceEnum;
 }
 type GameEvaluationReturn = {
   gameState: GameStateEnum;
-  winner?: PlayerEnum;
+  winner: PieceEnum;
 }
 
-export { SearchString, NextMove, GameEvaluationReturn };
+export { NextMove, GameEvaluationReturn };

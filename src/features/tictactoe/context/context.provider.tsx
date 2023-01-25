@@ -1,10 +1,11 @@
+import type { Reducer } from '@reduxjs/toolkit';
 import React, { createContext, useContext } from 'react';
 import { randomNames } from '../contracts/tictactoe.constant';
 import { ContextType, ProviderType } from '../contracts/tictactoe.context';
 import { initialState } from '../contracts/tictactoe.initial';
 import { StateType } from '../contracts/tictactoe.models';
 import { useReducerWithMiddleware } from './context.middleware';
-import { ticTacToeReducer } from './context.reducer';
+import { contextReducer } from './context.reducer';
 
 const TicTacToeContext = createContext<ContextType | undefined>(undefined);
 
@@ -28,7 +29,7 @@ const TicTacToeProvider = ({
     playerOne,
     playerTwo,
   };
-  const startReducer = seededReducer || ticTacToeReducer;
+  const startReducer: Reducer = seededReducer as Reducer || contextReducer as Reducer;
 
   const [state, dispatch] = useReducerWithMiddleware(
     startReducer,

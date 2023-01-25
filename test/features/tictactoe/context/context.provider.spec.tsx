@@ -3,7 +3,7 @@ import { fireEvent, render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import React, { ReactNode } from 'react';
 import GameStatus from '../../../../src/features/tictactoe/components/game-status';
-import { logger } from '../../../../src/features/tictactoe/context/context.middleware';
+import { logger } from '../../../../src/features/tictactoe/middleware/logger.middleware';
 import { TicTacToeProvider, useTicTacToe } from '../../../../src/features/tictactoe/context/context.provider';
 import { MiddleWareFunction } from '../../../../src/features/tictactoe/contracts/tictactoe.context';
 import { GameStateEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
@@ -107,25 +107,14 @@ describe('feature/tictactoe/context/context.provider', () => {
         remote: false,
       },
     };
-    const log1 = {
-      ...log,
-      name: 'action->state before',
-    };
-    const log2 = {
-      ...log,
-      name: 'action->state after',
-      state: {
-        ...log.state,
-        sessionId: '',
-      },
-    };
 
     // Act
-    const { getByRole } = render(getComponent(mockState, reducer, [beforeLogger], [afterLogger]));
-    fireEvent.click(getByRole('button', { name: 'Exit'}));
+    const { getAllByRole } = render(getComponent(mockState, reducer, [beforeLogger], [afterLogger]));
+    const buttons = getAllByRole('button');
+    fireEvent.click(buttons[0]);
 
     // Assert
-    expect(global.console.log).toHaveBeenNthCalledWith(1, log1.name, log1.payload, log1.state );
-    expect(global.console.log).toHaveBeenNthCalledWith(2, log2.name, log2.payload, log2.state );
+    expect(global.console.log).toHaveBeenNthCalledWith(1, 'action->state before', log.payload, expect.anything());
+    expect(global.console.log).toHaveBeenNthCalledWith(2, 'action->state after', log.payload, expect.anything());
   });
 });

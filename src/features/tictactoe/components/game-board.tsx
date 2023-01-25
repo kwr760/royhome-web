@@ -1,7 +1,8 @@
 import { Box, Grid } from '@mui/material';
 import type { WithStyles } from '@mui/styles';
 import { withStyles } from '@mui/styles';
-import React, { FunctionComponent, memo } from 'react';
+import React, { FunctionComponent, memo, useEffect } from 'react';
+import { useTicTacToe } from '../context/context.provider';
 import { useAI } from '../hooks/use-ai';
 import { useWebsocket } from '../hooks/use-websocket';
 import { styles } from '../styles/game-board.styles';
@@ -9,8 +10,16 @@ import GameSquare from './game-square';
 
 type GameBoardProps = WithStyles<typeof styles>;
 const GameBoardComponent: FunctionComponent<GameBoardProps> = ({ classes }) => {
+  const { state } = useTicTacToe();
+  const { client } = state;
   useWebsocket();
   useAI();
+
+  useEffect(() => {
+    return () => {
+      client?.deactivate();
+    };
+  }, [client]);
 
   return (
     <>

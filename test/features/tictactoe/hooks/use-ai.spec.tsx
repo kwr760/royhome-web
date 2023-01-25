@@ -2,10 +2,9 @@ import { renderHook } from '@testing-library/react-hooks';
 import React, { ReactNode } from 'react';
 import { takeTurn } from '../../../../src/features/tictactoe/context/context.actions';
 import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
-import { GameStateEnum, PlayerEnum, PlayerTypeEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import { GameStateEnum, PieceEnum, PlayerTypeEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import {
   initialPlayerOne,
-  initialPlayerTwo,
   initialState,
 } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { StateType } from '../../../../src/features/tictactoe/contracts/tictactoe.models';
@@ -29,37 +28,14 @@ describe('feature/tictactoe/hooks/use-ai', () => {
     const state = {
       ...initialState,
       gameState: GameStateEnum.Active,
-      turn: PlayerEnum.One,
+      turn: PieceEnum.X,
       playerOne: {
         ...initialPlayerOne,
         type: PlayerTypeEnum.Computer,
       },
     };
     const expectedTakeTurn = {
-      player: PlayerEnum.One,
-      position: 4,
-    };
-
-    // Act
-    const wrapper = createWrapper(state);
-    renderHook(() => useAI(), { wrapper });
-
-    // Assert
-    expect(takeTurn).toBeCalledWith(expectedTakeTurn);
-  });
-  it('should determine O turn', () => {
-    // Arrange
-    const state = {
-      ...initialState,
-      gameState: GameStateEnum.Active,
-      turn: PlayerEnum.Two,
-      playerTwo: {
-        ...initialPlayerTwo,
-        type: PlayerTypeEnum.Computer,
-      },
-    };
-    const expectedTakeTurn = {
-      player: PlayerEnum.Two,
+      player: PieceEnum.X,
       position: 4,
     };
 

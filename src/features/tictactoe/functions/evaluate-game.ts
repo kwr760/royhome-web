@@ -1,5 +1,5 @@
 import { BoardType } from '../contracts/tictactoe.context';
-import { GameStateEnum, PlayerEnum } from '../contracts/tictactoe.enum';
+import { GameStateEnum, PieceEnum } from '../contracts/tictactoe.enum';
 import { GameEvaluationReturn } from '../contracts/tictactoe.functions';
 import { findWinner } from './find-winner';
 import { isGameOver } from './is-game-over';
@@ -30,7 +30,7 @@ abstract class AbstractEvaluator<Param, Return> implements IEvaluator<Param, Ret
 class WinEvaluator extends AbstractEvaluator<BoardType, GameEvaluationReturn> {
   public evaluate(board: BoardType): GameEvaluationReturn {
     const winner = findWinner(board);
-    if (winner !== PlayerEnum.Neither) {
+    if (winner !== PieceEnum.Neither) {
       return {
         gameState: GameStateEnum.Completed,
         winner,
@@ -45,6 +45,7 @@ class TieEvaluator extends AbstractEvaluator<BoardType, GameEvaluationReturn> {
     if (isGameOver(board)) {
       return {
         gameState: GameStateEnum.Completed,
+        winner: PieceEnum.Neither,
       };
     }
     return super.evaluate(board);
@@ -55,6 +56,7 @@ class ActiveTerminal extends AbstractEvaluator<BoardType, GameEvaluationReturn> 
   public evaluate(): GameEvaluationReturn {
     return {
       gameState: GameStateEnum.Active,
+      winner: PieceEnum.Neither,
     };
   }
 }

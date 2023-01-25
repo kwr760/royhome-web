@@ -4,7 +4,7 @@ import { withStyles } from '@mui/styles';
 import React, { FunctionComponent, memo } from 'react';
 import { updatePlayer } from '../context/context.actions';
 import { useTicTacToe } from '../context/context.provider';
-import { PlayerEnum, PlayerTypeEnum } from '../contracts/tictactoe.enum';
+import { PieceEnum, PlayerTypeEnum } from '../contracts/tictactoe.enum';
 import { Player } from '../contracts/tictactoe.models';
 import { styles } from '../styles/player-type.styles';
 
@@ -18,14 +18,13 @@ const PlayerType: FunctionComponent<PlayerControlProps> = (
   const {
     dispatch,
   } = useTicTacToe();
-  const onChangeType = (position: PlayerEnum, event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeType = (position: PieceEnum, event: React.ChangeEvent<HTMLInputElement>) => {
     const type = event.target.checked ? PlayerTypeEnum.Human : PlayerTypeEnum.Computer;
     dispatch(updatePlayer({ position, player: {
       ...player,
       type,
     } }));
   };
-  const disabled = player.type === PlayerTypeEnum.Remote;
   return (
     <FormControlLabel
       control={<Switch
@@ -33,7 +32,6 @@ const PlayerType: FunctionComponent<PlayerControlProps> = (
         className={classes.playerType}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChangeType(player.piece, event)}
         checked={player.type === PlayerTypeEnum.Human}
-        disabled={disabled}
       />}
       label=""
     />

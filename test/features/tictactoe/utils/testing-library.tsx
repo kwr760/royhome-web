@@ -37,6 +37,8 @@ const customRender = (
           user={user}
           state={state}
           reducer={reducer}
+          beforeware={[]}
+          afterware={[]}
         >
           {children}
         </Provider>
