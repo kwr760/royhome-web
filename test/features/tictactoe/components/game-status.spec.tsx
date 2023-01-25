@@ -29,6 +29,23 @@ describe('feature/tictactoe/component/game-status', () => {
     // Assert
     screen.getByText(/The game has yet to begin./);
   });
+  it('should render wait', () => {
+    // Arrange
+    const mockState = {
+      ...initialState,
+      gameState: GameStateEnum.Wait,
+    };
+    const reducer = jest.fn(() => ( mockState ));
+
+    // Act
+    render(<GameStatus />, {
+      state: mockState,
+      reducer,
+    });
+
+    // Assert
+    screen.getByText(/Waiting for your opponent./);
+  });
   it('should render unknown', () => {
     // Arrange
     const mockState = {
@@ -67,9 +84,9 @@ describe('feature/tictactoe/component/game-status', () => {
     const mockState = {
       ...initialState,
       gameState: GameStateEnum.Completed,
+      board: 'XXXOO----',
       playerOne: {
         ...initialPlayerOne,
-        playerState: PlayerStateEnum.Winner,
       },
     };
     const reducer = jest.fn(() => ( mockState ));
@@ -96,7 +113,7 @@ describe('feature/tictactoe/component/game-status', () => {
       state: mockState,
       reducer,
     });
-    fireEvent.click(screen.getByRole('button', { name: 'Exit'}));
+    fireEvent.click(screen.getByText('Exit'));
 
     // Assert
     expect(updateGameState).toBeCalledWith(GameStateEnum.Exit);
@@ -114,7 +131,7 @@ describe('feature/tictactoe/component/game-status', () => {
       state: mockState,
       reducer,
     });
-    fireEvent.click(screen.getByRole('button', { name: 'Setup'}));
+    fireEvent.click(screen.getByText('Setup'));
 
     // Assert
     expect(updateGameState).toBeCalledWith(GameStateEnum.Setup);

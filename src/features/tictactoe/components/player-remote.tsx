@@ -17,8 +17,7 @@ const PlayerRemote: FunctionComponent<PlayerControlProps> = (
   } = useTicTacToe();
   const { remote } = state;
   const onChangeRemote = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const remote = event.target.checked;
-    dispatch(updateRemoteGame(remote));
+    dispatch(updateRemoteGame(event.target.checked));
   };
   return (
     <Tooltip

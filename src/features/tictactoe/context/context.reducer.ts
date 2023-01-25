@@ -1,5 +1,5 @@
 import { ActionTypes } from '../contracts/tictactoe.context';
-import { ActionEnum, GameStateEnum, PieceEnum } from '../contracts/tictactoe.enum';
+import { ActionEnum, PieceEnum } from '../contracts/tictactoe.enum';
 import { initialState } from '../contracts/tictactoe.initial';
 import { StateType } from '../contracts/tictactoe.models';
 import { replaceAt } from '../functions/replace-at';
@@ -18,7 +18,7 @@ const contextReducer = (state: StateType, action: ActionTypes): StateType => {
       };
     }
     case ActionEnum.Start: {
-      const { gameState = GameStateEnum.Active } = action.payload  || {};
+      const { gameState } = action.payload;
       return {
         ...state,
         gameState,

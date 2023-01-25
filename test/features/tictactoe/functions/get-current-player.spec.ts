@@ -1,4 +1,3 @@
-import { PieceEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import {
   initialPlayerOne,
   initialPlayerTwo,

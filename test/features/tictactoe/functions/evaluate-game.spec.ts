@@ -9,7 +9,7 @@ jest
   .mock('../../../../src/features/tictactoe/functions/find-winner')
   .mock('../../../../src/features/tictactoe/functions/is-game-over');
 
-describe('feature/tictactoe/functions/check-game', () => {
+describe('feature/tictactoe/functions/evaluate-game', () => {
   it('should determine a completed', () => {
     // Arrange
     const board: BoardType = initialState.board;
