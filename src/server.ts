@@ -59,6 +59,7 @@ app.use(helmet({
         's.gravatar.com',
         'cdn.auth0.com',
         '*.wp.com',
+        '*.googleusercontent.com',
       ],
     },
   },

@@ -86,6 +86,7 @@ describe('server/index', () => {
               's.gravatar.com',
               'cdn.auth0.com',
               '*.wp.com',
+              '*.googleusercontent.com',
             ],
           },
           useDefaults: true,
