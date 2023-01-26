@@ -42,10 +42,10 @@ describe('config/index', () => {
               key: '/var/cert/royhome/privkey.pem',
             },
             enableHttps: true,
-            deriveApiUrl: true,
+            deriveUrl: true,
+            websocketUrl: 'wss://api.royk.us/tictactoe',
           },
           isBrowser: true,
-          websocketUrl: 'wss://api.royk.us/tictactoe',
         },
       };
 
@@ -93,10 +93,10 @@ describe('config/index', () => {
               key: expect.stringContaining('privkey.pem'),
             },
             enableHttps: true,
-            deriveApiUrl: true,
+            deriveUrl: true,
+            websocketUrl: 'wss://api.royk.us/tictactoe',
           },
           isBrowser: true,
-          websocketUrl: 'wss://api.royk.us/tictactoe',
         },
       };
 
@@ -144,10 +144,10 @@ describe('config/index', () => {
               key: '/var/cert/royhome/privkey.pem',
             },
             enableHttps: false,
-            deriveApiUrl: true,
+            deriveUrl: true,
+            websocketUrl: 'wss://api.royk.us/tictactoe',
           },
           isBrowser: true,
-          websocketUrl: 'wss://api.royk.us/tictactoe',
         },
       };
 
@@ -195,10 +195,10 @@ describe('config/index', () => {
               key: './cert/localhost.key',
             },
             enableHttps: true,
-            deriveApiUrl: false,
+            deriveUrl: false,
+            websocketUrl: 'wss://api.royk.us/tictactoe',
           },
           isBrowser: true,
-          websocketUrl: 'wss://api.royk.us/tictactoe',
         },
       };
 
@@ -246,10 +246,10 @@ describe('config/index', () => {
               key: '/var/cert/royhome/privkey.pem',
             },
             enableHttps: true,
-            deriveApiUrl: true,
+            deriveUrl: true,
+            websocketUrl: 'wss://api.royk.us/tictactoe',
           },
           isBrowser: true,
-          websocketUrl: 'wss://api.royk.us/tictactoe',
         },
       };
       global.origin = '';
