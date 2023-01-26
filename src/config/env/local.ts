@@ -15,7 +15,7 @@ const local = {
       cert: './cert/localhost.crt',
     },
     apiUrl: 'https://localhost:5000',
-    deriveApiUrl: false,
+    deriveUrl: false,
   },
 };
 

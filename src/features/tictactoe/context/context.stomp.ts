@@ -1,9 +1,9 @@
 import * as Stomp from '@stomp/stompjs';
-import { env } from '../../../config/env';
+import { getWssUrl } from '../functions/get-wss-url';
 
 export const connectStomp = (destination: string, callback: (msg: { body: string }) => void): Stomp.Client => {
   const client = new Stomp.Client({
-    brokerURL: env.websocketUrl,
+    brokerURL: getWssUrl('tictactoe'),
     reconnectDelay: 3000,
   });
   client.onConnect = () => {

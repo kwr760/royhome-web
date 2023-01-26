@@ -14,7 +14,8 @@ const env = (host: string) => ({
       cert: '/var/cert/royhome/fullchain.pem',
     },
     apiUrl: 'https://api.royk.us',
-    deriveApiUrl: true,
+    websocketUrl: 'wss://api.royk.us/tictactoe',
+    deriveUrl: true,
   },
   log: {
     dir: '/var/log/royhome',
@@ -24,7 +25,6 @@ const env = (host: string) => ({
     clientId: 'J5Mu7fSFraTWgQBz1WJgikpnuRnKRkaL',
     callbackUrl: `${host}`,
   },
-  websocketUrl: 'wss://api.royk.us/tictactoe',
 });
 
 const base = env(currentHost);
