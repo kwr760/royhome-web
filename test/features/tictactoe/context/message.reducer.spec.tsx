@@ -1,6 +1,6 @@
 import { messageReducer } from '../../../../src/features/tictactoe/context/message.reducer';
 import {
-  ActionEnum, GameStateEnum,
+  ActionEnum, EndGameReasonEnum, GameStateEnum,
   MessageActionEnum,
 } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import {
@@ -164,6 +164,7 @@ describe('feature/tictactoe/context/message.reducer', () => {
         message: JSON.stringify(
           {
             action: MessageActionEnum.EndGame,
+            reason: EndGameReasonEnum.Completed,
           },
         ),
       },

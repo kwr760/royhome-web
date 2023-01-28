@@ -8,6 +8,7 @@ import { evaluateGameMiddleware } from '../middleware/evaluate-game.middleware';
 import { logger } from '../middleware/logger.middleware';
 import { startGameMiddleware } from '../middleware/start-game.middleware';
 import { takeTurnMiddleware } from '../middleware/take-turn.middleware';
+import { validateGameMiddleware } from '../middleware/validate-game.middleware';
 import { styles } from '../styles/tictactoe.styles';
 import GameContainer from './game-container';
 
@@ -19,6 +20,7 @@ type TicTacToeProps = Props & WithStyles<typeof styles>;
 const TicTacToeComponent: FunctionComponent<TicTacToeProps> = ({sessionId, user }) => {
   const beforeware: MiddleWareFunction[] = [
     startGameMiddleware,
+    validateGameMiddleware,
     takeTurnMiddleware,
     evaluateGameMiddleware,
   ];
