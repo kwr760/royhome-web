@@ -41,8 +41,9 @@ const messageReducer = (state: StateType, action: RemoteAction): StateType => {
       break;
     }
     case MessageActionEnum.EndGame: {
+      const { reason } = message;
       stateAfterAction = {
-        gameState: GameStateEnum.Completed,
+        gameState: reason,
       };
       break;
     }

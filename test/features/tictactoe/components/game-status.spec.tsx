@@ -46,6 +46,23 @@ describe('feature/tictactoe/component/game-status', () => {
     // Assert
     screen.getByText(/Waiting for your opponent./);
   });
+  it('should render mismatch', () => {
+    // Arrange
+    const mockState = {
+      ...initialState,
+      gameState: GameStateEnum.Mismatch,
+    };
+    const reducer = jest.fn(() => ( mockState ));
+
+    // Act
+    render(<GameStatus />, {
+      state: mockState,
+      reducer,
+    });
+
+    // Assert
+    screen.getByText(/The game ended since there was a problem./);
+  });
   it('should render unknown', () => {
     // Arrange
     const mockState = {

@@ -10,7 +10,7 @@ type Player = {
   sessionId?: string,
 }
 type StateType = {
-  sessionId?: string,
+  sessionId: string,
   client: Client | null,
   board: Board,
   gameState: GameStateEnum,

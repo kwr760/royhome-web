@@ -10,29 +10,31 @@ const useReducerWithMiddleware = (
   afterware?: MiddleWareFunction[],
 ): [StateType, Dispatch] => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
-  const aRef = useRef<ActionTypes | undefined>();
+  const refAction = useRef<ActionTypes | undefined>();
+  const refState = useRef<StateType>(state);
+  refState.current = state;
 
   const dispatchWithMiddleware = (action: ActionTypes) => {
     if (beforeware) {
       beforeware.forEach((ware) =>
-        ware(action, state),
+        ware(action, refState.current),
       );
     }
-    aRef.current = action;
+    refAction.current = action;
     dispatch(action);
   };
 
   React.useEffect(() => {
-    if (!aRef.current) {
+    if (!refAction.current) {
       return;
     }
-    const action = aRef.current;
+    const action = refAction.current;
     if (afterware) {
       afterware.forEach((ware) =>
         ware(action, state),
       );
     }
-    aRef.current = undefined;
+    refAction.current = undefined;
   }, [afterware, state]);
 
   return [state, dispatchWithMiddleware as Dispatch];
