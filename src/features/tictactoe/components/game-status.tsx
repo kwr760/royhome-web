@@ -32,6 +32,8 @@ const GameStatusComponent: FunctionComponent<GameStatusProps> = (
         return <span>Waiting for your opponent.</span>;
       case GameStateEnum.Message:
         return <span>The game has yet to begin.</span>;
+      case GameStateEnum.Mismatch:
+        return <span>The game ended since there was a problem.</span>;
       case GameStateEnum.Completed: {
         const winner = getWinner(state);
         if (winner?.name) {
@@ -50,6 +52,7 @@ const GameStatusComponent: FunctionComponent<GameStatusProps> = (
       case GameStateEnum.Wait:
       case GameStateEnum.Message:
       case GameStateEnum.Completed:
+      case GameStateEnum.Mismatch:
         setOpenDialog(true);
         break;
       default:
