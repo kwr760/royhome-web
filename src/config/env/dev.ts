@@ -15,6 +15,9 @@ const dev = {
       cert: '/local/cert/royhome/fullchain.pem',
     },
   },
+  tictactoe: {
+    logReducer: true,
+  },
 };
 
 export { dev };

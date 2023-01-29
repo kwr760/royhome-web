@@ -25,6 +25,9 @@ const env = (host: string) => ({
     clientId: 'J5Mu7fSFraTWgQBz1WJgikpnuRnKRkaL',
     callbackUrl: `${host}`,
   },
+  tictactoe: {
+    logReducer: false,
+  },
 });
 
 const base = env(currentHost);
