@@ -13,22 +13,22 @@ describe('feature/tictactoe/functions/is-game-over', () => {
     {
       gameState: GameStateEnum.Completed,
       owner: PieceEnum.Neither,
-      expected: false,
+      expected: true,
     },
     {
       gameState: GameStateEnum.Completed,
       owner: PieceEnum.Neither,
-      expected: false,
+      expected: true,
     },
     {
       gameState: GameStateEnum.Wait,
       owner: PieceEnum.Neither,
-      expected: false,
+      expected: true,
     },
     {
       gameState: GameStateEnum.Setup,
       owner: PieceEnum.Neither,
-      expected: false,
+      expected: true,
     },
     {
       gameState: GameStateEnum.Active,
