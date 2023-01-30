@@ -1,17 +1,11 @@
 enum GameStateEnum {
+  Welcome = 'welcome',
   Setup = 'setup',
   Active = 'active',
   Completed = 'completed',
-  Message = 'message',
   Mismatch = 'mismatch',
   Wait = 'wait',
   Exit = 'exit',
-}
-enum PlayerStateEnum {
-  Active = 'active',
-  Wait = 'wait',
-  Winner = 'winner',
-  Loser = 'loser',
 }
 enum PlayerTypeEnum {
   Human = 'human',
@@ -49,7 +43,6 @@ enum EndGameReasonEnum {
 }
 
 export {
-  PlayerStateEnum,
   GameStateEnum,
   ActionEnum,
   MessageActionEnum,

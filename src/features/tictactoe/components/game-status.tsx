@@ -28,10 +28,14 @@ const GameStatusComponent: FunctionComponent<GameStatusProps> = (
   };
   const renderMessage = () => {
     switch (gameState) {
+      case GameStateEnum.Welcome:
+        return <span>
+          Welcome to tic-tac-toe.<br />
+          <br />
+          You can play with a partner, an ai, or remotely with someone online.
+        </span>;
       case GameStateEnum.Wait:
         return <span>Waiting for your opponent.</span>;
-      case GameStateEnum.Message:
-        return <span>The game has yet to begin.</span>;
       case GameStateEnum.Mismatch:
         return <span>The game ended since there was a problem.</span>;
       case GameStateEnum.Completed: {
@@ -43,14 +47,14 @@ const GameStatusComponent: FunctionComponent<GameStatusProps> = (
         }
       }
       default:
-        return <span>Unknown state.</span>;
+        return null;
     }
   };
 
   useEffect(() => {
     switch (gameState) {
+      case GameStateEnum.Welcome:
       case GameStateEnum.Wait:
-      case GameStateEnum.Message:
       case GameStateEnum.Completed:
       case GameStateEnum.Mismatch:
         setOpenDialog(true);

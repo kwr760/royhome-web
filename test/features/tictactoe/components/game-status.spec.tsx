@@ -12,11 +12,11 @@ describe('feature/tictactoe/component/game-status', () => {
     jest.resetAllMocks();
     global.console.log = jest.fn();
   });
-  it('should render message', () => {
+  it('should render welcome', () => {
     // Arrange
     const mockState = {
       ...initialState,
-      gameState: GameStateEnum.Message,
+      gameState: GameStateEnum.Welcome,
     };
     const reducer = jest.fn(() => ( mockState ));
 
@@ -27,7 +27,7 @@ describe('feature/tictactoe/component/game-status', () => {
     });
 
     // Assert
-    screen.getByText(/The game has yet to begin./);
+    screen.getByText(/Welcome to tic-tac-toe./);
   });
   it('should render wait', () => {
     // Arrange
@@ -67,6 +67,7 @@ describe('feature/tictactoe/component/game-status', () => {
     // Arrange
     const mockState = {
       ...initialState,
+      gameState: 'unknown' as unknown as GameStateEnum,
     };
     const reducer = jest.fn(() => ( mockState ));
 
@@ -121,7 +122,7 @@ describe('feature/tictactoe/component/game-status', () => {
     // Arrange
     const mockState = {
       ...initialState,
-      gameState: GameStateEnum.Message,
+      gameState: GameStateEnum.Welcome,
     };
     const reducer = jest.fn(() => ( mockState ));
 
@@ -139,7 +140,7 @@ describe('feature/tictactoe/component/game-status', () => {
     // Arrange
     const mockState = {
       ...initialState,
-      gameState: GameStateEnum.Message,
+      gameState: GameStateEnum.Welcome,
     };
     const reducer = jest.fn(() => ( mockState ));
 

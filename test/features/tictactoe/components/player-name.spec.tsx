@@ -3,7 +3,6 @@ import PlayerName from '../../../../src/features/tictactoe/components/player-nam
 import { updatePlayer } from '../../../../src/features/tictactoe/context/context.actions';
 import {
   PieceEnum,
-  PlayerStateEnum,
   PlayerTypeEnum,
 } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { fireEvent, render, screen } from '../utils/testing-library';
@@ -18,7 +17,6 @@ describe('features/tictactoe/components/player-name', () => {
     // Arrange
     const player = {
       name: 'Player #1',
-      playerState: PlayerStateEnum.Active,
       type: PlayerTypeEnum.Human,
       piece: PieceEnum.X,
       remote: false,
@@ -27,7 +25,6 @@ describe('features/tictactoe/components/player-name', () => {
       player: {
         name: 'First',
         piece: PieceEnum.X,
-        playerState: PlayerStateEnum.Active,
         type: PlayerTypeEnum.Human,
         remote: false,
       },
