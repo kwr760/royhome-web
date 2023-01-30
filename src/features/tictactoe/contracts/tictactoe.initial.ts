@@ -15,7 +15,7 @@ const initialState: StateType = {
   sessionId: '',
   client: null,
   board: '---------',
-  gameState: GameStateEnum.Setup,
+  gameState: GameStateEnum.Welcome,
   playerOne: initialPlayerOne,
   playerTwo: initialPlayerTwo,
   remote: false,

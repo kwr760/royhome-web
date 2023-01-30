@@ -19,6 +19,7 @@ describe('feature/tictactoe/component/game-control', () => {
     // Arrange
     const state = {
       ...initialState,
+      gameState: GameStateEnum.Setup,
     };
     const reducer = jest.fn(() => ( state ));
 
@@ -60,6 +61,7 @@ describe('feature/tictactoe/component/game-control', () => {
     // Arrange
     const state = {
       ...initialState,
+      gameState: GameStateEnum.Setup,
     };
     const reducer = jest.fn(() => ( state ));
     jest.spyOn(mockActions, 'updateGameState');
@@ -69,12 +71,13 @@ describe('feature/tictactoe/component/game-control', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Close'}));
 
     // Assert
-    expect(mockActions.updateGameState).toBeCalledWith(GameStateEnum.Message);
+    expect(mockActions.updateGameState).toBeCalledWith(GameStateEnum.Exit);
   });
   it('should dispatch startGame on Play Game', () => {
     // Arrange
     const state = {
       ...initialState,
+      gameState: GameStateEnum.Setup,
     };
     const reducer = jest.fn(() => ( state ));
     jest.spyOn(mockActions, 'startGame');

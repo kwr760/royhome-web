@@ -20,7 +20,7 @@ const GameControl: FunctionComponent<PlayerControlProps> = (
   } = useTicTacToe();
   const { gameState, playerOne, playerTwo, remote } = state;
   const onCloseControl = () => {
-    dispatch(updateGameState(GameStateEnum.Message));
+    dispatch(updateGameState(GameStateEnum.Exit));
     setOpenDialog(false);
   };
   const onPlayGame = () => {

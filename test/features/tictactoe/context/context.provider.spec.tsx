@@ -76,7 +76,7 @@ describe('feature/tictactoe/context/context.provider', () => {
     const afterLogger = logger('after');
     const mockState = {
       ...initialState,
-      gameState: GameStateEnum.Message,
+      gameState: GameStateEnum.Welcome,
     };
     const reducer = jest.fn(() => ( mockState ));
     const log = {
@@ -89,7 +89,7 @@ describe('feature/tictactoe/context/context.provider', () => {
       state: {
         board: '---------',
         client: null,
-        gameState: GameStateEnum.Message,
+        gameState: GameStateEnum.Welcome,
         playerOne: {
           name: 'Player #1',
           piece: 'X',

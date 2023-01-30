@@ -2,7 +2,6 @@ import React from 'react';
 import PlayerControl from '../../../../src/features/tictactoe/components/player-control';
 import {
   PieceEnum,
-  PlayerStateEnum,
   PlayerTypeEnum,
 } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import { render, screen } from '../utils/testing-library';
@@ -23,7 +22,6 @@ describe('features/tictactoe/components/player-control', () => {
     // Arrange
     const player = {
       name: 'Player #1',
-      playerState: PlayerStateEnum.Active,
       type: PlayerTypeEnum.Human,
       piece: PieceEnum.X,
     };

@@ -273,14 +273,14 @@ describe('feature/tictactoe/context/context.reducer', () => {
     } as StateType;
     const expectedState = {
       ...initialState,
-      gameState: GameStateEnum.Message,
+      gameState: GameStateEnum.Welcome,
     };
     const wrapper = createWrapper(testState);
     const { result } = renderHook(() => useTicTacToe(), { wrapper });
 
     act(() => {
       const { dispatch } = result.current;
-      dispatch(updateGameState(GameStateEnum.Message));
+      dispatch(updateGameState(GameStateEnum.Welcome));
     });
 
     // Assert
