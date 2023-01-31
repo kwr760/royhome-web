@@ -4,6 +4,7 @@ enum GameStateEnum {
   Active = 'active',
   Completed = 'completed',
   Mismatch = 'mismatch',
+  Closed = 'closed',
   Wait = 'wait',
   Exit = 'exit',
 }
@@ -40,6 +41,7 @@ enum PublishEnum {
 enum EndGameReasonEnum {
   Completed = 'completed',
   Mismatch = 'mismatch',
+  Closed = 'closed',
 }
 
 export {

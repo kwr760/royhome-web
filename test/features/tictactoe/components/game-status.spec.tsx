@@ -7,61 +7,53 @@ import { fireEvent, render, screen } from '../utils/testing-library';
 
 jest.mock('../../../../src/features/tictactoe/context/context.actions');
 
+type TestTuple = {
+  gameState: GameStateEnum,
+  expected: RegExp,
+};
+
 describe('feature/tictactoe/component/game-status', () => {
   beforeEach(() => {
     jest.resetAllMocks();
     global.console.log = jest.fn();
   });
-  it('should render welcome', () => {
-    // Arrange
-    const mockState = {
-      ...initialState,
+
+  const cases = [
+    {
       gameState: GameStateEnum.Welcome,
-    };
-    const reducer = jest.fn(() => ( mockState ));
-
-    // Act
-    render(<GameStatus />, {
-      state: mockState,
-      reducer,
-    });
-
-    // Assert
-    screen.getByText(/Welcome to tic-tac-toe./);
-  });
-  it('should render wait', () => {
-    // Arrange
-    const mockState = {
-      ...initialState,
+      expected: /Welcome to tic-tac-toe./,
+    },
+    {
       gameState: GameStateEnum.Wait,
-    };
-    const reducer = jest.fn(() => ( mockState ));
-
-    // Act
-    render(<GameStatus />, {
-      state: mockState,
-      reducer,
-    });
-
-    // Assert
-    screen.getByText(/Waiting for your opponent./);
-  });
-  it('should render mismatch', () => {
-    // Arrange
-    const mockState = {
-      ...initialState,
+      expected: /Waiting for your opponent./,
+    },
+    {
       gameState: GameStateEnum.Mismatch,
-    };
-    const reducer = jest.fn(() => ( mockState ));
+      expected: /The game ended since there was a problem./,
+    },
+    {
+      gameState: GameStateEnum.Closed,
+      expected: /Your opponent ended the game./,
+    },
+  ];
+  cases.forEach(({ gameState, expected }: TestTuple) => {
+    it(`should render based on state - ${gameState} => ${expected}`, () => {
+      // Arrange
+      const mockState = {
+        ...initialState,
+        gameState,
+      };
+      const reducer = jest.fn(() => ( mockState ));
 
-    // Act
-    render(<GameStatus />, {
-      state: mockState,
-      reducer,
+      // Act
+      render(<GameStatus />, {
+        state: mockState,
+        reducer,
+      });
+
+      // Assert
+      screen.getByText(expected);
     });
-
-    // Assert
-    screen.getByText(/The game ended since there was a problem./);
   });
   it('should render unknown', () => {
     // Arrange
@@ -153,5 +145,23 @@ describe('feature/tictactoe/component/game-status', () => {
 
     // Assert
     expect(updateGameState).toBeCalledWith(GameStateEnum.Setup);
+  });
+  it('should dispatch updateGameState on End Game', () => {
+    // Arrange
+    const mockState = {
+      ...initialState,
+      gameState: GameStateEnum.Wait,
+    };
+    const reducer = jest.fn(() => ( mockState ));
+
+    // Act
+    render(<GameStatus />, {
+      state: mockState,
+      reducer,
+    });
+    fireEvent.click(screen.getByText('End Game'));
+
+    // Assert
+    expect(updateGameState).toBeCalledWith(GameStateEnum.Closed);
   });
 });
