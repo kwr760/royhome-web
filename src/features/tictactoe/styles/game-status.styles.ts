@@ -9,9 +9,6 @@ const styles = (theme: Theme): StyleRules => {
         backgroundColor: theme.color.background.paper,
       },
     },
-    buttonBar: {
-      justifyContent: 'space-between',
-    },
     button: {
       color: theme.color.foreground.base,
     },
@@ -25,6 +22,12 @@ const styles = (theme: Theme): StyleRules => {
     tooltip: {
       color: theme.color.foreground.base,
       backgroundColor: theme.color.background.paper,
+    },
+    betweenBar: {
+      justifyContent: 'space-between',
+    },
+    rightBar: {
+      display: 'flex',
     },
   });
 };

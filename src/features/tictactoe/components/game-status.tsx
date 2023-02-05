@@ -26,6 +26,10 @@ const GameStatusComponent: FunctionComponent<GameStatusProps> = (
     dispatch(updateGameState(GameStateEnum.Setup));
     setOpenDialog(false);
   };
+  const handleCloseGame = () => {
+    dispatch(updateGameState(GameStateEnum.Closed));
+    setOpenDialog(false);
+  };
   const renderMessage = () => {
     switch (gameState) {
       case GameStateEnum.Welcome:
@@ -38,6 +42,8 @@ const GameStatusComponent: FunctionComponent<GameStatusProps> = (
         return <span>Waiting for your opponent.</span>;
       case GameStateEnum.Mismatch:
         return <span>The game ended since there was a problem.</span>;
+      case GameStateEnum.Closed:
+        return <span>Your opponent ended the game.</span>;
       case GameStateEnum.Completed: {
         const winner = getWinner(state);
         if (winner?.name) {
@@ -57,6 +63,7 @@ const GameStatusComponent: FunctionComponent<GameStatusProps> = (
       case GameStateEnum.Wait:
       case GameStateEnum.Completed:
       case GameStateEnum.Mismatch:
+      case GameStateEnum.Closed:
         setOpenDialog(true);
         break;
       default:
@@ -76,14 +83,21 @@ const GameStatusComponent: FunctionComponent<GameStatusProps> = (
           {renderMessage()}
         </Typography>
       </DialogContent>
-      <DialogActions className={classes.buttonBar}>
-        <Tooltip title="Exit dialog to switch to different tab" classes={{ tooltip: classes.tooltip }}>
-          <Button className={classes.button} onClick={handleClose}>Exit</Button>
-        </Tooltip>
-        <Tooltip title="Start new game by going to the Setup" classes={{ tooltip: classes.tooltip }} >
-          <Button className={classes.button} onClick={handleSetup}>Setup</Button>
-        </Tooltip>
-      </DialogActions>
+      { gameState != GameStateEnum.Wait ?
+        <DialogActions className={classes.betweenBar}>
+          <Tooltip title="Exit dialog to switch to different tab" classes={{ tooltip: classes.tooltip }}>
+            <Button className={classes.button} onClick={handleClose}>Exit</Button>
+          </Tooltip>
+          <Tooltip title="Start new game by going to the Setup" classes={{ tooltip: classes.tooltip }} >
+            <Button className={classes.button} onClick={handleSetup}>Setup</Button>
+          </Tooltip>
+        </DialogActions> :
+        <DialogActions className={classes.rightBar}>
+          <Tooltip title="End the game and play again" classes={{ tooltip: classes.tooltip }} >
+            <Button className={classes.button} onClick={handleCloseGame}>End Game</Button>
+          </Tooltip>
+        </DialogActions>
+      }
     </Dialog>
   );
 };

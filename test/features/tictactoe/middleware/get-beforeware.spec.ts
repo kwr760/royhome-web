@@ -6,6 +6,6 @@ describe('feature/tictactoe/middleware/get-beforeware', () => {
     const beforeware = getBeforeware();
 
     // Assert
-    expect(beforeware.length).toBe(3);
+    expect(beforeware.length).toBe(4);
   });
 });
