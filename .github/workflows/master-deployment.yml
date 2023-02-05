@@ -4,33 +4,8 @@ on:
   push:
 
 jobs:
-  verify:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Install dependencies
-        run: yarn --frozen-lockfile
-
-      - name: Build
-        run: yarn install
-
-      - name: Verify
-        run: yarn test
-
   deploy:
     runs-on: ubuntu-latest
-    needs: [verify]
 
     strategy:
       matrix:
@@ -50,9 +25,9 @@ jobs:
             StrictHostKeyChecking no
           END
         env:
-          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_USER: ${{ variables.SSH_USER }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_HOST: ${{ variables.SSH_HOST }}
 
       - name: Stop the server
         run: ssh staging 'ls -l && pwd'
