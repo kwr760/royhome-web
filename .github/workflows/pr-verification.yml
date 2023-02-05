@@ -1,7 +1,7 @@
 name: NodeJS with Webpack
 
 on:
-  pull_request:
+  pull_request: [main]
 
 jobs:
   verify:

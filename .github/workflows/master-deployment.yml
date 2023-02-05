@@ -1,7 +1,7 @@
 name: NodeJS with Webpack
 
 on:
-  push:
+  push: [main]
 
 jobs:
   deploy:
@@ -25,9 +25,9 @@ jobs:
             StrictHostKeyChecking no
           END
         env:
-          SSH_USER: ${{ variables.SSH_USER }}
+          SSH_USER: ${{ env.SSH_USER }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
-          SSH_HOST: ${{ variables.SSH_HOST }}
+          SSH_HOST: ${{ env.SSH_HOST }}
 
       - name: Stop the server
         run: ssh staging 'ls -l && pwd'
