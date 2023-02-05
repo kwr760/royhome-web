@@ -23,7 +23,7 @@ jobs:
         env:
           SSH_USER: ${{ vars.SSH_USER }}
           SSH_KEY: ${{ secrets.SSH_KEY2 }}
-          SSH_HOST: ${{ env_var }}
+          SSH_HOST: ${{ env.env_var }}
 
       - name: Configure SSH
         run: |
