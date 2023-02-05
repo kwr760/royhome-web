@@ -1,4 +1,4 @@
-name: NodeJS with Webpack
+name: Verify the push
 
 on:
   pull_request: [main]
