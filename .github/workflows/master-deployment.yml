@@ -17,9 +17,13 @@ jobs:
     steps:
       - name: Display
         run: |
-          echo "$SSH_KEY"
+          echo "$SSH_USER"
           echo "$SSH_HOST"
           echo "$SSH_KEY"
+          echo "SSH_USER : ${{ vars.SSH_USER }}"
+          echo "SSH_HOST : ${{ vars.SSH_KEY }}"
+          echo "SSH_KEY : ${{ vars.SSH_HOST }}"
+          echo "variable from shell environment : $env_var"
         env:
           SSH_USER: ${{ vars.SSH_USER }}
           SSH_KEY: ${{ secrets.SSH_KEY2 }}
