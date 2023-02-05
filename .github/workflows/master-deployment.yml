@@ -15,6 +15,16 @@ jobs:
         node-version: [18.x]
 
     steps:
+      - name: Display
+        run: |
+          echo "$SSH_KEY"
+          echo "$SSH_HOST"
+          echo "$SSH_KEY"
+        env:
+          SSH_USER: ${{ vars.SSH_USER }}
+          SSH_KEY: ${{ secrets.SSH_KEY2 }}
+          SSH_HOST: $env_var
+
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
