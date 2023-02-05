@@ -17,17 +17,20 @@ jobs:
     steps:
       - name: Display
         run: |
-          echo "$SSH_USER"
-          echo "$SSH_HOST"
-          echo "$SSH_KEY"
+          echo "$USER"
+          echo "$HOST"
+          echo "$KEY"
+          echo "SSH_USER : ${{ vars.USER }}"
+          echo "SSH_HOST : ${{ vars.KEY }}"
+          echo "SSH_KEY : ${{ vars.HOST }}"
           echo "SSH_USER : ${{ vars.SSH_USER }}"
           echo "SSH_HOST : ${{ vars.SSH_KEY }}"
           echo "SSH_KEY : ${{ vars.SSH_HOST }}"
           echo "variable from shell environment : $env_var"
         env:
-          SSH_USER: ${{ vars.SSH_USER }}
-          SSH_KEY: ${{ secrets.SSH_KEY2 }}
-          SSH_HOST: ${{ env.env_var }}
+          USER: ${{ vars.SSH_USER }}
+          KEY: ${{ secrets.SSH_KEY2 }}
+          HOST: ${{ env.env_var }}
 
       - name: Configure SSH
         run: |
