@@ -2,8 +2,6 @@ name: NodeJS with Webpack
 
 on:
   pull_request:
-  push:
-    branches: [ "main" ]
 
 jobs:
   verify:
@@ -25,6 +23,7 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: Build
-        run: |
-          yarn install
-          yarn test
+        run: yarn install
+
+      - name: Verify
+        run: yarn test
