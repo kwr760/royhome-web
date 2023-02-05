@@ -2,6 +2,9 @@ name: NodeJS with Webpack
 
 on:
   push:
+env:
+  # Setting an environment variable with the value of a configuration variable
+  env_var: ${{ vars.ENV_CONTEXT_VAR }}
 
 jobs:
   deploy:
@@ -27,7 +30,7 @@ jobs:
         env:
           SSH_USER: ${{ vars.SSH_USER }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
-          SSH_HOST: ${{ vars.SSH_HOST }}
+          SSH_HOST: ${{ env.SSH_HOST }}
 
       - name: Stop the server
         run: ssh staging 'ls -l && pwd'
