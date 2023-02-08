@@ -2,14 +2,11 @@ name: Deploy code
 
 on:
   push:
-env:
-  # Setting an environment variable with the value of a configuration variable
-  env_var: ${{ vars.ENV_CONTEXT_VAR }}
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production
+    environment: deployment
 
     strategy:
       matrix:
@@ -18,39 +15,29 @@ jobs:
     steps:
       - name: Display
         run: |
-          echo "$USER"
-          echo "$HOST"
-          echo "$KEY"
+          echo "USER : $USER"
+          echo "KEY : $KEY"
+          echo "HOST : $HOST"
+          echo "USER : ${{ USER }}"
+          echo "KEY : ${{ KEY }}"
+          echo "HOST : ${{ HOST }}"
           echo "SSH_USER : ${{ env.USER }}"
-          echo "SSH_HOST : ${{ env.KEY }}"
-          echo "SSH_KEY : ${{ env.HOST }}"
-          echo "SSH_USER : ${{ vars.USER }}"
-          echo "SSH_HOST : ${{ vars.KEY }}"
-          echo "SSH_KEY : ${{ vars.HOST }}"
-          echo "SSH_USER : ${{ vars.SSH_USER }}"
-          echo "SSH_HOST : ${{ vars.SSH_KEY }}"
-          echo "SSH_KEY : ${{ vars.SSH_HOST }}"
-          echo "SECRET : $SECRET"
-          echo "SECRET : ${{ env.SECRET }}"
-          echo "SECRET : ${{ secrets.SECRET }}"
-          echo "SECRET : ${{ vars.SECRET }}"
-          echo "variable from shell environment : $env_var"
+          echo "SSH_KEY : ${{ env.KEY }}"
+          echo "SSH_HOST : ${{ env.HOST }}"
         env:
           USER: ${{ vars.SSH_USER }}
-          KEY: ${{ secrets.SSH_KEY2 }}
-          SECRET: ${{ secrets.SECRET }}
-          SECRET2: ${{ vars.SECRET }}
-          HOST: ${{ env.env_var }}
+          HOST: ${{ vars.SSH_HOST }}
+          KEY: ${{ secrets.SSH_KEY }}
 
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
-          echo "$SSH_KEY" > ~/.ssh/staging.key
+          echo "$KEY" > ~/.ssh/staging.key
           chmod 600 ~/.ssh/staging.key
           cat >>~/.ssh/config <<END
           Host staging
-            HostName $SSH_HOST
-            User $SSH_USER
+            HostName $HOST
+            User $USER
             IdentityFile ~/.ssh/staging.key
             StrictHostKeyChecking no
           END
