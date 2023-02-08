@@ -39,7 +39,6 @@ jobs:
           KEY: ${{ secrets.SSH_KEY2 }}
           SECRET: ${{ secrets.SECRET }}
           SECRET2: ${{ vars.SECRET }}
-          SECRET3: ${{ SECRET }}
           HOST: ${{ env.env_var }}
 
       - name: Configure SSH
