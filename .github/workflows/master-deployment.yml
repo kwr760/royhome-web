@@ -29,10 +29,17 @@ jobs:
           echo "SSH_USER : ${{ vars.SSH_USER }}"
           echo "SSH_HOST : ${{ vars.SSH_KEY }}"
           echo "SSH_KEY : ${{ vars.SSH_HOST }}"
+          echo "SECRET : $SECRET"
+          echo "SECRET : ${{ env.SECRET }}"
+          echo "SECRET : ${{ secrets.SECRET }}"
+          echo "SECRET : ${{ vars.SECRET }}"
           echo "variable from shell environment : $env_var"
         env:
           USER: ${{ vars.SSH_USER }}
           KEY: ${{ secrets.SSH_KEY2 }}
+          SECRET: ${{ secrets.SECRET }}
+          SECRET2: ${{ vars.SECRET }}
+          SECRET3: ${{ SECRET }}
           HOST: ${{ env.env_var }}
 
       - name: Configure SSH
