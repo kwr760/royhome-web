@@ -16,9 +16,6 @@ jobs:
       - name: Configure SSH for ${{ env.USER }}@${{ env.HOST }}
         run: |
           mkdir -p ~/.ssh/
-          echo "Kevin"
-          echo "${{ env.KEY }}"
-          echo "Kevin"
           echo "${{ env.KEY }}" > ~/.ssh/staging.key
           chmod 600 ~/.ssh/staging.key
           cat >>~/.ssh/config <<END
