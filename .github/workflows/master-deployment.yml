@@ -15,9 +15,6 @@ jobs:
     steps:
       - name: Display
         run: |
-          echo "USER : $USER"
-          echo "KEY : $KEY"
-          echo "HOST : $HOST"
           echo "USER : ${{ USER }}"
           echo "KEY : ${{ KEY }}"
           echo "HOST : ${{ HOST }}"
