@@ -20,6 +20,7 @@ jobs:
           ls -la ~/.ssh/staging.key
           cat ~/.ssh/staging.key
           echo "${{ env.KEY }}"
+          echo "Kevin"
           echo "${{ env.KEY }}" > ~/.ssh/staging.key
           chmod 600 ~/.ssh/staging.key
           cat >>~/.ssh/config <<END
