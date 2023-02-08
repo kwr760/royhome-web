@@ -15,10 +15,8 @@ jobs:
     steps:
       - name: Configure SSH for ${{ env.USER }}@${{ env.HOST }}
         run: |
-          echo "Adding SSH_KEY for deployment to ${{ env.USER }}@${{ env.HOST }}
           mkdir -p ~/.ssh/
-          ls -la ~/.ssh/staging.key
-          cat ~/.ssh/staging.key
+          echo "Kevin"
           echo "${{ env.KEY }}"
           echo "Kevin"
           echo "${{ env.KEY }}" > ~/.ssh/staging.key
