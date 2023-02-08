@@ -17,7 +17,9 @@ jobs:
         run: |
           echo "Adding SSH_KEY for deployment to ${{ env.USER }}@${{ env.HOST }}
           mkdir -p ~/.ssh/
-          rm -f  ~/.ssh/staging.key
+          ls -la ~/.ssh/staging.key
+          cat ~/.ssh/staging.key
+          echo "${{ env.KEY }}"
           echo "${{ env.KEY }}" > ~/.ssh/staging.key
           chmod 600 ~/.ssh/staging.key
           cat >>~/.ssh/config <<END
