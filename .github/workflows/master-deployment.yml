@@ -15,9 +15,6 @@ jobs:
     steps:
       - name: Display
         run: |
-          echo "USER : ${{ USER }}"
-          echo "KEY : ${{ KEY }}"
-          echo "HOST : ${{ HOST }}"
           echo "SSH_USER : ${{ env.USER }}"
           echo "SSH_KEY : ${{ env.KEY }}"
           echo "SSH_HOST : ${{ env.HOST }}"
