@@ -26,19 +26,19 @@ jobs:
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
-          echo "$KEY" > ~/.ssh/staging.key
+          echo "${{ env.KEY }}" > ~/.ssh/staging.key
           chmod 600 ~/.ssh/staging.key
           cat >>~/.ssh/config <<END
           Host staging
-            HostName $HOST
-            User $USER
+            HostName ${{ env.HOST }}
+            User ${{ env.USER }}
             IdentityFile ~/.ssh/staging.key
             StrictHostKeyChecking no
           END
         env:
-          SSH_USER: ${{ vars.SSH_USER }}
-          SSH_KEY: ${{ secrets.SSH_KEY }}
-          SSH_HOST: $env_var
+          USER: ${{ vars.SSH_USER }}
+          HOST: ${{ vars.SSH_HOST }}
+          KEY: ${{ secrets.SSH_KEY }}
 
       - name: Stop the server
         run: ssh staging 'ls -l && pwd'
