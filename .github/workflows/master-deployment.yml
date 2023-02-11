@@ -2,6 +2,8 @@ name: Deploy code
 
 on:
   push:
+    branches:
+      - master
 
 jobs:
   deploy:
@@ -31,4 +33,4 @@ jobs:
           KEY: ${{ secrets.SSH_KEY }}
 
       - name: Stop the server
-        run: ssh staging 'ls -la'
+        run: ssh staging '/usr/royhome/scripts/deploy/deploy-release.sh web'
