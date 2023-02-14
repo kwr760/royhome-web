@@ -3,12 +3,12 @@
   "name": "RoyHome site for Kevin Roy resume",
   "icons": [
     {
-      "src": "dist/web/favicon.ico",
+      "src": "dist/browser/favicon.ico",
       "sizes": "32x32",
       "type": "image/x-icon"
     },
     {
-      "src": "dist/web/favicon.png",
+      "src": "dist/browser/favicon.png",
       "sizes": "893x893",
       "type": "image/png"
     }
