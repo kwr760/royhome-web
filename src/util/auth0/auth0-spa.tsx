@@ -47,26 +47,26 @@ const AuthProvider: React.FC<Auth0Provider> = ({
         onRedirectCallback(appState);
       }
 
-      let claim: SaveSessionType;
+      let claim: SaveSessionType = {
+        authenticated: false,
+        expiration: 0,
+        darkMode,
+      };
       const user: Auth0User | undefined = await auth0FromHook.getUser();
       let context: Auth0ContextData | undefined;
       if (user) {
         const tokenClaims = await auth0FromHook.getIdTokenClaims();
-        context = tokenClaims[TOKEN_URL];
-        const expiration = (tokenClaims.exp || 0) * 1000;
-        claim = {
-          authenticated: true,
-          expiration,
-          darkMode,
-          email: tokenClaims.email,
-          context: JSON.stringify(context),
-        };
-      } else {
-        claim = {
-          authenticated: false,
-          expiration: 0,
-          darkMode,
-        };
+        if (tokenClaims) {
+          context = tokenClaims[TOKEN_URL];
+          const expiration = (tokenClaims.exp || 0) * 1000;
+          claim = {
+            authenticated: true,
+            expiration,
+            darkMode,
+            email: tokenClaims.email,
+            context: JSON.stringify(context),
+          };
+        }
       }
       dispatch(saveSession(claim, { ...user, context } ));
       dispatch(clearLoading());
