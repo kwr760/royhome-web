@@ -2288,7 +2288,7 @@
   dependencies:
     "@babel/plugin-syntax-dynamic-import" "^7.7.4"
 
-"@loadable/component@^5.15.0":
+"@loadable/component@^5.15.3":
   version "5.15.3"
   resolved "https://registry.yarnpkg.com/@loadable/component/-/component-5.15.3.tgz#7de7dcbdbf3db3799bf48d58cfcbae7a18d1818c"
   integrity sha512-VOgYgCABn6+/7aGIpg7m0Ruj34tGetaJzt4bQ345FwEovDQZ+dua+NWLmuJKv8rWZyxOUSfoJkmGnzyDXH2BAQ==
@@ -2297,14 +2297,14 @@
     hoist-non-react-statics "^3.3.1"
     react-is "^16.12.0"
 
-"@loadable/server@^5.15.1":
+"@loadable/server@^5.15.3":
   version "5.15.3"
   resolved "https://registry.yarnpkg.com/@loadable/server/-/server-5.15.3.tgz#a9421b37c74444ec38dba983b788f818f06ca325"
   integrity sha512-Bm/BGe+RlChuHDKNNXpQOi4AJ0cKVuSLI+J8U0Q06zTIfT0S1RLoy85qs5RXm3cLIfefygL8+9bcYFgeWcoM8A==
   dependencies:
     lodash "^4.17.15"
 
-"@loadable/webpack-plugin@^5.15.1":
+"@loadable/webpack-plugin@^5.15.2":
   version "5.15.2"
   resolved "https://registry.yarnpkg.com/@loadable/webpack-plugin/-/webpack-plugin-5.15.2.tgz#460acf5dc0d56c6aef98c7d5f1c2be033422fa8d"
   integrity sha512-+o87jPHn3E8sqW0aBA+qwKuG8JyIfMGdz3zECv0t/JF0KHhxXtzIlTiqzlIYc5ZpFs/vKSQfjzGIR5tPJjoXDw==
