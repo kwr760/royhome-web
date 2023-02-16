@@ -9,6 +9,8 @@ import { useAuth } from '../../../src/util/auth0/auth0-context';
 
 jest.mock('@auth0/auth0-spa-js');
 jest.mock('react-redux');
+jest.mock('../../../src/util/api/call-api');
+jest.mock('../../../src/util/api/get-api-url');
 
 describe('util/auth0/react-auth0-spa', () => {
   const testProvider = (coverage = false) => (
@@ -69,9 +71,9 @@ describe('util/auth0/react-auth0-spa', () => {
     await waitFor(() => {});
 
     // Assert
-    expect(dispatch).toBeCalledTimes(4);
+    expect(dispatch).toBeCalledTimes(2);
     expect(dispatch).toHaveBeenNthCalledWith(1, expectedLoadingOn);
-    expect(dispatch).toHaveBeenNthCalledWith(3, expectedLoadingOff);
+    expect(dispatch).toHaveBeenNthCalledWith(2, expectedLoadingOff);
   });
   it('should login a limited authenticated provider', async () => {
     // Arrange
@@ -91,9 +93,9 @@ describe('util/auth0/react-auth0-spa', () => {
     await waitFor(() => {});
 
     // Assert
-    expect(dispatch).toBeCalledTimes(3);
+    expect(dispatch).toBeCalledTimes(2);
     expect(dispatch).toHaveBeenNthCalledWith(1, expectedLoadingOn);
-    expect(dispatch).toHaveBeenNthCalledWith(3, expectedLoadingOff);
+    expect(dispatch).toHaveBeenNthCalledWith(2, expectedLoadingOff);
   });
   it('should handle redirect callback', async () => {
     // Arrange
@@ -123,9 +125,9 @@ describe('util/auth0/react-auth0-spa', () => {
     await waitFor(() => {});
 
     // Assert
-    expect(dispatch).toBeCalledTimes(3);
+    expect(dispatch).toBeCalledTimes(2);
     expect(dispatch).toHaveBeenNthCalledWith(1, expectedLoadingOn);
-    expect(dispatch).toHaveBeenNthCalledWith(3, expectedLoadingOff);
+    expect(dispatch).toHaveBeenNthCalledWith(2, expectedLoadingOff);
     global.window = savedWindow;
   });
 });

@@ -68,7 +68,7 @@ const AuthProvider: React.FC<Auth0Provider> = ({
           };
         }
       }
-      dispatch(saveSession(claim, { ...user, context } ));
+      saveSession(dispatch, claim, { ...user, context } );
       dispatch(clearLoading());
     };
     initAuth0();
@@ -80,7 +80,7 @@ const AuthProvider: React.FC<Auth0Provider> = ({
       returnTo: env.host,
     };
     await auth0Client.logout(logoutProps);
-    dispatch(saveSession({authenticated: false, expiration: 0}, {}));
+    saveSession(dispatch, {authenticated: false, expiration: 0}, {});
   };
 
   const login = (props: RedirectLoginOptions) => {
