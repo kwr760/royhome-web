@@ -32,6 +32,9 @@ app.enable('query parser');
 
 app.use(cors());
 app.use(helmet({
+  crossOriginEmbedderPolicy: {
+    policy: 'credentialless',
+  },
   contentSecurityPolicy: {
     useDefaults: true,
     directives: {
