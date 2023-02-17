@@ -19,7 +19,7 @@ describe('features/tictactoe/components/player-remote', () => {
 
     // Act
     render(<PlayerRemote />, { state, reducer });
-    fireEvent.click(screen.getByRole(/checkbox/));
+    fireEvent.click(screen.getByRole('checkbox'));
 
     // Assert
     expect(updateRemoteGame).toBeCalledWith(true);

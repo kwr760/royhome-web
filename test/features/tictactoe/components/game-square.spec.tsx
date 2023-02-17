@@ -30,8 +30,8 @@ describe('feature/tictactoe/component/game-square', () => {
       state,
       reducer,
     });
-    const button = screen.getByRole(/button/);
-    screen.getByRole(/heading/);
+    const button = screen.getByRole('button');
+    screen.getByRole('heading');
     fireEvent.click(button);
 
     // Assert

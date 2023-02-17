@@ -26,6 +26,8 @@ describe('feature/tictactoe/hooks/use-websocket', () => {
       client: null,
       destination: '/session/',
     };
+    (initWebSocket as jest.Mock).mockImplementation(
+      () => ({}));
 
     // Act
     const wrapper = createWrapper(state);

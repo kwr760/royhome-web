@@ -37,6 +37,7 @@ describe('feature/tictactoe/context/context.provider', () => {
   beforeEach(() => {
     jest.resetAllMocks();
     global.console.log = jest.fn();
+    global.console.error = jest.fn();
   });
 
   it('should throw exception without provider', () => {
@@ -47,6 +48,7 @@ describe('feature/tictactoe/context/context.provider', () => {
     // Act
     const { result } = renderHook(() => useTicTacToe(), {wrapper});
 
+    // Assert
     expect(result.error).toEqual(expectedError);
   });
   it('should set context with default state', () => {
