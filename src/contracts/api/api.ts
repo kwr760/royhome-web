@@ -1,4 +1,4 @@
-import { Method } from 'axios';
+import type { Method } from 'axios';
 
 interface ApiParams {
   [key: string]: string;

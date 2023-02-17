@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { callApi } from '../../../src/util/api/call-api';

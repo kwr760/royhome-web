@@ -1,4 +1,5 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
+import type { AxiosResponse } from 'axios';
 import { isEmpty } from 'lodash';
 import { ERROR_CODE } from '../error-codes';
 import { getParsedUrl } from './get-parsed-url';

@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 
