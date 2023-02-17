@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { createAuth0Client } from '@auth0/auth0-spa-js';
-
 import { AuthProvider } from '../../../src/util/auth0/auth0-spa';
 import { useAuth } from '../../../src/util/auth0/auth0-context';
 
@@ -11,10 +10,11 @@ jest.mock('@auth0/auth0-spa-js');
 jest.mock('react-redux');
 jest.mock('../../../src/util/api/call-api');
 jest.mock('../../../src/util/api/get-api-url');
+jest.mock('../../../src/util/logger/browser/write-to-server');
 
 describe('util/auth0/react-auth0-spa', () => {
   const redirect = {
-    redirect_uri: "/origin",
+    redirect_uri: '/origin',
   };
   const testProvider = (coverage = false) => (
     <AuthProvider
