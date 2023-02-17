@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import createAuth0Client, {
+import { createAuth0Client, LogoutOptions } from '@auth0/auth0-spa-js';
+import type {
   Auth0Client,
   Auth0ClientOptions,
   GetTokenSilentlyOptions,
@@ -39,7 +40,7 @@ const AuthProvider: React.FC<Auth0Provider> = ({
   useEffect(() => {
     const initAuth0 = async () => {
       dispatch(setLoading());
-      const auth0FromHook = await createAuth0Client(initOptions as Auth0ClientOptions);
+      const auth0FromHook = await createAuth0Client(initOptions as unknown as Auth0ClientOptions);
       setAuth0(auth0FromHook);
 
       if (window.location.search.includes('code=')) {
@@ -79,7 +80,7 @@ const AuthProvider: React.FC<Auth0Provider> = ({
       ...p,
       returnTo: env.host,
     };
-    await auth0Client.logout(logoutProps);
+    await auth0Client.logout(logoutProps as LogoutOptions);
     saveSession(dispatch, {authenticated: false, expiration: 0}, {});
   };
 

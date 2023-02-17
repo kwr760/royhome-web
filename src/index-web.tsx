@@ -23,12 +23,16 @@ const Main: FunctionComponent<Props> = ({ store }) => {
     removeJssStyle(preloadedState);
   }, []);
 
+  const { origin } = window.location;
+  const redirect = {
+    redirect_uri: origin,
+  };
   return (
     <Provider store={store}>
       <AuthProvider
         domain={config.domain}
-        client_id={config.clientId}
-        redirect_uri={window.location.origin}
+        clientId={config.clientId}
+        authorizationParams={redirect}
         useRefreshTokens={true}
         cacheLocation="localstorage"
       >

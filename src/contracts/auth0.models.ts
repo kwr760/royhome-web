@@ -18,9 +18,11 @@ interface Auth0Provider {
   context?: Auth0ContextData;
   onRedirectCallback?: (cb: string) => unknown;
   audience?: string;
-  client_id: string;
+  clientId: string;
   domain: string;
-  redirect_uri?: string;
+  authorizationParams?: {
+    redirect_uri?: string;
+  }
   useRefreshTokens?: boolean;
   cacheLocation?: unknown;
 }
