@@ -1,9 +1,9 @@
-import jwt from 'express-jwt';
+import { expressjwt } from 'express-jwt';
 import jwtRsa from 'jwks-rsa';
 
 import { env } from '../config/env';
 
-const checkJwt = jwt({
+const checkJwt = expressjwt({
   secret: jwtRsa.expressJwtSecret({
     cache: true,
     rateLimit: true,

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import jwt from 'express-jwt';
+import { expressjwt } from 'express-jwt';
 import { checkJwt } from '../../src/middleware/check-jwt';
 
 jest.mock('express-jwt');
@@ -9,6 +9,6 @@ describe('server/middleware/check-jwt', () => {
     // Arrange
     // Act
     // Assert
-    expect(jwt).not.toHaveBeenCalled();
+    expect(expressjwt).not.toHaveBeenCalled();
   });
 });
