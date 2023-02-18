@@ -1,6 +1,5 @@
 import { ThemeProvider } from '@mui/styles';
-import { fireEvent, render } from '@testing-library/react';
-import { renderHook } from '@testing-library/react-hooks';
+import { fireEvent, render, renderHook } from '@testing-library/react';
 import React, { ReactNode } from 'react';
 import GameStatus from '../../../../src/features/tictactoe/components/game-status';
 import { logger } from '../../../../src/features/tictactoe/middleware/logger.middleware';
@@ -46,10 +45,13 @@ describe('feature/tictactoe/context/context.provider', () => {
     const expectedError = Error('useTicTacToe must be used within a TicTacToeProvider');
 
     // Act
-    const { result } = renderHook(() => useTicTacToe(), {wrapper});
-
-    // Assert
-    expect(result.error).toEqual(expectedError);
+    try {
+      renderHook(() => useTicTacToe(), {wrapper});
+      expect(false).toBe(true);
+    } catch (error) {
+      // Assert
+      expect(error).toEqual(expectedError);
+    }
   });
   it('should set context with default state', () => {
     // Arrange

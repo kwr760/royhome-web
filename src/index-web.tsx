@@ -1,6 +1,6 @@
 import 'core-js';
 import React, { useEffect, FunctionComponent } from 'react';
-import { hydrate } from 'react-dom';
+import { hydrateRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { loadableReady } from '@loadable/component';
@@ -50,7 +50,7 @@ loadableReady(() => {
     const preloadedState = window.__PRELOADED_STATE__;
     delete window.__PRELOADED_STATE__;
     const store = createStore(preloadedState);
-    hydrate(<Main store={store} />, root);
+    hydrateRoot(root, <Main store={store} />);
   }
 });
 
