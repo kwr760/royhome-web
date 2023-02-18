@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 import React, { ReactNode } from 'react';
 import { initWebSocket } from '../../../../src/features/tictactoe/context/context.actions';
 import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';

@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import { getResumeProxy } from '../../src/proxy/get-resume.proxy';
+import { TextEncoder } from 'util';
+global.TextEncoder = TextEncoder;
 import { renderReact } from '../../src/ssr/render-react';
 
 jest.mock('parseurl');

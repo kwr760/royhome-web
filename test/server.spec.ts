@@ -6,10 +6,13 @@ import compression from 'compression';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import httpContext from 'express-http-context';
-
 import { handleError } from '../src/middleware/handle-error';
 import { notFound } from '../src/middleware/not-found';
+
+import { TextEncoder } from 'util';
+global.TextEncoder = TextEncoder;
 import { renderReact } from '../src/ssr/render-react';
+
 import { startHttpsServer } from '../src/middleware/start-https';
 import { startHttpServer } from '../src/middleware/start-http';
 
