@@ -15,7 +15,7 @@
   },
   "scripts": {
     "run:dev": "NODE_ENV=development ts-node src/server.ts",
-    "webpack:dev": "yarn clean & NODE_ENV=development webpack --watch",
+    "webpack:dev": "yarn clean & NODE_OPTIONS='--loader ts-node/esm' NODE_ENV=development webpack --watch",
     "test": "yarn test:lint && yarn test:only",
     "test:lint": "eslint src test && tsc",
     "test:only": "jest --colors",
@@ -126,7 +126,7 @@
     "typescript": "^4.9.5",
     "webpack": "^5.75.0",
     "webpack-bundle-analyzer": "^4.8.0",
-    "webpack-cli": "^4.10.0",
+    "webpack-cli": "^5.0.1",
     "webpack-node-externals": "^3.0.0"
   }
 }
