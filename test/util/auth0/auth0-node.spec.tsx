@@ -28,7 +28,7 @@ describe('util/auth0/react-auth0-node', () => {
       getToken: () => {},
     } as Auth0ContextData;
     const provider = (
-      <AuthProvider context={context} domain='domain' client_id='client_id'>
+      <AuthProvider context={context} domain='domain' clientId='clientId'>
         <TestConsumer />
       </AuthProvider>
     );

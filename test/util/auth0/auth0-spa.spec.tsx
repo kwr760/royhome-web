@@ -2,21 +2,26 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import createAuth0Client from '@auth0/auth0-spa-js';
-
+import { createAuth0Client } from '@auth0/auth0-spa-js';
 import { AuthProvider } from '../../../src/util/auth0/auth0-spa';
 import { useAuth } from '../../../src/util/auth0/auth0-context';
 
 jest.mock('@auth0/auth0-spa-js');
 jest.mock('react-redux');
+jest.mock('../../../src/util/api/call-api');
+jest.mock('../../../src/util/api/get-api-url');
+jest.mock('../../../src/util/logger/browser/write-to-server');
 
 describe('util/auth0/react-auth0-spa', () => {
+  const redirect = {
+    redirect_uri: '/origin',
+  };
   const testProvider = (coverage = false) => (
     <AuthProvider
       domain="domain"
-      client_id="clientId"
+      clientId="clientId"
       audience="audience"
-      redirect_uri="/origin"
+      authorizationParams={redirect}
     >
       <TestConsumer coverage={coverage} />
     </AuthProvider>
@@ -69,9 +74,9 @@ describe('util/auth0/react-auth0-spa', () => {
     await waitFor(() => {});
 
     // Assert
-    expect(dispatch).toBeCalledTimes(4);
+    expect(dispatch).toBeCalledTimes(2);
     expect(dispatch).toHaveBeenNthCalledWith(1, expectedLoadingOn);
-    expect(dispatch).toHaveBeenNthCalledWith(3, expectedLoadingOff);
+    expect(dispatch).toHaveBeenNthCalledWith(2, expectedLoadingOff);
   });
   it('should login a limited authenticated provider', async () => {
     // Arrange
@@ -91,9 +96,9 @@ describe('util/auth0/react-auth0-spa', () => {
     await waitFor(() => {});
 
     // Assert
-    expect(dispatch).toBeCalledTimes(3);
+    expect(dispatch).toBeCalledTimes(2);
     expect(dispatch).toHaveBeenNthCalledWith(1, expectedLoadingOn);
-    expect(dispatch).toHaveBeenNthCalledWith(3, expectedLoadingOff);
+    expect(dispatch).toHaveBeenNthCalledWith(2, expectedLoadingOff);
   });
   it('should handle redirect callback', async () => {
     // Arrange
@@ -123,9 +128,9 @@ describe('util/auth0/react-auth0-spa', () => {
     await waitFor(() => {});
 
     // Assert
-    expect(dispatch).toBeCalledTimes(3);
+    expect(dispatch).toBeCalledTimes(2);
     expect(dispatch).toHaveBeenNthCalledWith(1, expectedLoadingOn);
-    expect(dispatch).toHaveBeenNthCalledWith(3, expectedLoadingOff);
+    expect(dispatch).toHaveBeenNthCalledWith(2, expectedLoadingOff);
     global.window = savedWindow;
   });
 });

@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction, Dispatch } from '@reduxjs/toolkit';
 import type { AnyAction } from 'redux';
 import { ApiConfigs } from '../../../contracts/constants/api.constants';
 import { callApi } from '../../../util/api/call-api';
 import { setLoading, clearLoading } from '../../../store/session/session.slice';
-import { AppThunk } from '../../../store/create-store';
 import { initialResumeState } from '../contracts/resume.initial';
 import { ResumeStateType } from '../contracts/resume.state';
 
@@ -26,7 +25,7 @@ const resumeSlice = createSlice({
   },
 });
 
-const fetchResume = (email: string): AppThunk => async dispatch => {
+const fetchResume = async (dispatch: Dispatch, email: string) => {
   const { getResumeSuccess, getResumeFailure } = resumeSlice.actions;
   try {
     dispatch(setLoading());

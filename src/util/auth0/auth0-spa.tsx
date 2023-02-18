@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import createAuth0Client, {
+import { createAuth0Client, LogoutOptions } from '@auth0/auth0-spa-js';
+import type {
   Auth0Client,
   Auth0ClientOptions,
   GetTokenSilentlyOptions,
@@ -39,7 +40,7 @@ const AuthProvider: React.FC<Auth0Provider> = ({
   useEffect(() => {
     const initAuth0 = async () => {
       dispatch(setLoading());
-      const auth0FromHook = await createAuth0Client(initOptions as Auth0ClientOptions);
+      const auth0FromHook = await createAuth0Client(initOptions as unknown as Auth0ClientOptions);
       setAuth0(auth0FromHook);
 
       if (window.location.search.includes('code=')) {
@@ -47,28 +48,28 @@ const AuthProvider: React.FC<Auth0Provider> = ({
         onRedirectCallback(appState);
       }
 
-      let claim: SaveSessionType;
+      let claim: SaveSessionType = {
+        authenticated: false,
+        expiration: 0,
+        darkMode,
+      };
       const user: Auth0User | undefined = await auth0FromHook.getUser();
       let context: Auth0ContextData | undefined;
       if (user) {
         const tokenClaims = await auth0FromHook.getIdTokenClaims();
-        context = tokenClaims[TOKEN_URL];
-        const expiration = (tokenClaims.exp || 0) * 1000;
-        claim = {
-          authenticated: true,
-          expiration,
-          darkMode,
-          email: tokenClaims.email,
-          context: JSON.stringify(context),
-        };
-      } else {
-        claim = {
-          authenticated: false,
-          expiration: 0,
-          darkMode,
-        };
+        if (tokenClaims) {
+          context = tokenClaims[TOKEN_URL];
+          const expiration = (tokenClaims.exp || 0) * 1000;
+          claim = {
+            authenticated: true,
+            expiration,
+            darkMode,
+            email: tokenClaims.email,
+            context: JSON.stringify(context),
+          };
+        }
       }
-      dispatch(saveSession(claim, { ...user, context } ));
+      saveSession(dispatch, claim, { ...user, context } );
       dispatch(clearLoading());
     };
     initAuth0();
@@ -79,8 +80,8 @@ const AuthProvider: React.FC<Auth0Provider> = ({
       ...p,
       returnTo: env.host,
     };
-    await auth0Client.logout(logoutProps);
-    dispatch(saveSession({authenticated: false, expiration: 0}, {}));
+    await auth0Client.logout(logoutProps as LogoutOptions);
+    saveSession(dispatch, {authenticated: false, expiration: 0}, {});
   };
 
   const login = (props: RedirectLoginOptions) => {

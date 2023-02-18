@@ -15,7 +15,7 @@ const Main: FunctionComponent<Props> = ({ url = '', store }) => {
     <Provider store={store}>
       <AuthProvider
         domain={config.domain}
-        client_id={config.clientId}
+        clientId={config.clientId}
       >
         <Router location={url}>
           <Theme />

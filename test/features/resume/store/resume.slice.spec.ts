@@ -1,5 +1,4 @@
-import { AxiosResponse } from 'axios';
-import type { AnyAction } from 'redux';
+import type { AxiosResponse } from 'axios';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 
@@ -28,11 +27,12 @@ describe('store/resume/resume.slice', () => {
       data: expectedResume,
     } as AxiosResponse;
     const store = mockStore();
+    const { dispatch } = store;
 
     (callApi as jest.Mock).mockReturnValue(response);
 
     // Act
-    await store.dispatch(fetchResume(email) as unknown as AnyAction);
+    await fetchResume(dispatch, email);
     const actions = store.getActions();
     const newState = resumeReducer(store.getState() as ResumeStateType, actions[2]);
 
@@ -49,11 +49,12 @@ describe('store/resume/resume.slice', () => {
     const errorMsg = 'Failure';
     const expected = 'Error: ' + errorMsg;
     const store = mockStore();
+    const { dispatch } = store;
 
     (callApi as jest.Mock).mockImplementation(() => { throw Error(errorMsg); });
 
     // Act
-    await store.dispatch(fetchResume(email) as unknown as AnyAction);
+    await fetchResume(dispatch, email);
     const actions = store.getActions();
     const newState = resumeReducer(store.getState() as ResumeStateType, actions[2]);
 

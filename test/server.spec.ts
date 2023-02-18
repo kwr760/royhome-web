@@ -68,6 +68,9 @@ describe('server/index', () => {
       // Arrange/Act
       require('../src/server');
       const expectedHelmet = {
+        crossOriginEmbedderPolicy: {
+          policy: 'credentialless',
+        },
         contentSecurityPolicy: {
           directives: {
             'connect-src': [

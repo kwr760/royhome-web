@@ -13,7 +13,7 @@ export const DarkButtonComponent: FunctionComponent<DarkButtonProps> = ({classes
   const dispatch = useDispatch();
   const darkness = useSelector(getDarkMode);
   const changeDarkMode = (mode: string) => {
-    dispatch(updateDarkMode(mode));
+    updateDarkMode(dispatch, mode);
   };
   const handleClick = useCallback(changeDarkMode, [dispatch]);
   const mode = (darkness === DarkModes.DARK_MODE) ? DarkModes.LIGHT_MODE : DarkModes.DARK_MODE;

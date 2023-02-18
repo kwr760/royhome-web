@@ -6,6 +6,7 @@ const mockApp = jest.fn(() => <div>App</div>);
 
 jest.mock('@loadable/component');
 jest.mock('../src/util/auth0/auth0-spa');
+jest.mock('../src/util/logger/browser/write-to-server');
 jest.mock('../src/App', () => mockApp);
 
 describe('src/client/index-web', () => {

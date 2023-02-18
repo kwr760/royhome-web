@@ -5,10 +5,10 @@ import { GameStateEnum } from '../../../../src/features/tictactoe/contracts/tict
 import { initialState } from '../../../../src/features/tictactoe/contracts/tictactoe.initial';
 import { fireEvent, render, screen } from '../utils/testing-library';
 
-jest
-  .mock('../../../../src/features/tictactoe/components/player-control',
-    () => jest.fn(() => 'Player Control' ),
-  );
+// jest
+//   .mock('../../../../src/features/tictactoe/components/player-control',
+//     () => jest.fn(() => <div>Player Control</div> ),
+//   );
 
 describe('feature/tictactoe/component/game-control', () => {
   beforeEach(() => {
@@ -27,7 +27,7 @@ describe('feature/tictactoe/component/game-control', () => {
     render(<GameControl />, { state, reducer });
 
     // Assert
-    screen.getByText(/Player Control/);
+    screen.getAllByText(/Player X/);
   });
   it('should not render', () => {
     // Arrange

@@ -2,7 +2,12 @@ import { renderHook } from '@testing-library/react-hooks';
 import React, { ReactNode } from 'react';
 import { takeTurn } from '../../../../src/features/tictactoe/context/context.actions';
 import { TicTacToeProvider } from '../../../../src/features/tictactoe/context/context.provider';
-import { GameStateEnum, PieceEnum, PlayerTypeEnum } from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
+import {
+  ActionEnum,
+  GameStateEnum,
+  PieceEnum,
+  PlayerTypeEnum,
+} from '../../../../src/features/tictactoe/contracts/tictactoe.enum';
 import {
   initialPlayerOne,
   initialState,
@@ -17,7 +22,12 @@ describe('feature/tictactoe/hooks/use-ai', () => {
   const createWrapper = (testState: StateType | undefined) => {
     // eslint-disable-next-line react/display-name
     return ({ children }: { children: ReactNode }) =>
-      <TicTacToeProvider sessionId="" user={{}} state={testState}>{children}</TicTacToeProvider>;
+      <TicTacToeProvider
+        sessionId=""
+        user={{}}
+        state={testState}>
+        {children}
+      </TicTacToeProvider>;
   };
 
   beforeEach(() => {
@@ -38,6 +48,16 @@ describe('feature/tictactoe/hooks/use-ai', () => {
       player: PieceEnum.X,
       position: 4,
     };
+    (takeTurn as jest.Mock).mockImplementation(
+      () => {
+        return {
+          type: ActionEnum.TakeTurn,
+          payload: {
+            position: 4,
+            player: PieceEnum.X,
+          },
+        };
+      });
 
     // Act
     const wrapper = createWrapper(state);

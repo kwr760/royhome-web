@@ -9,10 +9,8 @@ module.exports = {
   preset: 'ts-jest',
   projects: [
     {
-      name: 'browser',
       displayName: 'browser',
       testEnvironment: 'jsdom',
-      verbose: true,
       testMatch: [
         '**/test/**/?(*.)spec.ts?(x)',
       ],

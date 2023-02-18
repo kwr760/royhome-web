@@ -4,9 +4,6 @@ import { LogMsgType } from '../../../contracts/logger.models';
 import { getParsedUrl } from '../../api/get-parsed-url';
 import { getApiUrl } from '../../api/get-api-url';
 
-/**
- * Assumes that the location being written to has been created.
- */
 const writeToServer = ({ logType, msg }: LogMsgType): void => {
   const apiUrl = getApiUrl();
   const params = {};

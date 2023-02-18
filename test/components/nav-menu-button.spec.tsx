@@ -58,6 +58,6 @@ describe('components/nav-menu-button', () => {
     const { getByRole } = render(getComponent(store, setAnchor));
 
     // Assert
-    getByRole(/button/);
+    getByRole('button');
   });
 });

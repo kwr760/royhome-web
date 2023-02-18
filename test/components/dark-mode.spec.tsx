@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@mui/styles';
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import React from 'react';
 import { Provider } from 'react-redux';
 import type { Store } from 'redux';

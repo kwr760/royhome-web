@@ -1,9 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import type { Action, Store } from '@reduxjs/toolkit';
-import type { ThunkAction } from 'redux-thunk';
+import type { Store } from '@reduxjs/toolkit';
 import { env } from '../config/env';
 import { PRODUCTION } from '../contracts/constants/environments.constants';
-import { rootReducer, RootState } from './root.reducer';
+import { rootReducer } from './root.reducer';
 
 const createStore = (preloadedState = {}): Store => {
   const reducer = rootReducer;
@@ -15,7 +14,4 @@ const createStore = (preloadedState = {}): Store => {
   });
 };
 
-type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>
-
-export type { AppThunk };
 export { createStore } ;

@@ -1,5 +1,4 @@
-import { AxiosResponse } from 'axios';
-import type { AnyAction } from 'redux';
+import type { AxiosResponse } from 'axios';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { callApi } from '../../../src/util/api/call-api';
@@ -78,10 +77,11 @@ describe('store/session/session.slice', () => {
       },
     };
     const store = mockStore();
+    const { dispatch } = store;
     (callApi as jest.Mock).mockReturnValue(response);
 
     // Act
-    await store.dispatch(updateDarkMode(darkMode) as unknown as AnyAction);
+    await updateDarkMode(dispatch, darkMode);
     const actions = store.getActions();
     const newState = sessionReducer(store.getState() as Session, actions[0]);
 
@@ -96,10 +96,11 @@ describe('store/session/session.slice', () => {
     const errorMsg = 'Failure';
     const expected = 'Error: ' + errorMsg;
     const store = mockStore();
+    const { dispatch } = store;
     (callApi as jest.Mock).mockImplementation(() => { throw Error(errorMsg); });
 
     // Act
-    await store.dispatch(updateDarkMode(darkMode) as unknown as AnyAction);
+    await updateDarkMode(dispatch, darkMode);
 
     // Assert
     expect(logger.error).toHaveBeenCalledWith(expected);
@@ -162,10 +163,11 @@ describe('store/session/session.slice', () => {
       },
     } as AxiosResponse;
     const store = mockStore();
+    const { dispatch } = store;
     (callApi as jest.Mock).mockReturnValue(response);
 
     // Act
-    await store.dispatch(saveSession(claim, user) as unknown as AnyAction);
+    await saveSession(dispatch, claim, user);
     const actions = store.getActions();
     const newState = sessionReducer(store.getState() as Session, actions[0]);
 
@@ -187,10 +189,11 @@ describe('store/session/session.slice', () => {
     const errorMsg = 'Failure';
     const expected = 'Error: ' + errorMsg;
     const store = mockStore();
+    const { dispatch } = store;
     (callApi as jest.Mock).mockImplementation(() => { throw Error(errorMsg); });
 
     // Act
-    await store.dispatch(saveSession(claim, user) as unknown as AnyAction);
+    await saveSession(dispatch, claim, user);
 
     // Assert
     expect(logger.error).toHaveBeenCalledWith(expected);

@@ -61,7 +61,7 @@ describe('features/resume/component/resume-page', () => {
     getByText(/Resume Skills/);
     getByText(/Resume Experience/);
     getByText(/Resume Education/);
-    expect(fetchResume).toBeCalledWith(email);
+    expect(fetchResume).toBeCalledWith(expect.any(Function), email);
   });
   it('should not render resume when loading', async () => {
     // Arrange

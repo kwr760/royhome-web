@@ -24,7 +24,7 @@ const ResumePage: FunctionComponent<ResumeProps> = ({ classes }) => {
   useEffect(() => {
     const callResumeApi = async () => {
       if (isResumeEmpty) {
-        dispatch(fetchResume('kroy760@gmail.com'));
+        fetchResume(dispatch, 'kroy760@gmail.com');
       }
     };
     callResumeApi();
