@@ -25,7 +25,7 @@
     "clean": "rimraf started dist build log/*.log reports",
     "docker": "yarn clean && webpack && ts-node src/server.ts",
     "run:prod": "NODE_ENV=production node dist/server/start.js",
-    "webpack:prod": "yarn clean && NODE_ENV=production webpack",
+    "webpack:prod": "yarn clean && NODE_OPTIONS='--loader ts-node/esm' NODE_ENV=production webpack",
     "service": "yarn webpack:prod && yarn run:prod"
   },
   "dependencies": {
