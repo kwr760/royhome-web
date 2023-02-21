@@ -9,6 +9,7 @@ web=/usr/royhome/web/${deployment}
 echo "installing web as ${deployment}"
 cd "${web}" || exit
 pwd
+nvm use
 echo "yarn install"
 yarn install
 echo "copy .env"
