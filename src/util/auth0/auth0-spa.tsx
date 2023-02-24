@@ -53,20 +53,25 @@ const AuthProvider: React.FC<Auth0Provider> = ({
         expiration: 0,
         darkMode,
       };
-      const user: Auth0User | undefined = await auth0FromHook.getUser();
+      let user: Auth0User | undefined = await auth0FromHook.getUser();
       let context: Auth0ContextData | undefined;
       if (user) {
         const tokenClaims = await auth0FromHook.getIdTokenClaims();
         if (tokenClaims) {
           context = tokenClaims[TOKEN_URL];
           const expiration = (tokenClaims.exp || 0) * 1000;
-          claim = {
-            authenticated: true,
-            expiration,
-            darkMode,
-            email: tokenClaims.email,
-            context: JSON.stringify(context),
-          };
+          const current = Date.now();
+          if (expiration > current) {
+            claim = {
+              authenticated: true,
+              expiration,
+              darkMode,
+              email: tokenClaims.email,
+              context: JSON.stringify(context),
+            };
+          } else {
+            user = {} as Auth0User;
+          }
         }
       }
       saveSession(dispatch, claim, { ...user, context } );
