@@ -6,6 +6,7 @@ describe('component/page/app-bar/should-display-tab', () => {
     // Arrange
     const user = {
       role: 'none',
+      userId: 'user-id',
     } as Auth0User;
 
     // Act

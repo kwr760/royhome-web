@@ -1,4 +1,4 @@
-import { FiInfo, FiBookOpen, FiAlertTriangle, FiLayers } from 'react-icons/fi';
+import { FiInfo, FiBookOpen, FiAlertTriangle, FiLayers, FiMap } from 'react-icons/fi';
 import { TabPageType } from '../tab.models';
 
 const pageRoutes: TabPageType[] = [
@@ -24,9 +24,14 @@ const pageRoutes: TabPageType[] = [
     name: 'Tic-Tac-Toe',
     path: '/tictactoe',
     icon: FiAlertTriangle,
-    // role: 'engineer',
-    authenticated: true,
     tab: 3,
+  },
+  {
+    name: 'Tracker',
+    path: '/tracker',
+    icon: FiMap,
+    tab: 4,
+    authenticated: true,
   },
 ];
 

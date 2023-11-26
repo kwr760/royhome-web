@@ -27,7 +27,7 @@ describe('component/page/app-bar/display-page', () => {
     const authenticated = false;
     const user = {
       role: 'none',
-    } as Auth0User;
+    } as unknown as Auth0User;
 
     // Act
     const matches = pages.filter(displayPage(authenticated, user));

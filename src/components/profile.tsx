@@ -16,14 +16,14 @@ const ProfileComponent: FunctionComponent<ProfileProps> = ({classes}) => {
       <Grid container className={classes.grid}>
         <Grid item xs={12} sm={4} className={classes.center}>
           <img
-            src={user.picture}
+            src={user?.picture}
             alt="Profile"
             className={classes.picture}
           />
         </Grid>
         <Grid item xs={12} sm={8} >
-          <h2 className={classes.header}>{user.name}</h2>
-          <p className={classes.email}>{user.email}</p>
+          <h2 className={classes.header}>{user?.name}</h2>
+          <p className={classes.email}>{user?.email}</p>
         </Grid>
       </Grid>
       <Grid container>

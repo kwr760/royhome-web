@@ -8,11 +8,15 @@ jest.mock('../../../../src/features/tictactoe/components/game-container',
 
 describe('features/tictactoe/components', () => {
   it('should render', () => {
-    // Arrange // Act
+    // Arrange
+    const user = {
+      userId: 'user-id',
+    };
+    // Act
     const { getByText } = render(
       <TicTacToe
         sessionId="session-id"
-        user={{}}
+        user={user}
       />,
     );
 

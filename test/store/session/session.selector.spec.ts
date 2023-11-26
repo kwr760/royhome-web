@@ -39,7 +39,7 @@ describe('store/session/session.selector', () => {
     const expectedAuthentication = false;
     const expectedLoading = false;
     const expectedDarkMode = DarkModes.CLEAR_MODE;
-    const expectedUser = {};
+    const expectedUser = undefined;
     const mockState = {
       session: {},
     };

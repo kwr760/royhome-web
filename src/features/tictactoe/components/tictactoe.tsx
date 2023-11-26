@@ -10,7 +10,7 @@ import GameContainer from './game-container';
 
 interface Props {
   sessionId: string;
-  user: Auth0User;
+  user: Auth0User | undefined;
 }
 type TicTacToeProps = Props & WithStyles<typeof styles>;
 const TicTacToeComponent: FunctionComponent<TicTacToeProps> = ({sessionId, user }) => {

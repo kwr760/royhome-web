@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export class ChunkExtractor {
   collectChunks = () => { return '<div>Chunks</div>'; };
   getScriptTags = () => { return '<div>Scripts</div>'; };

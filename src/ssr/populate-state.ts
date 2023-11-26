@@ -1,8 +1,10 @@
 import { matchPath } from 'react-router';
+import { noId } from '../contracts/constants/auth0.constants';
+import { DarkModes } from '../contracts/constants/session.constants';
 import { Session } from '../contracts/session.models';
 import { State } from '../contracts/state.models';
+import { TrackerActionEnum } from '../features/tracker/contracts/tracker.enum';
 import { getSessionProxy } from '../proxy/get-session.proxy';
-import { DarkModes } from '../contracts/constants/session.constants';
 import { fetchRoutes } from './fetch-routes';
 
 const populateState = async (path: string, sessionId?: string): Promise<State> => {
@@ -17,7 +19,7 @@ const populateState = async (path: string, sessionId?: string): Promise<State> =
       darkMode = DarkModes.CLEAR_MODE,
       user: sessionUser,
     } = currentSession;
-    const {userId, email, context} = sessionUser || {};
+    const {userId = noId, email, context} = sessionUser || {};
     const current = Date.now();
     session = {
       sessionId,
@@ -25,6 +27,7 @@ const populateState = async (path: string, sessionId?: string): Promise<State> =
       expiration,
       authenticated: expiration ? (expiration > current) : false,
       darkMode,
+      isLoading: false,
       user: {
         userId,
         email,
@@ -37,7 +40,9 @@ const populateState = async (path: string, sessionId?: string): Promise<State> =
       expiration: -1,
       isLoading: false,
       darkMode: DarkModes.CLEAR_MODE,
-      user: {},
+      user: {
+        userId: noId,
+      },
     };
   }
 
@@ -46,6 +51,10 @@ const populateState = async (path: string, sessionId?: string): Promise<State> =
     resume: {
       email: '',
       resumes: {},
+    },
+    tracker: {
+      groups: [],
+      action: TrackerActionEnum.None,
     },
     ...data,
   };

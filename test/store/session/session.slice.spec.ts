@@ -1,6 +1,7 @@
 import type { AxiosResponse } from 'axios';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import { Auth0User } from '../../../src/contracts/auth0.models';
 import { callApi } from '../../../src/util/api/call-api';
 import { DarkModes } from '../../../src/contracts/constants/session.constants';
 import {
@@ -139,6 +140,7 @@ describe('store/session/session.slice', () => {
     // Arrange
     const user = {
       email: 'person@email.com',
+      userId: 'id',
     };
     const claim = {
       authenticated: true,
@@ -152,7 +154,6 @@ describe('store/session/session.slice', () => {
       session: {
         ...claim,
       },
-      user,
     };
     const response = {
       data: {
@@ -185,7 +186,7 @@ describe('store/session/session.slice', () => {
       darkMode: 'dark-mode',
       context: '"context"',
     };
-    const user = {};
+    const user = {} as unknown as Auth0User;
     const errorMsg = 'Failure';
     const expected = 'Error: ' + errorMsg;
     const store = mockStore();

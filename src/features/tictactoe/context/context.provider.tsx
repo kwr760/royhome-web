@@ -21,7 +21,7 @@ const TicTacToeProvider = ({
 ): JSX.Element => {
   let newState: StateType = seededState || initialState;
   const { playerOne, playerTwo } = newState;
-  playerOne.name = user.name || playerOne.name;
+  playerOne.name = user?.name || playerOne.name;
   playerTwo.name = randomNames[Math.floor(Math.random()*randomNames.length)];
   newState = {
     ...newState,

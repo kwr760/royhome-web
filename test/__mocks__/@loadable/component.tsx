@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any,
+ @typescript-eslint/ban-ts-comment */
 import React, { FunctionComponent, PropsWithChildren } from 'react';
 
 export const loadableReady = (done: () => unknown) => (done());
@@ -12,7 +13,6 @@ const loadable = (load: any) => {
         'Bundle split module not loaded yet, ensure you beforeAll(() => MyLazyComponent.load()) '
         + 'in your test, import statement: ' + load.toString());
     }
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return <Component {...props} />;
   };

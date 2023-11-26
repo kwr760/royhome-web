@@ -24,7 +24,7 @@ const getDarkMode = createSelector(
 
 const getUser = createSelector(
   (state: State) => state.session,
-  (session) => session.user || {},
+  (session) => session.user,
 );
 
 export { getDarkMode, getUser, isAuthenticated, isLoading, getSessionId };

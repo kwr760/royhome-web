@@ -60,20 +60,24 @@ const AuthProvider: React.FC<Auth0Provider> = ({
         if (tokenClaims) {
           context = tokenClaims[TOKEN_URL];
           const expiration = (tokenClaims.exp || 0) * 1000;
-          claim = {
-            authenticated: true,
-            expiration,
-            darkMode,
-            email: tokenClaims.email,
-            context: JSON.stringify(context),
-          };
+          const current = Date.now();
+          if (expiration > current) {
+            claim = {
+              authenticated: true,
+              expiration,
+              darkMode,
+              email: tokenClaims.email,
+              context: JSON.stringify(context),
+            };
+            await saveSession(dispatch, claim, { ...user, context } );
+          } else {
+            await saveSession(dispatch, claim);
+          }
         }
       }
-      saveSession(dispatch, claim, { ...user, context } );
       dispatch(clearLoading());
     };
-    initAuth0();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    void initAuth0();
   }, [darkMode]);
   const logout = async (...p: unknown[]) => {
     const logoutProps = {
@@ -81,7 +85,7 @@ const AuthProvider: React.FC<Auth0Provider> = ({
       returnTo: env.host,
     };
     await auth0Client.logout(logoutProps as LogoutOptions);
-    saveSession(dispatch, {authenticated: false, expiration: 0}, {});
+    await saveSession(dispatch, {authenticated: false, expiration: 0} );
   };
 
   const login = (props: RedirectLoginOptions) => {

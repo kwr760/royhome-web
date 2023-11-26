@@ -30,7 +30,7 @@ describe('feature/tictactoe/context/context.reducer', () => {
   const createWrapper = (testState: StateType | undefined) => {
     // eslint-disable-next-line react/display-name
     return ({ children }: { children: ReactNode }) =>
-      <TicTacToeProvider sessionId="" user={{}} state={testState}>{children}</TicTacToeProvider>;
+      <TicTacToeProvider sessionId="" state={testState}>{children}</TicTacToeProvider>;
   };
   beforeEach(() => {
     global.console.log = jest.fn();

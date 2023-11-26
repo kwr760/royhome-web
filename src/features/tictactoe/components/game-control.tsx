@@ -1,7 +1,7 @@
+import React, { FunctionComponent, memo, useEffect, useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent } from '@mui/material';
 import type { WithStyles } from '@mui/styles';
 import { withStyles } from '@mui/styles';
-import React, { FunctionComponent, memo, useEffect, useState } from 'react';
 import { resetGame, startGame, updateGameState } from '../context/context.actions';
 import { useTicTacToe } from '../context/context.provider';
 import { GameStateEnum } from '../contracts/tictactoe.enum';
@@ -49,13 +49,13 @@ const GameControl: FunctionComponent<PlayerControlProps> = (
       className={classes.dialog}
     >
       <DialogContent
-        className={classes.informationDialog}
+        className={classes.content}
       >
         <PlayerControl player={playerOne} />
         { !remote && <PlayerControl player={playerTwo} /> }
         <PlayerRemote />
       </DialogContent>
-      <DialogActions className={classes.actionDialog}>
+      <DialogActions className={classes.actions}>
         <Button className={classes.button} onClick={onCloseControl}>Close</Button>
         <Button className={classes.button} onClick={onPlayGame}>Play Game</Button>
       </DialogActions>

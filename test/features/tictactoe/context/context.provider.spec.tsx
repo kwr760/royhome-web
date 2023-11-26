@@ -21,7 +21,6 @@ describe('feature/tictactoe/context/context.provider', () => {
       <ThemeProvider theme={themeLight}>
         <TicTacToeProvider
           sessionId={'session-id'}
-          user={{}}
           state={state}
           reducer={reducer}
           beforeware={beforeWare}
@@ -62,7 +61,6 @@ describe('feature/tictactoe/context/context.provider', () => {
     const wrapper = ({ children }: { children: ReactNode}) =>
       <TicTacToeProvider
         sessionId="session-id"
-        user={{}}
         afterware={[logger()]}
       >
         {children}

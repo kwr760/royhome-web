@@ -15,6 +15,10 @@ describe('store/configure', () => {
         email: 'kroy760@gmail.com',
         resumes: {},
       },
+      tracker: {
+        action: 'none',
+        groups: [],
+      },
     };
 
     // Act
@@ -36,6 +40,10 @@ describe('store/configure', () => {
       },
       resume: {
         email: 'kroy760@gmail.com',
+      },
+      tracker: {
+        action: 'none',
+        groups: [],
       },
     };
 

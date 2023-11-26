@@ -1,3 +1,4 @@
+import { noId } from '../../src/contracts/constants/auth0.constants';
 import { getResumeProxy } from '../../src/proxy/get-resume.proxy';
 import { getSessionProxy } from '../../src/proxy/get-session.proxy';
 import { populateState } from '../../src/ssr/populate-state';
@@ -30,14 +31,15 @@ describe('server/rendering/populate-state', () => {
     const expected = {
       session: {
         authenticated: false,
-        'browserId': 'browser-id',
-        'darkMode': DarkModes.DARK_MODE,
-        'expiration': 1000,
-        'sessionId': 'session-id',
+        browserId: 'browser-id',
+        darkMode: DarkModes.DARK_MODE,
+        expiration: 1000,
+        sessionId: 'session-id',
+        isLoading: false,
         user: {
-          'context': 'context',
-          'email': 'person@email.com',
-          'userId': 'user-id',
+          context: 'context',
+          email: 'person@email.com',
+          userId: 'user-id',
         },
       },
       resume: {
@@ -45,6 +47,10 @@ describe('server/rendering/populate-state', () => {
         resumes: {
           [email]: resume,
         },
+      },
+      tracker: {
+        action: 'none',
+        groups: [],
       },
     };
 
@@ -67,16 +73,21 @@ describe('server/rendering/populate-state', () => {
         browserId: '',
         darkMode: DarkModes.CLEAR_MODE,
         sessionId: 'session-id',
+        isLoading: false,
         expiration: 0,
         user: {
           context: undefined,
           email: undefined,
-          userId: undefined,
+          userId: noId,
         },
       },
       resume: {
         email: '',
         resumes: {},
+      },
+      tracker: {
+        action: 'none',
+        groups: [],
       },
     };
 
@@ -96,13 +107,19 @@ describe('server/rendering/populate-state', () => {
         expiration: -1,
         isLoading: false,
         darkMode: DarkModes.CLEAR_MODE,
-        user: {},
+        user: {
+          userId: noId,
+        },
       },
       resume: {
         email: email,
         resumes: {
           [email]: resume,
         },
+      },
+      tracker: {
+        action: 'none',
+        groups: [],
       },
     };
 

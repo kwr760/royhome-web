@@ -25,11 +25,14 @@ const ProfilePage = /* #__LOADABLE__ */ () =>
   import(/* webpackPrefetch: true */ './components/profile');
 const TicTacToePage = /* #__LOADABLE__ */ () =>
   import(/* webpackPrefetch: true */ './features/tictactoe/components/tictactoe');
+const TrackerPage = /* #__LOADABLE__ */ () =>
+  import(/* webpackPrefetch: true */ './features/tracker/components/tracker');
 const AboutLoadable = loadable(AboutPage, { ssr: false });
 const AuthorLoadable = loadable(AuthorPage, { ssr: false });
 const PrivacyLoadable = loadable(PrivacyPage, { ssr: false });
 const ProfileLoadable = loadable(ProfilePage, { ssr: true });
 const TicTacToeLoadable = loadable(TicTacToePage, { ssr: true });
+const TrackerLoadable = loadable(TrackerPage, { ssr: true });
 
 type AppProps = WithStyles<typeof styles>;
 const AppComponent: FunctionComponent<AppProps> = ({classes}) => {
@@ -50,9 +53,8 @@ const AppComponent: FunctionComponent<AppProps> = ({classes}) => {
             <Route path="about" element={<AboutLoadable />} />
             <Route path="author" element={<AuthorLoadable />} />
             <Route path="privacy" element={<PrivacyLoadable />} />
-            <Route path="tictactoe" element={<ProtectRoute>
-              <TicTacToeLoadable sessionId={sessionId} user={user} />
-            </ProtectRoute>} />
+            <Route path="tictactoe" element={<TicTacToeLoadable sessionId={sessionId} user={user} />} />
+            <Route path="tracker" element={<ProtectRoute><TrackerLoadable /></ProtectRoute>} />
             <Route path="profile" element={<ProtectRoute><ProfileLoadable /></ProtectRoute>} />
           </Routes>
         </Container>

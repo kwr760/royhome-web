@@ -8,7 +8,7 @@ type BoardType = string;
 type MiddleWareFunction = (action: ActionTypes, state: StateType) => StateType;
 type ProviderType = {
   sessionId: string,
-  user: Auth0User,
+  user?: Auth0User,
   state?: StateType,
   reducer?: Reducer<unknown, unknown>,
   beforeware?: MiddleWareFunction[],

@@ -28,10 +28,8 @@ const sessionSlice = createSlice({
       state.isLoading = action.payload;
     },
     updateSession: (state, action: PayloadAction<UpdateSessionType>) => {
-      const user = action.payload.user || state.user;
       Object.assign(state, {
         ...action.payload.session,
-        user,
       });
     },
   },
@@ -58,7 +56,7 @@ const updateDarkMode = async (dispatch: Dispatch, darkMode: string) => {
     logger.error(errorMsg);
   }
 };
-const saveSession = async (dispatch: Dispatch, claim: SaveSessionType, user: Auth0User) => {
+const saveSession = async (dispatch: Dispatch, claim: SaveSessionType, user?: Auth0User) => {
   const {updateSession} = sessionSlice.actions;
   try {
     const { data } = await callApi(ApiConfigs.SAVE_SESSION, {
@@ -71,8 +69,11 @@ const saveSession = async (dispatch: Dispatch, claim: SaveSessionType, user: Aut
       session: {
         ...data.output,
         authenticated: data.output.expiration > current,
+        user: {
+          ...data.output.user,
+          ...user,
+        },
       },
-      user,
     };
     dispatch(updateSession(payload));
   } catch (err) {

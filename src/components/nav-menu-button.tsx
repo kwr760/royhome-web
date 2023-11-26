@@ -14,7 +14,7 @@ type NavMenuButtonProps = Props & WithStyles<typeof styles>;
 const NavMenuButtonComponent: FunctionComponent<NavMenuButtonProps> = ({ setAnchor, classes }) => {
   const authenticated = useSelector(isAuthenticated);
   const user = useSelector(getUser);
-  const { picture: userPicture = '' } = user;
+  const userPicture= user?.picture;
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchor(event.currentTarget);

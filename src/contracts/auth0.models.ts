@@ -6,7 +6,7 @@ interface Auth0ContextData {
   data?: string;
 }
 interface Auth0User {
-  userId?: string,
+  userId: string,
   email?: string,
   context?: Auth0ContextData,
   nickname?: string,
