@@ -1,4 +1,5 @@
 import { type Dispatch } from '@reduxjs/toolkit';
+import { type AnyAction } from 'redux';
 import { ApiParams } from '../../../contracts/api/api';
 import { clearLoading, setLoading } from '../../../store/session/session.slice';
 import { callApi } from '../../../util/api/call-api';
@@ -13,15 +14,17 @@ const modifyGroupApi = async (dispatch: Dispatch, group: Group) => {
   } = trackerSlice.actions;
   try {
     dispatch(setLoading());
-    const response = await callApi(ApiConfigs.MODIFY_GROUP, {
+    await callApi(ApiConfigs.MODIFY_GROUP, {
       payload: {
-        ...group,
+        userId: group.userId,
+        name: group.name,
+        activities: [],
       },
       params: {
         groupId: group.groupId,
       } as ApiParams,
     });
-    dispatch(modifyGroup(response.data));
+    dispatch(modifyGroup( group as unknown as AnyAction));
   } catch (err) {
     const errorMsg = (err as Error).toString();
     dispatch(storeFailure(errorMsg));
