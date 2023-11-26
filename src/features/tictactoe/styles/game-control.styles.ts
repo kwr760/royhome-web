@@ -9,13 +9,13 @@ const styles = (theme: Theme): StyleRules => {
         backgroundColor: theme.color.background.paper,
       },
     },
-    informationDialog: {
+    content: {
       paddingTop: theme.spacing(2),
       paddingRight: theme.spacing(2),
       paddingLeft: theme.spacing(2),
       paddingBottom: theme.spacing(1),
     },
-    actionDialog: {
+    actions: {
       justifyContent: 'space-between',
     },
     button: {

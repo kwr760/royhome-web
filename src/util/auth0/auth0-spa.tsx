@@ -53,7 +53,7 @@ const AuthProvider: React.FC<Auth0Provider> = ({
         expiration: 0,
         darkMode,
       };
-      let user: Auth0User | undefined = await auth0FromHook.getUser();
+      const user: Auth0User | undefined = await auth0FromHook.getUser();
       let context: Auth0ContextData | undefined;
       if (user) {
         const tokenClaims = await auth0FromHook.getIdTokenClaims();
@@ -69,16 +69,15 @@ const AuthProvider: React.FC<Auth0Provider> = ({
               email: tokenClaims.email,
               context: JSON.stringify(context),
             };
+            await saveSession(dispatch, claim, { ...user, context } );
           } else {
-            user = {} as Auth0User;
+            await saveSession(dispatch, claim);
           }
         }
       }
-      saveSession(dispatch, claim, { ...user, context } );
       dispatch(clearLoading());
     };
-    initAuth0();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    void initAuth0();
   }, [darkMode]);
   const logout = async (...p: unknown[]) => {
     const logoutProps = {
@@ -86,7 +85,7 @@ const AuthProvider: React.FC<Auth0Provider> = ({
       returnTo: env.host,
     };
     await auth0Client.logout(logoutProps as LogoutOptions);
-    saveSession(dispatch, {authenticated: false, expiration: 0}, {});
+    await saveSession(dispatch, {authenticated: false, expiration: 0} );
   };
 
   const login = (props: RedirectLoginOptions) => {

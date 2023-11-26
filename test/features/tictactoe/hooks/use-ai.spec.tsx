@@ -24,7 +24,6 @@ describe('feature/tictactoe/hooks/use-ai', () => {
     return ({ children }: { children: ReactNode }) =>
       <TicTacToeProvider
         sessionId=""
-        user={{}}
         state={testState}>
         {children}
       </TicTacToeProvider>;

@@ -6,7 +6,6 @@ import { withStyles } from '@mui/styles';
 import type { WithStyles } from '@mui/styles';
 
 import { styles } from '../styles/resume-page.styles';
-import { useAuth } from '../../../util/auth0/auth0-context';
 import ResumeComponent from './resume';
 import { fetchResume } from '../store/resume.slice';
 import { getResume } from '../store/resume.selector';
@@ -15,7 +14,6 @@ import { Resume } from '../contracts/resume.models';
 
 type ResumeProps = WithStyles<typeof styles>;
 const ResumePage: FunctionComponent<ResumeProps> = ({ classes }) => {
-  const { getToken } = useAuth();
   const resume: Resume = useSelector(getResume);
   const dispatch = useDispatch();
   const loading = useSelector(isLoading);
@@ -24,11 +22,11 @@ const ResumePage: FunctionComponent<ResumeProps> = ({ classes }) => {
   useEffect(() => {
     const callResumeApi = async () => {
       if (isResumeEmpty) {
-        fetchResume(dispatch, 'kroy760@gmail.com');
+        await fetchResume(dispatch, 'kroy760@gmail.com');
       }
     };
     callResumeApi();
-  }, [isResumeEmpty, dispatch, getToken]);
+  }, [isResumeEmpty, dispatch]);
 
   return (
     loading ? null : <Container className={classes.container}>

@@ -1,11 +1,14 @@
 type Activity = {
-  platform: string;
-  activity: string;
-  progress: string;
+  activityId: string,
+  platform: string,
+  activity: string,
+  progress: string,
+  group?: Group,
 }
 type Group = {
-  name: string;
-  activities: [Activity | undefined]
+  groupId: string,
+  userId: string,
+  name: string,
+  activities: Array<Activity>,
 }
-
-export type { Group, Activity };
+export { type Group, type Activity };

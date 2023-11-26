@@ -1,3 +1,4 @@
+/* eslint-disable import/export */
 import { ThemeProvider } from '@mui/styles';
 import type { RenderOptions, RenderResult } from '@testing-library/react';
 import { render as baseRender } from '@testing-library/react';
@@ -24,7 +25,7 @@ const customRender = (
 ): RenderResult => {
   const {
     sessionId = 'session-id',
-    user = {},
+    user = { userId: 'id' },
     state = initialState,
     reducer = noop,
     ...renderOptions
@@ -48,7 +49,5 @@ const customRender = (
   return baseRender(ui, { wrapper: Wrapper, ...renderOptions });
 };
 
-// eslint-disable-next-line import/export
 export * from '@testing-library/react';
-// eslint-disable-next-line import/export
 export { customRender as render };

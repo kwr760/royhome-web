@@ -60,7 +60,7 @@ describe('util/auth0/react-auth0-spa', () => {
       isAuthenticated: jest.fn(() => true),
       getUser: jest.fn(() => ({ name: 'Tester' })),
       logout: jest.fn(() => ({})),
-      getIdTokenClaims: jest.fn(() => ({ exp: 999999999, 'http:\\royhome.net': { data: 'test data' } })),
+      getIdTokenClaims: jest.fn(() => ({ exp: 999999999999, 'http:\\royhome.net': { data: 'test data' } })),
     });
     const dispatch = jest.fn();
     (useDispatch as jest.Mock).mockReturnValue(dispatch);

@@ -5,4 +5,6 @@ const config = {
   clientId: 'J5Mu7fSFraTWgQBz1WJgikpnuRnKRkaL',
 };
 
-export { COOKIE_JWT_PAYLOAD, config };
+const noId = 'no-id';
+
+export { COOKIE_JWT_PAYLOAD, config, noId };

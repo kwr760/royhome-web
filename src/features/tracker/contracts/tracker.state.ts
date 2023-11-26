@@ -1,8 +1,10 @@
-import { Group } from './tracker.model';
+import { TrackerActionEnum } from './tracker.enum';
+import { type Group } from './tracker.model';
 
 interface TrackerStateType {
-  groups: [Group?],
-  error?: string,
+  groups: Array<Group>;
+  action: TrackerActionEnum;
+  error?: string;
 }
 
-export type { TrackerStateType };
+export { type TrackerStateType };

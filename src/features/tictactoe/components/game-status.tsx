@@ -1,7 +1,7 @@
+import React, { FunctionComponent, memo, useEffect, useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, Tooltip, Typography } from '@mui/material';
 import type { WithStyles } from '@mui/styles';
 import { withStyles } from '@mui/styles';
-import React, { FunctionComponent, memo, useEffect, useState } from 'react';
 import { updateGameState } from '../context/context.actions';
 import { useTicTacToe } from '../context/context.provider';
 import { GameStateEnum } from '../contracts/tictactoe.enum';

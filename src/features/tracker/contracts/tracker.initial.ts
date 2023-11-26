@@ -1,7 +1,9 @@
-import { TrackerStateType } from './tracker.state';
+import { TrackerActionEnum } from './tracker.enum';
+import { type TrackerStateType } from './tracker.state';
 
 const initialTrackerState: TrackerStateType = {
   groups: [],
-} as TrackerStateType;
+  action: TrackerActionEnum.None,
+};
 
 export { initialTrackerState };

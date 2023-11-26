@@ -37,7 +37,7 @@ module.exports = {
     'react/prop-types': [0],
     semi: ['error', 'always'],
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/exhaustive-deps': 'off',
     'no-console': 'off',
     'no-multi-str': 'off',
     'comma-dangle': ['error', 'always-multiline'],
