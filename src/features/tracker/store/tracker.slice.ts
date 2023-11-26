@@ -63,8 +63,8 @@ const trackerSlice = createSlice({
     },
     modifyGroup: (state, action: PayloadAction<AnyAction>) => {
       const newGroup = {
-        ...action.payload.output,
-      };
+        ...action.payload,
+      } as unknown as Group;
       const newGroups = produce(state.groups, draft => {
         const index = draft.findIndex((group: Group) => group.groupId === newGroup.groupId);
         if (index !== -1) {

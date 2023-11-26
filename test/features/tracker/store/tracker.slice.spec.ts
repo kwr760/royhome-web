@@ -90,7 +90,7 @@ describe('features/tracker/store/tracker.slice', () => {
       name: 'a',
     };
     const payload = {
-      output: newGroup,
+      ...newGroup,
     } as unknown as AnyAction;
     const expectedState = {
       groups: [
